@@ -1,0 +1,107 @@
+#include <ROOT_AIDA/utilROOT.h>
+#include <ROOT_AIDA/LeafPoint.h>
+#include <TH1F.h>
+#include <TDirectory.h>
+#include <TFile.h>
+#include <TTree.h>
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include <AIDA/IAnalysisFactory.h>
+#include <AIDA/ITreeFactory.h>
+#include <AIDA/ITree.h>
+#include <AIDA/IHistogramFactory.h>
+#include <AIDA/IHistogram1D.h>
+#include <AIDA/IHistogram2D.h>
+#include <AIDA/IHistogram3D.h>
+#include <AIDA/ITupleFactory.h>
+
+using namespace AIDA ;
+using namespace std;
+
+int main()
+{
+  IAnalysisFactory * myaida;
+  ITreeFactory * mytreefactory;
+  ITree * mytree;
+  IHistogramFactory * myhistofactory;
+  myaida = AIDA_createAnalysisFactory();
+  mytreefactory = myaida->createTreeFactory();
+
+
+  std::string storeName("aidaroot.root");
+  std::string storeType("root");
+  bool readOnly = false;
+  bool createNew = false;
+  std::string options("keine");
+  mytree = mytreefactory->create(storeName,storeType,readOnly,createNew,options);
+
+  ITupleFactory * mytuplefactory = myaida->createTupleFactory(*mytree);
+  myhistofactory = myaida->createHistogramFactory(*mytree);
+
+
+/// Anlegen eines TTrees ------------------------------------------------------
+  vector<LeafPoint> vp;
+  vector<Double_t> vd;
+  vector<string> vname, vtype;
+
+  vname.push_back("px");
+  vname.push_back("py");
+  vname.push_back("pz");
+  vtype.push_back("D");
+  vtype.push_back("D");
+  vtype.push_back("D");
+
+  for (int i = 0;i<3;i++)
+    {
+      LeafPoint *mytp = new LeafPoint; 
+      vp.push_back(*mytp);
+    }
+  TTree *ttree = new TTree("mytree","my first ttree obj.");
+  for (unsigned i = 0;i<vtype.size();i++)
+    {
+      string ss;
+      ss = vname[i] + "/" + vtype[i];
+      ttree->Branch(vname[i].c_str(),vp[i].getValue(),ss.c_str());
+    }
+  cout << "### ja, ich lebe noch!! ###" << endl;
+
+  vp[0].set(10);
+  vp[1].set(20);
+  vp[2].set(30);
+  ttree->Fill();
+
+  vp[0].set(11);
+  vp[1].set(21);
+  vp[2].set(31);
+  ttree->Fill();
+
+  vp[0].set(12);
+  vp[1].set(22);
+  vp[2].set(32);
+  ttree->Fill();
+
+
+  ttree->Print();
+
+
+
+  Double_t xpx,xpy,xpz; //,xpw;
+  ttree->SetBranchAddress("px",&xpx);
+  ttree->SetBranchAddress("py",&xpy);
+  ttree->SetBranchAddress("pz",&xpz);
+  //  ttree->SetBranchAddress("pw",&xpw);
+  for (int i=0;i<(int)ttree->GetEntriesFast();i++) 
+    {
+      ttree->GetEntry(i);
+      cout << xpx << " " << xpy << " " << xpz << " " << endl;
+    }
+/// Schliessen der Datei. -----------------------------------------------------
+  mytree->commit();
+  mytree->close();
+  cout << "Tree Entry: " << xpx << endl;
+}
+
