@@ -1,0 +1,36 @@
+PROGRAME = mainroot
+BASEDIR = ..
+
+# CLHEP_HOME = /data/tkraemer/clhep/target
+# CLHEP_INCLUDE = -I $(CLHEP_HOME)/include
+# CLHEPLIB = -L $(CLHEP_HOME)/lib -lCLHEP-2.0.1.1
+
+## ROOTCFLAGS   = `/opt/products/root/4.02.00/bin/root-config --cflags`
+## ROOTLIBS     = `/opt/products/root/4.02.00/bin/root-config --libs`
+## ROOTGLIBS    = `/opt/products/root/4.02.00/bin/root-config --glibs`
+
+ROOTCFLAGS   = `root-config --cflags`
+ROOTLIBS     = `root-config --libs`
+ROOTGLIBS    = `root-config --glibs`
+
+
+
+#INCLUDE = $(CLHEP_INCLUDE) 
+INCLUDE =  -I $(BASEDIR)/include
+
+#LIBS  =  $(CLHEPLIB)
+LIBS =  $(ROOTLIBS)
+
+CPPFLAGS += $(INCLUDE)
+#CPPFLAGS += $(USERINCLUDES)
+CPPFLAGS += $(ROOTCFLAGS)
+CPPFLAGS += -g -Wall -ansi
+
+
+$(PROGRAME): $(PROGRAME).cc
+	echo $(PROGRAME)
+#	rm *dict.C
+#	rootcint IDataPointROOTdict.C -c IDataPointROOT.h
+#	rootcint IMeasurementROOTdict.C -c IMeasurementROOT.h
+	g++ -o $(PROGRAME) $(CPPFLAGS) $(PROGRAME).cc AIDA_createAnalysisFactory.cc IAnalysisFactoryROOT.cc ITreeFactoryROOT.cc ITreeROOT.cc IHistogramFactoryROOT.cc IHistogram1DROOT.cc IHistogram2DROOT.cc IHistogram3DROOT.cc IProfile1DROOT.cc IProfile2DROOT.cc utilROOT.cc ICloud1DROOT.cc ICloud2DROOT.cc ICloud3DROOT.cc ITupleFactoryROOT.cc ITupleROOT.cc IDataPointSetFactoryROOT.cc NotYetImplementedException.cc LeafPoint.cc PathName.cc Naming.cc $(LIBS)
+

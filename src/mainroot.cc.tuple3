@@ -1,0 +1,225 @@
+#include <ROOT_AIDA/utilROOT.h>
+#include <ROOT_AIDA/LeafPoint.h>
+#include <TH1F.h>
+#include <TDirectory.h>
+#include <TFile.h>
+#include <TTree.h>
+
+
+#include <iostream>
+#include <string>
+#include <vector>
+
+#include <AIDA/IAnalysisFactory.h>
+#include <AIDA/ITreeFactory.h>
+#include <AIDA/ITree.h>
+#include <AIDA/IHistogramFactory.h>
+#include <AIDA/IHistogram1D.h>
+#include <AIDA/IHistogram2D.h>
+#include <AIDA/IHistogram3D.h>
+#include <AIDA/ITupleFactory.h>
+#include <AIDA/ITuple.h>
+
+using namespace AIDA ;
+using namespace std;
+
+int main()
+{
+  IAnalysisFactory * myaida;
+  ITreeFactory * mytreefactory;
+  ITree * mytree;
+  IHistogramFactory * myhistofactory;
+  myaida = AIDA_createAnalysisFactory();
+  mytreefactory = myaida->createTreeFactory();
+
+
+  std::string storeName("aidaroot.root");
+  std::string storeType("root");
+  bool readOnly = false;
+  bool createNew = false;
+  std::string options("keine");
+  mytree = mytreefactory->create(storeName,storeType,readOnly,createNew,options);
+
+  ITupleFactory * mytuplefactory = myaida->createTupleFactory(*mytree);
+  myhistofactory = myaida->createHistogramFactory(*mytree);
+  ITuple *mytuple;
+
+  vector<string> names,types;
+  names.push_back("myd");
+  types.push_back("D");
+  names.push_back("myf");
+  types.push_back("F");
+  names.push_back("myi");
+  types.push_back("I");
+  names.push_back("mys");
+  types.push_back("S");
+  names.push_back("myl");
+  types.push_back("L");
+  names.push_back("myc");
+  types.push_back("char");
+  names.push_back("myb");
+  types.push_back("bool");
+
+  mytuple = mytuplefactory->create("mynt","my first ntuple",names,types,"");
+
+  mytuple->fill(0,1.1);
+  mytuple->fill(1,1.2);
+  mytuple->fill(2,(int)3);
+  mytuple->fill(3,(short)4);
+  mytuple->fill(4,(long)5);
+  mytuple->fill(5,'a');
+  mytuple->fill(6,false);
+  mytuple->addRow();
+
+  mytuple->fill(0,2.1);
+  mytuple->fill(1,2.2);
+  mytuple->fill(2,23);
+  mytuple->fill(3,(short)24);
+  mytuple->fill(4,(long)25);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,3.1);
+  mytuple->fill(1,3.2);
+  mytuple->fill(2,33);
+  mytuple->fill(3,(short)34);
+  mytuple->fill(4,(long)35);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,4.1);
+  mytuple->fill(1,4.2);
+  mytuple->fill(2,43);
+  mytuple->fill(3,(short)44);
+  mytuple->fill(4,(long)45);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,5.1);
+  mytuple->fill(1,5.2);
+  mytuple->fill(2,53);
+  mytuple->fill(3,(short)54);
+  mytuple->fill(4,(long)55);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,6.1);
+  mytuple->fill(1,6.2);
+  mytuple->fill(2,63);
+  mytuple->fill(3,(short)64);
+  mytuple->fill(4,(long)65);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,7.1);
+  mytuple->fill(1,7.2);
+  mytuple->fill(2,73);
+  mytuple->fill(3,(short)74);
+  mytuple->fill(4,(long)75);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,8.1);
+  mytuple->fill(1,8.2);
+  mytuple->fill(2,83);
+  mytuple->fill(3,(short)84);
+  mytuple->fill(4,(long)85);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,9.1);
+  mytuple->fill(1,9.2);
+  mytuple->fill(2,93);
+  mytuple->fill(3,(short)94);
+  mytuple->fill(4,(long)95);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,10.1);
+  mytuple->fill(1,10.2);
+  mytuple->fill(2,103);
+  mytuple->fill(3,(short)104);
+  mytuple->fill(4,(long)105);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+  mytuple->fill(0,11.1);
+  mytuple->fill(1,11.2);
+  mytuple->fill(2,113);
+  mytuple->fill(3,(short)114);
+  mytuple->fill(4,(long)115);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
+
+  //vector<double> xi;
+  //xi.push_back(4.1);
+  //xi.push_back(4.2);
+  //xi.push_back(4.3);
+  //mytuple->fill(xi);
+  mytuple->start();
+  //mytuple->next();
+  cout << "in spalte: " 
+       << mytuple->getDouble(0) << " " 
+       << mytuple->getFloat(1) << " "
+       << mytuple->getInt(2) << " "
+       << mytuple->getShort(3) << " "
+       << mytuple->getLong(4) << " "
+       << mytuple->getChar(5) << " "
+       << mytuple->getBoolean(6) << " "
+       << endl;
+  cout << "Spalten: " << mytuple->columns() << 
+    " name2: " << mytuple->columnName(1) << " type3: " << 
+    mytuple->columnType(2) << endl;
+  vector<string> usednames = mytuple->columnNames();
+  vector<string> usedtypes = mytuple->columnTypes();
+  for (int i  =0; i<mytuple->rows(); i++)
+    {
+      mytuple->setRow(i);
+      for (int j=0;j<5;j++)
+	cout << mytuple->getDouble(j) << " " ;
+      cout << endl;
+    }
+  cout << endl;
+
+  for (unsigned i = 0 ; i<usednames.size(); i++)
+    cout << usednames[i] << " " << usedtypes[i] << " " ;
+  cout << endl; 
+  for (unsigned i = 0 ; i<5; i++)
+    cout << mytuple->columnMean(i) << " ";
+  cout << endl; 
+  for (unsigned i = 0 ; i<5; i++)
+    cout << mytuple->columnMin(i) << " "<< mytuple->columnMax(i) << 
+      " " << mytuple->columnRms(i) << " | ";
+  cout << endl; 
+
+  //mytuple->addRow();
+  //mytuple->start();
+  //mytuple->next();
+  //mytuple->next();
+  //mytuple->next();
+  //cout << "in spalte: " << mytuple->getDouble(1) << endl;
+  //mytuple->next();
+  //cout << "in spalte: " << mytuple->getDouble(1) << endl;
+  cout << " eintraege: " << mytuple->rows() << 
+    " spalte: " << mytuple->findColumn("myc") << endl;  
+
+/// Schliessen der Datei. -----------------------------------------------------
+  mytree->commit();
+  mytree->close();
+
+  LeafPoint mlp("F","punkt");
+  mlp.set((float)25.3);
+    cout << "punkt: " << *((float*)mlp.getValue()) << endl;
+}
+
