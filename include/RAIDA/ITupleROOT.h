@@ -34,7 +34,7 @@ class ITupleROOT : public ITuple {
 
 public: 
   /// Constructor
-  ITupleROOT(const std::string & path,
+  ITupleROOT(const std::string & name,
 	     const std::string & title,
 	     const std::vector<std::string>  & columnNames,
 	     const std::vector<std::string>  & columnType,

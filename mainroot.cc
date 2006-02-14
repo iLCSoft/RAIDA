@@ -58,6 +58,36 @@ int main()
   mytree->cd("er");
   cl5 = myhistofactory->createCloud3D("/ich/cl5","mycl5",500);
 
+  IHistogram1D *myhistoo = myhistofactory->createHistogram1D("/ich/xxl","hi xxl",5,0,1);
+  //  mytree->cd("/");
+  ITuple *mytuple;
+  vector<string> names,types;
+  names.push_back("myd");
+  types.push_back("D");
+  names.push_back("myf");
+  types.push_back("F");
+  names.push_back("myi");
+  types.push_back("I");
+  names.push_back("mys");
+  types.push_back("S");
+  names.push_back("myl");
+  types.push_back("L");
+  names.push_back("myc");
+  types.push_back("char");
+  names.push_back("myb");
+  types.push_back("bool");
+  //cout << "### Noch am LEBEN!!!" << endl;
+  mytuple = mytuplefactory->create("/ich/mynt","my first ntuple",
+				   names,types,"");
+  mytuple->fill(0,11.1);
+  mytuple->fill(1,11.2);
+  mytuple->fill(2,113);
+  mytuple->fill(3,(short)114);
+  mytuple->fill(4,(long)115);
+  mytuple->fill(5,'b');
+  mytuple->fill(6,true);
+  mytuple->addRow();
+
     for (int i = 0; i<490; i++)
       {
 		cl1->fill( (double)i,(double)i,(double)i  );
@@ -71,6 +101,7 @@ int main()
     //        cl4->scale(3.);
 
 /// Schliessen der Datei. -----------------------------------------------------
+  mytree->cd("/ich");
   mytree->commit();
   mytree->close();
 
