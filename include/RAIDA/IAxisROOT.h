@@ -3,6 +3,7 @@
 #define AIDA_IAXISROOT_H 1
 
 #include <AIDA/IAxis.h>
+#include <TAxis.h>
 
 namespace AIDA {
 
@@ -15,11 +16,16 @@ namespace AIDA {
  *
  */
 
-class IAxis {
+class IAxisROOT : public IAxis {
 
 public: 
     /// Destructor.
     virtual ~IAxisROOT() { /* nop */; }
+
+  /// Constructor: you need to have a pointer to a ROOT TAxis object to construct!
+  IAxisROOT(TAxis* axis); 
+  void setFixedBinning() ;
+  void setVariableBinning() ;
 
   /**
    * Check if the IAxis has fixed binning, i.e. if all the bins have the same width.
@@ -89,6 +95,12 @@ public:
    *
    */
     enum { UNDERFLOW_BIN = -2, OVERFLOW_BIN = -1 };
+
+protected:
+
+  TAxis *_axis;
+  bool _fixedBinning; 
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IAXISROOT_H */

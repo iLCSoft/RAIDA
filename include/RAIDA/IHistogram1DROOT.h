@@ -6,7 +6,7 @@
 
 
 #include <TH1D.h>
-
+#include <AIDA/IAxis.h>
 namespace AIDA {
 
   /// class IAxis;
@@ -234,6 +234,7 @@ private:
    TH1D *_histogram;
    TH1D *_histogramAIDA;
    TH1D *_histogramAIDABinMean;
+  IAxis *_xAxis;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM1DROOT_H */
