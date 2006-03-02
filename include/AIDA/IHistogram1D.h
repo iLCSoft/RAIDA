@@ -17,7 +17,7 @@
 
 namespace AIDA {
 
-  /// class IAxis;
+  class IAxis;
 
 /**
  * User level interface to 1D Histogram.
