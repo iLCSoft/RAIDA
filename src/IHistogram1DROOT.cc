@@ -1,4 +1,5 @@
 #include <RAIDA/IHistogram1DROOT.h>
+#include <RAIDA/IAxisROOT.h>
 // #include <RAIDA/utilROOT.h>
 #include <RAIDA/Naming.h>
 #include <iostream>
@@ -29,6 +30,10 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
 				   (Int_t)nBins,(Axis_t)lowerEdge,
 				   (Axis_t)upperEdge);
   //  gDirectory->ls();
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
 }
 
 bool IHistogram1DROOT::fill(double x, double weight)
