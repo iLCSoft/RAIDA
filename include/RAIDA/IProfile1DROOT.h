@@ -3,13 +3,13 @@
 #define AIDA_IPROFILE1DROOT_H 1
 
 #include "AIDA/IProfile1D.h"
-
+#include <AIDA/IAxis.h>
 #include <TH1D.h>
 #include <TProfile.h>
 
 namespace AIDA {
 
-class IAxis;
+  // class IAxis;
 
 /**
  * User level interface to a 1-dimensional profile histogram
@@ -84,7 +84,7 @@ public:
     /**
      * Returns the X axis.
      */
-  /// virtual const IAxis & axis() const ;
+  virtual const IAxis & axis() const ;
 
     /**
      * Convenience method, equivalent to <tt>axis().coordToIndex(coord)</tt>.
@@ -218,6 +218,8 @@ private:
   TH1D*     _histogram;
   TH1D*     _histogramAIDA;
   TH1D*     _histogramAIDABinMeanX;
+  IAxis *_xAxis;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE1DROOT_H */

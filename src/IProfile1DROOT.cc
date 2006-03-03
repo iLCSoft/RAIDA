@@ -1,6 +1,6 @@
-// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IProfile1DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -35,6 +35,10 @@ IProfile1DROOT::IProfile1DROOT(const std::string & name,
                                     Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBins,
 				    (Axis_t)lowerEdge,(Axis_t)upperEdge);
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
 }
 
 bool IProfile1DROOT::fill(double x, double y, double weight)
@@ -90,6 +94,11 @@ double IProfile1DROOT::mean() const
 double IProfile1DROOT::rms() const 
 {
   return (double)_profile->GetRMS();
+}
+
+const IAxis & IProfile1DROOT::axis() const
+{
+  return *_xAxis;
 }
 
 int IProfile1DROOT::coordToIndex(double coord) const 

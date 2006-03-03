@@ -4,12 +4,14 @@
 
 
 #include "AIDA/IProfile2D.h"
+#include <AIDA/IAxis.h>
+
 #include <TH2D.h>
 #include <TProfile2D.h>
 
 namespace AIDA {
 
-class IAxis;
+  // class IAxis;
 
 /**
  * User level interface to a 2-dimensional profile histogram
@@ -145,13 +147,13 @@ public:
      * Return the X axis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Return the Y axis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Convenience method, equivalent to <tt>xAxis().coordToIndex(coord)</tt>.
@@ -297,6 +299,9 @@ private:
   TH2D*     _histogramAIDA;
   TH2D*     _histogramAIDABinMeanX;
   TH2D*     _histogramAIDABinMeanY;
+  IAxis *_xAxis;
+  IAxis *_yAxis;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE2DROOT_H */

@@ -17,6 +17,9 @@
 #include <AIDA/IHistogram1D.h>
 #include <AIDA/IHistogram2D.h>
 #include <AIDA/IHistogram3D.h>
+#include <AIDA/IProfile1D.h>
+#include <AIDA/IProfile2D.h>
+
 #include <AIDA/ITupleFactory.h>
 #include <AIDA/ITuple.h>
 #include <AIDA/ICloud1D.h>
@@ -205,6 +208,58 @@ int main()
        << myhisto23->zAxis().coordToIndex(20) << " " 
        << myhisto23->zAxis().coordToIndex(23) << " " 
        << myhisto23->zAxis().coordToIndex(29)  << endl;
+// 1D prof. histos: 
+  cout << "1D-pHistos: ----------------------------------------------------------------" << endl;
+  IProfile1D *myprof2 = myhistofactory->createProfile1D("/ld","l4",5,2,7);
+  cout << "binning: " << myprof2->axis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myprof2->axis().lowerEdge() << " - " 
+       << myprof2->axis().upperEdge() << " bins: " 
+       << myprof2->axis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myprof2->axis().binLowerEdge(k) << " - " 
+	 << myprof2->axis().binUpperEdge(k) << " width: " 
+	 << myprof2->axis().binWidth(k) << endl;
+  cout << "index: " 
+       << myprof2->axis().coordToIndex(0) << " " 
+       << myprof2->axis().coordToIndex(3) << " " 
+       << myprof2->axis().coordToIndex(9)  << endl;
+
+// 2D prof. histos: 
+  cout << "2D-pHistos: -----------------------------------------------------------------" << endl;
+  IProfile2D *myprof22 
+    = myhistofactory->createProfile2D("/le","l5",5,2,7,5,9,14);
+// x-Achse:
+  cout << "binning: X" << myprof22->xAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myprof22->xAxis().lowerEdge() << " - " 
+       << myprof22->xAxis().upperEdge() << " bins: " 
+       << myprof22->xAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myprof22->xAxis().binLowerEdge(k) << " - " 
+	 << myprof22->xAxis().binUpperEdge(k) << " width: " 
+	 << myprof22->xAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myprof22->xAxis().coordToIndex(0) << " " 
+       << myprof22->xAxis().coordToIndex(3) << " " 
+       << myprof22->xAxis().coordToIndex(9)  << endl;
+// y-Achse:
+  cout << "binning: Y" << myprof22->yAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myprof22->yAxis().lowerEdge() << " - " 
+       << myprof22->yAxis().upperEdge() << " bins: " 
+       << myprof22->yAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myprof22->yAxis().binLowerEdge(k) << " - " 
+	 << myprof22->yAxis().binUpperEdge(k) << " width: " 
+	 << myprof22->yAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myprof22->yAxis().coordToIndex(0) << " " 
+       << myprof22->yAxis().coordToIndex(13) << " " 
+       << myprof22->yAxis().coordToIndex(19)  << endl;
 
 
   mytree->commit();

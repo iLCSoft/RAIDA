@@ -83,7 +83,7 @@ public:
     /**
      * Returns the X axis.
      */
-  /// virtual const IAxis & axis() const = 0;
+  virtual const IAxis & axis() const = 0;
 
     /**
      * Convenience method, equivalent to <tt>axis().coordToIndex(coord)</tt>.

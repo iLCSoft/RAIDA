@@ -1,6 +1,6 @@
-// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IProfile2DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -53,6 +53,13 @@ IProfile2DROOT::IProfile2DROOT(const std::string & name,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
 }
 
 bool IProfile2DROOT::fill(double x, double y, double z, double weight) 
@@ -189,6 +196,16 @@ double IProfile2DROOT::rmsX() const
 double IProfile2DROOT::rmsY() const 
 {
   return (double)_profile->GetRMS( (Int_t)2 );
+}
+
+const IAxis & IProfile2DROOT::xAxis() const
+{
+  return *_xAxis;
+}
+
+const IAxis & IProfile2DROOT::yAxis() const
+{
+  return *_yAxis;
 }
 
 int IProfile2DROOT::coordToIndexX(double coordX) const 
