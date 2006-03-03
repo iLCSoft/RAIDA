@@ -93,7 +93,7 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & axis() const = 0;
+  virtual const IAxis & axis() const = 0;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
