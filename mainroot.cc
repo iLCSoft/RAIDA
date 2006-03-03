@@ -22,6 +22,7 @@
 #include <AIDA/ICloud1D.h>
 #include <AIDA/ICloud2D.h>
 #include <AIDA/ICloud3D.h>
+#include <AIDA/IAxis.h>
 
 using namespace AIDA ;
 using namespace std;
@@ -101,7 +102,111 @@ int main()
     //        cl4->scale(3.);
 
 /// Schliessen der Datei. -----------------------------------------------------
-  mytree->cd("/ich");
+  mytree->cd("/");
+
+// 1D histos: 
+  cout << "1D-Histos: ------------------------------------------------------------------" << endl;
+  IHistogram1D *myhisto2 = myhistofactory->createHistogram1D("/la","l1",5,2,7);
+  cout << "binning: " << myhisto2->axis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto2->axis().lowerEdge() << " - " 
+       << myhisto2->axis().upperEdge() << " bins: " 
+       << myhisto2->axis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto2->axis().binLowerEdge(k) << " - " 
+	 << myhisto2->axis().binUpperEdge(k) << " width: " 
+	 << myhisto2->axis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto2->axis().coordToIndex(0) << " " 
+       << myhisto2->axis().coordToIndex(3) << " " 
+       << myhisto2->axis().coordToIndex(9)  << endl;
+
+// 2D histos: 
+  cout << "2D-Histos: ------------------------------------------------------------------" << endl;
+  IHistogram2D *myhisto22 
+    = myhistofactory->createHistogram2D("/lb","l2",5,2,7,5,9,14);
+// x-Achse:
+  cout << "binning: X" << myhisto22->xAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto22->xAxis().lowerEdge() << " - " 
+       << myhisto22->xAxis().upperEdge() << " bins: " 
+       << myhisto22->xAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto22->xAxis().binLowerEdge(k) << " - " 
+	 << myhisto22->xAxis().binUpperEdge(k) << " width: " 
+	 << myhisto22->xAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto22->xAxis().coordToIndex(0) << " " 
+       << myhisto22->xAxis().coordToIndex(3) << " " 
+       << myhisto22->xAxis().coordToIndex(9)  << endl;
+// y-Achse:
+  cout << "binning: Y" << myhisto22->yAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto22->yAxis().lowerEdge() << " - " 
+       << myhisto22->yAxis().upperEdge() << " bins: " 
+       << myhisto22->yAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto22->yAxis().binLowerEdge(k) << " - " 
+	 << myhisto22->yAxis().binUpperEdge(k) << " width: " 
+	 << myhisto22->yAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto22->yAxis().coordToIndex(0) << " " 
+       << myhisto22->yAxis().coordToIndex(13) << " " 
+       << myhisto22->yAxis().coordToIndex(19)  << endl;
+// 3D histos: 
+  cout << "3D-Histos: ------------------------------------------------------------------" << endl;
+  IHistogram3D *myhisto23 
+    = myhistofactory->createHistogram3D("/lc","l3",5,2,7,5,9,14,5,22,27);
+// x-Achse:
+  cout << "binning: X" << myhisto23->xAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto23->xAxis().lowerEdge() << " - " 
+       << myhisto23->xAxis().upperEdge() << " bins: " 
+       << myhisto23->xAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto23->xAxis().binLowerEdge(k) << " - " 
+	 << myhisto23->xAxis().binUpperEdge(k) << " width: " 
+	 << myhisto23->xAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto23->xAxis().coordToIndex(0) << " " 
+       << myhisto23->xAxis().coordToIndex(3) << " " 
+       << myhisto23->xAxis().coordToIndex(9)  << endl;
+// y-Achse:
+  cout << "binning: Y" << myhisto23->yAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto23->yAxis().lowerEdge() << " - " 
+       << myhisto23->yAxis().upperEdge() << " bins: " 
+       << myhisto23->yAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto23->yAxis().binLowerEdge(k) << " - " 
+	 << myhisto23->yAxis().binUpperEdge(k) << " width: " 
+	 << myhisto23->yAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto23->yAxis().coordToIndex(0) << " " 
+       << myhisto23->yAxis().coordToIndex(13) << " " 
+       << myhisto23->yAxis().coordToIndex(19)  << endl;
+// z-Achse:
+  cout << "binning: Z" << myhisto23->zAxis().isFixedBinning() << endl; 
+  cout << "range: " 
+       << myhisto23->zAxis().lowerEdge() << " - " 
+       << myhisto23->zAxis().upperEdge() << " bins: " 
+       << myhisto23->zAxis().bins() << endl; 
+  for (int k=0;k<=6;k++) 
+    cout << "bin " << k << " " 
+	 << myhisto23->zAxis().binLowerEdge(k) << " - " 
+	 << myhisto23->zAxis().binUpperEdge(k) << " width: " 
+	 << myhisto23->zAxis().binWidth(k) << endl;
+  cout << "index: " 
+       << myhisto23->zAxis().coordToIndex(20) << " " 
+       << myhisto23->zAxis().coordToIndex(23) << " " 
+       << myhisto23->zAxis().coordToIndex(29)  << endl;
+
+
   mytree->commit();
   mytree->close();
 
