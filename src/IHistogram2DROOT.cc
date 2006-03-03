@@ -1,6 +1,6 @@
-/// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IHistogram2DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -41,6 +41,12 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
 }
 
 string IHistogram2DROOT::title() const
@@ -408,6 +414,16 @@ double IHistogram2DROOT::rmsX() const
 double IHistogram2DROOT::rmsY() const 
 {
   return (double)_histogram->GetRMS( (Int_t)2 );
+}
+
+const IAxis & IHistogram2DROOT::xAxis() const
+{
+  return *_xAxis;
+}
+
+const IAxis & IHistogram2DROOT::yAxis() const
+{
+  return *_yAxis;
 }
 
 int IHistogram2DROOT::coordToIndexX(double coord) const 

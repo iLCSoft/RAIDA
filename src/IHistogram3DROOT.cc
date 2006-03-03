@@ -1,6 +1,6 @@
-/// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IHistogram3DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -64,6 +64,16 @@ IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY,
 				    (Int_t)nBinsZ,
 				    (Axis_t)lowerEdgeZ,(Axis_t)upperEdgeZ);
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  dynamic_cast<IAxisROOT*>(_zAxis)->setFixedBinning();
 }
 
 bool IHistogram3DROOT::fill(double x, double y, double z, double weight) 
@@ -267,6 +277,21 @@ double IHistogram3DROOT::rmsY() const
 double IHistogram3DROOT::rmsZ() const 
 {
   return (double)_histogram->GetRMS( (Int_t)3 );
+}
+
+const IAxis & IHistogram3DROOT::xAxis() const
+{
+  return *_xAxis;
+}
+
+const IAxis & IHistogram3DROOT::yAxis() const
+{
+  return *_yAxis;
+}
+
+const IAxis & IHistogram3DROOT::zAxis() const
+{
+  return *_zAxis;
 }
 
 int IHistogram3DROOT::coordToIndexX(double coord) const 

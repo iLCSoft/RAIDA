@@ -1,6 +1,5 @@
 #include <RAIDA/IHistogram1DROOT.h>
 #include <RAIDA/IAxisROOT.h>
-// #include <RAIDA/utilROOT.h>
 #include <RAIDA/Naming.h>
 #include <iostream>
 #include <TH1D.h>
@@ -225,6 +224,11 @@ double IHistogram1DROOT::mean() const
 double IHistogram1DROOT::rms() const 
 {
   return (double)_histogram->GetRMS();
+}
+
+const IAxis & IHistogram1DROOT::axis() const 
+{
+  return *_xAxis;
 }
 
 int IHistogram1DROOT::coordToIndex(double coord) const 

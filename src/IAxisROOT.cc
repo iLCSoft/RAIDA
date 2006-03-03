@@ -45,15 +45,18 @@ int IAxisROOT::bins() const
 double IAxisROOT::binLowerEdge(int index) const 
 {
   // check if index is in range
-  if (index <= 0) return -DBL_MAX;
-  if (index > _axis->GetNbins() ) return DBL_MAX;
+  if (index <= 0) 
+    return -DBL_MAX;
+  if (index > _axis->GetNbins() ) 
+    return (double)_axis->GetBinUpEdge( _axis->GetNbins() );
   return (double)_axis->GetBinLowEdge( index );
 }
 
 double IAxisROOT::binUpperEdge(int index) const 
 {
   // check if index is in range
-  if (index <= 0) return -DBL_MAX;
+  if (index <= 0) 
+    return (double)_axis->GetBinLowEdge( 1 );
   if (index > _axis->GetNbins() ) return DBL_MAX;
   return (double)_axis->GetBinUpEdge( index );
 }
