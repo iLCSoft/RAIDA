@@ -6,7 +6,7 @@
 #include "AIDA/IHistogram2D.h"
 #include <TH1D.h>
 #include <TH2D.h>
-
+#include <AIDA/IAxis.h>
 
 namespace AIDA {
 
@@ -163,14 +163,14 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Get the y axis of the IHistogram2D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -342,6 +342,8 @@ private:
   TH2D *_histogramAIDA;
   TH2D *_histogramAIDABinMeanX;
   TH2D *_histogramAIDABinMeanY;
+  IAxis *_xAxis;
+  IAxis *_yAxis;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM2DROOT_H */

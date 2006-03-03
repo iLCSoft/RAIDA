@@ -7,6 +7,7 @@
 
 #include <TH1D.h>
 #include <AIDA/IAxis.h>
+
 namespace AIDA {
 
   /// class IAxis;
@@ -211,6 +212,13 @@ public:
    *
    */
   virtual double rms() const ;
+
+  /**
+   * Get the x axis of the IHistogram1D.
+   * @return The x coordinate IAxis.
+   *
+   */
+  virtual const IAxis & axis() const ;
 
   /**
    * Get the bin number corresponding to a given coordinate along the x axis.

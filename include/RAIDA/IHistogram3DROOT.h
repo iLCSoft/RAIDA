@@ -6,10 +6,11 @@
 #include <TH1D.h>
 #include <TH2D.h>
 #include <TH3D.h>
+#include <AIDA/IAxis.h>
 
 namespace AIDA {
 
-class IAxis;
+  /// class IAxis;
 
 /**
  * User level interface to 3D Histogram.
@@ -213,21 +214,21 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Get the y axis of the IHistogram3D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Get the z axis of the IHistogram3D.
      * @return The z coordinate IAxis.
      *
      */
-  /// virtual const IAxis & zAxis() const ;
+  virtual const IAxis & zAxis() const ;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -410,6 +411,10 @@ private:
   TH3D *_histogramAIDABinMeanX;
   TH3D *_histogramAIDABinMeanY;
   TH3D *_histogramAIDABinMeanZ;
+
+  IAxis *_xAxis;
+  IAxis *_yAxis;
+  IAxis *_zAxis;
 
 }; // class
 } // namespace AIDA
