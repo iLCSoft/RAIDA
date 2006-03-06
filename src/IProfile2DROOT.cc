@@ -29,6 +29,46 @@ IProfile2DROOT::IProfile2DROOT(const std::string & name,
 			    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 			    (Int_t)nBinsY,
 			    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+
+  Profile2DHistograms(name,title,
+		      nBinsX,lowerEdgeX,upperEdgeX,
+		      nBinsY,lowerEdgeY,upperEdgeY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       int nBinsX,
+			       double lowerEdgeX,
+			       double upperEdgeX,
+			       int nBinsY,
+			       double lowerEdgeY,
+			       double upperEdgeY,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options)
+{
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,
+			    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
+			    (Int_t)nBinsY,
+			    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY,
+			    (Axis_t)lowerValue,(Axis_t)upperValue);
+
+  Profile2DHistograms(name,title,
+		      nBinsX,lowerEdgeX,upperEdgeX,
+		      nBinsY,lowerEdgeY,upperEdgeY);
+}
+
+void IProfile2DROOT::Profile2DHistograms(const std::string & name,
+					 const std::string & title,
+					 int nBinsX,
+					 double lowerEdgeX,
+					 double upperEdgeX,
+					 int nBinsY,
+					 double lowerEdgeY,
+					 double upperEdgeY)
+{
   _histogram = new TH2D(Naming::binContents(name).c_str(),
                         Naming::titleBinContents(title).c_str(),
 			(Int_t)nBinsX,

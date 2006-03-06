@@ -23,6 +23,34 @@ IProfile1DROOT::IProfile1DROOT(const std::string & name,
 			  title.c_str(),
 			  (Int_t)nBins,
                           (Axis_t)lowerEdge,(Axis_t)upperEdge);
+
+  Profile1DHistograms(name,title,nBins,lowerEdge,upperEdge);
+}
+
+IProfile1DROOT::IProfile1DROOT(const std::string & name,
+			       const std::string & title,
+			       int nBins,
+			       double lowerEdge,
+			       double upperEdge,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options) 
+{
+  _profile = new TProfile(name.c_str(),
+			  title.c_str(),
+			  (Int_t)nBins,
+                          (Axis_t)lowerEdge,(Axis_t)upperEdge,
+                          (Axis_t)lowerValue,(Axis_t)upperValue);
+
+  Profile1DHistograms(name,title,nBins,lowerEdge,upperEdge);
+}
+
+void IProfile1DROOT::Profile1DHistograms(const std::string & name,
+					 const std::string & title,
+					 int nBins,
+					 double lowerEdge,
+					 double upperEdge)
+{
   _histogram = new TH1D(Naming::binContents(name).c_str(),
 			Naming::titleBinContents(title).c_str(),
 			(Int_t)nBins,
