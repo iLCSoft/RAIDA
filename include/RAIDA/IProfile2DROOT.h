@@ -36,6 +36,17 @@ public:
 		 double lowerEdgeY,
 		 double upperEdgeY,
 		 const std::string & options = "");
+  IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 int nBinsX,
+		 double lowerEdgeX,
+		 double upperEdgeX,
+		 int nBinsY,
+		 double lowerEdgeY,
+		 double upperEdgeY,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
 
   IProfile2DROOT() { /* nop */; }
 
@@ -293,6 +304,15 @@ protected:
 
 
 private:
+
+  void Profile2DHistograms(const std::string & name,
+                           const std::string & title,
+                           int nBinsX,
+                           double lowerEdgeX,
+                           double upperEdgeX,
+                           int nBinsY,
+                           double lowerEdgeY,
+                           double upperEdgeY);
 
   TProfile2D* _profile;
   TH2D*     _histogram;

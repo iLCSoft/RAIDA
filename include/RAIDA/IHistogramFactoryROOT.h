@@ -75,7 +75,7 @@ public:
      * @return             The newly created ICloud1D.
      *
      */
-  /// virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) ;
+  virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) ;
 
     /**
      * Create a copy of an ICloud1D.
@@ -118,7 +118,7 @@ public:
      * @return             The newly created ICloud2D.
      *
      */
-  /// virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) ;
+  virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) ;
 
     /**
      * Create a copy of an ICloud2D.
@@ -161,7 +161,7 @@ public:
      * @return             The newly created ICloud3D.
      *
      */
-  /// virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) ;
+  virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) ;
 
     /**
      * Create a copy of an ICloud3D.
@@ -286,7 +286,13 @@ public:
      * @return             The newly created IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) ;
+  virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY) ;
 
     /**
      * Create a IHistogram2D.
@@ -369,7 +375,16 @@ public:
      * @return             The newly created IHistogram3D.
      *
      */
-  ///virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, int nBinsZ, double lowerEdgeZ, double upperEdgeZ) ;
+  virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY, 
+					   int nBinsZ, 
+					   double lowerEdgeZ, 
+					   double upperEdgeZ) ;
 
     /**
      * Create a IHistogram3D.
@@ -437,7 +452,14 @@ public:
      * @return           The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue, const std::string & options = "") ;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") ;
 
     /**
      * Create a IProfile1D.
@@ -482,7 +504,10 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge) ;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge) ;
 
     /**
      * Create a IProfile1D.
@@ -499,7 +524,12 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue) ;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue) ;
 
     /**
      * Create a copy of an IProfile1D.
@@ -559,7 +589,17 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue, const std::string & options = "") ;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") ;
 
     /**
      * Create a IProfile2D.
@@ -609,7 +649,13 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) ;
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY) ;
 
     /**
      * Create a IProfile2D.
@@ -629,8 +675,16 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue) ;
-
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue) ;
+  
     /**
      * Create a copy of an IProfile2D.
      * @param path    The path of the resulting IProfile. The path can either be a relative or full path.
@@ -986,7 +1040,7 @@ public:
 private:
 
   ITree* _usedTree; 
-
+  static const int _nMaxDefault;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAMFACTORYROOT_H */

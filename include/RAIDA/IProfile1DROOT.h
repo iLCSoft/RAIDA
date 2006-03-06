@@ -31,6 +31,15 @@ public:
 		 double lowerEdge,
 		 double upperEdge,
 		 const std::string & options = "");
+
+  IProfile1DROOT(const std::string & name,
+		 const std::string & title,
+		 int nBins,
+		 double lowerEdge,
+		 double upperEdge,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
   IProfile1DROOT() { /* nop */; }
     /**
      * Fill the IProfile1D.
@@ -213,6 +222,12 @@ protected:
 
 
 private:
+
+  void Profile1DHistograms(const std::string & name,
+			   const std::string & title,
+			   int nBins,
+			   double lowerEdge,
+			   double upperEdge);
 
   TProfile* _profile;
   TH1D*     _histogram;
