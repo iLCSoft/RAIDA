@@ -78,7 +78,7 @@ public:
      * @return             The newly created ICloud1D.
      *
      */
-  /// virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) = 0;
+  virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud1D.
@@ -121,7 +121,7 @@ public:
      * @return             The newly created ICloud2D.
      *
      */
-  /// virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) = 0;
+  virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud2D.
@@ -164,7 +164,7 @@ public:
      * @return             The newly created ICloud3D.
      *
      */
-  /// virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) = 0;
+  virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud3D.
@@ -208,7 +208,10 @@ public:
      * @return             The newly created IHistogram1D.
      *
      */
-  virtual IHistogram1D * createHistogram1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge) = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & pathAndTitle, 
+					   int nBins, 
+					   double lowerEdge, 
+					   double upperEdge) = 0;
 
     /**
      * Create a IHistogram1D.
@@ -281,7 +284,13 @@ public:
      * @return             The newly created IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) = 0;
+  virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY) = 0;
 
     /**
      * Create a IHistogram2D.
@@ -332,7 +341,18 @@ public:
      * @return           The newly created IHistogram3D.
      *
      */
-  virtual IHistogram3D * createHistogram3D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, int nBinsZ, double lowerEdgeZ, double upperEdgeZ, const std::string & options = "") = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & path, 
+					   const std::string & title, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY, 
+					   int nBinsZ, 
+					   double lowerEdgeZ, 
+					   double upperEdgeZ, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a IHistogram3D.
@@ -353,7 +373,16 @@ public:
      * @return             The newly created IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, int nBinsZ, double lowerEdgeZ, double upperEdgeZ) = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY, 
+					   int nBinsZ, 
+					   double lowerEdgeZ, 
+					   double upperEdgeZ) = 0;
 
     /**
      * Create a IHistogram3D.
@@ -398,7 +427,12 @@ public:
      * @return          The newly created IProfile1D.
      *
      */
-  virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -416,7 +450,14 @@ public:
      * @return           The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -461,7 +502,10 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge) = 0;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge) = 0;
 
     /**
      * Create a IProfile1D.
@@ -478,7 +522,12 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue) = 0;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue) = 0;
 
     /**
      * Create a copy of an IProfile1D.
@@ -530,7 +579,17 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
@@ -580,7 +639,13 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) = 0;
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY) = 0;
 
     /**
      * Create a IProfile2D.
@@ -600,7 +665,15 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue) = 0;
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue) = 0;
 
     /**
      * Create a copy of an IProfile2D.
