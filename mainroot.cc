@@ -59,6 +59,8 @@ int main()
   cl2 = myhistofactory->createCloud3D("/ich/cl2","mycl2",15);
   cl3 = myhistofactory->createCloud3D("/du/cl3","mycl3",500);
   cl4 = myhistofactory->createCloud3D("/er/cl4","mycl4",15);
+  //  cl6 = myhistofactory->createCloud1D("/er/cl6");
+
   mytree->cd("er");
   cl5 = myhistofactory->createCloud3D("/ich/cl5","mycl5",500);
 
@@ -105,162 +107,18 @@ int main()
     //        cl4->scale(3.);
 
 /// Schliessen der Datei. -----------------------------------------------------
-  mytree->cd("/");
-
-// 1D histos: 
-  cout << "1D-Histos: ------------------------------------------------------------------" << endl;
-  IHistogram1D *myhisto2 = myhistofactory->createHistogram1D("/la","l1",5,2,7);
-  cout << "binning: " << myhisto2->axis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto2->axis().lowerEdge() << " - " 
-       << myhisto2->axis().upperEdge() << " bins: " 
-       << myhisto2->axis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto2->axis().binLowerEdge(k) << " - " 
-	 << myhisto2->axis().binUpperEdge(k) << " width: " 
-	 << myhisto2->axis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto2->axis().coordToIndex(0) << " " 
-       << myhisto2->axis().coordToIndex(3) << " " 
-       << myhisto2->axis().coordToIndex(9)  << endl;
-
-// 2D histos: 
-  cout << "2D-Histos: ------------------------------------------------------------------" << endl;
-  IHistogram2D *myhisto22 
-    = myhistofactory->createHistogram2D("/lb","l2",5,2,7,5,9,14);
-// x-Achse:
-  cout << "binning: X" << myhisto22->xAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto22->xAxis().lowerEdge() << " - " 
-       << myhisto22->xAxis().upperEdge() << " bins: " 
-       << myhisto22->xAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto22->xAxis().binLowerEdge(k) << " - " 
-	 << myhisto22->xAxis().binUpperEdge(k) << " width: " 
-	 << myhisto22->xAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto22->xAxis().coordToIndex(0) << " " 
-       << myhisto22->xAxis().coordToIndex(3) << " " 
-       << myhisto22->xAxis().coordToIndex(9)  << endl;
-// y-Achse:
-  cout << "binning: Y" << myhisto22->yAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto22->yAxis().lowerEdge() << " - " 
-       << myhisto22->yAxis().upperEdge() << " bins: " 
-       << myhisto22->yAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto22->yAxis().binLowerEdge(k) << " - " 
-	 << myhisto22->yAxis().binUpperEdge(k) << " width: " 
-	 << myhisto22->yAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto22->yAxis().coordToIndex(0) << " " 
-       << myhisto22->yAxis().coordToIndex(13) << " " 
-       << myhisto22->yAxis().coordToIndex(19)  << endl;
-// 3D histos: 
-  cout << "3D-Histos: ------------------------------------------------------------------" << endl;
-  IHistogram3D *myhisto23 
-    = myhistofactory->createHistogram3D("/lc","l3",5,2,7,5,9,14,5,22,27);
-// x-Achse:
-  cout << "binning: X" << myhisto23->xAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto23->xAxis().lowerEdge() << " - " 
-       << myhisto23->xAxis().upperEdge() << " bins: " 
-       << myhisto23->xAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto23->xAxis().binLowerEdge(k) << " - " 
-	 << myhisto23->xAxis().binUpperEdge(k) << " width: " 
-	 << myhisto23->xAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto23->xAxis().coordToIndex(0) << " " 
-       << myhisto23->xAxis().coordToIndex(3) << " " 
-       << myhisto23->xAxis().coordToIndex(9)  << endl;
-// y-Achse:
-  cout << "binning: Y" << myhisto23->yAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto23->yAxis().lowerEdge() << " - " 
-       << myhisto23->yAxis().upperEdge() << " bins: " 
-       << myhisto23->yAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto23->yAxis().binLowerEdge(k) << " - " 
-	 << myhisto23->yAxis().binUpperEdge(k) << " width: " 
-	 << myhisto23->yAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto23->yAxis().coordToIndex(0) << " " 
-       << myhisto23->yAxis().coordToIndex(13) << " " 
-       << myhisto23->yAxis().coordToIndex(19)  << endl;
-// z-Achse:
-  cout << "binning: Z" << myhisto23->zAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myhisto23->zAxis().lowerEdge() << " - " 
-       << myhisto23->zAxis().upperEdge() << " bins: " 
-       << myhisto23->zAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myhisto23->zAxis().binLowerEdge(k) << " - " 
-	 << myhisto23->zAxis().binUpperEdge(k) << " width: " 
-	 << myhisto23->zAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myhisto23->zAxis().coordToIndex(20) << " " 
-       << myhisto23->zAxis().coordToIndex(23) << " " 
-       << myhisto23->zAxis().coordToIndex(29)  << endl;
-// 1D prof. histos: 
-  cout << "1D-pHistos: ----------------------------------------------------------------" << endl;
-  IProfile1D *myprof2 = myhistofactory->createProfile1D("/ld","l4",5,2,7);
-  cout << "binning: " << myprof2->axis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myprof2->axis().lowerEdge() << " - " 
-       << myprof2->axis().upperEdge() << " bins: " 
-       << myprof2->axis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myprof2->axis().binLowerEdge(k) << " - " 
-	 << myprof2->axis().binUpperEdge(k) << " width: " 
-	 << myprof2->axis().binWidth(k) << endl;
-  cout << "index: " 
-       << myprof2->axis().coordToIndex(0) << " " 
-       << myprof2->axis().coordToIndex(3) << " " 
-       << myprof2->axis().coordToIndex(9)  << endl;
-
-// 2D prof. histos: 
-  cout << "2D-pHistos: -----------------------------------------------------------------" << endl;
-  IProfile2D *myprof22 
-    = myhistofactory->createProfile2D("/le","l5",5,2,7,5,9,14);
-// x-Achse:
-  cout << "binning: X" << myprof22->xAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myprof22->xAxis().lowerEdge() << " - " 
-       << myprof22->xAxis().upperEdge() << " bins: " 
-       << myprof22->xAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myprof22->xAxis().binLowerEdge(k) << " - " 
-	 << myprof22->xAxis().binUpperEdge(k) << " width: " 
-	 << myprof22->xAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myprof22->xAxis().coordToIndex(0) << " " 
-       << myprof22->xAxis().coordToIndex(3) << " " 
-       << myprof22->xAxis().coordToIndex(9)  << endl;
-// y-Achse:
-  cout << "binning: Y" << myprof22->yAxis().isFixedBinning() << endl; 
-  cout << "range: " 
-       << myprof22->yAxis().lowerEdge() << " - " 
-       << myprof22->yAxis().upperEdge() << " bins: " 
-       << myprof22->yAxis().bins() << endl; 
-  for (int k=0;k<=6;k++) 
-    cout << "bin " << k << " " 
-	 << myprof22->yAxis().binLowerEdge(k) << " - " 
-	 << myprof22->yAxis().binUpperEdge(k) << " width: " 
-	 << myprof22->yAxis().binWidth(k) << endl;
-  cout << "index: " 
-       << myprof22->yAxis().coordToIndex(0) << " " 
-       << myprof22->yAxis().coordToIndex(13) << " " 
-       << myprof22->yAxis().coordToIndex(19)  << endl;
-
+  mytree->cd("/er");
+  ICloud1D *cl6;
+  ICloud2D *cl7;
+  ICloud3D *cl8;
+  cl6 = myhistofactory->createCloud1D("cl6");
+  cl7 = myhistofactory->createCloud2D("cl7");
+  cl8 = myhistofactory->createCloud3D("cl8");
+  //  IHistogram1D *myhi1 = myhistofactory->createHistogram1D("t1",5,0,1);
+  //  IHistogram2D *myhi2 = myhistofactory->createHistogram2D("t2",5,0,1,5,0,1);
+  //  IHistogram3D *myhi3 = myhistofactory->createHistogram3D("t3",5,0,1,5,0,1,5,0,1);
+  IProfile2D *mypr1 = myhistofactory->createProfile2D("/er/pr1",5,0,1,5,0,1);
+  IProfile2D *mypr2 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1,2,3);
 
   mytree->commit();
   mytree->close();
