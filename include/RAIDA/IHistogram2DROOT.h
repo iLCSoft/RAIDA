@@ -38,6 +38,9 @@ public:
                    double upperEdgeY,
                    const std::string & options = "") ;
 
+  IHistogram2DROOT(const std::string & name,
+                   const IHistogram2DROOT & hist) ;
+
     /**
      * Fill the IHistogram2D with a couple of values and the
      * corresponding weight.

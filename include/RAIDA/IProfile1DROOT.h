@@ -25,6 +25,8 @@ public:
     virtual ~IProfile1DROOT() { /* nop */; }
 
   /// constructor
+  IProfile1DROOT() { /* nop */; }
+
   IProfile1DROOT(const std::string & name,
 		 const std::string & title,
 		 int nBins,
@@ -40,7 +42,10 @@ public:
 		 double lowerValue,
 		 double upperValue,
 		 const std::string & options = "");
-  IProfile1DROOT() { /* nop */; }
+
+  IProfile1DROOT(const std::string & name,
+                   const IProfile1DROOT & profile) ;
+
     /**
      * Fill the IProfile1D.
      *

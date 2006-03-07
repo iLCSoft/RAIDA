@@ -27,6 +27,8 @@ public:
     virtual ~IProfile2DROOT() { /* nop */; }
 
   /// constructor
+  IProfile2DROOT() { /* nop */; }
+
   IProfile2DROOT(const std::string & name,
 		 const std::string & title,
 		 int nBinsX,
@@ -36,6 +38,7 @@ public:
 		 double lowerEdgeY,
 		 double upperEdgeY,
 		 const std::string & options = "");
+
   IProfile2DROOT(const std::string & name,
 		 const std::string & title,
 		 int nBinsX,
@@ -48,7 +51,8 @@ public:
 		 double upperValue,
 		 const std::string & options = "");
 
-  IProfile2DROOT() { /* nop */; }
+  IProfile2DROOT(const std::string & name,
+		 const IProfile2DROOT & profile) ;
 
     /**
      * Fill the IProfile2D.

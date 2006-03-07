@@ -240,7 +240,8 @@ public:
      * @return     The copy of the IHistogram1D.
      *
      */
-  /// virtual IHistogram1D * createCopy(const std::string & path, const IHistogram1D & hist) ;
+  virtual IHistogram1D * createCopy(const std::string & path, 
+				    const IHistogram1D & hist) ;
 
     /**
      * Create a IHistogram2D.
@@ -320,7 +321,8 @@ public:
      * @return     The copy of the IHistogram2D.
      *
      */
-  ///virtual IHistogram2D * createCopy(const std::string & copy, const IHistogram2D & hist) ;
+  virtual IHistogram2D * createCopy(const std::string & path, 
+				    const IHistogram2D & hist) ;
 
     /**
      * Create a IHistogram3D.
@@ -413,7 +415,8 @@ public:
      * @return     The copy of the IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createCopy(const std::string & path, const IHistogram3D & hist) ;
+  virtual IHistogram3D * createCopy(const std::string & path, 
+				    const IHistogram3D & hist) ;
 
     /**
      * Create a IProfile1D.
@@ -541,7 +544,8 @@ public:
      * @return        The copy of the IProfile1D.
      *
      */
-  /// virtual IProfile1D * createCopy(const std::string & path, const IProfile1D & profile) ;
+  virtual IProfile1D * createCopy(const std::string & path, 
+				  const IProfile1D & profile) ;
 
     /**
      * Create a IProfile2D.
@@ -695,7 +699,8 @@ public:
      * @return        The copy of the IProfile2D.
      *
      */
-  /// virtual IProfile2D * createCopy(const std::string & path, const IProfile2D & profile) ;
+  virtual IProfile2D * createCopy(const std::string & path, 
+				  const IProfile2D & profile) ;
 
     /**
      * Create an IHistogram1D by adding two IHistogram1D.

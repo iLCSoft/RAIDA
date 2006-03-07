@@ -32,6 +32,10 @@ public:
                    double lowerEdge, 
                    double upperEdge, 
                    const std::string & options = "") ;
+
+  IHistogram1DROOT(const std::string & name, 
+		   const IHistogram1DROOT & hist) ;
+
     /**
      * Fill the IHistogram1D with a value and the
      * corresponding weight.

@@ -41,6 +41,9 @@ public:
                    double upperEdgeZ,
                    const std::string & options = "") ;
 
+  IHistogram3DROOT(const std::string & name,
+                   const IHistogram3DROOT & hist) ;
+
     /**
      * Fill the IHistogram3D with a triplet of values and the
      * corresponding weight.
