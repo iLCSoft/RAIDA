@@ -114,11 +114,23 @@ int main()
   cl6 = myhistofactory->createCloud1D("cl6");
   cl7 = myhistofactory->createCloud2D("cl7");
   cl8 = myhistofactory->createCloud3D("cl8");
+
   //  IHistogram1D *myhi1 = myhistofactory->createHistogram1D("t1",5,0,1);
-  //  IHistogram2D *myhi2 = myhistofactory->createHistogram2D("t2",5,0,1,5,0,1);
-  //  IHistogram3D *myhi3 = myhistofactory->createHistogram3D("t3",5,0,1,5,0,1,5,0,1);
-  IProfile2D *mypr1 = myhistofactory->createProfile2D("/er/pr1",5,0,1,5,0,1);
-  IProfile2D *mypr2 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1,2,3);
+  //  IHistogram1D *myhi2 = myhistofactory->createCopy("/er/copy1",*myhi1);
+
+  //  IHistogram2D *myhi3 = myhistofactory->createHistogram2D("t2",5,0,1,5,0,1);
+  //  IHistogram2D *myhi4 = myhistofactory->createCopy("/er/copy2",*myhi3);
+
+  //  IHistogram3D *myhi5 = myhistofactory->createHistogram3D("t3",5,0,1,5,0,1,5,0,1);
+  //  IHistogram3D *myhi6 = myhistofactory->createCopy("/er/copy3",*myhi5);
+
+  IProfile1D *mypr1 = myhistofactory->createProfile1D("/er/pr1",5,0,1);
+  IProfile1D *mypr2 = myhistofactory->createCopy("/er/prc1",*mypr1);
+
+  IProfile2D *mypr3 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1);
+  IProfile2D *mypr4 = myhistofactory->createCopy("/er/prc2",*mypr3);
+
+  //IProfile2D *mypr2 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1,2,3);
 
   mytree->commit();
   mytree->close();
