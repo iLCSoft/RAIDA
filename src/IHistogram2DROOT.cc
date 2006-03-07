@@ -49,6 +49,28 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
   dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
 }
 
+IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
+				   const IHistogram2DROOT & hist) 
+{
+  _histogram = (TH2D*)hist._histogram->Clone( name.c_str() );
+  _histogramAIDA = (TH2D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMeanX = (TH2D*)hist._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  _histogramAIDABinMeanY = (TH2D*)hist._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  if ( hist._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  if ( hist._yAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning() ;
+}
+
 string IHistogram2DROOT::title() const
 {
   string a(_histogram->GetTitle());

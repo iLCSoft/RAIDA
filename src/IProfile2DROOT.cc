@@ -60,6 +60,29 @@ IProfile2DROOT::IProfile2DROOT(const std::string & name,
 		      nBinsY,lowerEdgeY,upperEdgeY);
 }
 
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const IProfile2DROOT & profile) 
+{
+  _profile = (TProfile2D*)profile._profile->Clone( name.c_str() );
+  _histogram = (TH2D*)profile._histogram->Clone( Naming::binContents(name).c_str() );
+  _histogramAIDA = (TH2D*)profile._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMeanX = (TH2D*)profile._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  _histogramAIDABinMeanY = (TH2D*)profile._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  if ( profile._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  if ( profile._yAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning() ;
+}
+
 void IProfile2DROOT::Profile2DHistograms(const std::string & name,
 					 const std::string & title,
 					 int nBinsX,

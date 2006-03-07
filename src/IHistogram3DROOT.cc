@@ -76,6 +76,36 @@ IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
   dynamic_cast<IAxisROOT*>(_zAxis)->setFixedBinning();
 }
 
+IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
+		 const IHistogram3DROOT & hist) 
+{
+  _histogram = (TH3D*)hist._histogram->Clone( name.c_str() );
+  _histogramAIDA = (TH3D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMeanX = (TH3D*)hist._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  _histogramAIDABinMeanY = (TH3D*)hist._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+  _histogramAIDABinMeanZ = (TH3D*)hist._histogramAIDABinMeanZ->Clone( Naming::binMeanZ(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  if ( hist._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  if ( hist._yAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning() ;
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  if ( hist._zAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_zAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_zAxis)->setVariableBinning() ;
+}
+
+
 bool IHistogram3DROOT::fill(double x, double y, double z, double weight) 
 {
   // only fill if weight is positiv

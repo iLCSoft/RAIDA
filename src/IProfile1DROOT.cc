@@ -45,6 +45,22 @@ IProfile1DROOT::IProfile1DROOT(const std::string & name,
   Profile1DHistograms(name,title,nBins,lowerEdge,upperEdge);
 }
 
+IProfile1DROOT::IProfile1DROOT(const std::string & name,
+			       const IProfile1DROOT & profile) 
+{
+  _profile = (TProfile*)profile._profile->Clone( name.c_str() );
+  _histogram = (TH1D*)profile._histogram->Clone( Naming::binContents(name).c_str() );
+  _histogramAIDA = (TH1D*)profile._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMeanX = (TH1D*)profile._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  if ( profile._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+}
+
 void IProfile1DROOT::Profile1DHistograms(const std::string & name,
 					 const std::string & title,
 					 int nBins,
