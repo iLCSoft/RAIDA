@@ -504,6 +504,30 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & pathAndTitle
   return createCloud1D(pathAndTitle,thePath.getName(),_nMaxDefault,"");
 }
 
+ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
+					     const ICloud1D & cloud) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const ICloud1DROOT* pcloud = dynamic_cast<const ICloud1DROOT*>(&cloud);
+  if (!pcloud) return NULL;
+  ICloud1DROOT* newCloud = new ICloud1DROOT(thePath.getPathName(),
+					    _usedTree,*pcloud);
+
+  _usedTree->cd( thePWD ) ;
+
+  return newCloud;
+}
+
 ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
 			          const std::string & title,
 			          int nMax,
@@ -534,6 +558,30 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & pathAndTitle
   return createCloud2D(pathAndTitle,thePath.getName(),_nMaxDefault,"");
 }
 
+ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
+					     const ICloud2D & cloud) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const ICloud2DROOT* pcloud = dynamic_cast<const ICloud2DROOT*>(&cloud);
+  if (!pcloud) return NULL;
+  ICloud2DROOT* newCloud = new ICloud2DROOT(thePath.getPathName(),
+					    _usedTree,*pcloud);
+
+  _usedTree->cd( thePWD ) ;
+
+  return newCloud;
+}
+
 ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
 						const std::string & title,
 						int nMax,
@@ -562,4 +610,28 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & pathAndTitle
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") return NULL;
   return createCloud3D(pathAndTitle,thePath.getName(),_nMaxDefault,"");
+}
+
+ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
+					     const ICloud3D & cloud) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const ICloud3DROOT* pcloud = dynamic_cast<const ICloud3DROOT*>(&cloud);
+  if (!pcloud) return NULL;
+  ICloud3DROOT* newCloud = new ICloud3DROOT(thePath.getPathName(),
+					    _usedTree,*pcloud);
+
+  _usedTree->cd( thePWD ) ;
+
+  return newCloud;
 }

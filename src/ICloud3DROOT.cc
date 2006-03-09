@@ -23,7 +23,7 @@ ICloud3DROOT::ICloud3DROOT(const std::string & path,
 			   ITree* usedTree,
                            const std::string & options)
   : _isConverted(false),
-    _nBinsDefault(10), // ######
+    //    _nBinsDefault(10), // ######
     _nMax(nMax),
     _histoLowerEdgeX(0),
     _histoUpperEdgeX(0),
@@ -41,6 +41,38 @@ ICloud3DROOT::ICloud3DROOT(const std::string & path,
   _ROOTTree->Branch("yValue",&_yValue,"yValue/D");
   _ROOTTree->Branch("zValue",&_zValue,"zValue/D");
   _ROOTTree->Branch("wValue",&_wValue,"wValue/D");
+}
+
+ICloud3DROOT::ICloud3DROOT(const std::string & path,
+			   ITree* usedTree,
+			   const ICloud3DROOT & cloud) 
+  : _usedTree(usedTree),
+    _isConverted(cloud._isConverted),
+    //    _nBinsDefault(10),
+    _nMax(cloud._nMax),
+    _histoLowerEdgeX(cloud._histoLowerEdgeX),
+    _histoUpperEdgeX(cloud._histoUpperEdgeX),
+    _histoLowerEdgeY(cloud._histoLowerEdgeY),
+    _histoUpperEdgeY(cloud._histoUpperEdgeY),
+    _histoLowerEdgeZ(cloud._histoLowerEdgeZ),
+    _histoUpperEdgeZ(cloud._histoUpperEdgeZ)
+{
+  _path.setPathName(path);
+
+  if (cloud._isConverted)
+    {
+      const IHistogram3DROOT * phisto = dynamic_cast<const IHistogram3DROOT*>(cloud._AIDAHistogram);
+      _AIDAHistogram = new IHistogram3DROOT(_path.getName(),
+					    *phisto) ;
+    }
+  else
+    {
+      _ROOTTree = (TTree*)cloud._ROOTTree->Clone( _path.getName().c_str() );
+      _ROOTTree->SetBranchAddress("xValue",&_xValue);
+      _ROOTTree->SetBranchAddress("yValue",&_yValue);
+      _ROOTTree->SetBranchAddress("zValue",&_zValue);
+      _ROOTTree->SetBranchAddress("wValue",&_wValue);
+    }
 }
 
 bool ICloud3DROOT::fill(double x, double y, double z, double weight) 

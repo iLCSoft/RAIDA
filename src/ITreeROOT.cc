@@ -79,7 +79,7 @@ std::string ITreeROOT::storeName() const
   return _storeName;
 }
 
-bool ITreeROOT::cd(const std::string & path)
+bool ITreeROOT::cd(const std::string & path) 
 {
   string localPath("");
   if (path != "" && path[0] == '/')
