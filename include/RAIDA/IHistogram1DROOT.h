@@ -243,9 +243,9 @@ protected:
 
 private:
 
-   TH1D *_histogram;
-   TH1D *_histogramAIDA;
-   TH1D *_histogramAIDABinMean;
+  TH1D *_histogram;
+  TH1D *_histogramAIDA;
+  TH1D *_histogramAIDABinMean;
   IAxis *_xAxis;
 }; // class
 } // namespace AIDA
