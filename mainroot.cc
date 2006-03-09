@@ -55,6 +55,12 @@ int main()
   mytree->mkdir("er");
   IHistogram1D *myhisto = myhistofactory->createHistogram1D("/x1","hi1",5,0,1);
   ICloud3D *cl1, *cl2, *cl3, *cl4, *cl5;
+  ICloud1D *cl10,*cl11;
+  ICloud2D *cl20,*cl21;
+  ICloud3D *cl30,*cl31;
+  cl10 = myhistofactory->createCloud1D("/ich/cl10","mycl10",400);
+  cl20 = myhistofactory->createCloud2D("/ich/cl20","mycl20",400);
+  cl30 = myhistofactory->createCloud3D("/ich/cl30","mycl30",400);
   cl1 = myhistofactory->createCloud3D("/ich/cl1","mycl1",500);
   cl2 = myhistofactory->createCloud3D("/ich/cl2","mycl2",15);
   cl3 = myhistofactory->createCloud3D("/du/cl3","mycl3",500);
@@ -97,6 +103,9 @@ int main()
     for (int i = 0; i<490; i++)
       {
 		cl1->fill( (double)i,(double)i,(double)i  );
+		cl10->fill( (double)i );
+		cl20->fill( (double)i,(double)i );
+		cl30->fill( (double)i,(double)i,(double)i );
 	  	cl2->fill( (double)i,(double)i,(double)i  );
 	  	cl3->fill( (double)i,(double)i,(double)i  );
 	  	cl4->fill( (double)i,(double)i,(double)i  );
@@ -124,13 +133,18 @@ int main()
   //  IHistogram3D *myhi5 = myhistofactory->createHistogram3D("t3",5,0,1,5,0,1,5,0,1);
   //  IHistogram3D *myhi6 = myhistofactory->createCopy("/er/copy3",*myhi5);
 
-  IProfile1D *mypr1 = myhistofactory->createProfile1D("/er/pr1",5,0,1);
-  IProfile1D *mypr2 = myhistofactory->createCopy("/er/prc1",*mypr1);
+  //  IProfile1D *mypr1 = myhistofactory->createProfile1D("/er/pr1",5,0,1);
+  //  IProfile1D *mypr2 = myhistofactory->createCopy("/er/prc1",*mypr1);
 
-  IProfile2D *mypr3 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1);
-  IProfile2D *mypr4 = myhistofactory->createCopy("/er/prc2",*mypr3);
+  //  IProfile2D *mypr3 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1);
+  //  IProfile2D *mypr4 = myhistofactory->createCopy("/er/prc2",*mypr3);
 
   //IProfile2D *mypr2 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1,2,3);
+
+  cl11 = myhistofactory->createCopy("cl11",*cl10);
+  cl21 = myhistofactory->createCopy("cl21",*cl20);
+  cl31 = myhistofactory->createCopy("cl31",*cl30);
+  //  mytree->cd("/");
 
   mytree->commit();
   mytree->close();
