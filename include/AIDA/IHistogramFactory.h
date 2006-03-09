@@ -90,7 +90,8 @@ public:
      * @return        The copy of the ICloud1D.
      *
      */
-  /// virtual ICloud1D * createCopy(const std::string & path, const ICloud1D & cloud) = 0;
+  virtual ICloud1D * createCopy(const std::string & path, 
+				const ICloud1D & cloud) = 0;
 
     /**
      * Create a ICloud2D, an unbinned 2-dimensional histogram.
@@ -133,7 +134,8 @@ public:
      * @return        The copy of the ICloud2D.
      *
      */
-  /// virtual ICloud2D * createCopy(const std::string & path, const ICloud2D & cloud) = 0;
+  virtual ICloud2D * createCopy(const std::string & path, 
+				const ICloud2D & cloud) = 0;
 
     /**
      * Create a ICloud3D, an unbinned 3-dimensional histogram.
@@ -176,7 +178,8 @@ public:
      * @return        The copy of the ICloud3D.
      *
      */
-  /// virtual ICloud3D * createCopy(const std::string & path, const ICloud3D & cloud) = 0;
+  virtual ICloud3D * createCopy(const std::string & path, 
+				const ICloud3D & cloud) = 0;
 
     /**
      * Create a IHistogram1D.
