@@ -39,7 +39,7 @@ class IHistogramFactory {
 
 public: 
     /// Destructor.
-    virtual ~IHistogramFactory() { /* nop */; }
+  virtual ~IHistogramFactory() { /* nop */; }
 
     /**
      * Destroy an IBaseHistogram ogject.
@@ -196,7 +196,7 @@ public:
      * @return          The newly created IHistogram1D.
      *
      */
-   virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
 
     /**
      * Create a IHistogram1D.
@@ -229,7 +229,10 @@ public:
      * @return          The newly created IHistogram1D.
      *
      */
-  /// virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, const std::string & options = "") = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdges, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram1D.
@@ -310,7 +313,11 @@ public:
      * @return           The newly created IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createHistogram2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::string & options = "") = 0;
+  virtual IHistogram2D * createHistogram2D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdgesX, 
+					   const std::vector<double>  & binEdgesY, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram2D.
@@ -404,7 +411,12 @@ public:
      * @return           The newly created IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createHistogram3D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ, const std::string & options = "") = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdgesX, 
+					   const std::vector<double>  & binEdgesY, 
+					   const std::vector<double>  & binEdgesZ, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram3D.
