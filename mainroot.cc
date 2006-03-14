@@ -117,12 +117,12 @@ int main()
 
 /// Schliessen der Datei. -----------------------------------------------------
   mytree->cd("/er");
-  ICloud1D *cl6;
-  ICloud2D *cl7;
-  ICloud3D *cl8;
-  cl6 = myhistofactory->createCloud1D("cl6");
-  cl7 = myhistofactory->createCloud2D("cl7");
-  cl8 = myhistofactory->createCloud3D("cl8");
+  //  ICloud1D *cl6;
+  //  ICloud2D *cl7;
+  //  ICloud3D *cl8;
+  //  cl6 = myhistofactory->createCloud1D("cl6");
+  //  cl7 = myhistofactory->createCloud2D("cl7");
+  //  cl8 = myhistofactory->createCloud3D("cl8");
 
   //  IHistogram1D *myhi1 = myhistofactory->createHistogram1D("t1",5,0,1);
   //  IHistogram1D *myhi2 = myhistofactory->createCopy("/er/copy1",*myhi1);
@@ -141,9 +141,37 @@ int main()
 
   //IProfile2D *mypr2 = myhistofactory->createProfile2D("/er/pr2",5,0,1,5,0,1,2,3);
 
-  cl11 = myhistofactory->createCopy("cl11",*cl10);
-  cl21 = myhistofactory->createCopy("cl21",*cl20);
-  cl31 = myhistofactory->createCopy("cl31",*cl30);
+  //  cl11 = myhistofactory->createCopy("cl11",*cl10);
+  //  cl21 = myhistofactory->createCopy("cl21",*cl20);
+  //  cl31 = myhistofactory->createCopy("cl31",*cl30);
+
+// variables Binning:
+  //  vector<double> be;
+  //  be.push_back(0.);
+  //  be.push_back(1.);
+  //  be.push_back(3.);
+
+  //  IHistogram1D *myhi10 = myhistofactory->createHistogram1D("/er/v1","hv1",be);
+  //  IHistogram2D *myhi20 = myhistofactory->createHistogram2D("/er/v2","hv2",be,be);
+  //  IHistogram3D *myhi30 = myhistofactory->createHistogram3D("/er/v3","hv3",be,be,be);
+
+  //  cout << "Variables Binning: " << endl;
+  //  for ( int i=0 ; i<=myhi10->axis().bins()+1;i++)
+  //    cout << i << " " 
+  //	 << myhi10->axis().binLowerEdge(i) << " " 
+  //	 << myhi10->axis().binUpperEdge(i) << " "
+  //	 << myhi20->xAxis().binLowerEdge(i) << " " 
+  //	 << myhi20->xAxis().binUpperEdge(i) << " "
+  //	 << myhi20->yAxis().binLowerEdge(i) << " " 
+  //	 << myhi20->yAxis().binUpperEdge(i) << " "
+  //	 << myhi30->xAxis().binLowerEdge(i) << " " 
+  //	 << myhi30->xAxis().binUpperEdge(i) << " "
+  //	 << myhi30->yAxis().binLowerEdge(i) << " " 
+  //	 << myhi30->yAxis().binUpperEdge(i) << " "
+  //	 << myhi30->zAxis().binLowerEdge(i) << " " 
+  //	 << myhi30->zAxis().binUpperEdge(i) << " "
+  //	 << endl;
+
   //  mytree->cd("/");
 
   mytree->commit();
