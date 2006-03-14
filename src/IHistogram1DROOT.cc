@@ -5,6 +5,7 @@
 #include <TH1D.h>
 #include <TDirectory.h>
 #include <string>
+#include <vector>
 
 using namespace AIDA ;
 using namespace std;
@@ -33,6 +34,31 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+}
+
+IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
+				   const std::string & title,
+				   const std::vector<double>  & binEdges,
+				   const std::string & options) 
+{
+  const int nBinsX = binEdges.size()-1;
+  Double_t xBins[nBinsX+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdges[i];
+
+  _histogram = new TH1D(name.c_str(),
+			title.c_str(), 
+			(Int_t)nBinsX,xBins);
+  _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
+			    Naming::titleBinEntry(title).c_str(), 
+			    (Int_t)nBinsX,xBins);
+  _histogramAIDABinMean = new TH1D(Naming::binMeanX(name).c_str(),
+				   Naming::titleBinMeanX(title).c_str(), 
+				   (Int_t)nBinsX,xBins);
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
 }
 
 IHistogram1DROOT::IHistogram1DROOT(const std::string & name,

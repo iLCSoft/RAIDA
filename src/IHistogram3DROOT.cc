@@ -77,6 +77,62 @@ IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
 }
 
 IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
+				   const std::string & title,
+				   const std::vector<double>  & binEdgesX,
+				   const std::vector<double>  & binEdgesY,
+				   const std::vector<double>  & binEdgesZ,
+				   const std::string & options) 
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  const int nBinsZ = binEdgesZ.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  Double_t zBins[nBinsZ+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+  for (int i=0;i<=nBinsZ;i++)
+    zBins[i] = binEdgesZ[i];
+
+  _histogram = new TH3D(name.c_str(),
+			title.c_str(),
+			(Int_t)nBinsX,xBins,
+                        (Int_t)nBinsY,yBins,
+                        (Int_t)nBinsZ,zBins);
+  _histogramAIDA = new TH3D(Naming::binEntry(name).c_str(),
+                            Naming::titleBinEntry(title).c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins,
+			    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanX = new TH3D(Naming::binMeanX(name).c_str(),
+				    Naming::titleBinMeanX(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanY = new TH3D(Naming::binMeanY(name).c_str(),
+				    Naming::titleBinMeanY(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanZ = new TH3D(Naming::binMeanZ(name).c_str(),
+				    Naming::titleBinMeanZ(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning();
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  dynamic_cast<IAxisROOT*>(_zAxis)->setVariableBinning();
+}
+
+IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
 		 const IHistogram3DROOT & hist) 
 {
   _histogram = (TH3D*)hist._histogram->Clone( name.c_str() );

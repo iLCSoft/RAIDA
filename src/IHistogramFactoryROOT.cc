@@ -65,6 +65,30 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D
 			   nBins,lowerEdge,upperEdge);
 }
 
+IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path,
+							const std::string & title,
+							const std::vector<double>  & binEdges,
+							const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdges.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IHistogram1DROOT* histo = new IHistogram1DROOT(thePath.getName(),
+						 title,binEdges,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
+}
+
 IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 						 const IHistogram1D & hist) 
 {
@@ -134,6 +158,33 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
   return createHistogram2D(pathAndTitle,thePath.getName(),
                            nBinsX,lowerEdgeX,upperEdgeX,
                            nBinsY,lowerEdgeY,upperEdgeY);
+}
+
+IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path,
+							const std::string & title,
+							const std::vector<double>  & binEdgesX,
+							const std::vector<double>  & binEdgesY,
+							const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdgesX.size() <2 || 
+      binEdgesY.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IHistogram2DROOT* histo = new IHistogram2DROOT(thePath.getName(),
+						 title,
+						 binEdgesX,binEdgesY,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
 }
 
 IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
@@ -214,6 +265,36 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
                            nBinsX,lowerEdgeX,upperEdgeX,
                            nBinsY,lowerEdgeY,upperEdgeY,
                            nBinsZ,lowerEdgeZ,upperEdgeZ);
+}
+
+IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path,
+							const std::string & title,
+							const std::vector<double>  & binEdgesX,
+							const std::vector<double>  & binEdgesY,
+							const std::vector<double>  & binEdgesZ,
+							const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdgesX.size() <2 || 
+      binEdgesY.size() <2 ||
+      binEdgesZ.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IHistogram3DROOT* histo = new IHistogram3DROOT(thePath.getName(),
+						 title,
+						 binEdgesX,binEdgesY,
+						 binEdgesZ,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
 }
 
 IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
