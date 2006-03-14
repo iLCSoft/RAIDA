@@ -42,6 +42,13 @@ public:
                    const std::string & options = "") ;
 
   IHistogram3DROOT(const std::string & name,
+                   const std::string & title,
+		   const std::vector<double>  & binEdgesX,
+                   const std::vector<double>  & binEdgesY,
+                   const std::vector<double>  & binEdgesZ,
+                   const std::string & options = "") ;
+
+  IHistogram3DROOT(const std::string & name,
                    const IHistogram3DROOT & hist) ;
 
     /**

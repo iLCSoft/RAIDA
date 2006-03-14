@@ -34,6 +34,11 @@ public:
                    const std::string & options = "") ;
 
   IHistogram1DROOT(const std::string & name, 
+                   const std::string & title, 
+		   const std::vector<double>  & binEdges,
+                   const std::string & options = "") ;
+
+  IHistogram1DROOT(const std::string & name, 
 		   const IHistogram1DROOT & hist) ;
 
     /**
