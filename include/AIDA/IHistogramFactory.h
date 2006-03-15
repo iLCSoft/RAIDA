@@ -489,7 +489,10 @@ public:
      * @return          The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdges, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -505,7 +508,12 @@ public:
      * @return           The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdges, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -623,8 +631,12 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::string & options = "") = 0;
-
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdgesX, 
+				       const std::vector<double>  & binEdgesY, 
+				       const std::string & options = "") = 0;
+  
     /**
      * Create a IProfile2D.
      * @param path       The path of the created IProfile. The path can either be a relative or full path.
@@ -640,7 +652,13 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdgesX, 
+				       const std::vector<double>  & binEdgesY, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
@@ -719,7 +737,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * add(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) = 0;
+  virtual IHistogram1D * add(const std::string & path, 
+  			     const IHistogram1D & hist1, 
+  			     const IHistogram1D & hist2) = 0;
 
     /**
      * Create an IHistogram1D by subtracting two IHistogram1D.
@@ -775,7 +795,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * add(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) = 0;
+  virtual IHistogram2D * add(const std::string & path, 
+			     const IHistogram2D & hist1, 
+			     const IHistogram2D & hist2) = 0;
 
     /**
      * Create an IHistogram2D by subtracting two IHistogram2D.
@@ -831,7 +853,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * add(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) = 0;
+  virtual IHistogram3D * add(const std::string & path, 
+			     const IHistogram3D & hist1, 
+			     const IHistogram3D & hist2) = 0;
 
     /**
      * Create an IHistogram3D by subtracting two IHistogram3D.

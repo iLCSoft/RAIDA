@@ -191,7 +191,7 @@ public:
      * @return false If the IHistogram2Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram2D & hist) = 0;
+  virtual bool add(const IHistogram2D & hist) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM2D_H */
