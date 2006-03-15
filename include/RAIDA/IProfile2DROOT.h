@@ -52,6 +52,20 @@ public:
 		 const std::string & options = "");
 
   IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdgesX,
+		 const std::vector<double>  & binEdgesY,
+		 const std::string & options = "");
+
+  IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdgesX,
+		 const std::vector<double>  & binEdgesY,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
+
+  IProfile2DROOT(const std::string & name,
 		 const IProfile2DROOT & profile) ;
 
     /**
@@ -317,6 +331,10 @@ private:
                            int nBinsY,
                            double lowerEdgeY,
                            double upperEdgeY);
+  void Profile2DHistograms(const std::string & name,
+                           const std::string & title,
+			   const std::vector<double>  & binEdgesX,
+			   const std::vector<double>  & binEdgesY);
 
   TProfile2D* _profile;
   TH2D*     _histogram;

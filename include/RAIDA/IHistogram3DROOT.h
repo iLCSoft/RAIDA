@@ -276,7 +276,7 @@ public:
      * @return false If the IHistogram3Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram3D & hist) ;
+  virtual bool add(const IHistogram3D & hist) ;
 
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h
