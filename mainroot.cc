@@ -146,36 +146,123 @@ int main()
   //  cl31 = myhistofactory->createCopy("cl31",*cl30);
 
 // variables Binning:
-  //  vector<double> be;
-  //  be.push_back(0.);
-  //  be.push_back(1.);
-  //  be.push_back(3.);
+  vector<double> be;
+  be.push_back(0.);
+  be.push_back(1.);
+  be.push_back(3.);
 
   //  IHistogram1D *myhi10 = myhistofactory->createHistogram1D("/er/v1","hv1",be);
   //  IHistogram2D *myhi20 = myhistofactory->createHistogram2D("/er/v2","hv2",be,be);
   //  IHistogram3D *myhi30 = myhistofactory->createHistogram3D("/er/v3","hv3",be,be,be);
 
-  //  cout << "Variables Binning: " << endl;
-  //  for ( int i=0 ; i<=myhi10->axis().bins()+1;i++)
-  //    cout << i << " " 
-  //	 << myhi10->axis().binLowerEdge(i) << " " 
-  //	 << myhi10->axis().binUpperEdge(i) << " "
-  //	 << myhi20->xAxis().binLowerEdge(i) << " " 
-  //	 << myhi20->xAxis().binUpperEdge(i) << " "
-  //	 << myhi20->yAxis().binLowerEdge(i) << " " 
-  //	 << myhi20->yAxis().binUpperEdge(i) << " "
+  //  IProfile1D *mypr1 = myhistofactory->createProfile1D("pr1","mypr1",be);
+  //  IProfile2D *mypr2 = myhistofactory->createProfile2D("pr2","mypr2",be,be);
+
+  //    cout << "Variables Binning: " << endl;
+  //    for ( int i=0 ; i<=mypr1->axis().bins()+1;i++)
+  //      cout << i << " " 
+  //  	 << mypr1->axis().binLowerEdge(i) << " " 
+  //  	 << mypr1->axis().binUpperEdge(i) << " "
+  //  	 << mypr2->xAxis().binLowerEdge(i) << " " 
+  //  	 << mypr2->xAxis().binUpperEdge(i) << " "
+  //  	 << mypr2->yAxis().binLowerEdge(i) << " " 
+  //  	 << mypr2->yAxis().binUpperEdge(i) << " "
   //	 << myhi30->xAxis().binLowerEdge(i) << " " 
   //	 << myhi30->xAxis().binUpperEdge(i) << " "
   //	 << myhi30->yAxis().binLowerEdge(i) << " " 
   //	 << myhi30->yAxis().binUpperEdge(i) << " "
   //	 << myhi30->zAxis().binLowerEdge(i) << " " 
   //	 << myhi30->zAxis().binUpperEdge(i) << " "
-  //	 << endl;
+  //  	 << endl;
+
+// Add ... 
+  IHistogram3D *myhi1 = myhistofactory->createHistogram3D("t1",3,0,1,3,0,1,1,0,1);
+  IHistogram3D *myhi2 = myhistofactory->createHistogram3D("t2",3,0,1,3,0,1,1,0,1);
+  myhi1->fill(-10.,-10.,0.5);
+  myhi1->fill(-10.,0.1,0.5);
+  myhi1->fill(-10,0.4,0.5);
+  myhi1->fill(-10.,0.7,0.5);
+  myhi1->fill(-10.,10.,0.5);
+  myhi1->fill(0.1,-10.,0.5);
+  myhi1->fill(0.1,0.1,0.5);
+  myhi1->fill(0.1,0.4,0.5);
+  myhi1->fill(0.1,0.7,0.5);
+  myhi1->fill(0.1,10.,0.5);
+  myhi1->fill(0.4,-10.,0.5);
+  myhi1->fill(0.4,0.1,0.5);
+  myhi1->fill(0.4,0.4,0.5);
+  myhi1->fill(0.4,0.7,0.5);
+  myhi1->fill(0.4,10.,0.5);
+  myhi1->fill(0.7,-10.,0.5);
+  myhi1->fill(0.7,0.1,0.5);
+  myhi1->fill(0.7,0.4,0.5);
+  myhi1->fill(0.7,0.7,0.5);
+  myhi1->fill(0.7,10.,0.5);
+  myhi1->fill(10.,-10.,0.5);
+  myhi1->fill(10.,0.1,0.5);
+  myhi1->fill(10.,0.4,0.5);
+  myhi1->fill(10.,0.7,0.5);
+  myhi1->fill(10.,10.,0.5);
+
+  myhi2->fill(-20,-20,0.5);
+  myhi2->fill(-20,0.3,0.5);
+  myhi2->fill(-20,0.6,0.5);
+  myhi2->fill(-20,0.9,0.5);
+  myhi2->fill(-20,20.,0.5);
+  myhi2->fill(0.3,-20,0.5);
+  myhi2->fill(0.3,0.3,0.5);
+  myhi2->fill(0.3,0.6,0.5);
+  myhi2->fill(0.3,0.9,0.5);
+  myhi2->fill(0.3,20,0.5);
+  myhi2->fill(0.6,-20,0.5);
+  myhi2->fill(0.6,0.3,0.5);
+  myhi2->fill(0.6,0.6,0.5);
+  myhi2->fill(0.6,0.9,0.5);
+  myhi2->fill(0.6,20.,0.5);
+  myhi2->fill(0.9,-20.,0.5);
+  myhi2->fill(0.9,0.3,0.5);
+  myhi2->fill(0.9,0.6,0.5);
+  myhi2->fill(0.9,0.9,0.5);
+  myhi2->fill(0.9,20.,0.5);
+  myhi2->fill(20.,-20.,0.5);
+  myhi2->fill(20.,0.3,0.5);
+  myhi2->fill(20.,0.6,0.5);
+  myhi2->fill(20.,0.9,0.5);
+  myhi2->fill(20.,20.,0.5);
+
+  IHistogram3D *myhi3 = myhistofactory->add("added",*myhi1,*myhi2);
+
+  //  myhi1->add(*myhi2);
+  //  IHistogram2D *myhi3 = myhi1; 
+  for (int i=0;i<=4;i++)
+    {
+      for (int j=0;j<=4;j++)
+	cout << myhi3->binHeight(i,j,1) << " "; 
+      cout << endl;
+    }
+  for (int i=0;i<=4;i++)
+    {
+      for (int j=0;j<=4;j++)
+	cout << myhi3->binEntries(i,j,1) << " ";
+      cout << endl;
+    }
+  for (int i=0;i<=4;i++)
+    {
+      for (int j=0;j<=4;j++)
+	cout << myhi3->binMeanX(i,j,1) << " ";
+      cout << endl;
+    }
+  for (int i=0;i<=4;i++)
+    {
+      for (int j=0;j<=4;j++)
+	cout << myhi3->binMeanY(i,j,1) << " ";
+      cout << endl;
+    }
 
   //  mytree->cd("/");
 
-  mytree->commit();
-  mytree->close();
+  ///  mytree->commit();
+  ///  mytree->close();
 
 }
 
