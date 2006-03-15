@@ -61,6 +61,41 @@ IProfile1DROOT::IProfile1DROOT(const std::string & name,
     dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
 }
 
+IProfile1DROOT::IProfile1DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdges,
+			       const std::string & options)
+{
+  const int nBinsX = binEdges.size()-1;
+  Double_t xBins[nBinsX+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdges[i];
+
+  _profile = new TProfile(name.c_str(),
+			  title.c_str(),
+			  (Int_t)nBinsX,xBins);
+  Profile1DHistograms(name,title,binEdges);
+}
+
+IProfile1DROOT::IProfile1DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdges,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options)
+{
+  const int nBinsX = binEdges.size()-1;
+  Double_t xBins[nBinsX+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdges[i];
+
+  _profile = new TProfile(name.c_str(),
+			  title.c_str(),
+			  (Int_t)nBinsX,xBins,
+			  (Double_t)lowerValue,(Double_t)upperValue);
+  Profile1DHistograms(name,title,binEdges);
+}
+
 void IProfile1DROOT::Profile1DHistograms(const std::string & name,
 					 const std::string & title,
 					 int nBins,
@@ -83,6 +118,30 @@ void IProfile1DROOT::Profile1DHistograms(const std::string & name,
   // create axis
   _xAxis = new IAxisROOT( _profile->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+}
+
+void IProfile1DROOT::Profile1DHistograms(const std::string & name,
+					 const std::string & title,
+					 const std::vector<double>  & binEdges)
+{
+  const int nBinsX = binEdges.size()-1;
+  Double_t xBins[nBinsX+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdges[i];
+
+  _histogram = new TH1D(Naming::binContents(name).c_str(),
+			Naming::titleBinContents(title).c_str(),
+			(Int_t)nBinsX,xBins);
+  _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
+                            Naming::titleBinEntry(title).c_str(),
+			    (Int_t)nBinsX,xBins);
+  _histogramAIDABinMeanX = new TH1D(Naming::binMeanX(name).c_str(),
+                                    Naming::titleBinMeanX(title).c_str(),
+				    (Int_t)nBinsX,xBins);
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
 }
 
 bool IProfile1DROOT::fill(double x, double y, double weight)

@@ -404,6 +404,57 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & pathAndT
 			 nBins,lowerEdge,upperEdge,lowerValue,upperValue);
 }
 
+IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
+						    const std::string & title,
+						    const std::vector<double>  & binEdges,
+						    const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdges.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IProfile1DROOT* histo = new IProfile1DROOT(thePath.getName(),
+					     title,binEdges,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
+}
+
+IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
+						    const std::string & title,
+						    const std::vector<double>  & binEdges,
+						    double lowerValue,
+						    double upperValue,
+						    const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdges.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IProfile1DROOT* histo = new IProfile1DROOT(thePath.getName(),
+					     title,binEdges,
+					     lowerValue,upperValue,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
+}
+
 IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					       const IProfile1D & profile) 
 {
@@ -527,6 +578,62 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & pathAndT
 			 nBinsX,lowerEdgeX,upperEdgeX,
 			 nBinsY,lowerEdgeY,upperEdgeY,
 			 lowerValue,upperValue);
+}
+
+IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
+						    const std::string & title,
+						    const std::vector<double>  & binEdgesX,
+						    const std::vector<double>  & binEdgesY,
+						    const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdgesX.size() <2 ||
+      binEdgesY.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IProfile2DROOT* histo = new IProfile2DROOT(thePath.getName(),
+					     title,binEdgesX,binEdgesY,
+					     options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
+}
+
+IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
+						    const std::string & title,
+						    const std::vector<double>  & binEdgesX,
+						    const std::vector<double>  & binEdgesY,
+						    double lowerValue,
+						    double upperValue,
+						    const std::string & options) 
+{
+  PathName thePath(path);
+  //cout << "L" << thePath.getPath() << "r" << endl;
+  if (thePath.getName() == "") return NULL;
+  if (binEdgesX.size() <2 ||
+      binEdgesY.size() <2) return NULL;
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  IProfile2DROOT* histo = new IProfile2DROOT(thePath.getName(),
+					     title,binEdgesX,binEdgesY,
+					     lowerValue,upperValue,options) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histo;
 }
 
 IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
@@ -715,4 +822,31 @@ ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
   _usedTree->cd( thePWD ) ;
 
   return newCloud;
+}
+
+IHistogram1D * IHistogramFactoryROOT::add(const std::string & path,
+					  const IHistogram1D & hist1,
+					  const IHistogram1D & hist2) 
+{
+  IHistogram1D *hist = createCopy(path,hist1);
+  if ( !hist->add(hist2) ) return NULL;
+  return hist;
+}
+
+IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
+					  const IHistogram2D & hist1,
+					  const IHistogram2D & hist2) 
+{
+  IHistogram2D *hist = createCopy(path,hist1);
+  if ( !hist->add(hist2) ) return NULL;
+  return hist;
+}
+
+IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
+					  const IHistogram3D & hist1,
+					  const IHistogram3D & hist2) 
+{
+  IHistogram3D *hist = createCopy(path,hist1);
+  if ( !hist->add(hist2) ) return NULL;
+  return hist;
 }

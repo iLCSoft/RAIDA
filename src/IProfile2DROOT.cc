@@ -61,6 +61,55 @@ IProfile2DROOT::IProfile2DROOT(const std::string & name,
 }
 
 IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdgesX,
+			       const std::vector<double>  & binEdgesY,
+			       const std::string & options)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+
+  Profile2DHistograms(name,title,binEdgesX,binEdgesY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdgesX,
+			       const std::vector<double>  & binEdgesY,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+    //			    (Double_t)lowerValue,(Double_t)upperValue);
+
+  Profile2DHistograms(name,title,binEdgesX,binEdgesY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
 			       const IProfile2DROOT & profile) 
 {
   _profile = (TProfile2D*)profile._profile->Clone( name.c_str() );
@@ -123,6 +172,45 @@ void IProfile2DROOT::Profile2DHistograms(const std::string & name,
 
   _yAxis = new IAxisROOT( _profile->GetYaxis() );
   dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+}
+
+void IProfile2DROOT::Profile2DHistograms(const std::string & name,
+					 const std::string & title,
+					 const std::vector<double>  & binEdgesX,
+					 const std::vector<double>  & binEdgesY)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _histogram = new TH2D(Naming::binContents(name).c_str(),
+                        Naming::titleBinContents(title).c_str(),
+			(Int_t)nBinsX,xBins,
+                        (Int_t)nBinsY,yBins);
+  _histogramAIDA = new TH2D(Naming::binEntry(name).c_str(),
+                            Naming::titleBinEntry(title).c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+  _histogramAIDABinMeanX = new TH2D(Naming::binMeanX(name).c_str(),
+                                    Naming::titleBinMeanX(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins);
+  _histogramAIDABinMeanY = new TH2D(Naming::binMeanY(name).c_str(),
+                                    Naming::titleBinMeanY(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins);
+
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning();
 }
 
 bool IProfile2DROOT::fill(double x, double y, double z, double weight) 

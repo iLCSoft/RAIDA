@@ -279,10 +279,24 @@ int IHistogram1DROOT::coordToIndex(double coord) const
 
 bool IHistogram1DROOT::add(const IHistogram1D & hist) 
 {
-  // FIXME! bin mean muss noch beruecksichtigt werden!!!
+  if ( axis().bins() != hist.axis().bins() ) return false;
   IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
-  _histogramAIDA->Add(localhist->_histogramAIDA);
+
+  for (int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++)
+    {
+      double binMean1 = (double)_histogramAIDABinMean->GetBinContent(i);
+      double binMean2 = (double)localhist->_histogramAIDABinMean->GetBinContent(i);
+      double weight1 = (double)_histogram->GetBinContent(i);
+      double weight2 = (double)localhist->_histogram->GetBinContent(i);
+
+      double newBinMean = 
+	(binMean1 * weight1 + binMean2 * weight2)/(weight1+weight2);
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)newBinMean );
+    }
+
   _histogram->Add(localhist->_histogram);
+  _histogramAIDA->Add(localhist->_histogramAIDA);
+
   return true;
 }
 

@@ -509,3 +509,36 @@ int IHistogram2DROOT::coordToIndexY(double coord) const
   return yBin; 
 }
 
+bool IHistogram2DROOT::add(const IHistogram2D & hist) 
+{
+  if (xAxis().bins() != hist.xAxis().bins() ) return false;
+  if (yAxis().bins() != hist.yAxis().bins() ) return false;
+
+  IHistogram2DROOT const * localhist = dynamic_cast<const IHistogram2DROOT*>(&hist);
+
+  for (int i=0 ; i<=_histogramAIDABinMeanX->GetNbinsX()+1 ; i++)
+    {
+      for (int j=0 ; j<=_histogramAIDABinMeanX->GetNbinsY()+1 ; j++)
+	{
+	  double binMeanX1 = (double)_histogramAIDABinMeanX->GetBinContent(i,j);
+	  double binMeanX2 = (double)localhist->_histogramAIDABinMeanX->GetBinContent(i,j);
+	  double binMeanY1 = (double)_histogramAIDABinMeanY->GetBinContent(i,j);
+	  double binMeanY2 = (double)localhist->_histogramAIDABinMeanY->GetBinContent(i,j);
+
+	  double weight1 = (double)_histogram->GetBinContent(i,j);
+	  double weight2 = (double)localhist->_histogram->GetBinContent(i,j);
+
+	  double newBinMeanX = 
+	    (binMeanX1 * weight1 + binMeanX2 * weight2)/(weight1+weight2);
+	  double newBinMeanY = 
+	    (binMeanY1 * weight1 + binMeanY2 * weight2)/(weight1+weight2);
+	  _histogramAIDABinMeanX->SetBinContent( (Int_t)i,(Int_t)j, (Double_t)newBinMeanX );
+	  _histogramAIDABinMeanY->SetBinContent( (Int_t)i,(Int_t)j, (Double_t)newBinMeanY );
+	}
+    }
+
+  _histogram->Add(localhist->_histogram);
+  _histogramAIDA->Add(localhist->_histogramAIDA);
+
+  return true;
+}
