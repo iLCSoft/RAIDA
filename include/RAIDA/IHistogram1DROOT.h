@@ -59,7 +59,7 @@ public:
      *
      */
   virtual double binMean(int index) const ;
-
+  // +
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h 
 // ---------------------------------------------------------------------------
@@ -191,7 +191,7 @@ public:
    *
    */
   virtual int binEntries(int index) const ;
-
+  // +
   /**
    * Total height of the corresponding bin (ie the sum of the weights in this
    * bin).
@@ -200,7 +200,7 @@ public:
    *
    */
   virtual double binHeight(int index) const ;
-
+  // +
   /**
    * The error of a given bin.
    * @param index The bin number (0...N-1) or OVERFLOW or UNDERFLOW.
@@ -208,7 +208,7 @@ public:
    *
    */
   virtual double binError(int index) const ;
-
+  // +
   /**
    * The mean of the whole IHistogram1D.
    * @return The mean of the IHistogram1D.
@@ -240,7 +240,7 @@ public:
    *
    */
   virtual int coordToIndex(double coord) const ;
-
+  // +
   virtual bool add(const IHistogram1D & hist) ;
   virtual bool subtract(const IHistogram1D & hist) ;
   virtual bool multiply(const IHistogram1D & hist) ;
