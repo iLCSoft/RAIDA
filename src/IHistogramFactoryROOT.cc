@@ -828,8 +828,43 @@ IHistogram1D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram1D & hist1,
 					  const IHistogram1D & hist2) 
 {
+  if ( hist1.axis().bins() != hist2.axis().bins() ) return NULL;
+
   IHistogram1D *hist = createCopy(path,hist1);
-  if ( !hist->add(hist2) ) return NULL;
+  hist->add(hist2) ;
+  return hist;
+}
+
+IHistogram1D * IHistogramFactoryROOT::subtract(const std::string & path,
+					       const IHistogram1D & hist1,
+					       const IHistogram1D & hist2) 
+{
+  if ( hist1.axis().bins() != hist2.axis().bins() ) return NULL;
+  IHistogram1DROOT *hist = 
+    dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
+  hist->subtract(hist2) ;
+  return hist;
+}
+
+IHistogram1D * IHistogramFactoryROOT::multiply(const std::string & path,
+			const IHistogram1D & hist1,
+			const IHistogram1D & hist2) 
+{
+  if ( hist1.axis().bins() != hist2.axis().bins() ) return NULL;
+  IHistogram1DROOT *hist = 
+    dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
+  hist->multiply(hist2) ;
+  return hist;
+}
+
+IHistogram1D * IHistogramFactoryROOT::divide(const std::string & path,
+		      const IHistogram1D & hist1,
+		      const IHistogram1D & hist2) 
+{
+  if ( hist1.axis().bins() != hist2.axis().bins() ) return NULL;
+  IHistogram1DROOT *hist = 
+    dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
+  hist->divide(hist2) ;
   return hist;
 }
 
@@ -837,8 +872,47 @@ IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram2D & hist1,
 					  const IHistogram2D & hist2) 
 {
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+
   IHistogram2D *hist = createCopy(path,hist1);
-  if ( !hist->add(hist2) ) return NULL;
+  hist->add(hist2) ;
+  return hist;
+}
+
+IHistogram2D * IHistogramFactoryROOT::subtract(const std::string & path,
+			const IHistogram2D & hist1,
+			const IHistogram2D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  IHistogram2DROOT *hist = 
+    dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
+  hist->subtract(hist2) ;
+  return hist;
+}
+
+IHistogram2D * IHistogramFactoryROOT::multiply(const std::string & path,
+					       const IHistogram2D & hist1,
+					       const IHistogram2D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  IHistogram2DROOT *hist = 
+    dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
+  hist->multiply(hist2) ;
+  return hist;
+}
+
+IHistogram2D * IHistogramFactoryROOT::divide(const std::string & path,
+					     const IHistogram2D & hist1,
+					     const IHistogram2D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  IHistogram2DROOT *hist = 
+    dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
+  hist->divide(hist2) ;
   return hist;
 }
 
@@ -846,7 +920,52 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram3D & hist1,
 					  const IHistogram3D & hist2) 
 {
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  if (hist1.zAxis().bins() != hist2.zAxis().bins() ) return NULL;
+
   IHistogram3D *hist = createCopy(path,hist1);
-  if ( !hist->add(hist2) ) return NULL;
+  hist->add(hist2) ;
+  //  cout << "###---###" << dynamic_cast<IHistogram3DROOT*>(hist)->_histogram->GetNbinsX() << endl; 
+  //  cout << "###---###" << dynamic_cast<IHistogram3DROOT*>(hist)->histoROOT()->GetNbinsX() << endl; 
+  return hist;
+}
+
+IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
+					       const IHistogram3D & hist1,
+					       const IHistogram3D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  if (hist1.zAxis().bins() != hist2.zAxis().bins() ) return NULL;
+  IHistogram3DROOT *hist = 
+    dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
+  hist->subtract(hist2) ;
+  return hist;
+}
+
+IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
+					       const IHistogram3D & hist1,
+					       const IHistogram3D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  if (hist1.zAxis().bins() != hist2.zAxis().bins() ) return NULL;
+  IHistogram3DROOT *hist = 
+    dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
+  hist->multiply(hist2) ;
+  return hist;
+}
+
+IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
+					     const IHistogram3D & hist1,
+					     const IHistogram3D & hist2) 
+{
+  if (hist1.xAxis().bins() != hist2.xAxis().bins() ) return NULL;
+  if (hist1.yAxis().bins() != hist2.yAxis().bins() ) return NULL;
+  if (hist1.zAxis().bins() != hist2.zAxis().bins() ) return NULL;
+  IHistogram3DROOT *hist = 
+    dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
+  hist->divide(hist2) ;
   return hist;
 }

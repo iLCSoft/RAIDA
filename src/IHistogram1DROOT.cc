@@ -300,3 +300,65 @@ bool IHistogram1DROOT::add(const IHistogram1D & hist)
   return true;
 }
 
+bool IHistogram1DROOT::subtract(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      double binMean1 = (double)_histogramAIDABinMean->GetBinContent(i);
+      double binMean2 = (double)localhist->_histogramAIDABinMean->GetBinContent(i);
+      double weight1 = (double)_histogram->GetBinContent(i);
+      double weight2 = (double)localhist->_histogram->GetBinContent(i);
+
+      double newBinMean;
+      if ( (weight1-weight2) )
+	{
+	  newBinMean = 
+	    (binMean1 * weight1 - binMean2 * weight2)/(weight1-weight2);
+	}
+      else
+	{
+	  newBinMean = 0; 
+	}
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)newBinMean );
+    }
+
+  _histogram->Add(localhist->_histogram,-1.);
+  _histogramAIDA->Add(localhist->_histogramAIDA,-1.);
+
+  return true;
+}
+
+bool IHistogram1DROOT::multiply(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)0 );
+    }
+
+  _histogram->Multiply(localhist->_histogram);
+  _histogramAIDA->Multiply(localhist->_histogramAIDA);
+
+  return true;
+}
+
+bool IHistogram1DROOT::divide(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)0 );
+    }
+
+  _histogram->Divide(localhist->_histogram);
+  _histogramAIDA->Divide(localhist->_histogramAIDA);
+
+  return true;
+}
