@@ -263,9 +263,12 @@ int main()
   IHistogram1D *myhi5 = myhistofactory->createHistogram1D("t3",3,0,1);
   IHistogram1D *myhi6 = myhistofactory->createHistogram1D("t4",3,0,1);
   myhi5->fill(-10.,2);
+  myhi5->fill(-10.,2);
   myhi5->fill(0.1,4);
   myhi5->fill(0.4,6);
   myhi5->fill(0.7,8);
+  myhi5->fill(10.,10);
+  myhi5->fill(10.,10);
   myhi5->fill(10.,10);
 
   myhi6->fill(-10.,2);
@@ -281,39 +284,32 @@ int main()
   //  myhi7->divide(*myhi6);
 
 
-  for (int i=0;i<=4;i++)
-    cout << myhi7->binHeight(i) << " "; 
+  for (int i=-3;i<=4;i++)
+    cout << myhi5->binHeight(i) << " "; 
   cout << endl;
-  for (int i=0;i<=4;i++)
-    cout << myhi7->binEntries(i) << " ";
+  for (int i=-3;i<=4;i++)
+    cout << myhi5->binError(i) << " "; 
   cout << endl;
-  for (int i=0;i<=4;i++)
-    cout << myhi7->binMean(i) << " ";
+  for (int i=-3;i<=4;i++)
+    cout << myhi5->binEntries(i) << " ";
+  cout << endl;
+  for (int i=-3;i<=4;i++)
+    cout << myhi5->binMean(i) << " ";
   cout << endl;
 
-
+  cout 
+    << myhi5->coordToIndex(-20) << " " 
+    << myhi5->coordToIndex(0.1) << " " 
+    << myhi5->coordToIndex(0.5) << " " 
+    << myhi5->coordToIndex(0.8) << " " 
+    << myhi5->coordToIndex(30) << " " 
+    << endl;
 
   //  mytree->cd("/");
+  cout << "u and o bin: " << IAxis::UNDERFLOW_BIN << " " 
+       << IAxis::OVERFLOW_BIN << endl;  
 
-// ROOT test:
-
-  TH1D *hh, *h = new TH1D("abc","def",5,0,5);
-  h->Fill(0.1,1);
-  h->Fill(1.2,2);
-  h->Fill(2.3,3);
-  h->Fill(3.4,4);
-  h->Fill(4.5,5);
-
-  hh = new TH1D(*h);
-  hh->Reset();
-
-  for (int i =1;i<=5;i++)
-    {
-      cout << hh->GetBinContent(i) << " " ;
-    }
-  cout << endl;
-
-    mytree->commit();
+  //    mytree->commit();
   //    mytree->close();
 
 }
