@@ -1,6 +1,7 @@
 // #include <RAIDA/utilROOT.h>
 #include <RAIDA/LeafPoint.h>
 #include <TH1F.h>
+#include <TH1D.h>
 #include <TDirectory.h>
 #include <TFile.h>
 #include <TTree.h>
@@ -14,7 +15,7 @@
 #include <AIDA/ITreeFactory.h>
 #include <AIDA/ITree.h>
 #include <AIDA/IHistogramFactory.h>
-#include <AIDA/IHistogram1D.h>
+#include <RAIDA/IHistogram1DROOT.h>
 #include <AIDA/IHistogram2D.h>
 #include <AIDA/IHistogram3D.h>
 #include <AIDA/IProfile1D.h>
@@ -259,10 +260,61 @@ int main()
       cout << endl;
     }
 
+  IHistogram1D *myhi5 = myhistofactory->createHistogram1D("t3",3,0,1);
+  IHistogram1D *myhi6 = myhistofactory->createHistogram1D("t4",3,0,1);
+  myhi5->fill(-10.,2);
+  myhi5->fill(0.1,4);
+  myhi5->fill(0.4,6);
+  myhi5->fill(0.7,8);
+  myhi5->fill(10.,10);
+
+  myhi6->fill(-10.,2);
+  myhi6->fill(0.3,2);
+  myhi6->fill(0.6,2);
+  myhi6->fill(0.9,0);
+  myhi6->fill(10.,0);
+
+  //  IHistogram1D *myhi8 = myhistofactory->add("added",*myhi6,*myhi6);
+  IHistogram1D *myhi7 = myhistofactory->divide("sub",*myhi5,*myhi6);
+  //  IHistogram1D *myhi7 = myhistofactory->add("subadd",*myhi9,*myhi8);
+  //  IHistogram1DROOT *myhi7 = dynamic_cast<IHistogram1DROOT*>(myhi5);
+  //  myhi7->divide(*myhi6);
+
+
+  for (int i=0;i<=4;i++)
+    cout << myhi7->binHeight(i) << " "; 
+  cout << endl;
+  for (int i=0;i<=4;i++)
+    cout << myhi7->binEntries(i) << " ";
+  cout << endl;
+  for (int i=0;i<=4;i++)
+    cout << myhi7->binMean(i) << " ";
+  cout << endl;
+
+
+
   //  mytree->cd("/");
 
-  ///  mytree->commit();
-  ///  mytree->close();
+// ROOT test:
+
+  TH1D *hh, *h = new TH1D("abc","def",5,0,5);
+  h->Fill(0.1,1);
+  h->Fill(1.2,2);
+  h->Fill(2.3,3);
+  h->Fill(3.4,4);
+  h->Fill(4.5,5);
+
+  hh = new TH1D(*h);
+  hh->Reset();
+
+  for (int i =1;i<=5;i++)
+    {
+      cout << hh->GetBinContent(i) << " " ;
+    }
+  cout << endl;
+
+    mytree->commit();
+  //    mytree->close();
 
 }
 
