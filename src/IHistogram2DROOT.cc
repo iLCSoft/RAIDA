@@ -1,6 +1,7 @@
 #include <RAIDA/IHistogram2DROOT.h>
 #include <RAIDA/Naming.h>
 #include <RAIDA/IAxisROOT.h>
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -367,92 +368,93 @@ bool IHistogram2DROOT::fill(double x, double y, double weight)
 
 double IHistogram2DROOT::binMeanX(int indexX, int indexY) const 
 {
-  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT );
 }
 
 double IHistogram2DROOT::binMeanY(int indexX, int indexY) const 
 {
-  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT );
 }
 
 int IHistogram2DROOT::binEntries(int indexX, int indexY) const 
 {
-  double binCount;
-  binCount = (double)_histogramAIDA->GetBinContent( (Int_t)indexX,(Int_t)indexY);
-  return (int)binCount;
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  return (int)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,
+					     (Int_t)indexYROOT );
 }
 
 int IHistogram2DROOT::binEntriesX(int index) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(index,xAxis().bins());
+
   double sumX = 0;
-  if (index < 0 || index > ((int)_histogramAIDA->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsY()+1) ; i++)
     {
-      sumX += (double)_histogramAIDA->GetBinContent( (Int_t)index,(Int_t)i );
+      sumX += (double)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,(Int_t)i );
     }
   return (int)sumX;
 }
 
 int IHistogram2DROOT::binEntriesY(int index) const 
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(index,yAxis().bins());
+
   double sumY = 0;
-  if (index < 0 || index > ((int)_histogramAIDA->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsX()+1) ; i++)
     {
-      sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)index );
+      sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)indexYROOT );
     }
   return (int)sumY;
 }
 
 double IHistogram2DROOT::binHeight(int indexX, int indexY) const 
 {
-  if ( (indexX < 0 || indexX > ((int)_histogram->GetNbinsX()+1)) ||
-       (indexY < 0 || indexY > ((int)_histogram->GetNbinsY()+1)) )
-    {
-      return -99999;
-    }
-  return (double)_histogram->GetBinContent( (Int_t)indexX,(Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogram->GetBinContent( (Int_t)indexXROOT,
+					    (Int_t)indexYROOT );
 }
 
 double IHistogram2DROOT::binHeightX(int index) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(index,xAxis().bins());
+
   double sumX = 0;
-  if (index < 0 || index > ((int)_histogram->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsY()+1) ; i++)
     {
-      sumX += (double)_histogram->GetBinContent( (Int_t)index,(Int_t)i );
+      sumX += (double)_histogram->GetBinContent( (Int_t)indexXROOT,(Int_t)i );
     }
   return sumX;
 }
 
 double IHistogram2DROOT::binHeightY(int index) const 
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(index,yAxis().bins());
+
   double sumY = 0;
-  if (index < 0 || index < ((int)_histogram->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsX()+1) ; i++)
     {
-      sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)index );
+      sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)indexYROOT );
     }
   return sumY;
 }
 
 double IHistogram2DROOT::binError(int indexX, int indexY) const 
 {
-  return (double)_histogram->GetBinError( (Int_t)indexX,(Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogram->GetBinError( (Int_t)indexXROOT,
+					  (Int_t)indexYROOT );
 }
 
 double IHistogram2DROOT::meanX() const 
@@ -487,26 +489,23 @@ const IAxis & IHistogram2DROOT::yAxis() const
 
 int IHistogram2DROOT::coordToIndexX(double coord) const 
 {
-  TH1D *xProj;
-  int xBin; 
-
-  xProj = _histogram->ProjectionX("_temphisto");
-  xBin = (int)xProj->FindBin( (Axis_t)coord );
+  TH1D *xProj = _histogram->ProjectionX("_temphisto");
+  int indexROOT = (int)xProj->FindBin( (Axis_t)coord );
 
   delete xProj;
-  return xBin; 
+
+
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,xAxis().bins());
 }
 
 int IHistogram2DROOT::coordToIndexY(double coord) const 
 {
-  TH1D *yProj;
-  int yBin; 
-
-  yProj = _histogram->ProjectionY("_temphisto");
-  yBin = (int)yProj->FindBin( (Axis_t)coord );
+  TH1D *yProj = _histogram->ProjectionY("_temphisto");
+  int indexROOT = (int)yProj->FindBin( (Axis_t)coord );
 
   delete yProj;
-  return yBin; 
+
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,yAxis().bins());
 }
 
 bool IHistogram2DROOT::add(const IHistogram2D & hist) 

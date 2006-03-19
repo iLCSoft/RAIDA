@@ -1,6 +1,7 @@
 #include <RAIDA/IProfile1DROOT.h>
 #include <RAIDA/Naming.h>
 #include <RAIDA/IAxisROOT.h>
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -164,29 +165,32 @@ bool IProfile1DROOT::fill(double x, double y, double weight)
 
 double IProfile1DROOT::binMean(int index) const 
 {
-  return (double)_histogramAIDABinMeanX->GetBinContent(index);
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogramAIDABinMeanX->GetBinContent(indexROOT);
 }
 
 int IProfile1DROOT::binEntries(int index) const 
 {
-  double bincount;
-  bincount = (double)_histogramAIDA->GetBinContent(index);
-  return (int)bincount;
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (int)_histogramAIDA->GetBinContent(indexROOT);
 }
 
 double IProfile1DROOT::binHeight(int index) const 
 {
-  return (double)_profile->GetBinEntries( (Int_t)index );
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_profile->GetBinEntries( (Int_t)indexROOT );
 }
 
 double IProfile1DROOT::binError(int index) const
 {
-  return (double)_histogram->GetBinError( (Int_t)index );
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogram->GetBinError( (Int_t)indexROOT );
 }
 
 double IProfile1DROOT::binRms(int index) const 
 {
-  return (double)_profile->GetBinError( (Int_t)index );
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_profile->GetBinError( (Int_t)indexROOT );
 }
 
 double IProfile1DROOT::mean() const 
@@ -207,7 +211,8 @@ const IAxis & IProfile1DROOT::axis() const
 int IProfile1DROOT::coordToIndex(double coord) const 
 {
   // FIXME!!! pruefen ob das auch mit profile die richtigen ergebnisse liefert
-  return (int)_histogram->FindBin( (Axis_t)coord );
+  int indexROOT = (int)_histogram->FindBin( (Axis_t)coord );
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,axis().bins());
 }
 
 int IProfile1DROOT::allEntries() const 

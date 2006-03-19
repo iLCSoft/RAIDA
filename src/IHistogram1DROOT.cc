@@ -1,6 +1,7 @@
 #include <RAIDA/IHistogram1DROOT.h>
 #include <RAIDA/IAxisROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TDirectory.h>
@@ -236,25 +237,27 @@ bool IHistogram1DROOT::scale(double scaleFactor)
 // ---------------------------------------------------------------------------
 
 double IHistogram1DROOT::binMean(int index) const 
-{
-  return (double)_histogramAIDABinMean->GetBinContent(index);
+{ 
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogramAIDABinMean->GetBinContent(indexROOT);
 }
 
 int IHistogram1DROOT::binEntries(int index) const 
 {
-  double bincount;
-  bincount = (double)_histogramAIDA->GetBinContent(index);
-  return (int)bincount;
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (int)_histogramAIDA->GetBinContent(indexROOT);
 }
 
 double IHistogram1DROOT::binHeight(int index) const 
 {
-  return (double)_histogram->GetBinContent( (Int_t)index );
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogram->GetBinContent( (Int_t)indexROOT );
 }
 
 double IHistogram1DROOT::binError(int index) const 
 {
-  return (double)_histogram->GetBinError(index);
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogram->GetBinError(indexROOT);
 }
 
 double IHistogram1DROOT::mean() const 
@@ -274,7 +277,8 @@ const IAxis & IHistogram1DROOT::axis() const
 
 int IHistogram1DROOT::coordToIndex(double coord) const 
 {
-  return (int)_histogram->FindBin( (Axis_t)coord );
+  int indexROOT = (int)_histogram->FindBin( (Axis_t)coord );
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,axis().bins());
 }
 
 bool IHistogram1DROOT::add(const IHistogram1D & hist) 
