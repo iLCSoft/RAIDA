@@ -20,6 +20,7 @@ namespace AIDA {
  */
  
 class IHistogram1DROOT : public IHistogram1D {
+friend class IHistogramFactoryROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram1DROOT() { _histogram->Write(); }
@@ -241,6 +242,9 @@ public:
   virtual int coordToIndex(double coord) const ;
 
   virtual bool add(const IHistogram1D & hist) ;
+  virtual bool subtract(const IHistogram1D & hist) ;
+  virtual bool multiply(const IHistogram1D & hist) ;
+  virtual bool divide(const IHistogram1D & hist) ;
 
 
 protected:

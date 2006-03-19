@@ -20,7 +20,7 @@ namespace AIDA {
  */
  
 class IHistogram2DROOT : public IHistogram2D {
-
+friend class IHistogramFactoryROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram2DROOT() { /* nop */; }
@@ -208,6 +208,9 @@ public:
      *
      */
   virtual bool add(const IHistogram2D & hist) ;
+  virtual bool subtract(const IHistogram2D & hist) ;
+  virtual bool multiply(const IHistogram2D & hist) ;
+  virtual bool divide(const IHistogram2D & hist) ;
 
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h

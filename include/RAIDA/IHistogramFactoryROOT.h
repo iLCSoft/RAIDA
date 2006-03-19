@@ -763,7 +763,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * subtract(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) ;
+  virtual IHistogram1D * subtract(const std::string & path, 
+				  const IHistogram1D & hist1, 
+				  const IHistogram1D & hist2) ;
 
     /**
      * Create an IHistogram1D by multiplying two IHistogram1D.
@@ -777,7 +779,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * multiply(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) ;
+  virtual IHistogram1D * multiply(const std::string & path, 
+				  const IHistogram1D & hist1, 
+				  const IHistogram1D & hist2) ;
 
     /**
      * Create an IHistogram1D by dividing two IHistogram1D.
@@ -791,7 +795,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * divide(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) ;
+  virtual IHistogram1D * divide(const std::string & path, 
+				const IHistogram1D & hist1, 
+				const IHistogram1D & hist2) ;
 
     /**
      * Create an IHistogram2D by adding two IHistogram2D.
@@ -821,7 +827,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * subtract(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) ;
+  virtual IHistogram2D * subtract(const std::string & path, 
+				  const IHistogram2D & hist1, 
+				  const IHistogram2D & hist2) ;
 
     /**
      * Create an IHistogram2D by multiplying two IHistogram2D.
@@ -835,7 +843,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * multiply(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) ;
+  virtual IHistogram2D * multiply(const std::string & path, 
+				  const IHistogram2D & hist1, 
+				  const IHistogram2D & hist2) ;
 
     /**
      * Create an IHistogram2D by dividing two IHistogram2D.
@@ -849,7 +859,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * divide(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) ;
+  virtual IHistogram2D * divide(const std::string & path, 
+				const IHistogram2D & hist1, 
+				const IHistogram2D & hist2) ;
 
     /**
      * Create an IHistogram3D by adding two IHistogram3D.
@@ -879,7 +891,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * subtract(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) ;
+  virtual IHistogram3D * subtract(const std::string & path, 
+				  const IHistogram3D & hist1, 
+				  const IHistogram3D & hist2) ;
 
     /**
      * Create an IHistogram3D by multiplying two IHistogram3D.
@@ -893,7 +907,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * multiply(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) ;
+  virtual IHistogram3D * multiply(const std::string & path, 
+				  const IHistogram3D & hist1, 
+				  const IHistogram3D & hist2) ;
 
     /**
      * Create an IHistogram3D by dividing two IHistogram3D.
@@ -907,7 +923,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * divide(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) ;
+  virtual IHistogram3D * divide(const std::string & path, 
+				const IHistogram3D & hist1, 
+				const IHistogram3D & hist2) ;
 
     /**
      * Create an IHistogram1D by projecting an IHistogram2D along its x axis.
