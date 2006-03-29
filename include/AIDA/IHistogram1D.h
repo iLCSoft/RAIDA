@@ -13,7 +13,6 @@
 //  GNU Library General Public License described in the LGPL.txt 
 
 #include "AIDA/IHistogram.h"
-//#include <TH1D.h>
 
 namespace AIDA {
 
@@ -113,9 +112,7 @@ public:
      */
   virtual bool add(const IHistogram1D & hist) = 0;
 
-protected:
-  //  TH1D *_histogram;
-  //  TH1D *_histogramAIDA;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM1D_H */
