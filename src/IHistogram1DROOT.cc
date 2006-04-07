@@ -1,10 +1,12 @@
 #include <RAIDA/IHistogram1DROOT.h>
-// #include <RAIDA/utilROOT.h>
+#include <RAIDA/IAxisROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TDirectory.h>
 #include <string>
+#include <vector>
 
 using namespace AIDA ;
 using namespace std;
@@ -29,6 +31,50 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
 				   (Int_t)nBins,(Axis_t)lowerEdge,
 				   (Axis_t)upperEdge);
   //  gDirectory->ls();
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+}
+
+IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
+				   const std::string & title,
+				   const std::vector<double>  & binEdges,
+				   const std::string & options) 
+{
+  const int nBinsX = binEdges.size()-1;
+  Double_t xBins[nBinsX+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdges[i];
+
+  _histogram = new TH1D(name.c_str(),
+			title.c_str(), 
+			(Int_t)nBinsX,xBins);
+  _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
+			    Naming::titleBinEntry(title).c_str(), 
+			    (Int_t)nBinsX,xBins);
+  _histogramAIDABinMean = new TH1D(Naming::binMeanX(name).c_str(),
+				   Naming::titleBinMeanX(title).c_str(), 
+				   (Int_t)nBinsX,xBins);
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
+}
+
+IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
+				   const IHistogram1DROOT & hist) 
+{
+  _histogram = (TH1D*)hist._histogram->Clone( name.c_str() );
+  _histogramAIDA = (TH1D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMean->Clone( Naming::binMeanX(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  if ( hist._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else 
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
 }
 
 bool IHistogram1DROOT::fill(double x, double weight)
@@ -191,25 +237,27 @@ bool IHistogram1DROOT::scale(double scaleFactor)
 // ---------------------------------------------------------------------------
 
 double IHistogram1DROOT::binMean(int index) const 
-{
-  return (double)_histogramAIDABinMean->GetBinContent(index);
+{ 
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogramAIDABinMean->GetBinContent(indexROOT);
 }
 
 int IHistogram1DROOT::binEntries(int index) const 
 {
-  double bincount;
-  bincount = (double)_histogramAIDA->GetBinContent(index);
-  return (int)bincount;
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (int)_histogramAIDA->GetBinContent(indexROOT);
 }
 
 double IHistogram1DROOT::binHeight(int index) const 
 {
-  return (double)_histogram->GetBinContent( (Int_t)index );
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogram->GetBinContent( (Int_t)indexROOT );
 }
 
 double IHistogram1DROOT::binError(int index) const 
 {
-  return (double)_histogram->GetBinError(index);
+  int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
+  return (double)_histogram->GetBinError(indexROOT);
 }
 
 double IHistogram1DROOT::mean() const 
@@ -222,17 +270,99 @@ double IHistogram1DROOT::rms() const
   return (double)_histogram->GetRMS();
 }
 
+const IAxis & IHistogram1DROOT::axis() const 
+{
+  return *_xAxis;
+}
+
 int IHistogram1DROOT::coordToIndex(double coord) const 
 {
-  return (int)_histogram->FindBin( (Axis_t)coord );
+  int indexROOT = (int)_histogram->FindBin( (Axis_t)coord );
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,axis().bins());
 }
 
 bool IHistogram1DROOT::add(const IHistogram1D & hist) 
 {
-  // FIXME! bin mean muss noch beruecksichtigt werden!!!
+  if ( axis().bins() != hist.axis().bins() ) return false;
   IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
-  _histogramAIDA->Add(localhist->_histogramAIDA);
+
+  for (int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++)
+    {
+      double binMean1 = (double)_histogramAIDABinMean->GetBinContent(i);
+      double binMean2 = (double)localhist->_histogramAIDABinMean->GetBinContent(i);
+      double weight1 = (double)_histogram->GetBinContent(i);
+      double weight2 = (double)localhist->_histogram->GetBinContent(i);
+
+      double newBinMean = 
+	(binMean1 * weight1 + binMean2 * weight2)/(weight1+weight2);
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)newBinMean );
+    }
+
   _histogram->Add(localhist->_histogram);
+  _histogramAIDA->Add(localhist->_histogramAIDA);
+
   return true;
 }
 
+bool IHistogram1DROOT::subtract(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      double binMean1 = (double)_histogramAIDABinMean->GetBinContent(i);
+      double binMean2 = (double)localhist->_histogramAIDABinMean->GetBinContent(i);
+      double weight1 = (double)_histogram->GetBinContent(i);
+      double weight2 = (double)localhist->_histogram->GetBinContent(i);
+
+      double newBinMean;
+      if ( (weight1-weight2) )
+	{
+	  newBinMean = 
+	    (binMean1 * weight1 - binMean2 * weight2)/(weight1-weight2);
+	}
+      else
+	{
+	  newBinMean = 0; 
+	}
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)newBinMean );
+    }
+
+  _histogram->Add(localhist->_histogram,-1.);
+  _histogramAIDA->Add(localhist->_histogramAIDA,-1.);
+
+  return true;
+}
+
+bool IHistogram1DROOT::multiply(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)0 );
+    }
+
+  _histogram->Multiply(localhist->_histogram);
+  _histogramAIDA->Multiply(localhist->_histogramAIDA);
+
+  return true;
+}
+
+bool IHistogram1DROOT::divide(const IHistogram1D & hist) 
+{
+  if ( axis().bins() != hist.axis().bins() ) return false;
+  IHistogram1DROOT const * localhist = dynamic_cast<const IHistogram1DROOT*>(&hist);
+
+  for ( int i=0 ; i<=_histogramAIDABinMean->GetNbinsX()+1 ; i++ )
+    {
+      _histogramAIDABinMean->SetBinContent( (Int_t)i, (Double_t)0 );
+    }
+
+  _histogram->Divide(localhist->_histogram);
+  _histogramAIDA->Divide(localhist->_histogramAIDA);
+
+  return true;
+}

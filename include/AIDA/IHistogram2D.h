@@ -156,14 +156,14 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  ///    virtual const IAxis & xAxis() const = 0;
+  virtual const IAxis & xAxis() const = 0;
 
     /**
      * Get the y axis of the IHistogram2D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const = 0;
+  virtual const IAxis & yAxis() const = 0;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -191,7 +191,7 @@ public:
      * @return false If the IHistogram2Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram2D & hist) = 0;
+  virtual bool add(const IHistogram2D & hist) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM2D_H */

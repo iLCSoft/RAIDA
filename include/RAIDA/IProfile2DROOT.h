@@ -4,12 +4,14 @@
 
 
 #include "AIDA/IProfile2D.h"
+#include <AIDA/IAxis.h>
+
 #include <TH2D.h>
 #include <TProfile2D.h>
 
 namespace AIDA {
 
-class IAxis;
+  // class IAxis;
 
 /**
  * User level interface to a 2-dimensional profile histogram
@@ -25,6 +27,8 @@ public:
     virtual ~IProfile2DROOT() { /* nop */; }
 
   /// constructor
+  IProfile2DROOT() { /* nop */; }
+
   IProfile2DROOT(const std::string & name,
 		 const std::string & title,
 		 int nBinsX,
@@ -35,7 +39,34 @@ public:
 		 double upperEdgeY,
 		 const std::string & options = "");
 
-  IProfile2DROOT() { /* nop */; }
+  IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 int nBinsX,
+		 double lowerEdgeX,
+		 double upperEdgeX,
+		 int nBinsY,
+		 double lowerEdgeY,
+		 double upperEdgeY,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
+
+  IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdgesX,
+		 const std::vector<double>  & binEdgesY,
+		 const std::string & options = "");
+
+  IProfile2DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdgesX,
+		 const std::vector<double>  & binEdgesY,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
+
+  IProfile2DROOT(const std::string & name,
+		 const IProfile2DROOT & profile) ;
 
     /**
      * Fill the IProfile2D.
@@ -145,13 +176,13 @@ public:
      * Return the X axis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Return the Y axis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Convenience method, equivalent to <tt>xAxis().coordToIndex(coord)</tt>.
@@ -292,11 +323,27 @@ protected:
 
 private:
 
+  void Profile2DHistograms(const std::string & name,
+                           const std::string & title,
+                           int nBinsX,
+                           double lowerEdgeX,
+                           double upperEdgeX,
+                           int nBinsY,
+                           double lowerEdgeY,
+                           double upperEdgeY);
+  void Profile2DHistograms(const std::string & name,
+                           const std::string & title,
+			   const std::vector<double>  & binEdgesX,
+			   const std::vector<double>  & binEdgesY);
+
   TProfile2D* _profile;
   TH2D*     _histogram;
   TH2D*     _histogramAIDA;
   TH2D*     _histogramAIDABinMeanX;
   TH2D*     _histogramAIDABinMeanY;
+  IAxis *_xAxis;
+  IAxis *_yAxis;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE2DROOT_H */

@@ -18,19 +18,47 @@ ICloud1DROOT::ICloud1DROOT(const std::string & path,
 			   int nMax,
 			   ITree* usedTree,
 			   const std::string & options)
-  :   _isConverted(false),
-      _nBinsDefault(100),
+  :   _usedTree(usedTree),
+      _isConverted(false),
+      //      _nBinsDefault(100),
       _nMax(nMax),
       _histoLowerEdge(0),
       _histoUpperEdge(0)
 {
   _path.setPathName(path);
-  _usedTree = usedTree;
+  //  _usedTree = usedTree;
 
   // TTree object to hold data points
   _ROOTTree = new TTree(_path.getName().c_str(),title.c_str());
   _ROOTTree->Branch("xValue",&_xValue,"xValue/D");
   _ROOTTree->Branch("yValue",&_yValue,"yValue/D");
+}
+
+ICloud1DROOT::ICloud1DROOT(const std::string & path,
+			   ITree* usedTree,
+			   const ICloud1DROOT & cloud) 
+  : _usedTree(usedTree),
+    _isConverted(cloud._isConverted),
+    //    _nBinsDefault(100),
+    _nMax(cloud._nMax),
+    _histoLowerEdge(cloud._histoLowerEdge),
+    _histoUpperEdge(cloud._histoUpperEdge)
+{
+  _path.setPathName(path);
+
+
+  if (cloud._isConverted)
+    {
+      const IHistogram1DROOT * phisto = dynamic_cast<const IHistogram1DROOT*>(cloud._AIDAHistogram);
+      _AIDAHistogram = new IHistogram1DROOT(_path.getName(),
+					    *phisto) ;
+    }
+  else
+    {
+      _ROOTTree = (TTree*)cloud._ROOTTree->Clone( _path.getName().c_str() );
+      _ROOTTree->SetBranchAddress("xValue",&_xValue);
+      _ROOTTree->SetBranchAddress("yValue",&_yValue);
+    }
 }
 
 bool ICloud1DROOT::fill(double x, double weight) 

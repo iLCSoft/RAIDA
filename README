@@ -1,0 +1,84 @@
+###################################################
+#
+#  RAIDA
+#
+#  [ Root (http://root.cern.ch)    implementation of
+#    AIDA (http://aida.freehep.org)  ]  
+#  
+#  
+###################################################
+
+ 
+Introduction:
+-------------
+
+RAIDA is a ROOT implementation of AIDA (Abstract Interfaces for Data Analysis).
+The motivation for the development of RAIDA was to offer the 
+possibility to create and fill n-tuple or histograms using standard ROOT 
+objects with AIDA. All ROOT objects created with AIDA are stored in a 
+ROOT file. Since our main application of RAIDA is to create ROOT output to
+be analysed using the ROOT program, the current version can not read in 
+the root files created. Furthermore only objects, which exist within ROOT 
+can be created. 
+
+This version of RAIDA supports the following AIDA objects:
+
+ITREE (create output-file, create and change directories)  
+IHistogram1D, IHistogram2D, IHistogram3D (1D, 2D, and 3D binned histograms) 
+ICloud1D, ICloud2D, ICloud3D (1D, 2D, and 3D unbinned histograms)
+IProfile1D, IProfile2D (1D and 2D profile histogram)
+IAxis (get information about axis of IHistogram, ICloud, and IProfile)
+ITuple (creating and filling of n-tuples with different data types:
+        int, short, long, float, double)
+
+Installation:
+------------
+
+Set the environment variables that describe your root installation, e.g.:
+
+   export ROOTSYS=/opt/products/root/5.08.00
+
+   export LD_LIBRARY_PATH=$ROOTSYS/lib:$LD_LIBRARY_PATH
+   export PATH=$ROOTSYS/bin:$PATH
+
+
+and then build the library:
+   
+  cd ./src
+  gmake
+  cd ..
+
+this will create ./lib/libRAIDA.a
+
+
+
+
+
+
+Linking against RAIDA:
+---------------------
+
+In order to build your program with RAIDA you need to use the proper 
+include files and libraries, e.g. in your Makefile add:
+ 
+  CPPFLAGS += `aida-config --include`
+  LIBS += `aida-config --lib`
+
+  LIBS += `root-config --libs`
+
+( the first two lines should work for any AIDA installation)
+
+
+and before calling 'make' set the proper environment, e.g.:
+
+ export ROOTSYS=/opt/products/root/5.08.00
+
+ export LD_LIBRARY_PATH=$ROOTSYS/lib:$LD_LIBRARY_PATH
+ export PATH=$ROOTSYS/bin:$PATH
+
+ export RAIDA_HOME=/afs/desy.de/user/g/gaede/ilcsoft/RAIDA/v00-00
+
+ . $RAIDA_HOME/bin/aida-setup.sh
+
+
+

@@ -204,21 +204,21 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & xAxis() const = 0;
+  virtual const IAxis & xAxis() const = 0;
 
     /**
      * Get the y axis of the IHistogram3D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const = 0;
+  virtual const IAxis & yAxis() const = 0;
 
     /**
      * Get the z axis of the IHistogram3D.
      * @return The z coordinate IAxis.
      *
      */
-  /// virtual const IAxis & zAxis() const = 0;
+  virtual const IAxis & zAxis() const = 0;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -256,7 +256,7 @@ public:
      * @return false If the IHistogram3Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram3D & hist) = 0;
+  virtual bool add(const IHistogram3D & hist) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM3D_H */

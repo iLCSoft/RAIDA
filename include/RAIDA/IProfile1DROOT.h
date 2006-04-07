@@ -3,13 +3,13 @@
 #define AIDA_IPROFILE1DROOT_H 1
 
 #include "AIDA/IProfile1D.h"
-
+#include <AIDA/IAxis.h>
 #include <TH1D.h>
 #include <TProfile.h>
 
 namespace AIDA {
 
-class IAxis;
+  // class IAxis;
 
 /**
  * User level interface to a 1-dimensional profile histogram
@@ -25,13 +25,39 @@ public:
     virtual ~IProfile1DROOT() { /* nop */; }
 
   /// constructor
+  IProfile1DROOT() { /* nop */; }
+
   IProfile1DROOT(const std::string & name,
 		 const std::string & title,
 		 int nBins,
 		 double lowerEdge,
 		 double upperEdge,
 		 const std::string & options = "");
-  IProfile1DROOT() { /* nop */; }
+
+  IProfile1DROOT(const std::string & name,
+		 const std::string & title,
+		 int nBins,
+		 double lowerEdge,
+		 double upperEdge,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
+
+  IProfile1DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdges,
+		 const std::string & options = "");
+
+  IProfile1DROOT(const std::string & name,
+		 const std::string & title,
+		 const std::vector<double>  & binEdges,
+		 double lowerValue,
+		 double upperValue,
+		 const std::string & options = "");
+
+  IProfile1DROOT(const std::string & name,
+                   const IProfile1DROOT & profile) ;
+
     /**
      * Fill the IProfile1D.
      *
@@ -84,7 +110,7 @@ public:
     /**
      * Returns the X axis.
      */
-  /// virtual const IAxis & axis() const ;
+  virtual const IAxis & axis() const ;
 
     /**
      * Convenience method, equivalent to <tt>axis().coordToIndex(coord)</tt>.
@@ -214,10 +240,21 @@ protected:
 
 private:
 
+  void Profile1DHistograms(const std::string & name,
+			   const std::string & title,
+			   int nBins,
+			   double lowerEdge,
+			   double upperEdge);
+  void Profile1DHistograms(const std::string & name,
+			   const std::string & title,
+			   const std::vector<double>  & binEdges);
+
   TProfile* _profile;
   TH1D*     _histogram;
   TH1D*     _histogramAIDA;
   TH1D*     _histogramAIDABinMeanX;
+  IAxis *_xAxis;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE1DROOT_H */

@@ -6,10 +6,11 @@
 #include <TH1D.h>
 #include <TH2D.h>
 #include <TH3D.h>
+#include <AIDA/IAxis.h>
 
 namespace AIDA {
 
-class IAxis;
+  /// class IAxis;
 
 /**
  * User level interface to 3D Histogram.
@@ -19,7 +20,7 @@ class IAxis;
  */
 
 class IHistogram3DROOT : public IHistogram3D {
-
+friend class IHistogramFactoryROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram3DROOT() { /* nop */; }
@@ -39,6 +40,16 @@ public:
                    double lowerEdgeZ,
                    double upperEdgeZ,
                    const std::string & options = "") ;
+
+  IHistogram3DROOT(const std::string & name,
+                   const std::string & title,
+		   const std::vector<double>  & binEdgesX,
+                   const std::vector<double>  & binEdgesY,
+                   const std::vector<double>  & binEdgesZ,
+                   const std::string & options = "") ;
+
+  IHistogram3DROOT(const std::string & name,
+                   const IHistogram3DROOT & hist) ;
 
     /**
      * Fill the IHistogram3D with a triplet of values and the
@@ -213,21 +224,21 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Get the y axis of the IHistogram3D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Get the z axis of the IHistogram3D.
      * @return The z coordinate IAxis.
      *
      */
-  /// virtual const IAxis & zAxis() const ;
+  virtual const IAxis & zAxis() const ;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -265,7 +276,10 @@ public:
      * @return false If the IHistogram3Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram3D & hist) ;
+  virtual bool add(const IHistogram3D & hist) ;
+  virtual bool subtract(const IHistogram3D & hist) ;
+  virtual bool multiply(const IHistogram3D & hist) ;
+  virtual bool divide(const IHistogram3D & hist) ;
 
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h
@@ -410,6 +424,10 @@ private:
   TH3D *_histogramAIDABinMeanX;
   TH3D *_histogramAIDABinMeanY;
   TH3D *_histogramAIDABinMeanZ;
+
+  IAxis *_xAxis;
+  IAxis *_yAxis;
+  IAxis *_zAxis;
 
 }; // class
 } // namespace AIDA

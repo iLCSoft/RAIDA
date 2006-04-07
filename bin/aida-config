@@ -1,0 +1,17 @@
+#!/bin/sh
+#
+# configuration script that requires RAIDA_HOME to be set properly
+#   
+# F.Gaede, DESY
+
+
+case $1 in
+    --include)
+	out="-I $RAIDA_HOME/include"
+	;;
+    --lib)
+	out="-L $RAIDA_HOME/lib -lRAIDA"
+	;;
+esac
+
+echo $out

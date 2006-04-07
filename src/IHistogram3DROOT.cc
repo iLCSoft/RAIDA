@@ -1,6 +1,7 @@
-// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IHistogram3DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -64,7 +65,103 @@ IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY,
 				    (Int_t)nBinsZ,
 				    (Axis_t)lowerEdgeZ,(Axis_t)upperEdgeZ);
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  dynamic_cast<IAxisROOT*>(_zAxis)->setFixedBinning();
 }
+
+IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
+				   const std::string & title,
+				   const std::vector<double>  & binEdgesX,
+				   const std::vector<double>  & binEdgesY,
+				   const std::vector<double>  & binEdgesZ,
+				   const std::string & options) 
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  const int nBinsZ = binEdgesZ.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  Double_t zBins[nBinsZ+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+  for (int i=0;i<=nBinsZ;i++)
+    zBins[i] = binEdgesZ[i];
+
+  _histogram = new TH3D(name.c_str(),
+			title.c_str(),
+			(Int_t)nBinsX,xBins,
+                        (Int_t)nBinsY,yBins,
+                        (Int_t)nBinsZ,zBins);
+  _histogramAIDA = new TH3D(Naming::binEntry(name).c_str(),
+                            Naming::titleBinEntry(title).c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins,
+			    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanX = new TH3D(Naming::binMeanX(name).c_str(),
+				    Naming::titleBinMeanX(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanY = new TH3D(Naming::binMeanY(name).c_str(),
+				    Naming::titleBinMeanY(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  _histogramAIDABinMeanZ = new TH3D(Naming::binMeanZ(name).c_str(),
+				    Naming::titleBinMeanZ(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins,
+				    (Int_t)nBinsZ,zBins);
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning();
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  dynamic_cast<IAxisROOT*>(_zAxis)->setVariableBinning();
+}
+
+IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
+		 const IHistogram3DROOT & hist) 
+{
+  _histogram = (TH3D*)hist._histogram->Clone( name.c_str() );
+  _histogramAIDA = (TH3D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  _histogramAIDABinMeanX = (TH3D*)hist._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  _histogramAIDABinMeanY = (TH3D*)hist._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+  _histogramAIDABinMeanZ = (TH3D*)hist._histogramAIDABinMeanZ->Clone( Naming::binMeanZ(name).c_str() );
+
+  // create axis
+  _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+  if ( hist._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+
+  _yAxis = new IAxisROOT( _histogram->GetYaxis() );
+  if ( hist._yAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning() ;
+
+  _zAxis = new IAxisROOT( _histogram->GetZaxis() );
+  if ( hist._zAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_zAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_zAxis)->setVariableBinning() ;
+}
+
 
 bool IHistogram3DROOT::fill(double x, double y, double z, double weight) 
 {
@@ -93,46 +190,58 @@ bool IHistogram3DROOT::fill(double x, double y, double z, double weight)
 
 double IHistogram3DROOT::binMeanX(int indexX, int indexY, int indexZ) const 
 {
-  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY,
-                                                        (Int_t)indexZ );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT,
+                                                        (Int_t)indexZROOT );
 }
 
 double IHistogram3DROOT::binMeanY(int indexX, int indexY, int indexZ) const 
 {
-  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY,
-                                                        (Int_t)indexZ );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT,
+                                                        (Int_t)indexZROOT );
 }
 
 double IHistogram3DROOT::binMeanZ(int indexX, int indexY, int indexZ) const 
 {
-  return (double)_histogramAIDABinMeanZ->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY,
-                                                        (Int_t)indexZ );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (double)_histogramAIDABinMeanZ->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT,
+                                                        (Int_t)indexZROOT );
 }
 
 int IHistogram3DROOT::binEntries(int indexX, int indexY, int indexZ) const 
 {
-  double binCount;
-  binCount = (double)_histogramAIDA->GetBinContent( (Int_t)indexX,
-                                                    (Int_t)indexY,
-                                                    (Int_t)indexZ );
-  return (int)binCount;
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (int)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,
+					     (Int_t)indexYROOT,
+					     (Int_t)indexZROOT );
 }
 
 int IHistogram3DROOT::binEntriesX(int index) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(index,xAxis().bins());
+
   double sumX = 0;
-  if (index < 0 || index > ((int)_histogramAIDA->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsY()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogramAIDA->GetNbinsZ()+1) ; j++)
 	{
-	  sumX += (double)_histogramAIDA->GetBinContent( (Int_t)index,(Int_t)i,(Int_t)j );
+	  sumX += (double)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,(Int_t)i,(Int_t)j );
 	}
     }
   return (int)sumX;
@@ -140,16 +249,14 @@ int IHistogram3DROOT::binEntriesX(int index) const
 
 int IHistogram3DROOT::binEntriesY(int index) const  
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(index,yAxis().bins());
+
   double sumY = 0;
-  if (index < 0 || index > ((int)_histogramAIDA->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsX()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogramAIDA->GetNbinsZ()+1) ; j++)
 	{
-	  sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)index,(Int_t)j );
+	  sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)indexYROOT,(Int_t)j );
 	}
     }
   return (int)sumY;
@@ -157,16 +264,14 @@ int IHistogram3DROOT::binEntriesY(int index) const
 
 int IHistogram3DROOT::binEntriesZ(int index) const 
 {
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(index,zAxis().bins());
+
   double sumZ = 0;
-  if (index < 0 || index > ((int)_histogramAIDA->GetNbinsZ()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsX()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogramAIDA->GetNbinsY()+1) ; j++)
 	{
-	  sumZ += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)j,(Int_t)index );
+	  sumZ += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)j,(Int_t)indexZROOT );
 	}
     }
   return (int)sumZ;
@@ -174,27 +279,25 @@ int IHistogram3DROOT::binEntriesZ(int index) const
 
 double IHistogram3DROOT::binHeight(int indexX, int indexY, int indexZ) const 
 {
-  if ( (indexX < 0 || indexX > ((int)_histogram->GetNbinsX()+1)) ||
-       (indexY < 0 || indexY > ((int)_histogram->GetNbinsY()+1)) ||
-       (indexZ < 0 || indexZ > ((int)_histogram->GetNbinsZ()+1)) )
-    {
-      return -99999;
-    }
-  return (double)_histogram->GetBinContent( (Int_t)indexX,(Int_t)indexY,(Int_t)indexZ );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (double)_histogram->GetBinContent( (Int_t)indexXROOT,
+					    (Int_t)indexYROOT,
+					    (Int_t)indexZROOT );
 }
 
 double IHistogram3DROOT::binHeightX(int index) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(index,xAxis().bins());
+
   double sumX = 0;
-  if (index < 0 || index > ((int)_histogram->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsY()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogram->GetNbinsZ()+1) ; j++)
 	{
-	  sumX += (double)_histogram->GetBinContent( (Int_t)index,(Int_t)i,(Int_t)j );
+	  sumX += (double)_histogram->GetBinContent( (Int_t)indexXROOT,(Int_t)i,(Int_t)j );
 	}
     }
   return sumX;
@@ -202,16 +305,14 @@ double IHistogram3DROOT::binHeightX(int index) const
 
 double IHistogram3DROOT::binHeightY(int index) const 
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(index,yAxis().bins());
+
   double sumY = 0;
-  if (index < 0 || index > ((int)_histogram->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsX()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogram->GetNbinsZ()+1) ; j++)
 	{
-	  sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)index,(Int_t)j );
+	  sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)indexYROOT,(Int_t)j );
 	}
     }
   return sumY;
@@ -219,16 +320,14 @@ double IHistogram3DROOT::binHeightY(int index) const
 
 double IHistogram3DROOT::binHeightZ(int index) const 
 {
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(index,zAxis().bins());
+
   double sumZ = 0;
-  if (index < 0 || index > ((int)_histogram->GetNbinsZ()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsX()+1) ; i++)
     {
       for ( int j=0 ; j<=((int)_histogram->GetNbinsY()+1) ; j++)
 	{
-	  sumZ += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)j,(Int_t)index );
+	  sumZ += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)j,(Int_t)indexZROOT );
 	}
     }
   return sumZ;
@@ -236,7 +335,13 @@ double IHistogram3DROOT::binHeightZ(int index) const
 
 double IHistogram3DROOT::binError(int indexX, int indexY, int indexZ) const 
 {
-  return (double)_histogram->GetBinError( (Int_t)indexX,(Int_t)indexY,(Int_t)indexZ );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+  int indexZROOT = RAIDAUtil::binIndexAIDA2ROOT(indexZ,zAxis().bins());
+
+  return (double)_histogram->GetBinError( (Int_t)indexXROOT,
+					  (Int_t)indexYROOT,
+					  (Int_t)indexZROOT );
 }
 
 double IHistogram3DROOT::meanX() const 
@@ -269,40 +374,46 @@ double IHistogram3DROOT::rmsZ() const
   return (double)_histogram->GetRMS( (Int_t)3 );
 }
 
+const IAxis & IHistogram3DROOT::xAxis() const
+{
+  return *_xAxis;
+}
+
+const IAxis & IHistogram3DROOT::yAxis() const
+{
+  return *_yAxis;
+}
+
+const IAxis & IHistogram3DROOT::zAxis() const
+{
+  return *_zAxis;
+}
+
 int IHistogram3DROOT::coordToIndexX(double coord) const 
 {
-  TH1 *xProj;
-  int xBin;
-
-  xProj = _histogram->Project3D("x");
-  xBin = (int)xProj->FindBin( (Axis_t)coord );
+  TH1 *xProj = _histogram->Project3D("x");
+  int indexROOT = (int)xProj->FindBin( (Axis_t)coord );
 
   delete xProj;
-  return xBin;
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,xAxis().bins());
 }
 
 int IHistogram3DROOT::coordToIndexY(double coord) const 
 {
-  TH1 *yProj;
-  int yBin;
-
-  yProj = _histogram->Project3D("y");
-  yBin = (int)yProj->FindBin( (Axis_t)coord );
+  TH1 *yProj = _histogram->Project3D("y");
+  int indexROOT = (int)yProj->FindBin( (Axis_t)coord );
 
   delete yProj;
-  return yBin;
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,yAxis().bins());
 }
 
 int IHistogram3DROOT::coordToIndexZ(double coord) const 
 {
-  TH1 *zProj;
-  int zBin;
-
-  zProj = _histogram->Project3D("z");
-  zBin = (int)zProj->FindBin( (Axis_t)coord );
+  TH1 *zProj = _histogram->Project3D("z");
+  int indexROOT = (int)zProj->FindBin( (Axis_t)coord );
 
   delete zProj;
-  return zBin;
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,zAxis().bins());
 }
 
 // ---------------------------------------------------------------------------
@@ -533,6 +644,152 @@ bool IHistogram3DROOT::scale(double scaleFactor)
 {
   /// FIXME! richtige beruecksichtigung der Fehler im Zusammenhang mit dcale!
   _histogram->Scale( (Double_t)scaleFactor );
+  return true;
+}
+
+bool IHistogram3DROOT::add(const IHistogram3D & hist) 
+{
+  if (xAxis().bins() != hist.xAxis().bins() ) return false;
+  if (yAxis().bins() != hist.yAxis().bins() ) return false;
+  if (zAxis().bins() != hist.zAxis().bins() ) return false;
+
+  IHistogram3DROOT const * localhist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+
+  for (int i=0 ; i<=_histogramAIDABinMeanX->GetNbinsX()+1 ; i++)
+    {
+      for (int j=0 ; j<=_histogramAIDABinMeanX->GetNbinsY()+1 ; j++)
+	{
+	  for (int k=0 ; k<=_histogramAIDABinMeanX->GetNbinsZ()+1 ; k++)
+	    {
+	      double binMeanX1 = (double)_histogramAIDABinMeanX->GetBinContent(i,j,k);
+	      double binMeanX2 = (double)localhist->_histogramAIDABinMeanX->GetBinContent(i,j,k);
+	      double binMeanY1 = (double)_histogramAIDABinMeanY->GetBinContent(i,j,k);
+	      double binMeanY2 = (double)localhist->_histogramAIDABinMeanY->GetBinContent(i,j,k);
+	      double binMeanZ1 = (double)_histogramAIDABinMeanZ->GetBinContent(i,j,k);
+	      double binMeanZ2 = (double)localhist->_histogramAIDABinMeanZ->GetBinContent(i,j,k);
+
+	      double weight1 = (double)_histogram->GetBinContent(i,j,k);
+	      double weight2 = (double)localhist->_histogram->GetBinContent(i,j,k);
+
+	      double newBinMeanX = 
+		(binMeanX1 * weight1 + binMeanX2 * weight2)/(weight1+weight2);
+	      double newBinMeanY = 
+		(binMeanY1 * weight1 + binMeanY2 * weight2)/(weight1+weight2);
+	      double newBinMeanZ = 
+		(binMeanZ1 * weight1 + binMeanZ2 * weight2)/(weight1+weight2);
+	      _histogramAIDABinMeanX->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanX );
+	      _histogramAIDABinMeanY->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanY );
+	      _histogramAIDABinMeanZ->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanZ );
+	    }
+	}
+    }
+  _histogram->Add(localhist->_histogram);
+  _histogramAIDA->Add(localhist->_histogramAIDA);
+
+  return true;
+}
+
+bool IHistogram3DROOT::subtract(const IHistogram3D & hist) 
+{
+  if ( xAxis().bins() != hist.xAxis().bins() ) return false;
+  if ( yAxis().bins() != hist.yAxis().bins() ) return false;
+  if ( zAxis().bins() != hist.zAxis().bins() ) return false;
+  IHistogram3DROOT const * localhist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+
+  for (int i=0 ; i<=_histogramAIDABinMeanX->GetNbinsX()+1 ; i++)
+    {
+      for (int j=0 ; j<=_histogramAIDABinMeanX->GetNbinsY()+1 ; j++)
+	{
+	  for (int k=0 ; k<=_histogramAIDABinMeanX->GetNbinsZ()+1 ; k++)
+	    {
+	      double binMeanX1 = (double)_histogramAIDABinMeanX->GetBinContent(i,j,k);
+	      double binMeanX2 = (double)localhist->_histogramAIDABinMeanX->GetBinContent(i,j,k);
+	      double binMeanY1 = (double)_histogramAIDABinMeanY->GetBinContent(i,j,k);
+	      double binMeanY2 = (double)localhist->_histogramAIDABinMeanY->GetBinContent(i,j,k);
+	      double binMeanZ1 = (double)_histogramAIDABinMeanZ->GetBinContent(i,j,k);
+	      double binMeanZ2 = (double)localhist->_histogramAIDABinMeanZ->GetBinContent(i,j,k);
+
+	      double weight1 = (double)_histogram->GetBinContent(i,j,k);
+	      double weight2 = (double)localhist->_histogram->GetBinContent(i,j,k);
+
+	      double newBinMeanX, newBinMeanY, newBinMeanZ;
+	      if ( (weight1-weight2) )
+		{
+		  newBinMeanX = 
+		    (binMeanX1 * weight1 - binMeanX2 * weight2)/(weight1-weight2);
+		  newBinMeanY = 
+		    (binMeanY1 * weight1 - binMeanY2 * weight2)/(weight1-weight2);
+		  newBinMeanZ = 
+		    (binMeanZ1 * weight1 - binMeanZ2 * weight2)/(weight1-weight2);
+		}
+	      else
+		{
+		  newBinMeanX = 0; 
+		  newBinMeanY = 0; 
+		  newBinMeanZ = 0; 
+		}
+	      _histogramAIDABinMeanX->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanX );
+	      _histogramAIDABinMeanY->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanY );
+	      _histogramAIDABinMeanZ->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)newBinMeanZ );
+	    }
+	}
+    }
+
+  _histogram->Add(localhist->_histogram,-1.);
+  _histogramAIDA->Add(localhist->_histogramAIDA,-1.);
+
+  return true;
+}
+
+bool IHistogram3DROOT::multiply(const IHistogram3D & hist) 
+{
+  if ( xAxis().bins() != hist.xAxis().bins() ) return false;
+  if ( yAxis().bins() != hist.yAxis().bins() ) return false;
+  if ( zAxis().bins() != hist.zAxis().bins() ) return false;
+  IHistogram3DROOT const * localhist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+
+  for (int i=0 ; i<=_histogramAIDABinMeanX->GetNbinsX()+1 ; i++)
+    {
+      for (int j=0 ; j<=_histogramAIDABinMeanX->GetNbinsY()+1 ; j++)
+	{
+	  for (int k=0 ; k<=_histogramAIDABinMeanX->GetNbinsZ()+1 ; k++)
+	    {
+	      _histogramAIDABinMeanX->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	      _histogramAIDABinMeanY->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	      _histogramAIDABinMeanZ->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	    }
+	}
+    }
+
+  _histogram->Multiply(localhist->_histogram);
+  _histogramAIDA->Multiply(localhist->_histogramAIDA);
+
+  return true;
+}
+
+bool IHistogram3DROOT::divide(const IHistogram3D & hist) 
+{
+  if ( xAxis().bins() != hist.xAxis().bins() ) return false;
+  if ( yAxis().bins() != hist.yAxis().bins() ) return false;
+  if ( zAxis().bins() != hist.zAxis().bins() ) return false;
+  IHistogram3DROOT const * localhist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+
+  for (int i=0 ; i<=_histogramAIDABinMeanX->GetNbinsX()+1 ; i++)
+    {
+      for (int j=0 ; j<=_histogramAIDABinMeanX->GetNbinsY()+1 ; j++)
+	{
+	  for (int k=0 ; k<=_histogramAIDABinMeanX->GetNbinsZ()+1 ; k++)
+	    {
+	      _histogramAIDABinMeanX->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	      _histogramAIDABinMeanY->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	      _histogramAIDABinMeanZ->SetBinContent( (Int_t)i,(Int_t)j,(Int_t)k, (Double_t)0 );
+	    }
+	}
+    }
+
+  _histogram->Divide(localhist->_histogram);
+  _histogramAIDA->Divide(localhist->_histogramAIDA);
+
   return true;
 }
 
