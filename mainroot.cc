@@ -241,6 +241,7 @@ int main()
 	cout << myhi3->binHeight(i,j,1) << " "; 
       cout << endl;
     }
+  //cout << "### das ist nan" << endl;
   for (int i=0;i<=4;i++)
     {
       for (int j=0;j<=4;j++)
