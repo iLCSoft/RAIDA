@@ -5,7 +5,7 @@
 #include <TDirectory.h>
 #include <TFile.h>
 #include <TTree.h>
-
+#include <TAxis.h>
 
 #include <iostream>
 #include <string>
@@ -179,6 +179,7 @@ int main()
 // Add ... 
   IHistogram3D *myhi1 = myhistofactory->createHistogram3D("t1",3,0,1,3,0,1,1,0,1);
   IHistogram3D *myhi2 = myhistofactory->createHistogram3D("t2",3,0,1,3,0,1,1,0,1);
+  IHistogram2D *myhii = myhistofactory->createHistogram2D("txy",3,0,1,3,0,1);
   myhi1->fill(-10.,-10.,0.5);
   myhi1->fill(-10.,0.1,0.5);
   myhi1->fill(-10,0.4,0.5);
@@ -230,34 +231,68 @@ int main()
   myhi2->fill(20.,0.6,0.5);
   myhi2->fill(20.,0.9,0.5);
   myhi2->fill(20.,20.,0.5);
+  // 2d-histo
+  myhii->fill(-20,-20,0.5);
+  myhii->fill(-20,0.3,0.5);
+  myhii->fill(-20,0.6,0.5);
+  myhii->fill(-20,0.9,0.5);
+  myhii->fill(-20,20.,0.5);
+  myhii->fill(0.3,-20,0.5);
+  myhii->fill(0.3,0.3,0.3);
+  myhii->fill(0.3,0.6,0.3);
+  myhii->fill(0.3,0.9,0.3);
+  myhii->fill(0.3,20,0.5);
+  myhii->fill(0.6,-20,0.5);
+  myhii->fill(0.6,0.3,0.6);
+  myhii->fill(0.6,0.6,0.6);
+  myhii->fill(0.6,0.9,0.6);
+  myhii->fill(0.6,20.,0.5);
+  myhii->fill(0.9,-20.,0.5);
+  myhii->fill(0.9,0.3,0.9);
+  myhii->fill(0.9,0.6,0.9);
+  myhii->fill(0.9,0.9,0.9);
+  myhii->fill(0.9,20.,0.5);
+  myhii->fill(20.,-20.,0.5);
+  myhii->fill(20.,0.3,0.5);
+  myhii->fill(20.,0.6,0.5);
+  myhii->fill(20.,0.9,0.5);
+  myhii->fill(20.,20.,0.5);
 
   IHistogram3D *myhi3 = myhistofactory->add("added",*myhi1,*myhi2);
-
+  // IHistogram1D *proj = myhistofactory->projectionY("pr",*myhii);  
+  IHistogram1D *proj = myhistofactory->sliceY("pr",*myhii,1);  
   //  myhi1->add(*myhi2);
   //  IHistogram2D *myhi3 = myhi1; 
-  for (int i=0;i<=4;i++)
+  cout << "### noch da! proj: " << proj << endl; 
+  for (int i=0;i<=2;i++)
     {
-      for (int j=0;j<=4;j++)
-	cout << myhi3->binHeight(i,j,1) << " "; 
+  //        cout << proj->binMean(0) << " ";
+      cout << proj->binHeight(i) << " ";
+    }
+  cout << endl; 
+  for (int i=0;i<=2;i++)
+    {
+      for (int j=0;j<=2;j++)
+	cout << myhii->binHeight(j,i) << " "; 
       cout << endl;
     }
   //cout << "### das ist nan" << endl;
-  for (int i=0;i<=4;i++)
+  for (int i=-2;i<=2;i++)
     {
-      for (int j=0;j<=4;j++)
-	cout << myhi3->binEntries(i,j,1) << " ";
+      for (int j=-2;j<=2;j++)
+	cout << myhi3->binEntries(i,j,0) << " ";
       cout << endl;
     }
-  for (int i=0;i<=4;i++)
+  for (int i=-2;i<=2;i++)
     {
-      for (int j=0;j<=4;j++)
-	cout << myhi3->binMeanX(i,j,1) << " ";
+      for (int j=-2;j<=2;j++)
+	cout << myhi3->binMeanX(i,j,0) << " ";
       cout << endl;
     }
-  for (int i=0;i<=4;i++)
+  for (int i=-2;i<=2;i++)
     {
-      for (int j=0;j<=4;j++)
-	cout << myhi3->binMeanY(i,j,1) << " ";
+      for (int j=-2;j<=2;j++)
+	cout << myhi3->binMeanY(i,j,0) << " ";
       cout << endl;
     }
 
@@ -310,8 +345,58 @@ int main()
   cout << "u and o bin: " << IAxis::UNDERFLOW_BIN << " " 
        << IAxis::OVERFLOW_BIN << endl;  
 
-  //    mytree->commit();
-  //    mytree->close();
+
+  TH1 * achshi = new TH1D("achstest","achstest",100,0.,1.);
+  cout << "unten " << achshi->GetXaxis()->GetFirst() << " oben " 
+       << achshi->GetXaxis()->GetLast() << endl;
+  achshi->GetXaxis()->SetRange(23,56);
+  cout << "unten " << achshi->GetXaxis()->GetFirst() << " oben " 
+       << achshi->GetXaxis()->GetLast() << endl;
+
+  IHistogram3D *my3d = myhistofactory->createHistogram3D(
+      "u2",3,0.5,3.5,3,0.5,3.5,3,0.5,3.5);
+
+  int l = 0 ;
+  for (int i=0;i<5;i++)
+    {
+      for (int j=0;j<5;j++)
+	{
+	  for (int k=0;k<5;k++)
+	    {
+	      l++;
+	      my3d->fill( (double)k, (double)j, (double)i, (double)l );
+	      cout << i << " " << j << " " << k << " " << l << endl;
+	    }
+	}
+    }
+
+  for (int i=-2;i<3;i++)
+    {
+      for (int j=-2;j<3;j++)
+	{
+	  for (int k=-2;k<3;k++)
+	    {
+	      cout << my3d->binHeight(k,j,i) << " ";
+	    }
+	  cout << " L";
+	}
+      cout << endl << endl; 
+    }
+
+  IHistogram2D *mystueck = myhistofactory->sliceXY("stueck",*my3d,0,0);
+  for (int j=-2;j<3;j++)
+    {
+      for (int i=-2;i<3;i++)
+	{
+	  //	  cout << mystueck->binHeight(j,i) << " ";
+	  cout << mystueck->binEntries(j,i) << " ";
+	}
+      cout << endl ;
+    }
+
+//------------------------------------------------------------------------
+  ///      mytree->commit();
+  ///      mytree->close();
 
 }
 

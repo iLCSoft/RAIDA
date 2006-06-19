@@ -20,7 +20,9 @@ namespace AIDA {
  */
 
 class IHistogram3DROOT : public IHistogram3D {
-friend class IHistogramFactoryROOT ;
+  friend class IHistogramFactoryROOT ;
+  friend class IHistogram2DROOT ;
+
 public: 
     /// Destructor.
     virtual ~IHistogram3DROOT() { /* nop */; }

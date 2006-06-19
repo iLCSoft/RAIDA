@@ -969,3 +969,173 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
   hist->divide(hist2) ;
   return hist;
 }
+
+IHistogram1D * IHistogramFactoryROOT::projectionX(const std::string & path,
+						  const IHistogram2D & hist) 
+{
+  return sliceX(path,hist,-2,-1);
+}
+
+IHistogram1D * IHistogramFactoryROOT::projectionY(const std::string & path,
+						  const IHistogram2D & hist) 
+{
+  return sliceY(path,hist,-2,-1);
+}
+
+IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
+					     const IHistogram2D & hist,
+					     int index) 
+{
+  return sliceX(path,hist,index,index);
+}
+
+IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
+					     const IHistogram2D & hist,
+					     int index) 
+{
+  return sliceY(path,hist,index,index);
+}
+
+IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
+		      const IHistogram2D & hist,
+		      int index1,
+		      int index2) 
+{
+  PathName thePath(path);
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const IHistogram2DROOT* phist = dynamic_cast<const IHistogram2DROOT*>(&hist);
+  if (!phist) return NULL;
+  IHistogram1DROOT* histogram = new IHistogram1DROOT(thePath.getName(),
+						     *phist,'x',index1,index2) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histogram;
+}
+
+
+IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
+		      const IHistogram2D & hist,
+		      int index1,
+		      int index2) 
+{
+  PathName thePath(path);
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const IHistogram2DROOT* phist = dynamic_cast<const IHistogram2DROOT*>(&hist);
+  if (!phist) return NULL;
+  IHistogram1DROOT* histogram = new IHistogram1DROOT(thePath.getName(),
+						     *phist,'y',index1,index2) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histogram;
+}
+
+IHistogram2D * IHistogramFactoryROOT::projectionXY(const std::string & path,
+						   const IHistogram3D & hist) 
+{
+  return sliceXY(path,hist,-2,-1);
+}
+
+IHistogram2D * IHistogramFactoryROOT::projectionXZ(const std::string & path,
+						   const IHistogram3D & hist) 
+{
+  return sliceXZ(path,hist,-2,-1);
+}
+
+IHistogram2D * IHistogramFactoryROOT::projectionYZ(const std::string & path,
+						   const IHistogram3D & hist) 
+{
+  return sliceYZ(path,hist,-2,-1);
+}
+
+IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
+					      const IHistogram3D & hist,
+					      int index1,
+					      int index2) 
+{
+  PathName thePath(path);
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const IHistogram3DROOT* phist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+  if (!phist) return NULL;
+  IHistogram2DROOT* histogram = new IHistogram2DROOT(thePath.getName(),
+						     *phist,"xy",index1,index2) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histogram;
+}
+
+IHistogram2D * IHistogramFactoryROOT::sliceXZ(const std::string & path,
+					      const IHistogram3D & hist,
+					      int index1,
+					      int index2) 
+{
+  PathName thePath(path);
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const IHistogram3DROOT* phist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+  if (!phist) return NULL;
+  IHistogram2DROOT* histogram = new IHistogram2DROOT(thePath.getName(),
+						     *phist,"xz",index1,index2) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histogram;
+}
+
+IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
+					      const IHistogram3D & hist,
+					      int index1,
+					      int index2) 
+{
+  PathName thePath(path);
+  if (thePath.getName() == "") return NULL;
+
+  string thePWD = _usedTree->pwd();
+
+  if ( !thePath.onlyName() )
+    {
+      if (!_usedTree->cd(thePath.getPath()) ) return NULL;
+    }
+
+  const IHistogram3DROOT* phist = dynamic_cast<const IHistogram3DROOT*>(&hist);
+  if (!phist) return NULL;
+  IHistogram2DROOT* histogram = new IHistogram2DROOT(thePath.getName(),
+						     *phist,"yz",index1,index2) ;
+
+  _usedTree->cd( thePWD ) ;
+
+  return histogram;
+}

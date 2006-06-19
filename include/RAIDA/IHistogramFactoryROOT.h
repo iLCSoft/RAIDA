@@ -938,7 +938,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram1D * projectionX(const std::string & path, const IHistogram2D & hist) ;
+  virtual IHistogram1D * projectionX(const std::string & path, 
+				     const IHistogram2D & hist) ;
 
     /**
      * Create an IHistogram1D by projecting an IHistogram2D along its y axis.
@@ -951,7 +952,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram1D * projectionY(const std::string & path, const IHistogram2D & hist) ;
+  virtual IHistogram1D * projectionY(const std::string & path, 
+				     const IHistogram2D & hist) ;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the y axis at a given bin.
@@ -965,7 +967,9 @@ public:
      * @return      The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceX(const std::string & path, const IHistogram2D & hist, int index) ;
+  virtual IHistogram1D * sliceX(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index) ;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the x axis at a given bin.
@@ -979,7 +983,9 @@ public:
      * @return      The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceY(const std::string & path, const IHistogram2D & hist, int index) ;
+  virtual IHistogram1D * sliceY(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index) ;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the y axis between two bins (inclusive).
@@ -993,7 +999,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceX(const std::string & path, const IHistogram2D & hist, int index1, int index2) ;
+  virtual IHistogram1D * sliceX(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index1, 
+				int index2) ;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the x axis between two bins (inclusive).
@@ -1007,7 +1016,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceY(const std::string & path, const IHistogram2D & hist, int index1, int index2) ;
+  virtual IHistogram1D * sliceY(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index1, 
+				int index2) ;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the x-y plane.
@@ -1020,7 +1032,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionXY(const std::string & path, const IHistogram3D & hist) ;
+  virtual IHistogram2D * projectionXY(const std::string & path, 
+				      const IHistogram3D & hist) ;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the x-z plane.
@@ -1033,7 +1046,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionXZ(const std::string & path, const IHistogram3D & hist) ;
+  virtual IHistogram2D * projectionXZ(const std::string & path, 
+				      const IHistogram3D & hist) ;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the y-z plane.
@@ -1046,7 +1060,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionYZ(const std::string & path, const IHistogram3D & hist) ;
+  virtual IHistogram2D * projectionYZ(const std::string & path, 
+				      const IHistogram3D & hist) ;
 
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the Z axis,
@@ -1063,7 +1078,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceXY(const std::string & path, const IHistogram3D & hist, int index1, int index2) ;
+  virtual IHistogram2D * sliceXY(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) ;
 
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the Y axis,
@@ -1080,7 +1098,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceXZ(const std::string & path, const IHistogram3D & hist, int index1, int index2) ;
+  virtual IHistogram2D * sliceXZ(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) ;
 
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the X axis,
@@ -1097,7 +1118,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceYZ(const std::string & path, const IHistogram3D & hist, int index1, int index2) ;
+  virtual IHistogram2D * sliceYZ(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) ;
 
 private:
 

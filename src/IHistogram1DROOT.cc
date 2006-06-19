@@ -1,4 +1,6 @@
 #include <RAIDA/IHistogram1DROOT.h>
+#include <RAIDA/IHistogram2DROOT.h>
+#include <RAIDA/IHistogram3DROOT.h>
 #include <RAIDA/IAxisROOT.h>
 #include <RAIDA/Naming.h>
 #include <RAIDA/RAIDAUtil.h>
@@ -75,6 +77,77 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
     dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
   else 
     dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+}
+
+IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
+				   const IHistogram2DROOT & hist,
+				   char axis,
+				   int lowerBin,
+				   int upperBin) 
+{ // ######
+  if (axis == 'x')
+    {
+      int index1ROOT = RAIDAUtil::binIndexAIDA2ROOT(lowerBin,hist.xAxis().bins());
+      int index2ROOT = RAIDAUtil::binIndexAIDA2ROOT(upperBin,hist.xAxis().bins());
+
+      _histogram = (TH1D*)hist._histogram->ProjectionX( name.c_str(), index1ROOT, index2ROOT );
+      _histogramAIDA = (TH1D*)hist._histogramAIDA->ProjectionX( Naming::binEntry(name).c_str(), index1ROOT, index2ROOT );
+      _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMeanX->ProjectionX( Naming::binMeanX(name).c_str(), index1ROOT, index2ROOT );
+      _histogramAIDABinMean->Reset();
+      for (int i=-2; i<hist.xAxis().bins(); i++)
+	{
+	  double binmean = 0, binhight = 0;
+	  for (int j=-2; j<hist.yAxis().bins(); j++)
+	    {
+	      binmean += hist.binMeanX(i,j)*hist.binHeight(i,j);
+	      binhight += hist.binHeight(i,j);
+	    }
+	  binmean = binmean / binhight;
+
+	  // different bin index for root and AIDA:
+	  _histogramAIDABinMean->SetBinContent((Int_t)RAIDAUtil::binIndexAIDA2ROOT( i, hist.xAxis().bins() ), 
+					       (Double_t)binmean );
+	}
+
+      // create axis
+      _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+      if ( hist._xAxis->isFixedBinning() )
+	dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+      else 
+	dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+    }
+  else if (axis == 'y')
+    {
+      int index1ROOT = RAIDAUtil::binIndexAIDA2ROOT(lowerBin,hist.yAxis().bins());
+      int index2ROOT = RAIDAUtil::binIndexAIDA2ROOT(upperBin,hist.yAxis().bins());
+
+      _histogram = (TH1D*)hist._histogram->ProjectionY( name.c_str(), index1ROOT, index2ROOT );
+      _histogramAIDA = (TH1D*)hist._histogramAIDA->ProjectionY( Naming::binEntry(name).c_str(), index1ROOT, index2ROOT );
+      _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMeanY->ProjectionY( Naming::binMeanX(name).c_str(), index1ROOT, index2ROOT );
+      _histogramAIDABinMean->Reset();
+      for (int j=-2; j<hist.yAxis().bins(); j++)
+	{
+	  double binmean = 0, binhight = 0;
+	  for (int i=-2; i<hist.xAxis().bins(); i++)
+	    {
+	      binmean += hist.binMeanY(i,j)*hist.binHeight(i,j);
+	      binhight += hist.binHeight(i,j);
+	    }
+	  binmean = binmean / binhight;
+
+	  // different bin index for root and AIDA:
+	  _histogramAIDABinMean->SetBinContent( (Int_t)RAIDAUtil::binIndexAIDA2ROOT( j, hist.yAxis().bins() ), 
+						(Double_t)binmean );
+	}
+
+      // create axis
+      _xAxis = new IAxisROOT( _histogram->GetXaxis() );
+      if ( hist._yAxis->isFixedBinning() )
+	dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+      else 
+	dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+    }
+  //  cout << "### histo da? " << _histogram->GetBinContent(1) << endl; 
 }
 
 bool IHistogram1DROOT::fill(double x, double weight)

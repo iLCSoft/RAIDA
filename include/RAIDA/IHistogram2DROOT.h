@@ -7,6 +7,7 @@
 #include <TH1D.h>
 #include <TH2D.h>
 #include <AIDA/IAxis.h>
+#include <RAIDA/IHistogram3DROOT.h>
 
 namespace AIDA {
 
@@ -21,6 +22,7 @@ namespace AIDA {
  
 class IHistogram2DROOT : public IHistogram2D {
 friend class IHistogramFactoryROOT ;
+friend class IHistogram1DROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram2DROOT() { /* nop */; }
@@ -46,6 +48,11 @@ public:
 
   IHistogram2DROOT(const std::string & name,
                    const IHistogram2DROOT & hist) ;
+  IHistogram2DROOT(const std::string & name,
+                   const IHistogram3DROOT & hist,
+                   std::string axis,
+                   int lowerBin = -2,
+                   int upperBin = -1) ;
 
     /**
      * Fill the IHistogram2D with a couple of values and the

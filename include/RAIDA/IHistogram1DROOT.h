@@ -3,6 +3,8 @@
 #define AIDA_IHISTOGRAM1DROOT_H 1
 
 #include <AIDA/IHistogram1D.h>
+#include <RAIDA/IHistogram2DROOT.h>
+#include <RAIDA/IHistogram3DROOT.h>
 
 
 #include <TH1D.h>
@@ -41,6 +43,11 @@ public:
 
   IHistogram1DROOT(const std::string & name, 
 		   const IHistogram1DROOT & hist) ;
+  IHistogram1DROOT(const std::string & name, 
+		   const IHistogram2DROOT & hist,
+		   char axis,
+		   int lowerBin = -2,
+		   int upperBin = -1) ;
 
     /**
      * Fill the IHistogram1D with a value and the
