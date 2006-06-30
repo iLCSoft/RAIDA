@@ -196,7 +196,12 @@ public:
      * @return          The newly created IHistogram1D.
      *
      */
-  virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & path, 
+					   const std::string & title, 
+					   int nBins, 
+					   double lowerEdge, 
+					   double upperEdge, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a IHistogram1D.
@@ -585,7 +590,15 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
