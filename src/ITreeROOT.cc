@@ -130,8 +130,9 @@ bool ITreeROOT::mkdir(const std::string & path)
       subDirectory = localPath.substr(localPath.rfind(("/"))+1);
       leftPath = localPath; 
       leftPath.erase(leftPath.rfind("/"));
+      if (leftPath == "") leftPath = "/";
     }
-
+  cout << leftPath << " " << subDirectory << endl;
   // check if all leading sub-directories exist 
   string currentDir = pwd();
   if (leftPath != "")
