@@ -132,7 +132,7 @@ bool ITreeROOT::mkdir(const std::string & path)
       leftPath.erase(leftPath.rfind("/"));
       if (leftPath == "") leftPath = "/";
     }
-  cout << leftPath << " " << subDirectory << endl;
+
   // check if all leading sub-directories exist 
   string currentDir = pwd();
   if (leftPath != "")
