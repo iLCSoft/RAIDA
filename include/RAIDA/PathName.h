@@ -14,6 +14,8 @@ public:
   PathName();
   PathName(const string rawName);
   void setPathName(string rawName);
+  void changePath(string rawPath);
+
   string getName() const;
   string getName(int number) const;
   string getPath()const;
