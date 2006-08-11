@@ -677,6 +677,8 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(
       if (!_usedTree->cd(thePath.getPath()) ) return NULL;
     }
 
+  thePath.changePath( _usedTree->pwd() );
+
   ICloud1DROOT* histo = new ICloud1DROOT(thePath.getPathName(),
 					 title,nMax,_usedTree,options);
 
