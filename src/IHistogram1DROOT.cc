@@ -4,6 +4,7 @@
 #include <RAIDA/IAxisROOT.h>
 #include <RAIDA/Naming.h>
 #include <RAIDA/RAIDAUtil.h>
+#include <RAIDA/AIDAHistogramsInROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TDirectory.h>
@@ -28,10 +29,14 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
 			    Naming::titleBinEntry(title).c_str(), 
 			    (Int_t)nBins,(Axis_t)lowerEdge,
 			    (Axis_t)upperEdge);
+  if (!AIDAHistogramsInROOT) 
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMean = new TH1D(Naming::binMeanX(name).c_str(),
 				   Naming::titleBinMeanX(title).c_str(), 
 				   (Int_t)nBins,(Axis_t)lowerEdge,
 				   (Axis_t)upperEdge);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMean->SetDirectory(0);
   //  gDirectory->ls();
 
   // create axis
@@ -55,10 +60,13 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
   _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
 			    Naming::titleBinEntry(title).c_str(), 
 			    (Int_t)nBinsX,xBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMean = new TH1D(Naming::binMeanX(name).c_str(),
 				   Naming::titleBinMeanX(title).c_str(), 
 				   (Int_t)nBinsX,xBins);
-
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMean->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
@@ -69,7 +77,11 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
 {
   _histogram = (TH1D*)hist._histogram->Clone( name.c_str() );
   _histogramAIDA = (TH1D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMean->Clone( Naming::binMeanX(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMean->SetDirectory(0);
 
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
@@ -94,6 +106,10 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
       _histogramAIDA = (TH1D*)hist._histogramAIDA->ProjectionX( Naming::binEntry(name).c_str(), index1ROOT, index2ROOT );
       _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMeanX->ProjectionX( Naming::binMeanX(name).c_str(), index1ROOT, index2ROOT );
       _histogramAIDABinMean->Reset();
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDA->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMean->SetDirectory(0);
       for (int i=-2; i<hist.xAxis().bins(); i++)
 	{
 	  double binmean = 0, binhight = 0;
@@ -125,6 +141,10 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
       _histogramAIDA = (TH1D*)hist._histogramAIDA->ProjectionY( Naming::binEntry(name).c_str(), index1ROOT, index2ROOT );
       _histogramAIDABinMean = (TH1D*)hist._histogramAIDABinMeanY->ProjectionY( Naming::binMeanX(name).c_str(), index1ROOT, index2ROOT );
       _histogramAIDABinMean->Reset();
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDA->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMean->SetDirectory(0);
       for (int j=-2; j<hist.yAxis().bins(); j++)
 	{
 	  double binmean = 0, binhight = 0;

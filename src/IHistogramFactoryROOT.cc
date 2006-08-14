@@ -9,7 +9,7 @@
 #include <RAIDA/ICloud3DROOT.h>
 #include <RAIDA/IHistogramFactoryROOT.h>
 #include <RAIDA/PathName.h>
-
+#include <RAIDA/AIDAHistogramsInROOT.h>
 #include <TH1D.h>
 #include <TH2D.h>
 

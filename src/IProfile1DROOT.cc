@@ -2,6 +2,7 @@
 #include <RAIDA/Naming.h>
 #include <RAIDA/IAxisROOT.h>
 #include <RAIDA/RAIDAUtil.h>
+#include <RAIDA/AIDAHistogramsInROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -51,9 +52,14 @@ IProfile1DROOT::IProfile1DROOT(const std::string & name,
 {
   _profile = (TProfile*)profile._profile->Clone( name.c_str() );
   _histogram = (TH1D*)profile._histogram->Clone( Naming::binContents(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
   _histogramAIDA = (TH1D*)profile._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = (TH1D*)profile._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
-
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _profile->GetXaxis() );
   if ( profile._xAxis->isFixedBinning() )
@@ -107,15 +113,20 @@ void IProfile1DROOT::Profile1DHistograms(const std::string & name,
 			Naming::titleBinContents(title).c_str(),
 			(Int_t)nBins,
 			(Axis_t)lowerEdge,(Axis_t)upperEdge);
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
   _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
                             Naming::titleBinEntry(title).c_str(),
                             (Int_t)nBins,
                             (Axis_t)lowerEdge,(Axis_t)upperEdge);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = new TH1D(Naming::binMeanX(name).c_str(),
                                     Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBins,
 				    (Axis_t)lowerEdge,(Axis_t)upperEdge);
-
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _profile->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
@@ -133,13 +144,18 @@ void IProfile1DROOT::Profile1DHistograms(const std::string & name,
   _histogram = new TH1D(Naming::binContents(name).c_str(),
 			Naming::titleBinContents(title).c_str(),
 			(Int_t)nBinsX,xBins);
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
   _histogramAIDA = new TH1D(Naming::binEntry(name).c_str(),
                             Naming::titleBinEntry(title).c_str(),
 			    (Int_t)nBinsX,xBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = new TH1D(Naming::binMeanX(name).c_str(),
                                     Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBinsX,xBins);
-
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _profile->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();

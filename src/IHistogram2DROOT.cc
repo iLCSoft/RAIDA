@@ -2,6 +2,7 @@
 #include <RAIDA/Naming.h>
 #include <RAIDA/IAxisROOT.h>
 #include <RAIDA/RAIDAUtil.h>
+#include <RAIDA/AIDAHistogramsInROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -30,19 +31,24 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
 			    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 			    (Int_t)nBinsY,
 			    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = new TH2D(Naming::binMeanX(name).c_str(),
 				    Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBinsX,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   _histogramAIDABinMeanY = new TH2D(Naming::binMeanY(name).c_str(),
 				    Naming::titleBinMeanY(title).c_str(),
 				    (Int_t)nBinsX,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
-
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
@@ -72,14 +78,20 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
                             Naming::titleBinEntry(title).c_str(),
 			    (Int_t)nBinsX,xBins,
 			    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = new TH2D(Naming::binMeanX(name).c_str(),
 				    Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBinsX,xBins,
 				    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   _histogramAIDABinMeanY = new TH2D(Naming::binMeanY(name).c_str(),
 				    Naming::titleBinMeanY(title).c_str(),
 				    (Int_t)nBinsX,xBins,
 				    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
   dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
@@ -92,8 +104,14 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
 {
   _histogram = (TH2D*)hist._histogram->Clone( name.c_str() );
   _histogramAIDA = (TH2D*)hist._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = (TH2D*)hist._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   _histogramAIDABinMeanY = (TH2D*)hist._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
 
   // create axis
   _xAxis = new IAxisROOT( _histogram->GetXaxis() );
@@ -139,6 +157,13 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
 
       _histogramAIDABinMeanX->Reset();
       _histogramAIDABinMeanY->Reset();
+
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDA->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanX->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanY->SetDirectory(0);
 
       for (int i=-2; i<hist.xAxis().bins(); i++)
 	{
@@ -202,6 +227,13 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
       _histogramAIDABinMeanX->Reset();
       _histogramAIDABinMeanY->Reset();
 
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDA->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanX->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanY->SetDirectory(0);
+
       for (int i=-2; i<hist.xAxis().bins(); i++)
 	{
 	  for (int k=-2; k<hist.zAxis().bins(); k++)
@@ -263,6 +295,13 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
 
       _histogramAIDABinMeanX->Reset();
       _histogramAIDABinMeanY->Reset();
+
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDA->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanX->SetDirectory(0);
+      if (!AIDAHistogramsInROOT)
+	_histogramAIDABinMeanY->SetDirectory(0);
 
       for (int j=-2; j<hist.yAxis().bins(); j++)
 	{
