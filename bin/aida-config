@@ -7,10 +7,10 @@
 
 case $1 in
     --include)
-	out="-I $RAIDA_HOME/include"
+	out="-I$RAIDA_HOME/include"
 	;;
     --lib)
-	out="-L $RAIDA_HOME/lib -lRAIDA"
+	out="-L$RAIDA_HOME/lib -lRAIDA"
 	;;
 esac
 
