@@ -1,4 +1,3 @@
-#!/bin/sh
 # -*- sh-indentation: 3 -*-
 #
 ###############################################################################
@@ -14,9 +13,8 @@
 # test whether RAIDA_HOME is unknown 
 if [ -z "${RAIDA_HOME}" ]
 then
-    echo "$(basename "$0"): error: RAIDA_HOME is not set" 1>&2 ; exit 1
+    echo "$(basename "$0"): error: RAIDA_HOME is not set" 1>&2 
 fi
 
 export PATH=$RAIDA_HOME/bin:$PATH
 
-exit 0 
