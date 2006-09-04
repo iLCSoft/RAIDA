@@ -58,7 +58,10 @@ public:
      * @param options NTuple options (currently undefined)
      *
      */
-  ///virtual ITuple * create(const std::string & path, const std::string & title, const std::string & columns, const std::string & options = "") = 0;
+  virtual ITuple * create(const std::string & path, 
+			  const std::string & title, 
+			  const std::string & columns, 
+			  const std::string & options = "") = 0;
 
     /**
      * Creates a logical chain of ITuples. All ITuples in the set must

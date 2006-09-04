@@ -34,7 +34,7 @@ ITreeROOT::ITreeROOT(const std::string & storeName,
   // save storeName because ROOT can not return it
   _storeName = storeName;
 
-  _ROOTFile = new TFile(storeName.c_str(),RWMode.c_str(),"ROOT_AIDA",0);
+  _ROOTFile = new TFile(storeName.c_str(),RWMode.c_str(),"ROOT_AIDA",1);
 }
 
 ITreeROOT::~ITreeROOT()
