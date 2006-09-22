@@ -90,7 +90,7 @@ bool LeafPoint::set(const double v)
     } 
   else if (_leafType == 'F')
     {
-      if (v > FLT_MIN && v < FLT_MAX)
+      if (abs(v) > FLT_MIN && abs(v) < FLT_MAX)
 	{
 	  _f = v;
 	  return true;
