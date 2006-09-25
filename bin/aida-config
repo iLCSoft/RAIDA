@@ -1,0 +1,85 @@
+#!/bin/sh
+# -*- sh-indentation: 3 -*-
+#
+###############################################################################
+#
+# This script returns the compile options needed to compile and link 
+# applications using the RAIDA library.
+# 
+# This script 
+# - requires RAIDA_HOME to be set properly
+# - needs root-config for ROOT libraries
+# 
+# F.Gaede, T.Kraemer, A.Vogel, DESY
+#
+###############################################################################
+
+usage()
+{
+    echo "Usage: $(basename "$0") [--include] [--lib] [--[no]root]" 1>&2
+}
+
+# did the user run the script without arguments?
+if [ $# -eq 0 ]
+then
+    usage
+    exit 0
+fi
+
+# default behaviour: include ROOT libraries in the output
+print_root=1
+
+# scan the command line arguments
+for i in "$@"
+do
+    case "$i" in
+        --include | -include )
+            print_incs=1 ;;
+        --lib | -lib | --libs | -libs )
+            print_libs=1 ;;
+        --root | -root )
+            print_root=1 ;;
+        --noroot | -noroot )
+            unset print_root ;;
+        --help | -help | -h )
+            usage ; exit 0 ;;
+        -* )
+            echo "$(basename "$0"): unknown option: $i" 1>&2
+            usage ; exit 1 ;;
+        * )
+            echo "$(basename "$0"): illegal argument: $i" 1>&2
+            usage ; exit 1 ;;
+    esac
+done
+
+# print ROOT libraries only if the user wants libraries
+if [ -z "${print_libs}" ]
+then
+    unset print_root
+fi
+
+# test whether the command "root-config" is available
+if [ "${print_root}" ]
+then
+    # does the shell know this command?
+    type root-config >& /dev/null
+    # test the exit status of "type"
+    if [ $? -ne 0 ]
+    then
+        echo "$(basename "$0"): root-config: command not found" 1>&2 ; exit 1
+    fi
+fi
+
+# test whether RAIDA_HOME is unknown (just a warning, not a fatal error)
+if [ -z "${RAIDA_HOME}" ]
+then
+    echo "$(basename "$0"): warning: RAIDA_HOME is not set" 1>&2
+fi
+
+# compose the output depending on the user choice
+[ "${print_incs}" ] && out="${out}${out:+ }${RAIDA_HOME:+-I${RAIDA_HOME}/include}"
+[ "${print_libs}" ] && out="${out}${out:+ }${RAIDA_HOME:+-L${RAIDA_HOME}/lib }-lRAIDA"
+[ "${print_root}" ] && out="${out}${out:+ }$(root-config --libs)"
+
+echo "${out}"
+exit 0

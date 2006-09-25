@@ -139,13 +139,13 @@ public:
      * Return the X axis.
      *
      */
-  /// virtual const IAxis & xAxis() const = 0;
+  virtual const IAxis & xAxis() const = 0;
 
     /**
      * Return the Y axis.
      *
      */
-  /// virtual const IAxis & yAxis() const = 0;
+  virtual const IAxis & yAxis() const = 0;
 
     /**
      * Convenience method, equivalent to <tt>xAxis().coordToIndex(coord)</tt>.

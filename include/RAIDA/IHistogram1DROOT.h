@@ -3,9 +3,12 @@
 #define AIDA_IHISTOGRAM1DROOT_H 1
 
 #include <AIDA/IHistogram1D.h>
+#include <RAIDA/IHistogram2DROOT.h>
+#include <RAIDA/IHistogram3DROOT.h>
 
 
 #include <TH1D.h>
+#include <AIDA/IAxis.h>
 
 namespace AIDA {
 
@@ -19,6 +22,7 @@ namespace AIDA {
  */
  
 class IHistogram1DROOT : public IHistogram1D {
+friend class IHistogramFactoryROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram1DROOT() { _histogram->Write(); }
@@ -31,6 +35,20 @@ public:
                    double lowerEdge, 
                    double upperEdge, 
                    const std::string & options = "") ;
+
+  IHistogram1DROOT(const std::string & name, 
+                   const std::string & title, 
+		   const std::vector<double>  & binEdges,
+                   const std::string & options = "") ;
+
+  IHistogram1DROOT(const std::string & name, 
+		   const IHistogram1DROOT & hist) ;
+  IHistogram1DROOT(const std::string & name, 
+		   const IHistogram2DROOT & hist,
+		   char axis,
+		   int lowerBin = -2,
+		   int upperBin = -1) ;
+
     /**
      * Fill the IHistogram1D with a value and the
      * corresponding weight.
@@ -48,7 +66,7 @@ public:
      *
      */
   virtual double binMean(int index) const ;
-
+  // +
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h 
 // ---------------------------------------------------------------------------
@@ -180,7 +198,7 @@ public:
    *
    */
   virtual int binEntries(int index) const ;
-
+  // +
   /**
    * Total height of the corresponding bin (ie the sum of the weights in this
    * bin).
@@ -189,7 +207,7 @@ public:
    *
    */
   virtual double binHeight(int index) const ;
-
+  // +
   /**
    * The error of a given bin.
    * @param index The bin number (0...N-1) or OVERFLOW or UNDERFLOW.
@@ -197,7 +215,7 @@ public:
    *
    */
   virtual double binError(int index) const ;
-
+  // +
   /**
    * The mean of the whole IHistogram1D.
    * @return The mean of the IHistogram1D.
@@ -213,6 +231,13 @@ public:
   virtual double rms() const ;
 
   /**
+   * Get the x axis of the IHistogram1D.
+   * @return The x coordinate IAxis.
+   *
+   */
+  virtual const IAxis & axis() const ;
+
+  /**
    * Get the bin number corresponding to a given coordinate along the x axis.
    * This is a convenience method, equivalent to 
    * <tt>axis().coordToIndex(coord)</tt>.
@@ -222,8 +247,11 @@ public:
    *
    */
   virtual int coordToIndex(double coord) const ;
-
+  // +
   virtual bool add(const IHistogram1D & hist) ;
+  virtual bool subtract(const IHistogram1D & hist) ;
+  virtual bool multiply(const IHistogram1D & hist) ;
+  virtual bool divide(const IHistogram1D & hist) ;
 
 
 protected:
@@ -231,9 +259,10 @@ protected:
 
 private:
 
-   TH1D *_histogram;
-   TH1D *_histogramAIDA;
-   TH1D *_histogramAIDABinMean;
+  TH1D *_histogram;
+  TH1D *_histogramAIDA;
+  TH1D *_histogramAIDABinMean;
+  IAxis *_xAxis;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM1DROOT_H */

@@ -33,6 +33,10 @@ public:
 	       ITree* usedTree,
 	       const std::string & options = "");
 
+  ICloud1DROOT(const std::string & path,
+	       ITree* usedTree,
+	       const ICloud1DROOT & cloud) ;
+
     /**
      * Fill the ICloud1D with a value and a corresponding weight.
      * @param x      The value.
@@ -230,7 +234,7 @@ private:
   mutable IHistogram1D *_AIDAHistogram;
 
   mutable bool _isConverted;
-  int _nBinsDefault;
+  static const int _nBinsDefault = 100;
   int _nMax;
   mutable TTree *_ROOTTree; 
 

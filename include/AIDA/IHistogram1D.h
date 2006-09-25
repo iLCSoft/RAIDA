@@ -13,11 +13,10 @@
 //  GNU Library General Public License described in the LGPL.txt 
 
 #include "AIDA/IHistogram.h"
-#include <TH1D.h>
 
 namespace AIDA {
 
-  /// class IAxis;
+  class IAxis;
 
 /**
  * User level interface to 1D Histogram.
@@ -93,7 +92,7 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & axis() const = 0;
+  virtual const IAxis & axis() const = 0;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -113,9 +112,7 @@ public:
      */
   virtual bool add(const IHistogram1D & hist) = 0;
 
-protected:
-  //  TH1D *_histogram;
-  //  TH1D *_histogramAIDA;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM1D_H */

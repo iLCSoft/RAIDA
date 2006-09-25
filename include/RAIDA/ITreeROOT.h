@@ -84,7 +84,7 @@ public:
    * @return false If the path does not exist.
    *
    */
-  virtual bool cd(const std::string & path);
+  virtual bool cd(const std::string & path) ;
 
   /**
    * Get the path of the current working directory.

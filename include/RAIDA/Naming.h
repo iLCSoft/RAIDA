@@ -39,4 +39,4 @@ protected:
 
 };
 } // namespace AIDA
-#endif /* ifndef AIDA_PATHNAME_H */
+#endif /* ifndef AIDA_Naming_H */

@@ -1,6 +1,8 @@
-// #include <RAIDA/utilROOT.h>
 #include <RAIDA/IProfile2DROOT.h>
 #include <RAIDA/Naming.h>
+#include <RAIDA/IAxisROOT.h>
+#include <RAIDA/RAIDAUtil.h>
+#include <RAIDA/AIDAHistogramsInROOT.h>
 #include <iostream>
 #include <TH1D.h>
 #include <TH2D.h>
@@ -29,30 +31,209 @@ IProfile2DROOT::IProfile2DROOT(const std::string & name,
 			    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 			    (Int_t)nBinsY,
 			    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+
+  Profile2DHistograms(name,title,
+		      nBinsX,lowerEdgeX,upperEdgeX,
+		      nBinsY,lowerEdgeY,upperEdgeY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       int nBinsX,
+			       double lowerEdgeX,
+			       double upperEdgeX,
+			       int nBinsY,
+			       double lowerEdgeY,
+			       double upperEdgeY,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options)
+{
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,
+			    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
+			    (Int_t)nBinsY,
+			    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY,
+			    (Axis_t)lowerValue,(Axis_t)upperValue);
+
+  Profile2DHistograms(name,title,
+		      nBinsX,lowerEdgeX,upperEdgeX,
+		      nBinsY,lowerEdgeY,upperEdgeY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdgesX,
+			       const std::vector<double>  & binEdgesY,
+			       const std::string & options)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+
+  Profile2DHistograms(name,title,binEdgesX,binEdgesY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const std::string & title,
+			       const std::vector<double>  & binEdgesX,
+			       const std::vector<double>  & binEdgesY,
+			       double lowerValue,
+			       double upperValue,
+			       const std::string & options)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _profile = new TProfile2D(name.c_str(),
+			    title.c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+    //			    (Double_t)lowerValue,(Double_t)upperValue);
+
+  Profile2DHistograms(name,title,binEdgesX,binEdgesY);
+}
+
+IProfile2DROOT::IProfile2DROOT(const std::string & name,
+			       const IProfile2DROOT & profile) 
+{
+  _profile = (TProfile2D*)profile._profile->Clone( name.c_str() );
+  _histogram = (TH2D*)profile._histogram->Clone( Naming::binContents(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
+  _histogramAIDA = (TH2D*)profile._histogramAIDA->Clone( Naming::binEntry(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
+  _histogramAIDABinMeanX = (TH2D*)profile._histogramAIDABinMeanX->Clone( Naming::binMeanX(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
+  _histogramAIDABinMeanY = (TH2D*)profile._histogramAIDABinMeanY->Clone( Naming::binMeanY(name).c_str() );
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  if ( profile._xAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  if ( profile._yAxis->isFixedBinning() )
+    dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+  else
+    dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning() ;
+}
+
+void IProfile2DROOT::Profile2DHistograms(const std::string & name,
+					 const std::string & title,
+					 int nBinsX,
+					 double lowerEdgeX,
+					 double upperEdgeX,
+					 int nBinsY,
+					 double lowerEdgeY,
+					 double upperEdgeY)
+{
   _histogram = new TH2D(Naming::binContents(name).c_str(),
                         Naming::titleBinContents(title).c_str(),
 			(Int_t)nBinsX,
 			(Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 			(Int_t)nBinsY,
 			(Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
   _histogramAIDA = new TH2D(Naming::binEntry(name).c_str(),
                             Naming::titleBinEntry(title).c_str(),
                             (Int_t)nBinsX,
                             (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
                             (Int_t)nBinsY,
                             (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
   _histogramAIDABinMeanX = new TH2D(Naming::binMeanX(name).c_str(),
                                     Naming::titleBinMeanX(title).c_str(),
 				    (Int_t)nBinsX,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
   _histogramAIDABinMeanY = new TH2D(Naming::binMeanY(name).c_str(),
                                     Naming::titleBinMeanY(title).c_str(),
 				    (Int_t)nBinsX,
 				    (Axis_t)lowerEdgeX,(Axis_t)upperEdgeX,
 				    (Int_t)nBinsY,
 				    (Axis_t)lowerEdgeY,(Axis_t)upperEdgeY);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setFixedBinning();
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setFixedBinning();
+}
+
+void IProfile2DROOT::Profile2DHistograms(const std::string & name,
+					 const std::string & title,
+					 const std::vector<double>  & binEdgesX,
+					 const std::vector<double>  & binEdgesY)
+{
+  const int nBinsX = binEdgesX.size()-1;
+  const int nBinsY = binEdgesY.size()-1;
+  Double_t xBins[nBinsX+1];
+  Double_t yBins[nBinsY+1];
+  for (int i=0;i<=nBinsX;i++)
+    xBins[i] = binEdgesX[i];
+  for (int i=0;i<=nBinsY;i++)
+    yBins[i] = binEdgesY[i];
+
+  _histogram = new TH2D(Naming::binContents(name).c_str(),
+                        Naming::titleBinContents(title).c_str(),
+			(Int_t)nBinsX,xBins,
+                        (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogram->SetDirectory(0);
+  _histogramAIDA = new TH2D(Naming::binEntry(name).c_str(),
+                            Naming::titleBinEntry(title).c_str(),
+			    (Int_t)nBinsX,xBins,
+			    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDA->SetDirectory(0);
+  _histogramAIDABinMeanX = new TH2D(Naming::binMeanX(name).c_str(),
+                                    Naming::titleBinMeanX(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanX->SetDirectory(0);
+  _histogramAIDABinMeanY = new TH2D(Naming::binMeanY(name).c_str(),
+                                    Naming::titleBinMeanY(title).c_str(),
+				    (Int_t)nBinsX,xBins,
+				    (Int_t)nBinsY,yBins);
+  if (!AIDAHistogramsInROOT)
+    _histogramAIDABinMeanY->SetDirectory(0);
+  // create axis
+  _xAxis = new IAxisROOT( _profile->GetXaxis() );
+  dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning();
+
+  _yAxis = new IAxisROOT( _profile->GetYaxis() );
+  dynamic_cast<IAxisROOT*>(_yAxis)->setVariableBinning();
 }
 
 bool IProfile2DROOT::fill(double x, double y, double z, double weight) 
@@ -78,97 +259,104 @@ bool IProfile2DROOT::fill(double x, double y, double z, double weight)
 
 double IProfile2DROOT::binMeanX(int indexX, int indexY) const 
 {
-  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogramAIDABinMeanX->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT );
 }
 
 double IProfile2DROOT::binMeanY(int indexX, int indexY) const 
 {
-  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexX,
-                                                        (Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogramAIDABinMeanY->GetBinContent( (Int_t)indexXROOT,
+                                                        (Int_t)indexYROOT );
 }
 
 int IProfile2DROOT::binEntries(int indexX, int indexY) const 
 {
-  double binCount;
-  binCount = (double)_histogramAIDA->GetBinContent( (Int_t)indexX,(Int_t)indexY);
-  return (int)binCount;
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (int)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,
+					     (Int_t)indexYROOT );
 }
 
 int IProfile2DROOT::binEntriesX(int indexX) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+
   double sumX = 0;
-  if (indexX < 0 || indexX > ((int)_histogramAIDA->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsY()+1) ; i++)
     {
-      sumX += (double)_histogramAIDA->GetBinContent( (Int_t)indexX,(Int_t)i );
+      sumX += (double)_histogramAIDA->GetBinContent( (Int_t)indexXROOT,(Int_t)i );
     }
   return (int)sumX;
 }
 
 int IProfile2DROOT::binEntriesY(int indexY) const 
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
   double sumY = 0;
-  if (indexY < 0 || indexY > ((int)_histogramAIDA->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogramAIDA->GetNbinsX()+1) ; i++)
     {
-      sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)indexY );
+      sumY += (double)_histogramAIDA->GetBinContent( (Int_t)i,(Int_t)indexYROOT );
     }
   return (int)sumY;
 }
 
 double IProfile2DROOT::binHeight(int indexX, int indexY) const 
 {
-  if ( (indexX < 0 || indexX > ((int)_histogram->GetNbinsX()+1)) ||
-       (indexY < 0 || indexY > ((int)_histogram->GetNbinsY()+1)) )
-    {
-      return -99999;
-    }
-  return (double)_profile->GetBinEntries(_profile->GetBin( (Int_t)indexX,(Int_t)indexY ));
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_profile->GetBinEntries(_profile->GetBin( (Int_t)indexXROOT,
+							   (Int_t)indexYROOT ));
 }
 
 double IProfile2DROOT::binHeightX(int indexX) const 
 {
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+
   double sumX = 0;
-  if (indexX < 0 || indexX > ((int)_histogram->GetNbinsX()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsY()+1) ; i++)
     {
-      sumX += (double)_histogram->GetBinContent( (Int_t)indexX,(Int_t)i );
+      sumX += (double)_histogram->GetBinContent( (Int_t)indexXROOT,(Int_t)i );
     }
   return sumX;
 }
 
 double IProfile2DROOT::binHeightY(int indexY) const 
 {
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
   double sumY = 0;
-  if (indexY < 0 || indexY < ((int)_histogram->GetNbinsY()+1))
-    {
-      return -99999;
-    }
   for ( int i=0 ; i<=((int)_histogram->GetNbinsX()+1) ; i++)
     {
-      sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)indexY );
+      sumY += (double)_histogram->GetBinContent( (Int_t)i,(Int_t)indexYROOT );
     }
   return sumY;
 }
 
 double IProfile2DROOT::binError(int indexX, int indexY) const 
 {
-  return (double)_histogram->GetBinError( (Int_t)indexX,(Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_histogram->GetBinError( (Int_t)indexXROOT,
+					  (Int_t)indexYROOT );
 }
 
 double IProfile2DROOT::binRms(int indexX, int indexY) const 
 {
-  return (double)_profile->GetBinError( (Int_t)indexX,(Int_t)indexY );
+  int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
+  int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
+
+  return (double)_profile->GetBinError( (Int_t)indexXROOT,
+					(Int_t)indexYROOT );
 }
 
 double IProfile2DROOT::meanX() const 
@@ -191,28 +379,32 @@ double IProfile2DROOT::rmsY() const
   return (double)_profile->GetRMS( (Int_t)2 );
 }
 
+const IAxis & IProfile2DROOT::xAxis() const
+{
+  return *_xAxis;
+}
+
+const IAxis & IProfile2DROOT::yAxis() const
+{
+  return *_yAxis;
+}
+
 int IProfile2DROOT::coordToIndexX(double coordX) const 
 {
-  TH1D *xProj;
-  int xBin;
-
-  xProj = _histogram->ProjectionX("_temphisto");
-  xBin = (int)xProj->FindBin( (Axis_t)coordX );
+  TH1D *xProj = _histogram->ProjectionX("_temphisto");
+  int indexROOT = (int)xProj->FindBin( (Axis_t)coordX );
 
   delete xProj;
-  return xBin;
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,xAxis().bins());
 }
 
 int IProfile2DROOT::coordToIndexY(double coordY) const 
 {
-  TH1D *yProj;
-  int yBin;
-
-  yProj = _histogram->ProjectionY("_temphisto");
-  yBin = (int)yProj->FindBin( (Axis_t)coordY );
+  TH1D *yProj = _histogram->ProjectionY("_temphisto");
+  int indexROOT = (int)yProj->FindBin( (Axis_t)coordY );
 
   delete yProj;
-  return yBin;
+  return RAIDAUtil::binIndexROOT2AIDA(indexROOT,yAxis().bins());
 }
 
 int IProfile2DROOT::allEntries() const 

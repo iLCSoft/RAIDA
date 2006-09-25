@@ -39,7 +39,7 @@ class IHistogramFactory {
 
 public: 
     /// Destructor.
-    virtual ~IHistogramFactory() { /* nop */; }
+  virtual ~IHistogramFactory() { /* nop */; }
 
     /**
      * Destroy an IBaseHistogram ogject.
@@ -78,7 +78,7 @@ public:
      * @return             The newly created ICloud1D.
      *
      */
-  /// virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) = 0;
+  virtual ICloud1D * createCloud1D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud1D.
@@ -90,7 +90,8 @@ public:
      * @return        The copy of the ICloud1D.
      *
      */
-  /// virtual ICloud1D * createCopy(const std::string & path, const ICloud1D & cloud) = 0;
+  virtual ICloud1D * createCopy(const std::string & path, 
+				const ICloud1D & cloud) = 0;
 
     /**
      * Create a ICloud2D, an unbinned 2-dimensional histogram.
@@ -121,7 +122,7 @@ public:
      * @return             The newly created ICloud2D.
      *
      */
-  /// virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) = 0;
+  virtual ICloud2D * createCloud2D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud2D.
@@ -133,7 +134,8 @@ public:
      * @return        The copy of the ICloud2D.
      *
      */
-  /// virtual ICloud2D * createCopy(const std::string & path, const ICloud2D & cloud) = 0;
+  virtual ICloud2D * createCopy(const std::string & path, 
+				const ICloud2D & cloud) = 0;
 
     /**
      * Create a ICloud3D, an unbinned 3-dimensional histogram.
@@ -164,7 +166,7 @@ public:
      * @return             The newly created ICloud3D.
      *
      */
-  /// virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) = 0;
+  virtual ICloud3D * createCloud3D(const std::string & pathAndTitle) = 0;
 
     /**
      * Create a copy of an ICloud3D.
@@ -176,7 +178,8 @@ public:
      * @return        The copy of the ICloud3D.
      *
      */
-  /// virtual ICloud3D * createCopy(const std::string & path, const ICloud3D & cloud) = 0;
+  virtual ICloud3D * createCopy(const std::string & path, 
+				const ICloud3D & cloud) = 0;
 
     /**
      * Create a IHistogram1D.
@@ -193,7 +196,12 @@ public:
      * @return          The newly created IHistogram1D.
      *
      */
-   virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & path, 
+					   const std::string & title, 
+					   int nBins, 
+					   double lowerEdge, 
+					   double upperEdge, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a IHistogram1D.
@@ -208,7 +216,10 @@ public:
      * @return             The newly created IHistogram1D.
      *
      */
-  virtual IHistogram1D * createHistogram1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge) = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & pathAndTitle, 
+					   int nBins, 
+					   double lowerEdge, 
+					   double upperEdge) = 0;
 
     /**
      * Create a IHistogram1D.
@@ -223,7 +234,10 @@ public:
      * @return          The newly created IHistogram1D.
      *
      */
-  /// virtual IHistogram1D * createHistogram1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, const std::string & options = "") = 0;
+  virtual IHistogram1D * createHistogram1D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdges, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram1D.
@@ -235,7 +249,8 @@ public:
      * @return     The copy of the IHistogram1D.
      *
      */
-  /// virtual IHistogram1D * createCopy(const std::string & path, const IHistogram1D & hist) = 0;
+  virtual IHistogram1D * createCopy(const std::string & path, 
+				    const IHistogram1D & hist) = 0;
 
     /**
      * Create a IHistogram2D.
@@ -281,7 +296,13 @@ public:
      * @return             The newly created IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) = 0;
+  virtual IHistogram2D * createHistogram2D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY) = 0;
 
     /**
      * Create a IHistogram2D.
@@ -297,7 +318,11 @@ public:
      * @return           The newly created IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createHistogram2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::string & options = "") = 0;
+  virtual IHistogram2D * createHistogram2D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdgesX, 
+					   const std::vector<double>  & binEdgesY, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram2D.
@@ -309,7 +334,8 @@ public:
      * @return     The copy of the IHistogram2D.
      *
      */
-  /// virtual IHistogram2D * createCopy(const std::string & copy, const IHistogram2D & hist) = 0;
+  virtual IHistogram2D * createCopy(const std::string & path, 
+				    const IHistogram2D & hist) = 0;
 
     /**
      * Create a IHistogram3D.
@@ -332,7 +358,18 @@ public:
      * @return           The newly created IHistogram3D.
      *
      */
-  virtual IHistogram3D * createHistogram3D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, int nBinsZ, double lowerEdgeZ, double upperEdgeZ, const std::string & options = "") = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & path, 
+					   const std::string & title, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY, 
+					   int nBinsZ, 
+					   double lowerEdgeZ, 
+					   double upperEdgeZ, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a IHistogram3D.
@@ -353,7 +390,16 @@ public:
      * @return             The newly created IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, int nBinsZ, double lowerEdgeZ, double upperEdgeZ) = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & pathAndTitle, 
+					   int nBinsX, 
+					   double lowerEdgeX, 
+					   double upperEdgeX, 
+					   int nBinsY, 
+					   double lowerEdgeY, 
+					   double upperEdgeY, 
+					   int nBinsZ, 
+					   double lowerEdgeZ, 
+					   double upperEdgeZ) = 0;
 
     /**
      * Create a IHistogram3D.
@@ -370,7 +416,12 @@ public:
      * @return           The newly created IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createHistogram3D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ, const std::string & options = "") = 0;
+  virtual IHistogram3D * createHistogram3D(const std::string & path, 
+					   const std::string & title, 
+					   const std::vector<double>  & binEdgesX, 
+					   const std::vector<double>  & binEdgesY, 
+					   const std::vector<double>  & binEdgesZ, 
+					   const std::string & options = "") = 0;
 
     /**
      * Create a copy of an IHistogram3D.
@@ -382,7 +433,8 @@ public:
      * @return     The copy of the IHistogram3D.
      *
      */
-  /// virtual IHistogram3D * createCopy(const std::string & path, const IHistogram3D & hist) = 0;
+  virtual IHistogram3D * createCopy(const std::string & path, 
+				    const IHistogram3D & hist) = 0;
 
     /**
      * Create a IProfile1D.
@@ -398,7 +450,12 @@ public:
      * @return          The newly created IProfile1D.
      *
      */
-  virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -416,7 +473,14 @@ public:
      * @return           The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -430,7 +494,10 @@ public:
      * @return          The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdges, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -446,7 +513,12 @@ public:
      * @return           The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & path, const std::string & title, const std::vector<double>  & binEdges, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile1D * createProfile1D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdges, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile1D.
@@ -461,7 +533,10 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge) = 0;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge) = 0;
 
     /**
      * Create a IProfile1D.
@@ -478,7 +553,12 @@ public:
      * @return             The newly created IProfile1D.
      *
      */
-  /// virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, int nBins, double lowerEdge, double upperEdge, double lowerValue, double upperValue) = 0;
+  virtual IProfile1D * createProfile1D(const std::string & pathAndTitle, 
+				       int nBins, 
+				       double lowerEdge, 
+				       double upperEdge, 
+				       double lowerValue, 
+				       double upperValue) = 0;
 
     /**
      * Create a copy of an IProfile1D.
@@ -490,7 +570,8 @@ public:
      * @return        The copy of the IProfile1D.
      *
      */
-  /// virtual IProfile1D * createCopy(const std::string & path, const IProfile1D & profile) = 0;
+  virtual IProfile1D * createCopy(const std::string & path, 
+				  const IProfile1D & profile) = 0;
 
     /**
      * Create a IProfile2D.
@@ -509,7 +590,15 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
@@ -530,7 +619,17 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
@@ -545,8 +644,12 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::string & options = "") = 0;
-
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdgesX, 
+				       const std::vector<double>  & binEdgesY, 
+				       const std::string & options = "") = 0;
+  
     /**
      * Create a IProfile2D.
      * @param path       The path of the created IProfile. The path can either be a relative or full path.
@@ -562,7 +665,13 @@ public:
      * @return           The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & path, const std::string & title, const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, double lowerValue, double upperValue, const std::string & options = "") = 0;
+  virtual IProfile2D * createProfile2D(const std::string & path, 
+				       const std::string & title, 
+				       const std::vector<double>  & binEdgesX, 
+				       const std::vector<double>  & binEdgesY, 
+				       double lowerValue, 
+				       double upperValue, 
+				       const std::string & options = "") = 0;
 
     /**
      * Create a IProfile2D.
@@ -580,7 +689,13 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY) = 0;
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY) = 0;
 
     /**
      * Create a IProfile2D.
@@ -600,7 +715,15 @@ public:
      * @return             The newly created IProfile2D.
      *
      */
-  /// virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, int nBinsX, double lowerEdgeX, double upperEdgeX, int nBinsY, double lowerEdgeY, double upperEdgeY, double lowerValue, double upperValue) = 0;
+  virtual IProfile2D * createProfile2D(const std::string & pathAndTitle, 
+				       int nBinsX, 
+				       double lowerEdgeX, 
+				       double upperEdgeX, 
+				       int nBinsY, 
+				       double lowerEdgeY, 
+				       double upperEdgeY, 
+				       double lowerValue, 
+				       double upperValue) = 0;
 
     /**
      * Create a copy of an IProfile2D.
@@ -612,7 +735,8 @@ public:
      * @return        The copy of the IProfile2D.
      *
      */
-  /// virtual IProfile2D * createCopy(const std::string & path, const IProfile2D & profile) = 0;
+  virtual IProfile2D * createCopy(const std::string & path, 
+				  const IProfile2D & profile) = 0;
 
     /**
      * Create an IHistogram1D by adding two IHistogram1D.
@@ -626,7 +750,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * add(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) = 0;
+  virtual IHistogram1D * add(const std::string & path, 
+  			     const IHistogram1D & hist1, 
+  			     const IHistogram1D & hist2) = 0;
 
     /**
      * Create an IHistogram1D by subtracting two IHistogram1D.
@@ -640,7 +766,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * subtract(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) = 0;
+  virtual IHistogram1D * subtract(const std::string & path, 
+				  const IHistogram1D & hist1, 
+				  const IHistogram1D & hist2) = 0;
 
     /**
      * Create an IHistogram1D by multiplying two IHistogram1D.
@@ -654,7 +782,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * multiply(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) = 0;
+  virtual IHistogram1D * multiply(const std::string & path, 
+				  const IHistogram1D & hist1, 
+				  const IHistogram1D & hist2) = 0;
 
     /**
      * Create an IHistogram1D by dividing two IHistogram1D.
@@ -668,7 +798,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram1D * divide(const std::string & path, const IHistogram1D & hist1, const IHistogram1D & hist2) = 0;
+  virtual IHistogram1D * divide(const std::string & path, 
+				const IHistogram1D & hist1, 
+				const IHistogram1D & hist2) = 0;
 
     /**
      * Create an IHistogram2D by adding two IHistogram2D.
@@ -682,7 +814,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * add(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) = 0;
+  virtual IHistogram2D * add(const std::string & path, 
+			     const IHistogram2D & hist1, 
+			     const IHistogram2D & hist2) = 0;
 
     /**
      * Create an IHistogram2D by subtracting two IHistogram2D.
@@ -696,7 +830,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * subtract(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) = 0;
+  virtual IHistogram2D * subtract(const std::string & path, 
+				  const IHistogram2D & hist1, 
+				  const IHistogram2D & hist2) = 0;
 
     /**
      * Create an IHistogram2D by multiplying two IHistogram2D.
@@ -710,7 +846,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * multiply(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) = 0;
+  virtual IHistogram2D * multiply(const std::string & path, 
+				  const IHistogram2D & hist1, 
+				  const IHistogram2D & hist2) = 0;
 
     /**
      * Create an IHistogram2D by dividing two IHistogram2D.
@@ -724,7 +862,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram2D * divide(const std::string & path, const IHistogram2D & hist1, const IHistogram2D & hist2) = 0;
+  virtual IHistogram2D * divide(const std::string & path, 
+				const IHistogram2D & hist1, 
+				const IHistogram2D & hist2) = 0;
 
     /**
      * Create an IHistogram3D by adding two IHistogram3D.
@@ -738,7 +878,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * add(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) = 0;
+  virtual IHistogram3D * add(const std::string & path, 
+			     const IHistogram3D & hist1, 
+			     const IHistogram3D & hist2) = 0;
 
     /**
      * Create an IHistogram3D by subtracting two IHistogram3D.
@@ -752,7 +894,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * subtract(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) = 0;
+  virtual IHistogram3D * subtract(const std::string & path, 
+				  const IHistogram3D & hist1, 
+				  const IHistogram3D & hist2) = 0;
 
     /**
      * Create an IHistogram3D by multiplying two IHistogram3D.
@@ -766,7 +910,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * multiply(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) = 0;
+  virtual IHistogram3D * multiply(const std::string & path, 
+				  const IHistogram3D & hist1, 
+				  const IHistogram3D & hist2) = 0;
 
     /**
      * Create an IHistogram3D by dividing two IHistogram3D.
@@ -780,7 +926,9 @@ public:
      *              if a directory in the path does not exist, or the path is illegal.
      *
      */
-  /// virtual IHistogram3D * divide(const std::string & path, const IHistogram3D & hist1, const IHistogram3D & hist2) = 0;
+  virtual IHistogram3D * divide(const std::string & path, 
+				const IHistogram3D & hist1, 
+				const IHistogram3D & hist2) = 0;
 
     /**
      * Create an IHistogram1D by projecting an IHistogram2D along its x axis.
@@ -793,7 +941,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram1D * projectionX(const std::string & path, const IHistogram2D & hist) = 0;
+  virtual IHistogram1D * projectionX(const std::string & path, 
+				     const IHistogram2D & hist) = 0;
 
     /**
      * Create an IHistogram1D by projecting an IHistogram2D along its y axis.
@@ -806,7 +955,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram1D * projectionY(const std::string & path, const IHistogram2D & hist) = 0;
+  virtual IHistogram1D * projectionY(const std::string & path, 
+				     const IHistogram2D & hist) = 0;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the y axis at a given bin.
@@ -820,7 +970,9 @@ public:
      * @return      The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceX(const std::string & path, const IHistogram2D & hist, int index) = 0;
+  virtual IHistogram1D * sliceX(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index) = 0;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the x axis at a given bin.
@@ -834,7 +986,9 @@ public:
      * @return      The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceY(const std::string & path, const IHistogram2D & hist, int index) = 0;
+  virtual IHistogram1D * sliceY(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index) = 0;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the y axis between two bins (inclusive).
@@ -848,7 +1002,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceX(const std::string & path, const IHistogram2D & hist, int index1, int index2) = 0;
+  virtual IHistogram1D * sliceX(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index1, 
+				int index2) = 0;
 
     /**
      * Create an IHistogram1D by slicing an IHistogram2D parallel to the x axis between two bins (inclusive).
@@ -862,7 +1019,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram1D * sliceY(const std::string & path, const IHistogram2D & hist, int index1, int index2) = 0;
+  virtual IHistogram1D * sliceY(const std::string & path, 
+				const IHistogram2D & hist, 
+				int index1, 
+				int index2) = 0;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the x-y plane.
@@ -875,7 +1035,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionXY(const std::string & path, const IHistogram3D & hist) = 0;
+  virtual IHistogram2D * projectionXY(const std::string & path, 
+				      const IHistogram3D & hist) = 0;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the x-z plane.
@@ -888,7 +1049,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionXZ(const std::string & path, const IHistogram3D & hist) = 0;
+  virtual IHistogram2D * projectionXZ(const std::string & path, 
+				      const IHistogram3D & hist) = 0;
 
     /**
      * Create an IHistogram2D by projecting an IHistogram3D on the y-z plane.
@@ -901,7 +1063,8 @@ public:
      * @return     The resulting projection.
      *
      */
-  /// virtual IHistogram2D * projectionYZ(const std::string & path, const IHistogram3D & hist) = 0;
+  virtual IHistogram2D * projectionYZ(const std::string & path, 
+				      const IHistogram3D & hist) = 0;
 
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the Z axis,
@@ -918,8 +1081,11 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceXY(const std::string & path, const IHistogram3D & hist, int index1, int index2) = 0;
-
+  virtual IHistogram2D * sliceXY(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) = 0;
+  
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the Y axis,
      * between "index1" and "index2" (inclusive).
@@ -935,7 +1101,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceXZ(const std::string & path, const IHistogram3D & hist, int index1, int index2) = 0;
+  virtual IHistogram2D * sliceXZ(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) = 0;
 
     /**
      * Create an IHistogram2D by slicing an IHistogram3D perpendicular to the X axis,
@@ -952,7 +1121,10 @@ public:
      * @return       The resulting slice.
      *
      */
-  /// virtual IHistogram2D * sliceYZ(const std::string & path, const IHistogram3D & hist, int index1, int index2) = 0;
+  virtual IHistogram2D * sliceYZ(const std::string & path, 
+				 const IHistogram3D & hist, 
+				 int index1, 
+				 int index2) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAMFACTORY_H */

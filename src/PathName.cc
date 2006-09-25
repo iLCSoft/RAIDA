@@ -15,10 +15,10 @@ PathName::PathName()
 PathName::PathName(string rawName)
 {
   setPathName(rawName);
-  cout << "%" << rawName << "%" << endl;
-  cout << "%" << _rawPathName << "%" << endl;
-  for (unsigned i = 0; i<_names.size(); i++)
-    cout << _names[i] << endl;
+  //  cout << "%" << rawName << "%" << endl;
+  //  cout << "%" << _rawPathName << "%" << endl;
+  //  for (unsigned i = 0; i<_names.size(); i++)
+  //    cout << _names[i] << endl;
 
 }
 
@@ -132,4 +132,18 @@ bool PathName::onlyName() const
 {
   if ( _isRelative && getName() != "" && getNumberOfNames() == 1 ) return true;
   return false;
+}
+
+void PathName::changePath(string rawPath)
+{
+  string name = getName();
+  if (rawPath == "")
+    {
+      setPathName(name);
+      return;
+    }
+
+  if (rawPath[rawPath.length()-1]!='/') rawPath += "/";
+  rawPath += name;
+  setPathName(rawPath);
 }

@@ -34,7 +34,7 @@ ITreeROOT::ITreeROOT(const std::string & storeName,
   // save storeName because ROOT can not return it
   _storeName = storeName;
 
-  _ROOTFile = new TFile(storeName.c_str(),RWMode.c_str(),"ROOT_AIDA",0);
+  _ROOTFile = new TFile(storeName.c_str(),RWMode.c_str(),"ROOT_AIDA",1);
 }
 
 ITreeROOT::~ITreeROOT()
@@ -79,7 +79,7 @@ std::string ITreeROOT::storeName() const
   return _storeName;
 }
 
-bool ITreeROOT::cd(const std::string & path)
+bool ITreeROOT::cd(const std::string & path) 
 {
   string localPath("");
   if (path != "" && path[0] == '/')
@@ -130,6 +130,7 @@ bool ITreeROOT::mkdir(const std::string & path)
       subDirectory = localPath.substr(localPath.rfind(("/"))+1);
       leftPath = localPath; 
       leftPath.erase(leftPath.rfind("/"));
+      if (leftPath == "") leftPath = "/";
     }
 
   // check if all leading sub-directories exist 

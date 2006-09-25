@@ -26,8 +26,10 @@ ITupleFactory * IAnalysisFactoryROOT::createTupleFactory(ITree & tree)
 
 IDataPointSetFactory * IAnalysisFactoryROOT::createDataPointSetFactory(ITree & tree)
 {
-  throw(NotYetImplementedException("IDataPointSetFactory"));
-  //  return new IDataPointSetFactoryROOT(tree);
+  //throw(NotYetImplementedException("IDataPointSetFactory"));
+  // fg: return an empty dummy object to allow Marlin to use RAIDA
+  // as Marlin::AIDAProcessor instantiates an IDataPointSetFactory...
+  return new IDataPointSetFactoryROOT(tree);
 }
 
 IFunctionFactory * IAnalysisFactoryROOT::createFunctionFactory(ITree & tree)

@@ -6,7 +6,8 @@
 #include "AIDA/IHistogram2D.h"
 #include <TH1D.h>
 #include <TH2D.h>
-
+#include <AIDA/IAxis.h>
+#include <RAIDA/IHistogram3DROOT.h>
 
 namespace AIDA {
 
@@ -20,7 +21,8 @@ namespace AIDA {
  */
  
 class IHistogram2DROOT : public IHistogram2D {
-
+friend class IHistogramFactoryROOT ;
+friend class IHistogram1DROOT ;
 public: 
     /// Destructor.
     virtual ~IHistogram2DROOT() { /* nop */; }
@@ -37,6 +39,20 @@ public:
                    double lowerEdgeY,
                    double upperEdgeY,
                    const std::string & options = "") ;
+
+  IHistogram2DROOT(const std::string & name,
+                   const std::string & title,
+		   const std::vector<double>  & binEdgesX,
+		   const std::vector<double>  & binEdgesY,
+                   const std::string & options = "") ;
+
+  IHistogram2DROOT(const std::string & name,
+                   const IHistogram2DROOT & hist) ;
+  IHistogram2DROOT(const std::string & name,
+                   const IHistogram3DROOT & hist,
+                   std::string axis,
+                   int lowerBin = -2,
+                   int upperBin = -1) ;
 
     /**
      * Fill the IHistogram2D with a couple of values and the
@@ -163,14 +179,14 @@ public:
      * @return The x coordinate IAxis.
      *
      */
-  /// virtual const IAxis & xAxis() const ;
+  virtual const IAxis & xAxis() const ;
 
     /**
      * Get the y axis of the IHistogram2D.
      * @return The y coordinate IAxis.
      *
      */
-  /// virtual const IAxis & yAxis() const ;
+  virtual const IAxis & yAxis() const ;
 
     /**
      * Get the bin number corresponding to a given coordinate along the x axis.
@@ -198,7 +214,10 @@ public:
      * @return false If the IHistogram2Ds binnings are incompatible.
      *
      */
-  /// virtual bool add(const IHistogram2D & hist) ;
+  virtual bool add(const IHistogram2D & hist) ;
+  virtual bool subtract(const IHistogram2D & hist) ;
+  virtual bool multiply(const IHistogram2D & hist) ;
+  virtual bool divide(const IHistogram2D & hist) ;
 
 // ---------------------------------------------------------------------------
 // Functions from IBaseHistogram.h
@@ -342,6 +361,8 @@ private:
   TH2D *_histogramAIDA;
   TH2D *_histogramAIDABinMeanX;
   TH2D *_histogramAIDABinMeanY;
+  IAxis *_xAxis;
+  IAxis *_yAxis;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAM2DROOT_H */

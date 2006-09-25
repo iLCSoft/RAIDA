@@ -15,7 +15,7 @@ ITupleROOT::ITupleROOT()
 {
 }
 
-ITupleROOT::ITupleROOT(const std::string & path,
+ITupleROOT::ITupleROOT(const std::string & name,
 		       const std::string & title,
 		       const std::vector<std::string>  & columnNames,
 		       const std::vector<std::string>  & columnType,
@@ -23,8 +23,8 @@ ITupleROOT::ITupleROOT(const std::string & path,
   : _readCursor(0)
 {
   // create a ROOT TTree to hold the n-tuple data.
-  string treeName = extractName(path);
-  _theTree = new TTree(treeName.c_str(),title.c_str());
+  //string treeName = extractName(path);
+  _theTree = new TTree(name.c_str(),title.c_str());
 
   for (unsigned i = 0; i<columnType.size() ; i++)
     {
@@ -108,12 +108,13 @@ ITupleROOT::ITupleROOT(const std::string & path,
 
   for (unsigned i = 0; i<_pointVec.size() ; i++)
     {
+      //      cout << "### Noch am LEBEN!!!" << endl;
       _theTree->Branch(_pointVec[i].getName().c_str(),
-		       _pointVec[i].getValue(),
-		       _pointVec[i].getROOTNameType().c_str());
-            cout << "spalten: " << 
-	      _pointVec[i].getROOTNameType() << " " << 
-	      _pointVec[i].getName() << endl;
+      		       _pointVec[i].getValue(),
+      		       _pointVec[i].getROOTNameType().c_str());
+      //            cout << "spalten: " << 
+      //	      _pointVec[i].getROOTNameType() << " " << 
+      //	      _pointVec[i].getName() << endl;
     }
 }
 
@@ -191,7 +192,7 @@ bool ITupleROOT::fill(int column, long value)
   // right type?
   if (_pointVec[column].getType() != 'L') return false;
 
-  cout << "=== short wird gesetzt" << endl;
+  //  cout << "=== short wird gesetzt" << endl;
   return _pointVec[column].set(value); 
 }
 
@@ -456,7 +457,7 @@ float ITupleROOT::getFloat(int column) const
     {
       if (_pointVec[column].getType() == 'F')
 	{
-  cout << "bis hier!" << endl; 
+	  //  cout << "bis hier!" << endl; 
 	  return (float)_pointVec[column].getFloat();
 	}
       else if (_pointVec[column].getType() == 'I')
