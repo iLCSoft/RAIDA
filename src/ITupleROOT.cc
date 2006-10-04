@@ -141,7 +141,7 @@ bool ITupleROOT::fill(int column, double value)
   // fill with a decimal number will call this function since all 
   // decimal numbers are treated as double. 
   if (_pointVec[column].getType() == 'F' && 
-      value > FLT_MIN && value < FLT_MAX)
+      fabs(value) > FLT_MIN && fabs(value) < FLT_MAX)
     { // ###
       float fvalue;
       fvalue = (float)value;
