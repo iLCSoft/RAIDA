@@ -93,12 +93,13 @@ int main()
   mytuple = mytuplefactory->create("/ich/mynt","my first ntuple",
 				   names,types,"");
   mytuple->fill(0,11.1);
-  mytuple->fill(1,11.2);
+  mytuple->fill(1,(float)-11.2);
   mytuple->fill(2,113);
   mytuple->fill(3,(short)114);
   mytuple->fill(4,(long)115);
   mytuple->fill(5,'b');
   mytuple->fill(6,true);
+  cout << "### Spalte mit float: " << mytuple->getFloat(1) << endl;
   mytuple->addRow();
 
     for (int i = 0; i<490; i++)

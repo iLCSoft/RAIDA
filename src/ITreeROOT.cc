@@ -2,7 +2,14 @@
 
 #include <iostream>
 #include <TFile.h>
+#include <RVersion.h>
 #include <string>
+
+#if ROOT_VERSION_CODE < ROOT_VERSION(5,08,00)
+  #define OLD_ROOT_VERSION
+#else
+  #undef  OLD_ROOT_VERSION
+#endif
 
 using namespace AIDA ;
 using namespace std;
@@ -93,8 +100,17 @@ bool ITreeROOT::cd(const std::string & path)
       localPath = path;
     }
 
+#ifdef OLD_ROOT_VERSION
   return (bool)gDirectory->cd(localPath.c_str());
   //  return (bool)_ROOTFile->cd(localPath.c_str());
+#else
+  TDirectory* target = gDirectory->GetDirectory(localPath.c_str());
+  if ( target == NULL )
+    return false;
+
+  target->cd();
+  return true;
+#endif
 }
 
 std::string ITreeROOT::pwd() const
@@ -140,6 +156,7 @@ bool ITreeROOT::mkdir(const std::string & path)
       if (!cd(leftPath)) return false;
     }
 
+#ifdef OLD_ROOT_VERSION
   // sub-directory to be created already exists ?
   if (cd(subDirectory))
     {
@@ -154,6 +171,11 @@ bool ITreeROOT::mkdir(const std::string & path)
       cd(currentDir);
       return false;
     }
+#else
+  TDirectory* target = gDirectory->GetDirectory(subDirectory.c_str());
+  if ( target != NULL )
+    return false;
+#endif
 
   // create the sub-directory:
   gDirectory->mkdir(subDirectory.c_str(),subDirectory.c_str());
