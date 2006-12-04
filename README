@@ -31,6 +31,35 @@ IAxis (get information about axis of IHistogram, ICloud, and IProfile)
 ITuple (creating and filling of n-tuples with different data types:
         int, short, long, float, double)
 
+Additional Information:
+----------------------
+
+The AIDA histograms hold more information about the data than those from ROOT. 
+RAIDA can write out these additional information by including additional 
+histograms in the output file. By default the additional histograms are 
+omitted. To tell RAIDA to write out these histograms, the environment variable 
+"AIDA_HISTOGRAMS_IN_ROOT" has to be set to "1":
+
+export AIDA_HISTOGRAMS_IN_ROOT=1
+
+Debug Information:
+-----------------
+
+To supporting the usage of a debugger like GDB (DDD), the object file has to
+have some additional information. By default these information is not 
+written to the object file. This can be changed by setting an environment
+variable:
+
+export RAIDADEBUG=1
+
+Verbose Mode:
+------------
+
+To get additional information written to the screen during the operation of
+RAIDA, set the following environment variable:
+
+export RAIDA_DEBUG_VERBOSE=1
+
 Installation:
 ------------
 
