@@ -1,6 +1,7 @@
 /// #include <RAIDA/AIDA_createAnalysisFactory.h>
 #include <RAIDA/IAnalysisFactoryROOT.h>
 #include <RAIDA/AIDAHistogramsInROOT.h>
+#include <RAIDA/Revision.h>
 #include <stdlib.h>
 #include <string>
 
@@ -19,6 +20,12 @@ IAnalysisFactory* AIDA_createAnalysisFactory(void)
     {
       newFactory = new IAnalysisFactoryROOT;
     }
+  else
+    {
+      cout << "*******************************************************************************" << endl;
+      cout << "***                    RAIDA has already been initialised                   ***" << endl;
+      cout << "*******************************************************************************" << endl;
+    }
 
   // decide, if the additional Histograms are written to the ROOT file:
   string name = "AIDA_HISTOGRAMS_IN_ROOT";
@@ -26,6 +33,21 @@ IAnalysisFactory* AIDA_createAnalysisFactory(void)
   string envResult = "";
   if (res) envResult = res;
   if (envResult == "1") AIDAHistogramsInROOT = true;
+
+  cout << "---------------------------------- R A I D A ----------------------------------" << endl;
+  cout << "ROOT Implementation of the Abstract Interfaces for Data Analysis (AIDA) v3.2.1" << endl;
+  cout << endl;
+  if (Revision::getName() != "")
+    cout << "RAIDA Version: " << Revision::getName() << endl;
+  else
+    cout << "RAIDA Version: Experimental" << endl;
+  cout << endl;
+  if (envResult == "1")
+    cout << "RAIDA creates additional histograms to write AIDA specific info to disk" << endl;
+  else
+    cout << "RAIDA only creates simple ROOT histograms" << endl;
+  cout << "-------------------------------------------------------------------------------" << endl;
+  cout << endl;
 
   return newFactory;
 }

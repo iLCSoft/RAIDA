@@ -5,7 +5,7 @@
 #include <RVersion.h>
 #include <string>
 
-#if ROOT_VERSION_CODE < ROOT_VERSION(5,08,00)
+#if ROOT_VERSION_CODE < ROOT_VERSION(5,8,00)
   #define OLD_ROOT_VERSION
 #else
   #undef  OLD_ROOT_VERSION
