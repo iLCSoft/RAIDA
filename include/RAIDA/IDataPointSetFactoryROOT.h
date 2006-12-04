@@ -23,8 +23,8 @@ namespace AIDA {
  * Basic user-level interface for creating a factory
  * of IDataPointSet.
  * 
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IDataPointSetFactoryROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IDataPointSetFactoryROOT : public IDataPointSetFactory {

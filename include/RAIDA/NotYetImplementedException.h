@@ -6,6 +6,13 @@
 #include <iostream>
 #include <string>
 
+/**
+ * Object used to handle exceptions originating from not yet available 
+ * functionality.
+ * @author T. Kraemer, DESY
+ * @version $Id: NotYetImplementedException.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
+ */
+
 using namespace std;
 
 namespace AIDA {

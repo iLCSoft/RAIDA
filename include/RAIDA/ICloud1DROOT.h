@@ -16,8 +16,8 @@ class IHistogram1D;
 /**
  * User level interface to a 1D Cloud.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: ICloud1DROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class ICloud1DROOT : public ICloud1D {

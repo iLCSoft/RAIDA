@@ -12,8 +12,8 @@ namespace AIDA {
  * An object which can be stored in a tree.
  * @see ITree
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IManagedObjectROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class IManagedObjectROOT : virtual public IManagedObject {

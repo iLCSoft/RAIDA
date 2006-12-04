@@ -15,8 +15,8 @@ namespace AIDA {
 /**
  * User level interface to 3D Histogram.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IHistogram3DROOT.h,v 1.8 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IHistogram3DROOT : public IHistogram3D {

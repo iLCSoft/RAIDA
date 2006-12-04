@@ -25,8 +25,8 @@ namespace AIDA {
  * User level interface for factory classes of Histograms (binned, unbinned, and profile)
  * The created objects are assumed to be managed by the tree which is associated to the factory.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IHistogramFactoryROOT.h,v 1.9 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class IHistogramFactoryROOT : public IHistogramFactory {

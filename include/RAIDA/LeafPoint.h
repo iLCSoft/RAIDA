@@ -8,6 +8,11 @@ using namespace std;
 
 namespace AIDA {
 
+  /** This class holds the values to be filled into a n-tuple 
+   * @author T. Kraemer, DESY
+   * @version $Id: LeafPoint.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
+   */
+
 class LeafPoint {
 
 public:

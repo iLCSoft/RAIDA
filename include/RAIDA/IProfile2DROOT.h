@@ -16,8 +16,8 @@ namespace AIDA {
 /**
  * User level interface to a 2-dimensional profile histogram
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IProfile2DROOT.h,v 1.6 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IProfile2DROOT : public IProfile2D {

@@ -16,8 +16,8 @@ namespace AIDA {
 /**
  * User level interface to 2D Histogram.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IHistogram2DROOT.h,v 1.8 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class IHistogram2DROOT : public IHistogram2D {

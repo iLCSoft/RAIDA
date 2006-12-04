@@ -6,6 +6,13 @@
 #include <string>
 #include <vector>
 
+/**
+ * This class provides the names for the objects to be created to store the 
+ * additional AIDA information.
+ * @author T. Kraemer, DESY
+ * @version $Id: Naming.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
+ */
+
 using namespace std;
 
 namespace AIDA {

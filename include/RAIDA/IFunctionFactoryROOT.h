@@ -14,7 +14,8 @@ class IFunctionCatalog;
  *
  * Function factory.
  *
- * @author The AIDA team (http://aida.freehep.org/)
+ * @author T. Kraemer, DESY
+ * @version $Id: IFunctionFactoryROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  *
  * @stereotype abstractfactory
  */

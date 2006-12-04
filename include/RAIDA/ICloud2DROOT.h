@@ -17,8 +17,8 @@ class IHistogram2D;
 /**
  * User level interface to a 2D Cloud.
  * 
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: ICloud2DROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class ICloud2DROOT : public ICloud2D {

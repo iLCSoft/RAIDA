@@ -6,6 +6,9 @@ namespace AIDA {
   // ROOT output file:
   // AIDAHistogramsInROOT = false : the additional histograms are not written 
   // AIDAHistogramsInROOT = true  : the additional histograms are written 
+  // Author: T. Kraemer, DESY
+  // version: $Id: AIDAHistogramsInROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
+
   extern bool AIDAHistogramsInROOT;
 } // namespace AIDA
 

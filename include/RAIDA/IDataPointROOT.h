@@ -12,8 +12,8 @@ class IMeasurement;
  * Basic user-level interface class for holding and managing
  * a single set of "measurements".
  * 
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IDataPointROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IDataPointROOT : public IDataPoint {

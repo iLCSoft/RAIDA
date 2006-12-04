@@ -12,8 +12,8 @@ namespace AIDA {
  * one Axis representing the X axis, while a 2D Histogram would have two
  * axes representing the X and Y Axis.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IAxisROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IAxisROOT : public IAxis {

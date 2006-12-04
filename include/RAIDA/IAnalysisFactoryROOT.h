@@ -20,13 +20,10 @@ namespace AIDA {
 /**
  * The "master" factory from which other factories are obtained.
  * Typically accessed by:
- * <pre>
- *   IAnalysisFactory af =(IAnalysisFactory) ServiceManager.create("hep.aida.IAnalysisFactory");
- * </pre>
+ * IAnalysisFactory* af = AIDA_createAnalysisFactory();
  *
- * In C++ IAnalysisFactory* af = AIDA_createAnalysisFactory();
- *
- * @author The AIDA team (http://aida.freehep.org/)
+ * @author T. Kraemer, DESY
+ * @version $Id: IAnalysisFactoryROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class IAnalysisFactoryROOT : public IAnalysisFactory {

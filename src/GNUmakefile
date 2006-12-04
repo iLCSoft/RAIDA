@@ -3,7 +3,7 @@
 # Example GNUmakefile to build an Application with Marlin
 #
 # @author Frank Gaede
-# @version $Id: GNUmakefile,v 1.1.1.1 2006-02-07 15:48:49 tkraemer Exp $
+# @version $Id: GNUmakefile,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
 #
 ###########################################################
 
@@ -50,7 +50,7 @@ BINDIR = $(BASEDIR)/bin
 
 
 
-ifdef MARLINDEBUG
+ifdef RAIDADEBUG
  CPPFLAGS = -g -Wall -ansi
 else
  CPPFLAGS = -O3 -Wall -ansi
@@ -69,6 +69,10 @@ AR = ar
 #--------------------------------------------------------------------------------------
 LIBS +=   -Wl,-whole-archive  -L $(INSTALL)  -l$(PROGNAME) -Wl,-no-whole-archive
 #--------------------------------------------------------------------------------------
+
+ifdef RAIDA_DEBUG_VERBOSE
+ INCLUDE += -D USE_RAIDA_DEBUG_VERBOSE 
+endif
 
 INCLUDE +=  -I $(BASEDIR)/include
 INCLUDE += $(USERINCLUDES)

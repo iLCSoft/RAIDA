@@ -26,8 +26,8 @@ class ITupleEntry;
 /**
  * User level interface to a Tuple.
  * 
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: ITupleROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class ITupleROOT : public ITuple {

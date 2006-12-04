@@ -22,8 +22,8 @@ namespace AIDA {
  * NOTE: - this tree keeps a current position(pwd) within the tree.
  * This may be implemented on a per-thread basis.
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: ITreeROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class ITreeROOT : public ITree {

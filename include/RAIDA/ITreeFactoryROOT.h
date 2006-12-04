@@ -16,7 +16,8 @@ class ITree;
 /**
  * The creator of trees.
  *
- * @author The AIDA team (http://aida.freehep.org/)
+ * @author T. Kraemer, DESY
+ * @version $Id: ITreeFactoryROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class ITreeFactoryROOT : public ITreeFactory {

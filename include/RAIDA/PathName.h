@@ -6,6 +6,13 @@
 #include <string>
 #include <vector>
 
+/**
+ * This class provides functionality to separate the path and filename 
+ * information from each other.
+ * @author T. Kraemer, DESY
+ * @version $Id: PathName.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
+ */
+
 using namespace std;
 
 namespace AIDA {

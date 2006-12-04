@@ -18,8 +18,8 @@ class IHistogram3D;
 /**
  * User level interface to a 3D Cloud.
  * 
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: ICloud3DROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
  */
 
 class ICloud3DROOT : public ICloud3D {

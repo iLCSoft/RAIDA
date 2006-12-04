@@ -4,6 +4,13 @@
 
 #include <iostream>
 
+/**
+ * Class holding utility functions for RAIDA.  
+ * @author T. Kraemer, DESY
+ * @version $Id: RAIDAUtil.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
+ */
+
+
 using namespace std;
 
 namespace AIDA {

@@ -11,8 +11,8 @@ namespace AIDA {
  * with positive and negative errors (to allow for asymmetric errors).
  * "IMeasurement" = "value" + "errorPlus" - "errorMinus"
  *
- * @author The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IMeasurementROOT.h,v 1.2 2006-12-04 17:24:06 tkraemer Exp $
  */
  
 class IMeasurementROOT : public IMeasurement {
