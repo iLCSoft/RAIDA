@@ -39,6 +39,8 @@
  * 
  * cd nnTrain
  * cvs tag -d v00-01 . 
+ * @author T. Kraemer, DESY
+ * @version $Id: Revision.h,v 1.2 2006-12-04 17:36:39 tkraemer Exp $
  */
 
 namespace Revision {
