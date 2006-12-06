@@ -4,7 +4,14 @@
 
 #include <string>
 #include <vector>
+
 namespace AIDA {
+
+  /** Helper class to hold the current setting, the default setting and the 
+   * possible settings for a key.
+   * @author T. Kraemer, DESY
+   * @version $Id: Settings.h,v 1.2 2006-12-06 13:41:14 tkraemer Exp $
+   */
 
 class Settings {
 
