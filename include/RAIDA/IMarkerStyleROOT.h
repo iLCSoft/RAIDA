@@ -6,7 +6,7 @@
 #include <vector>
 
 #include <RAIDA/IBrushStyleROOT.h>
-#include <AIDA/IMarkerStyleROOT.h>
+#include <AIDA/IMarkerStyle.h>
 
 namespace AIDA {
 
@@ -14,7 +14,7 @@ namespace AIDA {
  * Style for all markers (histo representation, legend box etc.)
  *
  * @author T. Kraemer, DESY
- * @version $Id: IMarkerStyleROOT.h,v 1.1 2006-12-07 10:33:21 tkraemer Exp $
+ * @version $Id: IMarkerStyleROOT.h,v 1.2 2006-12-07 15:41:09 tkraemer Exp $
  */
 
 class IMarkerStyleROOT : public IBrushStyleROOT, public IMarkerStyle {
