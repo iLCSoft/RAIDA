@@ -1,3 +1,114 @@
+2006-12-08 11:58  tkraemer
+
+	* include/RAIDA/IAnnotationROOT.h,
+	  include/RAIDA/IDataPointSetROOT.h, src/IAnnotationROOT.cc,
+	  src/IDataPointSetROOT.cc: added dummy versions of the classes
+	  IDataPointSet and IAnnotation
+
+2006-12-07 16:41  tkraemer
+
+	* include/RAIDA/IMarkerStyleROOT.h: In the file IMarkerStyleROOT.h
+	  the #include pointed to a rong file.
+
+2006-12-07 16:35  tkraemer
+
+	* src/IMarkerStyleROOT.cc: This file hase been moved from
+	  IMarkerStyleROOT.h to IMarkerStyleROOT.cc due to a typing error.
+
+2006-12-07 16:33  tkraemer
+
+	* src/IMarkerStyleROOT.h: Moved the file to another name
+
+2006-12-07 15:30  tkraemer
+
+	* src/: IAxisStyleROOT.cc, IBrushStyleROOT.cc, IDataStyleROOT.cc,
+	  IFillStyleROOT.cc, IInfoStyleROOT.cc, ILineStyleROOT.cc,
+	  IMarkerStyleROOT.h, IPlotterStyleROOT.cc, ITextStyleROOT.cc,
+	  ITitleStyleROOT.cc: added "throw" to handle exceptions in all the
+	  classes which have not been implemented up to now.
+
+2006-12-07 11:33  tkraemer
+
+	* include/RAIDA/IAxisStyleROOT.h, include/RAIDA/IBrushStyleROOT.h,
+	  include/RAIDA/IDataStyleROOT.h, include/RAIDA/IFillStyleROOT.h,
+	  include/RAIDA/IInfoStyleROOT.h, include/RAIDA/ILineStyleROOT.h,
+	  include/RAIDA/IMarkerStyleROOT.h,
+	  include/RAIDA/IPlotterStyleROOT.h,
+	  include/RAIDA/ITextStyleROOT.h, include/RAIDA/ITitleStyleROOT.h,
+	  src/IAxisStyleROOT.cc, src/IBrushStyleROOT.cc,
+	  src/IDataStyleROOT.cc, src/IFillStyleROOT.cc,
+	  src/IInfoStyleROOT.cc, src/ILineStyleROOT.cc,
+	  src/IMarkerStyleROOT.h, src/IPlotterStyleROOT.cc,
+	  src/ITextStyleROOT.cc, src/ITitleStyleROOT.cc: add dummy classes
+	  for the definition of styles.
+
+2006-12-06 14:41  tkraemer
+
+	* include/RAIDA/IBaseStyleROOT.h, include/RAIDA/Settings.h,
+	  src/IBaseStyleROOT.cc: dummy implementation of IBaseStyleROOT.
+
+2006-12-05 16:20  tkraemer
+
+	* include/RAIDA/Settings.h, src/Settings.cc: New class to hold the
+	  options and values used in the style classes of AIDA.
+
+2006-12-04 18:36  tkraemer
+
+	* include/RAIDA/Revision.h: added author and ID to the header file
+
+2006-12-04 18:24  tkraemer
+
+	* include/RAIDA/AIDAHistogramsInROOT.h,
+	  include/RAIDA/AIDA_createAnalysisFactory.h,
+	  include/RAIDA/IAnalysisFactoryROOT.h, include/RAIDA/IAxisROOT.h,
+	  include/RAIDA/ICloud1DROOT.h, include/RAIDA/ICloud2DROOT.h,
+	  include/RAIDA/ICloud3DROOT.h, include/RAIDA/IDataPointROOT.h,
+	  include/RAIDA/IDataPointSetFactoryROOT.h,
+	  include/RAIDA/IFunctionFactoryROOT.h,
+	  include/RAIDA/IHistogram1DROOT.h,
+	  include/RAIDA/IHistogram2DROOT.h,
+	  include/RAIDA/IHistogram3DROOT.h,
+	  include/RAIDA/IHistogramFactoryROOT.h,
+	  include/RAIDA/IManagedObjectROOT.h,
+	  include/RAIDA/IMeasurementROOT.h, include/RAIDA/IProfile1DROOT.h,
+	  include/RAIDA/IProfile2DROOT.h, include/RAIDA/ITreeFactoryROOT.h,
+	  include/RAIDA/ITreeROOT.h, include/RAIDA/ITupleFactoryROOT.h,
+	  include/RAIDA/ITupleROOT.h, include/RAIDA/LeafPoint.h,
+	  include/RAIDA/Naming.h,
+	  include/RAIDA/NotYetImplementedException.h,
+	  include/RAIDA/PathName.h, include/RAIDA/RAIDAUtil.h,
+	  src/AIDA_createAnalysisFactory.cc, src/GNUmakefile: Added Author
+	  and Version information to headerfiles, implemented mechanism to
+	  turn off debug information during compiletime
+
+2006-12-04 16:53  tkraemer
+
+	* README: some more Documentation about the environment variables
+	  available
+
+2006-12-04 15:56  tkraemer
+
+	* include/RAIDA/Revision.h, src/AIDA_createAnalysisFactory.cc,
+	  src/ITreeROOT.cc: RAIDA now writes out a start message when it is
+	  initialised.	The "Version" is taken from the CVS-Tag.
+
+2006-11-08 10:41  tkraemer
+
+	* mainroot.cc, src/ITreeROOT.cc: removed writing ERROR while
+	  changing directories within ROOT files
+
+2006-10-04 16:51  tkraemer
+
+	* src/ITupleROOT.cc: removed bug in fill routine
+
+2006-10-04 15:48  tkraemer
+
+	* src/LeafPoint.cc: removed small bug
+
+2006-09-25 21:55  gaede
+
+	* ChangeLog: initial version of file
+
 2006-09-22 10:16  tkraemer
 
 	* src/LeafPoint.cc: removed bug in ITuple: can now also take
