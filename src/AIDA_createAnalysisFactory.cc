@@ -2,6 +2,7 @@
 #include <RAIDA/IAnalysisFactoryROOT.h>
 #include <RAIDA/AIDAHistogramsInROOT.h>
 #include <RAIDA/Revision.h>
+#include <AIDA/IConstants.h>
 
 #include <RVersion.h>
 
@@ -38,7 +39,7 @@ IAnalysisFactory* AIDA_createAnalysisFactory(void)
   if (envResult == "1") AIDAHistogramsInROOT = true;
 
   cout << "---------------------------------- R A I D A ----------------------------------" << endl;
-  cout << "ROOT Implementation of the Abstract Interfaces for Data Analysis (AIDA) v3.2.1" << endl;
+  cout << "ROOT Implementation of the Abstract Interfaces for Data Analysis (AIDA v" << AIDA_VERSION << ")" << endl;
   cout << endl;
   if (Revision::getName() != "")
     cout << "RAIDA Version: " << Revision::getName() << endl;
