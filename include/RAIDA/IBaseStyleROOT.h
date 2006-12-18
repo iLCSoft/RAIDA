@@ -24,10 +24,10 @@ namespace AIDA {
  * not be overridden by the 'parent' style.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IBaseStyleROOT.h,v 1.1 2006-12-06 13:41:14 tkraemer Exp $
+ * @version $Id: IBaseStyleROOT.h,v 1.2 2006-12-18 09:49:56 tkraemer Exp $
  */
 
-class IBaseStyleROOT : public IBaseStyle {
+class IBaseStyleROOT : virtual public IBaseStyle {
 
 public: 
     /// Destructor.

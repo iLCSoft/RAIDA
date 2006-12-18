@@ -15,10 +15,10 @@ namespace AIDA {
  * colours and with (possibly) transparent/opaque/translucent effect.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IBrushStyleROOT.h,v 1.1 2006-12-07 10:33:21 tkraemer Exp $
+ * @version $Id: IBrushStyleROOT.h,v 1.2 2006-12-18 09:49:56 tkraemer Exp $
  */
 
-class IBrushStyleROOT : public IBaseStyleROOT, public IBrushStyle {
+class IBrushStyleROOT : public IBaseStyleROOT, virtual public IBrushStyle {
 
 public: 
     /// Destructor.

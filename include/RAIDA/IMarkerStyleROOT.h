@@ -14,10 +14,10 @@ namespace AIDA {
  * Style for all markers (histo representation, legend box etc.)
  *
  * @author T. Kraemer, DESY
- * @version $Id: IMarkerStyleROOT.h,v 1.2 2006-12-07 15:41:09 tkraemer Exp $
+ * @version $Id: IMarkerStyleROOT.h,v 1.3 2006-12-18 09:49:56 tkraemer Exp $
  */
 
-class IMarkerStyleROOT : public IBrushStyleROOT, public IMarkerStyle {
+class IMarkerStyleROOT : public IMarkerStyle, public IBrushStyleROOT  {
 
 public: 
     /// Destructor.
