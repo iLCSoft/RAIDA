@@ -27,8 +27,8 @@ class IRangeSet;
  * Now we set it in the data pipe, Victor thinks that it is not very clear
  * and should be on the function ;)
  *
- * @author  The AIDA team (http://aida.freehep.org/)
- *
+ * @author T. Kraemer, DESY
+ * @version $Id: IModelFunctionROOT.h,v 1.2 2007-01-02 16:20:45 tkraemer Exp $
  */
 
 class IModelFunctionROOT : public IFunctionROOT, virtual public IModelFunction {

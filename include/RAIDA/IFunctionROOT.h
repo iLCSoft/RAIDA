@@ -20,10 +20,10 @@ class IAnnotation;
  * "x[0]" corresponds to variable number 0 etc.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IFunctionROOT.h,v 1.1 2007-01-02 13:06:24 tkraemer Exp $
+ * @version $Id: IFunctionROOT.h,v 1.2 2007-01-02 16:20:45 tkraemer Exp $
  */
  
-class IFunctionROOT {
+class IFunctionROOT : public IFunction {
 
 public: 
   /// Destructor.
