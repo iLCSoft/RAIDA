@@ -1,3 +1,97 @@
+2007-01-03 18:18  tkraemer
+
+	* include/RAIDA/IFitFactoryROOT.h, src/IFitFactoryROOT.cc: Add
+	  dummy version ov the class "IFitFactory".
+
+2007-01-03 18:03  tkraemer
+
+	* include/RAIDA/IFitterROOT.h, src/IFitterROOT.cc: Add dummy
+	  implementation of class "IFitter".
+
+2007-01-03 17:07  tkraemer
+
+	* include/RAIDA/IFitResultROOT.h, src/IFitResultROOT.cc: Add dummy
+	  implementation of class "IFitResult".
+
+2007-01-03 15:20  tkraemer
+
+	* include/RAIDA/IFitParameterSettingsROOT.h,
+	  src/IFitParameterSettingsROOT.cc: Add Dummy implementation of the
+	  class "IFitParameterSettings".
+
+2007-01-03 14:35  tkraemer
+
+	* include/RAIDA/IFitDataROOT.h, src/IFitDataROOT.cc: Dummy
+	  implementation of the class "IFitData".
+
+2007-01-02 17:20  tkraemer
+
+	* include/RAIDA/IFunctionCatalogROOT.h,
+	  include/RAIDA/IFunctionFactoryROOT.h,
+	  include/RAIDA/IFunctionROOT.h,
+	  include/RAIDA/IModelFunctionROOT.h, src/IFunctionCatalogROOT.cc,
+	  src/IFunctionFactoryROOT.cc: Add dummy implementation of class
+	  "IFunctionCatalog".  Modifications in the FunctionFactory.
+
+2007-01-02 14:35  tkraemer
+
+	* include/RAIDA/IModelFunctionROOT.h, src/IModelFunctionROOT.cc:
+	  Add dummy implementation of "IModelFunction".
+
+2007-01-02 14:06  tkraemer
+
+	* include/RAIDA/IFunctionROOT.h, src/IFunctionROOT.cc: Add dummy
+	  implementation of "IFunction".
+
+2006-12-18 11:29  tkraemer
+
+	* include/RAIDA/IPlotterLayoutROOT.h, src/IPlotterLayoutROOT.cc:
+	  Add dummy version of "IPlotterLayout".
+
+2006-12-18 10:49  tkraemer
+
+	* include/RAIDA/IBaseStyleROOT.h, include/RAIDA/IBrushStyleROOT.h,
+	  include/RAIDA/IMarkerStyleROOT.h,
+	  include/RAIDA/IPlotterFactoryROOT.h,
+	  include/RAIDA/IPlotterROOT.h, include/RAIDA/IPlotterRegionROOT.h,
+	  src/IPlotterFactoryROOT.cc, src/IPlotterROOT.cc: Add dummy
+	  version of "IPlotterFactory", "IPlotter" and "IPlotterRegion".
+	  Solve problem with virtual inheritance of Plotter classes.
+
+2006-12-14 11:52  tkraemer
+
+	* include/RAIDA/IRangeSetROOT.h, src/IRangeSetROOT.cc: Add dummy
+	  version of "IRangeSet".
+
+2006-12-14 11:29  tkraemer
+
+	* include/RAIDA/ITupleEntryROOT.h: Add dummy version of
+	  "ITupleEntry".
+
+2006-12-14 11:16  tkraemer
+
+	* include/RAIDA/IInfoROOT.h, src/IInfoROOT.cc: Add dummy version of
+	  "IInfo".
+
+2006-12-14 10:55  tkraemer
+
+	* include/RAIDA/IFilterROOT.h, src/IFilterROOT.cc: Add dummy
+	  version of "IFilter".
+
+2006-12-14 10:41  tkraemer
+
+	* include/RAIDA/IEvaluatorROOT.h, src/IEvaluatorROOT.cc: Add dummy
+	  version of "IEvaluator".
+
+2006-12-14 10:25  tkraemer
+
+	* src/AIDA_createAnalysisFactory.cc: Using the definitions in
+	  "IConstants.h" to print the AIDA version
+
+2006-12-08 14:47  tkraemer
+
+	* ChangeLog: new ChangeLog file
+
 2006-12-08 11:58  tkraemer
 
 	* include/RAIDA/IAnnotationROOT.h,
