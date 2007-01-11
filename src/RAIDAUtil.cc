@@ -2,8 +2,8 @@
 #include <RAIDA/RAIDAUtil.h>
 #include <AIDA/IAxis.h>
 #include <iostream>
+#include <vector>
 
-using namespace std ;
 using namespace AIDA ;
 
 int RAIDAUtil::binIndexAIDA2ROOT(int index, int nBins)
@@ -34,4 +34,33 @@ int RAIDAUtil::binIndexROOT2AIDA(int index, int nBins)
     indexAIDA = index - 1;
 
   return indexAIDA;
+}
+
+bool RAIDAUtil::isOrdered(std::vector<double> x)
+{
+  if (x[0]<x[x.size()-1])
+    {
+      for (int i=0 ; i<=x.size()-2 ; i++)
+        {
+          if (x[i]>=x[i+1])
+            {
+              return false;
+            }
+        }
+    }
+  else if (x[0]>x[x.size()-1])
+    {
+      for (int i=0 ; i<=x.size()-2 ; i++)
+        {
+          if (x[i]<=x[i+1])
+            {
+              return false;
+            }
+        }
+    }
+  else
+    {
+      return false;
+    }
+  return true;
 }
