@@ -1,11 +1,11 @@
 ### For testing only:
-#export RAIDA_DEBUG_VERBOSE=1
+export RAIDA_DEBUG_VERBOSE=1
 ###########################################################
 #
 # Example GNUmakefile to build an Application with Marlin
 #
 # @author Frank Gaede
-# @version $Id: GNUmakefile,v 1.3 2007-01-12 12:54:02 tkraemer Exp $
+# @version $Id: GNUmakefile,v 1.4 2007-01-16 15:59:33 tkraemer Exp $
 #
 ###########################################################
 
