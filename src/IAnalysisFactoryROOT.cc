@@ -16,7 +16,7 @@ using namespace std;
 
 ITreeFactory * IAnalysisFactoryROOT::createTreeFactory()
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IAnalysisFactoryROOT::createTreeFactory()" 
        << ": " 
        << "Create the TreeFactory" << endl;
@@ -26,7 +26,7 @@ ITreeFactory * IAnalysisFactoryROOT::createTreeFactory()
 
 IHistogramFactory * IAnalysisFactoryROOT::createHistogramFactory(ITree & tree)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IAnalysisFactoryROOT::createHistogramFactory(ITree & tree)" 
        << ": " 
        << "Create HistogramFactory connected to store (file): "  
@@ -37,7 +37,7 @@ IHistogramFactory * IAnalysisFactoryROOT::createHistogramFactory(ITree & tree)
 
 ITupleFactory * IAnalysisFactoryROOT::createTupleFactory(ITree & tree)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IAnalysisFactoryROOT::createTupleFactory(ITree & tree)" 
        << ": " 
        << "Create TupleFactory connected to store (file): "  
@@ -51,7 +51,7 @@ IDataPointSetFactory * IAnalysisFactoryROOT::createDataPointSetFactory(ITree & t
   //throw(NotYetImplementedException("IDataPointSetFactory"));
   // fg: return an empty dummy object to allow Marlin to use RAIDA
   // as Marlin::AIDAProcessor instantiates an IDataPointSetFactory...
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IAnalysisFactoryROOT::createDataPointSetFactory(ITree & tree)" 
        << ": " 
        << "Create DataPointSetFactory connected to store (file): "  

@@ -96,7 +96,8 @@ ITupleROOT::ITupleROOT(const std::string & name,
 	}
       else
 	{
-	  cout << "Kein gueltiger Datentyp exception" << endl;
+	  cout << "Kein gueltiger Datentyp exception" 
+	       << " upper: " << upper << " original: " << original << endl;
 	}
 
       // construct objects to be filled into the tree (columns of ntuple)

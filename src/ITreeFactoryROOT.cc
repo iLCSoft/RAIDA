@@ -7,7 +7,7 @@ using namespace std;
 
 ITree * ITreeFactoryROOT::create()
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "ITreeFactoryROOT::create():" << endl;
   cout << "          " 
        << "Creates an AIDA tree in memory" << endl;
@@ -23,7 +23,7 @@ ITree * ITreeFactoryROOT::create(const std::string & storeName,
 				 bool createNew, 
 				 const std::string &options)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "ITreeFactoryROOT::create(const std::string & storeName,const std::string & storeType,bool readOnly,bool createNew,const std::string &options):" << endl;
   cout << "          " 
        << "Creates an AIDA tree connected to a ROOT file" << endl << endl;

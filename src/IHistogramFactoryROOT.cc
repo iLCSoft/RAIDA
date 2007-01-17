@@ -35,7 +35,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
                double upperEdge, 
                const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram1D(const std::string & path,const std::string & title,int nBins,double lowerEdge,double upperEdge,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D histogram with equal binning" << endl << endl;
@@ -58,7 +58,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -66,7 +66,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -75,18 +75,18 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -109,7 +109,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D
 					     double lowerEdge,
 					     double upperEdge) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram1D(const std::string & pathAndTitle,int nBins,double lowerEdge,double upperEdge): " << endl;
   cout << "          " 
        << "Creates a 1D histogram" << endl;
@@ -120,7 +120,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -135,7 +135,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 							const std::vector<double>  & binEdges,
 							const std::string & options) 
 { // ###
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram1D(const std::string & path,const std::string & title,const std::vector<double>  & binEdges,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D histogram with variable binning" << endl << endl;
@@ -151,14 +151,14 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 
   if (binEdges.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << binEdges.size() 
        << " lowerEdge: " << binEdges[0] 
@@ -176,7 +176,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -185,7 +185,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdges))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the axis!" << endl;
 #endif
@@ -193,7 +193,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -202,18 +202,18 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -232,7 +232,7 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 						 const IHistogram1D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const IHistogram1D & hist):" << endl;
   cout << "          "
        << "Create a new 1D histogram from an other 1D histogram" << endl << endl;
@@ -253,7 +253,7 @@ IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -261,7 +261,7 @@ IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -270,18 +270,18 @@ IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -310,7 +310,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(
 				      double upperEdgeY,
 				      const std::string & options) 
 { 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram2D(const std::string & path,const std::string & title,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D histogram2D" << endl << endl;
@@ -337,7 +337,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -345,7 +345,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -354,18 +354,18 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -392,7 +392,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 							double lowerEdgeY,
 							double upperEdgeY) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram2D(const std::string & pathAndTitle,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY):" << endl; 
   cout << "          " 
        << "Creates a 2D histogram" << endl;
@@ -402,7 +402,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -419,7 +419,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 							const std::vector<double>  & binEdgesY,
 							const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram2D(const std::string & path,const std::string & title,const std::vector<double>  & binEdgesX,const std::vector<double>  & binEdgesY,const std::string & options):" << endl;
     cout << "          "
        << "Create a new 2D histogram with variable binning" << endl << endl;
@@ -435,7 +435,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 
   if (binEdgesX.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of x-axis to small!" << endl;
 #endif
@@ -444,14 +444,14 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 
   if (binEdgesY.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of y-axis to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << binEdgesX.size() 
        << " lowerEdgeX: " << binEdgesX[0] 
@@ -477,7 +477,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -486,7 +486,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdgesX))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the x-axis!" << endl;
 #endif
@@ -495,7 +495,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdgesY))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the y-axis!" << endl;
 #endif
@@ -503,7 +503,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -512,18 +512,18 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -543,7 +543,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 						 const IHistogram2D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const IHistogram2D & hist):" << endl;
   cout << "          "
        << "Create a new 2d histogram from an other 2D histogram" << endl << endl;
@@ -568,7 +568,7 @@ IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -576,7 +576,7 @@ IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -585,18 +585,18 @@ IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -628,7 +628,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D
                                        double upperEdgeZ,
                                        const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram3D(const std::string & path,const std::string & title,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,int nBinsZ,double lowerEdgeZ,double upperEdgeZ,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 3D histogram" << endl << endl;
@@ -659,7 +659,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -667,7 +667,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -676,18 +676,18 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -718,7 +718,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 							double lowerEdgeZ,
 							double upperEdgeZ) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram3D(const std::string & pathAndTitle,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,int nBinsZ,double lowerEdgeZ,double upperEdgeZ): " << endl;
   cout << "          "
        << "Creates a 3D histogram" << endl;
@@ -728,7 +728,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          " 
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -747,7 +747,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 							const std::vector<double>  & binEdgesZ,
 							const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createHistogram3D(const std::string & path,const std::string & title,const std::vector<double> & binEdgesX,const std::vector<double> & binEdgesY,const std::vector<double> & binEdgesZ,const std::string & options)" << endl;
   cout << "          "
        << "Create a new 3D histogram with variable binning" << endl << endl;
@@ -763,7 +763,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (binEdgesX.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of x-axis to small!" << endl;
 #endif
@@ -772,7 +772,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (binEdgesY.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of y-axis to small!" << endl;
 #endif
@@ -781,14 +781,14 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (binEdgesZ.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of z-axis to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << binEdgesX.size() 
        << " lowerEdgeX: " << binEdgesX[0] 
@@ -823,7 +823,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -832,7 +832,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdgesX))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the x-axis!" << endl;
 #endif
@@ -841,7 +841,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdgesY))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the y-axis!" << endl;
 #endif
@@ -850,7 +850,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   if (!RAIDAUtil::isOrdered(binEdgesZ))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the z-axis!" << endl;
 #endif
@@ -858,7 +858,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -867,18 +867,18 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -899,7 +899,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
 						 const IHistogram3D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const IHistogram3D & hist):" << endl;
   cout << "          "
        << "Create a new 3D histogram from an other 3D histogram" << endl << endl;
@@ -928,7 +928,7 @@ IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -936,7 +936,7 @@ IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -945,18 +945,18 @@ IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -981,7 +981,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 						    double upperEdge,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & path,const std::string & title,int nBins,double lowerEdge,double upperEdge,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D profile histogram" << endl << endl;
@@ -1004,7 +1004,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1012,7 +1012,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1021,18 +1021,18 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1059,7 +1059,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 						    double upperValue,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & path,const std::string & title,int nBins,double lowerEdge,double upperEdge,double lowerValue,double upperValue,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D profile histogram" << endl << endl;
@@ -1085,7 +1085,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1093,7 +1093,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1102,18 +1102,18 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1137,7 +1137,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & pathAndT
 						    double lowerEdge,
 						    double upperEdge) 
 { // xxx---xxx
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & pathAndTitle,int nBins,double lowerEdge,double upperEdge):" << endl;
   cout << "          "  
        << "Creates a 1D profile histogram" << endl;
@@ -1147,7 +1147,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & pathAndT
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1164,7 +1164,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & pathAndT
 						    double lowerValue,
 						    double upperValue) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & pathAndTitle,int nBins,double lowerEdge,double upperEdge,double lowerValue,double upperValue):" << endl;
   cout << "          "  
        << "Creates a 1D profile histogram" << endl;
@@ -1174,7 +1174,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & pathAndT
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1189,7 +1189,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 						    const std::vector<double>  & binEdges,
 						    const std::string & options) 
 { 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & path,const std::string & title,const std::vector<double>  & binEdges,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D profile histogram with variable binning" << endl << endl;
@@ -1205,14 +1205,14 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   if (binEdges.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << binEdges.size() 
        << " lowerEdge: " << binEdges[0] 
@@ -1229,7 +1229,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1238,7 +1238,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdges))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the axis!" << endl;
 #endif
@@ -1246,7 +1246,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1255,18 +1255,18 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1289,7 +1289,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 						    double upperValue,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile1D(const std::string & path,const std::string & title,const std::vector<double>  & binEdges,double lowerValue,double upperValue,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D profile histogram with variable binning" << endl << endl;
@@ -1305,14 +1305,14 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   if (binEdges.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << binEdges.size() 
        << " lowerEdge: " << binEdges[0] 
@@ -1332,7 +1332,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1341,7 +1341,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdges))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the axis!" << endl;
 #endif
@@ -1349,7 +1349,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1358,18 +1358,18 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1389,7 +1389,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					       const IProfile1D & profile) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const IProfile1D & profile):" << endl;
   cout << "          "
        << "Create a new 1D profile histogram from an other 1D profile histogram" << endl << endl;
@@ -1410,7 +1410,7 @@ IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1418,7 +1418,7 @@ IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1427,18 +1427,18 @@ IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1467,7 +1467,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 						    double upperEdgeY,
 						    const std::string & options)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & path,const std::string & title,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D profile histogram" << endl << endl;
@@ -1494,7 +1494,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1502,7 +1502,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1511,18 +1511,18 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1553,7 +1553,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 						    double upperValue,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & path,const std::string & title,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,double lowerValue,double upperValue,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D profile histogram" << endl << endl;
@@ -1583,7 +1583,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1591,7 +1591,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1600,18 +1600,18 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1639,7 +1639,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & pathAndT
 						    double lowerEdgeY,
 						    double upperEdgeY) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & pathAndTitle,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY):" << endl;
   cout << "          "  
        << "Create a 2D profile histogram" << endl;
@@ -1649,7 +1649,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & pathAndT
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1670,7 +1670,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & pathAndT
 						    double lowerValue,
 						    double upperValue) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & pathAndTitle,int nBinsX,double lowerEdgeX,double upperEdgeX,int nBinsY,double lowerEdgeY,double upperEdgeY,double lowerValue,double upperValue):" << endl;
   cout << "          "  
        << "Create a 2D profile histogram" << endl;
@@ -1680,7 +1680,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & pathAndT
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1698,7 +1698,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 						    const std::vector<double>  & binEdgesY,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & path,const std::string & title,const std::vector<double>  & binEdgesX,const std::vector<double>  & binEdgesY,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D profile histogram with variable binning" << endl << endl;
@@ -1714,7 +1714,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (binEdgesX.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of x-axis to small!" << endl;
 #endif
@@ -1723,14 +1723,14 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (binEdgesY.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges of y-axis to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << binEdgesX.size() 
        << " lowerEdgeX: " << binEdgesX[0] 
@@ -1756,7 +1756,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1765,7 +1765,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdgesX))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the x-axis!" << endl;
 #endif
@@ -1774,7 +1774,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdgesY))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the y-axis!" << endl;
 #endif
@@ -1782,7 +1782,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1791,18 +1791,18 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1827,7 +1827,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 						    double upperValue,
 						    const std::string & options) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createProfile2D(const std::string & path,const std::string & title,const std::vector<double>  & binEdgesX,const std::vector<double>  & binEdgesY,double lowerValue,double upperValue,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D profile histogram with variable binning" << endl << endl;
@@ -1843,7 +1843,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (binEdgesX.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges ov x-axis to small!" << endl;
 #endif
@@ -1852,14 +1852,14 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (binEdgesY.size() <2) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "
 	   << "number of specified bin edges ov y-axis to small!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << binEdgesX.size() 
        << " lowerEdgeX: " << binEdgesX[0] 
@@ -1888,7 +1888,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1897,7 +1897,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdgesX))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the x-axis!" << endl;
 #endif
@@ -1906,7 +1906,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   if (!RAIDAUtil::isOrdered(binEdgesY))
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "Bin edges must be ordered along the y-axis!" << endl;
 #endif
@@ -1914,7 +1914,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1923,18 +1923,18 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -1954,7 +1954,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					       const IProfile2D & profile) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const IProfile2D & profile):" << endl;
   cout << "          "
        << "Create a new 2D profile histogram from an other 2D profile histogram" << endl << endl;
@@ -1979,7 +1979,7 @@ IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -1987,7 +1987,7 @@ IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -1996,18 +1996,18 @@ IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2030,7 +2030,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
 						int nMax,
 						const std::string & options)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud1D(const std::string & path,const std::string & title,int nMax,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 1D cloud" << endl << endl;
@@ -2051,7 +2051,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2059,7 +2059,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2068,18 +2068,18 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2099,7 +2099,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
 
 ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & pathAndTitle) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud1D(const std::string & pathAndTitle):" << endl;
   cout << "          " 
        << "Create a new 1D cloud" << endl;
@@ -2109,7 +2109,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & pathAndTitle
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2121,7 +2121,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & pathAndTitle
 ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					     const ICloud1D & cloud) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const ICloud1D & cloud):" << endl;
   cout << "          "
        << "Create a new 1D cloud from an other 1D cloud" << endl << endl;
@@ -2140,7 +2140,7 @@ ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2148,7 +2148,7 @@ ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2157,18 +2157,18 @@ ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2191,7 +2191,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
 			          int nMax,
 			          const std::string & options)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud2D(const std::string & path,const std::string & title,int nMax,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 2D cloud" << endl << endl;
@@ -2212,7 +2212,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2220,7 +2220,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2229,18 +2229,18 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2258,7 +2258,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
 
 ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & pathAndTitle) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud2D(const std::string & pathAndTitle):" << endl;
   cout << "          " 
        << "Create a new 2D cloud" << endl;
@@ -2269,7 +2269,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & pathAndTitle
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2281,7 +2281,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & pathAndTitle
 ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					     const ICloud2D & cloud)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const ICloud2D & cloud):" << endl;
   cout << "          "
        << "Create a new 2D cloud from an other 2D cloud" << endl << endl;
@@ -2300,7 +2300,7 @@ ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2308,7 +2308,7 @@ ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2317,18 +2317,18 @@ ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2351,7 +2351,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
 						int nMax,
 						const std::string & options)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud3D(const std::string & path,const std::string & title,int nMax,const std::string & options):" << endl;
   cout << "          "
        << "Create a new 3D cloud" << endl << endl;
@@ -2372,7 +2372,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2380,7 +2380,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2389,18 +2389,18 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2418,7 +2418,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
 
 ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & pathAndTitle) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCloud3D(const std::string & pathAndTitle):" << endl;
   cout << "          " 
        << "Create a new 3D cloud" << endl;
@@ -2429,7 +2429,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & pathAndTitle
   PathName thePath(pathAndTitle);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2441,7 +2441,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & pathAndTitle
 ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
 					     const ICloud3D & cloud) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::createCopy(const std::string & path,const ICloud3D & cloud):" << endl;
   cout << "          "
        << "Create a new 3D cloud from an other 3D cloud" << endl << endl;
@@ -2460,7 +2460,7 @@ ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a Cloud!" << endl;
 #endif
@@ -2468,7 +2468,7 @@ ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -2477,18 +2477,18 @@ ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the cloud is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -2510,7 +2510,7 @@ IHistogram1D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram1D & hist1,
 					  const IHistogram1D & hist2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::add(const std::string & path,const IHistogram1D & hist1,const IHistogram1D & hist2):" << endl;
   cout << "          " 
        << "Add two 1D histograms (hist1 + hist2)" << endl << endl;
@@ -2528,14 +2528,14 @@ IHistogram1D * IHistogramFactoryROOT::add(const std::string & path,
 
   if ( hist1.axis().bins() != hist2.axis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of bins, can not add them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << hist1.axis().bins() << endl;
   cout << "          " 
@@ -2557,7 +2557,7 @@ IHistogram1D * IHistogramFactoryROOT::subtract(const std::string & path,
 					       const IHistogram1D & hist1,
 					       const IHistogram1D & hist2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::subtract(const std::string & path,const IHistogram1D & hist1,const IHistogram1D & hist2):" << endl;
   cout << "          " 
        << "Subtract two 1D histograms (hist1 - hist2)" << endl << endl;
@@ -2575,14 +2575,14 @@ IHistogram1D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if ( hist1.axis().bins() != hist2.axis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of bins, can not subtract them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << hist1.axis().bins() << endl;
   cout << "          " 
@@ -2605,7 +2605,7 @@ IHistogram1D * IHistogramFactoryROOT::multiply(const std::string & path,
 			const IHistogram1D & hist1,
 			const IHistogram1D & hist2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::multiply(const std::string & path,const IHistogram1D & hist1,const IHistogram1D & hist2):" << endl;
   cout << "          " 
        << "Multiply two 1D histograms (hist1 * hist2)" << endl << endl;
@@ -2623,14 +2623,14 @@ IHistogram1D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if ( hist1.axis().bins() != hist2.axis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of bins, can not multiply them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << hist1.axis().bins() << endl;
   cout << "          " 
@@ -2653,7 +2653,7 @@ IHistogram1D * IHistogramFactoryROOT::divide(const std::string & path,
 		      const IHistogram1D & hist1,
 		      const IHistogram1D & hist2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::divide(const std::string & path,const IHistogram1D & hist1,const IHistogram1D & hist2):" << endl;
   cout << "          " 
        << "Divide two 1D histograms (hist1 / hist2)" << endl << endl;
@@ -2671,14 +2671,14 @@ IHistogram1D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if ( hist1.axis().bins() != hist2.axis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of bins, can not divide them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBins: " << hist1.axis().bins() << endl;
   cout << "          " 
@@ -2701,7 +2701,7 @@ IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram2D & hist1,
 					  const IHistogram2D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::add(const std::string & path,const IHistogram2D & hist1,const IHistogram2D & hist2):" << endl;
   cout << "          " 
        << "Add two 2D histograms (hist1 + hist2)" << endl << endl;
@@ -2719,7 +2719,7 @@ IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not add them!" << endl;
 #endif
@@ -2728,14 +2728,14 @@ IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not add them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() << endl;
@@ -2762,7 +2762,7 @@ IHistogram2D * IHistogramFactoryROOT::subtract(const std::string & path,
 			const IHistogram2D & hist1,
 			const IHistogram2D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::subtract(const std::string & path,const IHistogram2D & hist1,const IHistogram2D & hist2):" << endl;
   cout << "          " 
        << "Subtract two 2D histograms (hist1 - hist2)" << endl << endl;
@@ -2780,7 +2780,7 @@ IHistogram2D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not subtract them!" << endl;
 #endif
@@ -2789,14 +2789,14 @@ IHistogram2D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not subtract them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() << endl;
@@ -2824,7 +2824,7 @@ IHistogram2D * IHistogramFactoryROOT::multiply(const std::string & path,
 					       const IHistogram2D & hist1,
 					       const IHistogram2D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::multiply(const std::string & path,const IHistogram2D & hist1,const IHistogram2D & hist2):" << endl;
   cout << "          " 
        << "Multiply two 2D histograms (hist1 * hist2)" << endl << endl;
@@ -2842,7 +2842,7 @@ IHistogram2D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not multiply them!" << endl;
 #endif
@@ -2851,14 +2851,14 @@ IHistogram2D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not multiply them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() << endl;
@@ -2886,7 +2886,7 @@ IHistogram2D * IHistogramFactoryROOT::divide(const std::string & path,
 					     const IHistogram2D & hist1,
 					     const IHistogram2D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::divide(const std::string & path,const IHistogram2D & hist1,const IHistogram2D & hist2):" << endl;
   cout << "          " 
        << "Divide two 2D histograms (hist1 / hist2)" << endl << endl;
@@ -2904,7 +2904,7 @@ IHistogram2D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not divide them!" << endl;
 #endif
@@ -2913,14 +2913,14 @@ IHistogram2D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not divide them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() << endl;
@@ -2948,7 +2948,7 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
 					  const IHistogram3D & hist1,
 					  const IHistogram3D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::add(const std::string & path,const IHistogram3D & hist1,const IHistogram3D & hist2):" << endl;
   cout << "          " 
        << "Add two 3D histograms (hist1 + hist2)" << endl << endl;
@@ -2966,7 +2966,7 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not add them!" << endl;
 #endif
@@ -2975,7 +2975,7 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not add them!" << endl;
 #endif
@@ -2984,14 +2984,14 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
 
   if (hist1.zAxis().bins() != hist2.zAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of z-bins, can not add them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() 
@@ -3025,7 +3025,7 @@ IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
 					       const IHistogram3D & hist1,
 					       const IHistogram3D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::subtract(const std::string & path,const IHistogram3D & hist1,const IHistogram3D & hist2):" << endl;
   cout << "          " 
        << "Subtract two 3D histograms (hist1 - hist2)" << endl << endl;
@@ -3043,7 +3043,7 @@ IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not subtract them!" << endl;
 #endif
@@ -3052,7 +3052,7 @@ IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not subtract them!" << endl;
 #endif
@@ -3061,14 +3061,14 @@ IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
 
   if (hist1.zAxis().bins() != hist2.zAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of z-bins, can not subtract them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() 
@@ -3101,7 +3101,7 @@ IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
 					       const IHistogram3D & hist1,
 					       const IHistogram3D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::multiply(const std::string & path,const IHistogram3D & hist1,const IHistogram3D & hist2):" << endl;
   cout << "          " 
        << "Multiply two 3D histograms (hist1 * hist2)" << endl << endl;
@@ -3119,7 +3119,7 @@ IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not multiply them!" << endl;
 #endif
@@ -3128,7 +3128,7 @@ IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not multiply them!" << endl;
 #endif
@@ -3137,14 +3137,14 @@ IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
 
   if (hist1.zAxis().bins() != hist2.zAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of z-bins, can not multiply them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() 
@@ -3177,7 +3177,7 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
 					     const IHistogram3D & hist1,
 					     const IHistogram3D & hist2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::divide(const std::string & path,const IHistogram3D & hist1,const IHistogram3D & hist2):" << endl;
   cout << "          " 
        << "Divide two 3D histograms (hist1 / hist2)" << endl << endl;
@@ -3195,7 +3195,7 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if (hist1.xAxis().bins() != hist2.xAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of x-bins, can not divide them!" << endl;
 #endif
@@ -3204,7 +3204,7 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if (hist1.yAxis().bins() != hist2.yAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of y-bins, can not divide them!" << endl;
 #endif
@@ -3213,14 +3213,14 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
 
   if (hist1.zAxis().bins() != hist2.zAxis().bins() ) 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "hist1 and hist2 have different number of z-bins, can not divide them!" << endl;
 #endif
       return NULL;
     }
 
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "          " 
        << "nBinsX: " << hist1.xAxis().bins() 
        << " nBinsY: " << hist1.yAxis().bins() 
@@ -3252,7 +3252,7 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
 IHistogram1D * IHistogramFactoryROOT::projectionX(const std::string & path,
 						  const IHistogram2D & hist)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::projectionX(const std::string & path,const IHistogram2D & hist):" << endl;
   cout << "          "
        << "Create a new 1D histogram by projecting a 2D histogram along its x axis." << endl << endl;
@@ -3265,7 +3265,7 @@ IHistogram1D * IHistogramFactoryROOT::projectionX(const std::string & path,
 IHistogram1D * IHistogramFactoryROOT::projectionY(const std::string & path,
 						  const IHistogram2D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::projectionY(const std::string & path,const IHistogram2D & hist):" << endl;
   cout << "          "
        << "Create a new 1D histogram by projecting a 2D histogram along its y axis." << endl << endl;
@@ -3279,7 +3279,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
 					     const IHistogram2D & hist,
 					     int index)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceX(const std::string & path,const IHistogram2D & hist,int index):" << endl;
   cout << "          "
        << "Create a new 1D histogram by slicing an 2D histogram parallel to the y axis at a given bin." << endl << endl;
@@ -3293,7 +3293,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
 					     const IHistogram2D & hist,
 					     int index) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceY(const std::string & path,const IHistogram2D & hist,int index):" << endl;
   cout << "          "
        << "Create a new 1D histogram by slicing an 2D histogram parallel to the x axis at a given bin." << endl << endl;
@@ -3308,7 +3308,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
 		      int index1,
 		      int index2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceX(const std::string & path,const IHistogram2D & hist,int index1,int index2):" << endl;
   cout << "          "
        << "Create a new 1D histogram by slicing an 2D histogram parallel to the y axis between two bins (inclusive)." << endl << endl;
@@ -3327,7 +3327,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -3335,7 +3335,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -3344,18 +3344,18 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -3379,7 +3379,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
 		      int index1,
 		      int index2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceY(const std::string & path,const IHistogram2D & hist,int index1,int index2):" << endl;
   cout << "          "
        << "Create a new 1D histogram by slicing an 2D histogram parallel to the x axis between two bins (inclusive)." << endl << endl;
@@ -3398,7 +3398,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -3406,7 +3406,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -3415,18 +3415,18 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -3447,7 +3447,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
 IHistogram2D * IHistogramFactoryROOT::projectionXY(const std::string & path,
 						   const IHistogram3D & hist)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::projectionXY(const std::string & path,const IHistogram3D & hist):" << endl;
   cout << "          "
        << "Create a new 2D histogram by projecting a 3D histogram on the xy plane." << endl << endl;
@@ -3460,7 +3460,7 @@ IHistogram2D * IHistogramFactoryROOT::projectionXY(const std::string & path,
 IHistogram2D * IHistogramFactoryROOT::projectionXZ(const std::string & path,
 						   const IHistogram3D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::projectionXZ(const std::string & path,const IHistogram3D & hist):" << endl;
   cout << "          "
        << "Create a new 2D histogram by projecting a 3D histogram on the xz plane." << endl << endl;
@@ -3473,7 +3473,7 @@ IHistogram2D * IHistogramFactoryROOT::projectionXZ(const std::string & path,
 IHistogram2D * IHistogramFactoryROOT::projectionYZ(const std::string & path,
 						   const IHistogram3D & hist) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::projectionYZ(const std::string & path,const IHistogram3D & hist):" << endl;
   cout << "          "
        << "Create a new 2D histogram by projecting a 3D histogram on the yz plane." << endl << endl;
@@ -3488,7 +3488,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
 					      int index1,
 					      int index2)
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceXY(const std::string & path,const IHistogram3D & hist,int index1,int index2):" << endl;
   cout << "          "
        << "Create a new 2D histogram by slicing an 3D histogram perpendicular to the Z axis between two bins (inclusive)." << endl << endl;
@@ -3507,7 +3507,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -3515,7 +3515,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -3524,18 +3524,18 @@ IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -3558,7 +3558,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXZ(const std::string & path,
 					      int index1,
 					      int index2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceXZ(const std::string & path,const IHistogram3D & hist,int index1,int index2):" << endl;
   cout << "          "
        << "Create a new 2D histogram by slicing an 3D histogram perpendicular to the Y axis between two bins (inclusive)." << endl << endl;
@@ -3577,14 +3577,14 @@ IHistogram2D * IHistogramFactoryROOT::sliceXZ(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
       return NULL;
     }
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -3593,18 +3593,18 @@ IHistogram2D * IHistogramFactoryROOT::sliceXZ(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
@@ -3627,7 +3627,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
 					      int index1,
 					      int index2) 
 {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "IHistogramFactoryROOT::sliceYZ(const std::string & path,const IHistogram3D & hist,int index1,int index2):" << endl;
   cout << "          "
        << "Create a new 2D histogram by slicing an 3D histogram perpendicular to the X axis between two bins (inclusive)." << endl << endl;
@@ -3646,7 +3646,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
   PathName thePath(path);
   if (thePath.getName() == "") 
     {
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "No file specified: can not create a histogram!" << endl;
 #endif
@@ -3654,7 +3654,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
     }
 
   string thePWD = _usedTree->pwd();
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "original working directory: " << _usedTree->pwd() << endl;
 #endif
@@ -3663,18 +3663,18 @@ IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
     {
       if (!_usedTree->cd(thePath.getPath()) ) 
 	{
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
 	  cout << "          "  
 	       << "directory does not exist: " << thePath.getPath() << endl;
 #endif
 	  return NULL;
 	}
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
       cout << "          "  
 	   << "directory where the histogram is created: " << _usedTree->pwd() << endl;
 #endif
     }
-#ifdef USE_RAIDA_DEBUG_VERBOSE
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   else
     {
       cout << "          "  
