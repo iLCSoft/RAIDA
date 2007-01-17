@@ -50,9 +50,19 @@ IAnalysisFactory* AIDA_createAnalysisFactory(void)
     cout << "RAIDA creates additional histograms to write AIDA specific info to disk" << endl;
   else
     cout << "RAIDA only creates simple ROOT histograms" << endl;
-  // #ifdef USE_RAIDA_DEBUG_VERBOSE
+  // #ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
   cout << "Used ROOT Release: " << ROOT_RELEASE << endl; 
   // #endif
+#if defined(USE_RAIDA_DEBUG_VERBOSE_FACTORY)
+  cout << endl << "Debug mode activated:" << endl; 
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
+  cout << "          " 
+       << "writing additional information for Factories" << endl; 
+#endif
+#endif
+
+
+
   cout << "-------------------------------------------------------------------------------" << endl;
   cout << endl;
 
