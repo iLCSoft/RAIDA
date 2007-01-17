@@ -74,6 +74,7 @@ int main()
   IHistogram1D *myhistoo = myhistofactory->createHistogram1D("/ich/xxl","hi xxl",5,0,1);
   //  mytree->cd("/");
   ITuple *mytuple;
+  ITuple *mytuple1;
   vector<string> names,types;
   names.push_back("myd");
   types.push_back("D");
@@ -92,6 +93,9 @@ int main()
   //cout << "### Noch am LEBEN!!!" << endl;
   mytuple = mytuplefactory->create("/ich/mynt","my first ntuple",
 				   names,types,"");
+
+  mytuple1 = mytuplefactory->create("/ich/myntx","my first ntuplex",
+				    " D col1 , int col2 , col3 ","");
   mytuple->fill(0,11.1);
   mytuple->fill(1,(float)-11.2);
   mytuple->fill(2,113);
