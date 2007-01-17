@@ -1,11 +1,11 @@
 ### For testing only:
-export RAIDA_DEBUG_VERBOSE=1
+export RAIDA_DEBUG_VERBOSE_FACTORY=1
 ###########################################################
 #
 # Example GNUmakefile to build an Application with Marlin
 #
 # @author Frank Gaede
-# @version $Id: GNUmakefile,v 1.4 2007-01-16 15:59:33 tkraemer Exp $
+# @version $Id: GNUmakefile,v 1.5 2007-01-17 16:58:36 tkraemer Exp $
 #
 ###########################################################
 
@@ -72,8 +72,9 @@ AR = ar
 LIBS +=   -Wl,-whole-archive  -L $(INSTALL)  -l$(PROGNAME) -Wl,-no-whole-archive
 #--------------------------------------------------------------------------------------
 
-ifdef RAIDA_DEBUG_VERBOSE
- INCLUDE += -D USE_RAIDA_DEBUG_VERBOSE 
+ifdef RAIDA_DEBUG_VERBOSE_FACTORY
+# INCLUDE += -D USE_RAIDA_DEBUG_VERBOSE 
+ INCLUDE += -D USE_RAIDA_DEBUG_VERBOSE_FACTORY 
 endif
 
 INCLUDE +=  -I $(BASEDIR)/include
