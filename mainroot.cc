@@ -95,7 +95,7 @@ int main()
 				   names,types,"");
 
   mytuple1 = mytuplefactory->create("/ich/myntx","my first ntuplex",
-				    " D col1 , int col2 , col3 ","");
+				    " D col1 , int col2 , col3 , col4, I col5, col6, F col7","");
   mytuple->fill(0,11.1);
   mytuple->fill(1,(float)-11.2);
   mytuple->fill(2,113);
