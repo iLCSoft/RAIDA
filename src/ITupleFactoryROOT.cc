@@ -2,6 +2,9 @@
 #include <RAIDA/ITupleROOT.h>
 #include <RAIDA/ITreeROOT.h>
 #include <RAIDA/PathName.h>
+#include <RAIDA/RAIDAUtil.h>
+#include <vector>
+#include <string>
 
 #include <iostream>
 
@@ -44,7 +47,7 @@ ITuple * ITupleFactoryROOT::create(const std::string & path,
        << "no. of columns: " << columnNames.size() << endl; 
   cout << "          "
        << "column names (type): ";
-  for (int i = 0; i<= columnNames.size()-1;i++)
+  for (int i = 0; i<= (int)columnNames.size()-1;i++)
     cout << columnNames[i] << " (" << columnType[i] << ") ";
   cout << endl;
   cout << "          " << "options: " << options << endl; 
@@ -114,30 +117,44 @@ ITuple * ITupleFactoryROOT::create(const string & path,
 
   vector<string> columnNames;
   vector<string> columnType;
+  vector<string> alltypeandnames = RAIDAUtil::splitIntoWords(columns,',');
 
-  string type;
-  int nl = columns.length();
-  int ix=0;
-  while (ix<nl) {
-    string name;
-    string::size_type pos = columns.find (",",ix);
-    if (pos==string::npos) pos=nl;
-    name=columns.substr(ix,pos-ix);
-    for (;;) {
-      string::size_type isp = name.find(" ",0);
-      if (isp==0) name=name.substr(1);
-      else if (isp==string::npos) break;
-      else {
-	type=name.substr(0,isp);
-	name=name.substr(isp+1);
-	break;
-      }
-    }
-    ix=pos+1;
-    //    cout<<"// "<<type<<" "<<name<<";"<<endl;
-    columnType.push_back(type);
-    columnNames.push_back(name);
-  }
+  for (int i=0; i<alltypeandnames.size(); i++)
+    {
+      vector<string> typeandname = RAIDAUtil::splitIntoWords(alltypeandnames[i],' ');
+
+      if (typeandname.size() > 2)
+	{
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
+      cout << "          " << "Can not create a tuple: "
+	   << "To many parameters (" << typeandname.size() 
+	   << ") to describe column no. " << i << ": " 
+	   << "Can not create a tuple!" << endl;
+#endif
+	  return NULL;
+	}
+
+      if (i==0 && typeandname.size() == 1)
+	{
+#ifdef USE_RAIDA_DEBUG_VERBOSE_FACTORY
+      cout << "          " << "Can not create a tuple: "
+	   << "There is no type or name specified for column 1: "
+	   << "Can not create a tuple!" << endl; 
+#endif
+	  return NULL;
+	}
+
+      if (typeandname.size() == 1)
+	{
+	  columnType.push_back(columnType[i-1]);
+	  columnNames.push_back(typeandname[0]);
+	}
+      else 
+	{
+	  columnType.push_back(typeandname[0]);
+	  columnNames.push_back(typeandname[1]);
+	}
+    } // end of for-loop
 
   if (columnNames.size() != columnType.size()) 
     {
