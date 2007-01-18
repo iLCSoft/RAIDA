@@ -3,6 +3,7 @@
 #include <AIDA/IAxis.h>
 #include <iostream>
 #include <vector>
+#include <string>
 
 using namespace AIDA ;
 
@@ -40,7 +41,7 @@ bool RAIDAUtil::isOrdered(std::vector<double> x)
 {
   if (x[0]<x[x.size()-1])
     {
-      for (int i=0 ; i<=x.size()-2 ; i++)
+      for (int i=0 ; i<=(int)x.size()-2 ; i++)
         {
           if (x[i]>=x[i+1])
             {
@@ -50,7 +51,7 @@ bool RAIDAUtil::isOrdered(std::vector<double> x)
     }
   else if (x[0]>x[x.size()-1])
     {
-      for (int i=0 ; i<=x.size()-2 ; i++)
+      for (int i=0 ; i<=(int)x.size()-2 ; i++)
         {
           if (x[i]<=x[i+1])
             {
@@ -64,3 +65,48 @@ bool RAIDAUtil::isOrdered(std::vector<double> x)
     }
   return true;
 }
+
+std::string RAIDAUtil::removeWidespaceLeft(std::string s)
+{
+  while (s.length() > 0)
+    {
+      if (s[0]==' ') s.erase(0,1);
+      else break;
+    }
+  return s;
+}
+
+std::string RAIDAUtil::removeWidespaceRight(std::string s)
+{
+  while (s.length() > 0)
+    {
+      if (s[s.length()-1] == ' ') s.erase(s.length()-1,1);
+      else break;
+    }
+  return s;
+}
+
+std::string RAIDAUtil::removeWidespaceLeftRight(std::string s)
+{
+  return removeWidespaceLeft( removeWidespaceRight(s) );
+}
+
+std::vector<std::string> RAIDAUtil::splitIntoWords(std::string s,char sep)
+{
+  s = removeWidespaceLeftRight(s);
+  std::vector<std::string> words;
+
+  while (s.length() > 0)
+    {
+      std::string word;
+      std::string::size_type pos = s.find(sep);
+      if (pos==std::string::npos) pos=s.length();
+      word = s.substr(0,pos);
+      s.erase(0,pos+1);
+      words.push_back(removeWidespaceRight(word));
+      s = removeWidespaceLeft(s);
+    }
+
+  return words;
+}
+
