@@ -1,3 +1,87 @@
+2007-01-18 12:07  tkraemer
+
+	* src/ITupleFactoryROOT.cc: Specifying the names and types of the
+	  column of a n-tuple in a string, now all names without type get
+	  the type specified before.
+
+2007-01-18 12:04  tkraemer
+
+	* mainroot.cc: Modifications for testing changes.
+
+2007-01-18 12:04  tkraemer
+
+	* include/RAIDA/RAIDAUtil.h, src/RAIDAUtil.cc: 3 new functions to
+	  remove wide spaces from the left and/or right side of a string.
+	  New function to split a string into parts separated by a
+	  separation-character.
+
+2007-01-17 18:02  tkraemer
+
+	* src/: IAnalysisFactoryROOT.cc, IHistogramFactoryROOT.cc,
+	  ITreeFactoryROOT.cc, ITupleROOT.cc: change name of environment
+	  variable to switch on debug information to split information
+	  sources.
+
+2007-01-17 18:00  tkraemer
+
+	* src/AIDA_createAnalysisFactory.cc: print a message if any kind of
+	  debug information is turned on.
+
+2007-01-17 17:59  tkraemer
+
+	* src/ITupleFactoryROOT.cc: output to be printed to the screen if
+	  debug information is switched on.
+
+2007-01-17 17:58  tkraemer
+
+	* src/GNUmakefile: modifications to allow more than one debug
+	  level.
+
+2007-01-17 17:57  tkraemer
+
+	* mainroot.cc: modifications to test the debug messages in the
+	  factories.
+
+2007-01-16 16:59  tkraemer
+
+	* src/: GNUmakefile, ITreeFactoryROOT.cc: print additional
+	  information in debug mode.
+
+2007-01-12 13:54  tkraemer
+
+	* src/: GNUmakefile, IHistogramFactoryROOT.cc: The class
+	  IHistogramFactory can write debug information to stdout if the
+	  environment variable RAIDA_DEBUG_VERBOSE is set.
+
+2007-01-11 10:03  tkraemer
+
+	* src/IAnalysisFactoryROOT.cc: Add cout statements to print
+	  additional information to the screen if the debug level is
+	  invoked  by setting the environment variable
+	  "RAIDA_DEBUG_VERBOSE=1"
+
+2007-01-11 09:57  tkraemer
+
+	* src/AIDA_createAnalysisFactory.cc: ROOT version used is now
+	  printed if RAIDA is invoked.
+
+2007-01-11 09:54  tkraemer
+
+	* include/RAIDA/RAIDAUtil.h, src/RAIDAUtil.cc: first implementation
+	  of function isordered(std::vector<double>) to check if a the
+	  values in a vector are orderd according to their magnitude or
+	  not.
+
+2007-01-04 17:24  tkraemer
+
+	* include/RAIDA/IPlotterRegionROOT.h, src/IPlotterRegionROOT.cc:
+	  Add dummy version of the class "IPlotterRegion".
+
+2007-01-03 18:23  tkraemer
+
+	* ChangeLog: Provide an updated version of the ChangeLog. using the
+	  "cvs2cl.pl" script.
+
 2007-01-03 18:18  tkraemer
 
 	* include/RAIDA/IFitFactoryROOT.h, src/IFitFactoryROOT.cc: Add
