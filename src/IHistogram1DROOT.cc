@@ -10,6 +10,7 @@
 #include <TDirectory.h>
 #include <string>
 #include <vector>
+#include <iomanip>
 
 using namespace AIDA ;
 using namespace std;
@@ -185,7 +186,6 @@ bool IHistogram1DROOT::fill(double x, double weight)
   _histogram->Fill((Axis_t)x,(Stat_t)weight);
   _histogramAIDA->Fill((Axis_t)x,(Stat_t)1.);
   return true;
-
 }
 
 // ----------------------------------------------------------------------------
@@ -458,4 +458,67 @@ bool IHistogram1DROOT::divide(const IHistogram1D & hist)
   _histogramAIDA->Divide(localhist->_histogramAIDA);
 
   return true;
+}
+
+void IHistogram1DROOT::printContents() const 
+{
+  int colWidth = 10;
+
+  cout << "*******************************************************************************" << endl;
+  cout << endl 
+       << "Contents of 1D histogram:" << endl  
+       << "------------------------" << endl << endl; 
+  cout << "title:              " << title() << endl; 
+  cout << "range:              " 
+       << "min: " << axis().lowerEdge()
+       << ", max: " << axis().upperEdge() 
+       << ", nBins: " << axis().bins() ;
+  if (axis().isFixedBinning()) cout << " (fixed " ;
+  else cout << " (variable " ;
+  cout << "binning)" << endl; 
+  cout << "entries:            " 
+       << "in-range:  " << entries() << endl; 
+  cout << "                    " 
+       << "UNDERFLOW: " << (int)_histogramAIDA->GetBinContent(0) 
+       << " OVERFLOW: " << _histogramAIDA->GetBinContent( _histogramAIDA->GetNbinsX() + 1) 
+       << " (total: " << extraEntries()<< ")" << endl; 
+  cout << "                    " 
+       << "total:     " << allEntries() << endl; 
+  cout << "sum of bin heights: " 
+       << "in-range:  " << sumBinHeights() << endl; 
+  cout << "                    " 
+       << "UNDERFLOW: " << (double)_histogram->GetBinContent(0)
+       << " OVERFLOW: " << (double)_histogram->GetBinContent( _histogram->GetNbinsX() + 1) 
+       << " (total: " << sumExtraBinHeights() << ")" << endl; 
+  cout << "                    " 
+       << "sum:       " << sumAllBinHeights()<< endl; 
+  cout << "bin height:         " << "minimum:   " << minBinHeight()
+       << " maximum: " << maxBinHeight() << endl;
+  cout << "statistics:         " 
+       << "mean: " << mean() 
+       << " RMS: " << rms() << endl;
+  cout << endl; 
+  cout << "bin contents:" << endl 
+       << "------------" << endl << endl;
+  cout << "     binID | "
+       << "     low edge | "
+       << "   entries | "
+       << "  bin mean | " 
+       << "     hight | " 
+       << "     error" << endl; 
+  cout << "------------------------------------------------------------------------------" << endl;
+
+  for (int i=IAxis::UNDERFLOW_BIN; i<axis().bins(); i++)
+    {
+      cout << setw(colWidth) << i << " | " ;
+      cout << setw(colWidth+3) << axis().binLowerEdge(i) << " | " ;
+      cout << setw(colWidth) << binEntries(i) << " | " 
+	   << setw(colWidth) << binMean(i) << " | " 
+	   << setw(colWidth) << binHeight(i) << " | " 
+	   << setw(colWidth) << binError(i) << endl;
+    }
+  cout << "------------------------------------------------------------------------------" << endl;
+
+
+  cout << "*******************************************************************************" << endl;
 }

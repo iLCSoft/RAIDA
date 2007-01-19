@@ -18,7 +18,7 @@ namespace AIDA {
  * User level interface to 1D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram1DROOT.h,v 1.10 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IHistogram1DROOT.h,v 1.11 2007-01-19 14:34:20 tkraemer Exp $
  */
  
 class IHistogram1DROOT : public IHistogram1D {
@@ -253,6 +253,11 @@ public:
   virtual bool multiply(const IHistogram1D & hist) ;
   virtual bool divide(const IHistogram1D & hist) ;
 
+  /** Print out the contents of a histogram to the screen.
+   * This method is made for debugging purposes. It is not part of the
+   * AIDA Interface!
+   */
+  virtual void printContents() const ;
 
 protected:
 
