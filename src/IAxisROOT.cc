@@ -1,4 +1,5 @@
 #include <RAIDA/IAxisROOT.h> 
+#include <RAIDA/RAIDAUtil.h>
 #include <iostream>
 #include <TAxis.h>
 #include <float.h>
@@ -45,20 +46,21 @@ int IAxisROOT::bins() const
 double IAxisROOT::binLowerEdge(int index) const 
 {
   // check if index is in range
-  if (index <= 0) 
+  if (index <= IAxis::UNDERFLOW_BIN) 
     return -DBL_MAX;
-  if (index > _axis->GetNbins() ) 
+  if (index >= _axis->GetNbins() || index == IAxis::OVERFLOW_BIN) 
     return (double)_axis->GetBinUpEdge( _axis->GetNbins() );
-  return (double)_axis->GetBinLowEdge( index );
+  return (double)_axis->GetBinLowEdge( RAIDAUtil::binIndexAIDA2ROOT(index,bins()) );
 }
 
 double IAxisROOT::binUpperEdge(int index) const 
 {
   // check if index is in range
-  if (index <= 0) 
+  if (index <= IAxis::UNDERFLOW_BIN)
     return (double)_axis->GetBinLowEdge( 1 );
-  if (index > _axis->GetNbins() ) return DBL_MAX;
-  return (double)_axis->GetBinUpEdge( index );
+  if (index >= _axis->GetNbins() || index == IAxis::OVERFLOW_BIN)
+    return DBL_MAX;
+  return (double)_axis->GetBinUpEdge( RAIDAUtil::binIndexAIDA2ROOT(index,bins()) );
 }
 
 double IAxisROOT::binWidth(int index) const 
