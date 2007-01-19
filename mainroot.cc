@@ -1,4 +1,6 @@
 // #include <RAIDA/utilROOT.h>
+#include <stdlib.h>
+#include <time.h>
 #include <RAIDA/LeafPoint.h>
 #include <TH1F.h>
 #include <TH1D.h>
@@ -54,7 +56,7 @@ int main()
   mytree->mkdir("ich");
   mytree->mkdir("du");
   mytree->mkdir("er");
-  IHistogram1D *myhisto = myhistofactory->createHistogram1D("/x1","hi1",5,0,1);
+  IHistogram1D *myhisto = myhistofactory->createHistogram1D("/x1","hi1",15,0,100);
   ICloud3D *cl1, *cl2, *cl3, *cl4, *cl5;
   ICloud1D *cl10,*cl11;
   ICloud2D *cl20,*cl21;
@@ -90,7 +92,6 @@ int main()
   types.push_back("char");
   names.push_back("myb");
   types.push_back("bool");
-  //cout << "### Noch am LEBEN!!!" << endl;
   mytuple = mytuplefactory->create("/ich/mynt","my first ntuple",
 				   names,types,"");
 
@@ -103,7 +104,6 @@ int main()
   mytuple->fill(4,(long)115);
   mytuple->fill(5,'b');
   mytuple->fill(6,true);
-  cout << "### Spalte mit float: " << mytuple->getFloat(1) << endl;
   mytuple->addRow();
 
     for (int i = 0; i<490; i++)
@@ -210,7 +210,16 @@ int main()
   myhi1->fill(10.,0.4,0.5);
   myhi1->fill(10.,0.7,0.5);
   myhi1->fill(10.,10.,0.5);
-
+  srand(time(NULL));
+  cout << "### vor cast " << RAND_MAX << endl;
+  for (int j=0;j<1000000;j++)
+    {
+      double dd = rand() % 100 ;
+      //    cout << "// rnd: " << dd << endl; 
+      myhisto->fill(dd);
+    }
+  dynamic_cast<IHistogram1DROOT*>(myhisto)->printContents();
+  cout << "### nach print" << endl; 
   myhi2->fill(-20,-20,0.5);
   myhi2->fill(-20,0.3,0.5);
   myhi2->fill(-20,0.6,0.5);
