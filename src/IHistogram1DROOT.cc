@@ -168,7 +168,6 @@ IHistogram1DROOT::IHistogram1DROOT(const std::string & name,
       else 
 	dynamic_cast<IAxisROOT*>(_xAxis)->setVariableBinning() ;
     }
-  //  cout << "### histo da? " << _histogram->GetBinContent(1) << endl; 
 }
 
 bool IHistogram1DROOT::fill(double x, double weight)

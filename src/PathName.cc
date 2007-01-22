@@ -15,11 +15,6 @@ PathName::PathName()
 PathName::PathName(string rawName)
 {
   setPathName(rawName);
-  //  cout << "%" << rawName << "%" << endl;
-  //  cout << "%" << _rawPathName << "%" << endl;
-  //  for (unsigned i = 0; i<_names.size(); i++)
-  //    cout << _names[i] << endl;
-
 }
 
 void PathName::setPathName(string rawName)

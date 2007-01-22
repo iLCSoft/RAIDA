@@ -149,8 +149,6 @@ IHistogram2DROOT::IHistogram2DROOT(const std::string & name,
       hist._histogramAIDABinMeanX->GetZaxis()->SetRange(index1ROOT,index2ROOT);
       hist._histogramAIDABinMeanY->GetZaxis()->SetRange(index1ROOT,index2ROOT);
 
-      cout << "### range of histo: " << hist._histogram->GetZaxis()->GetFirst() 
-	   << " " << hist._histogram->GetZaxis()->GetLast() << endl;
       _histogram = (TH2D*)hist._histogram->Project3D("xye");
       _histogramAIDA = (TH2D*)hist._histogramAIDA->Project3D("xye");
       _histogramAIDABinMeanX = (TH2D*)hist._histogramAIDABinMeanX->Project3D("xye");
