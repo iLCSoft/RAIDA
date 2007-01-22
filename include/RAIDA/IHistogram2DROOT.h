@@ -17,7 +17,7 @@ namespace AIDA {
  * User level interface to 2D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram2DROOT.h,v 1.8 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IHistogram2DROOT.h,v 1.9 2007-01-22 16:35:27 tkraemer Exp $
  */
  
 class IHistogram2DROOT : public IHistogram2D {
@@ -351,6 +351,12 @@ public:
      *
      */
   virtual bool scale(double scaleFactor) ;
+
+  /** Print out the contents of a histogram to the screen.
+   * This method is made for debugging purposes. It is not part of the
+   * AIDA Interface!
+   */
+  virtual void printContents() const ;
 
 protected:
 
