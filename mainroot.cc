@@ -183,6 +183,7 @@ int main()
 
 // Add ... 
   IHistogram3D *myhi1 = myhistofactory->createHistogram3D("t1",3,0,1,3,0,1,1,0,1);
+  IHistogram3D *myddt = myhistofactory->createHistogram3D("myddt",3,0,1,3,0,1,3,0,1);
   IHistogram3D *myhi2 = myhistofactory->createHistogram3D("t2",3,0,1,3,0,1,1,0,1);
   IHistogram2D *myhii = myhistofactory->createHistogram2D("txy",3,0,1,3,0,1);
   myhi1->fill(-10.,-10.,0.5);
@@ -215,10 +216,17 @@ int main()
   for (int j=0;j<1000000;j++)
     {
       double dd = rand() % 100 ;
-      //    cout << "// rnd: " << dd << endl; 
+      double dda = 1.2*(double)(rand() % 100)/100. -0.1 ;
+      double ddb = 1.2*(double)(rand() % 100)/100. -0.1 ;
+      double ddc = 1.2*(double)(rand() % 100)/100. -0.1 ;
+      //      cout << "// rnd: " << dd << " " << dda << " "  << ddb << " "  << endl; 
       myhisto->fill(dd);
+      myhii->fill(dda,ddb);
+      myddt->fill(dda,ddb,ddc);
     }
   dynamic_cast<IHistogram1DROOT*>(myhisto)->printContents();
+  dynamic_cast<IHistogram2DROOT*>(myhii)->printContents();
+  dynamic_cast<IHistogram3DROOT*>(myddt)->printContents();
   cout << "### nach print" << endl; 
   myhi2->fill(-20,-20,0.5);
   myhi2->fill(-20,0.3,0.5);
