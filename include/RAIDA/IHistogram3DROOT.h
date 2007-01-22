@@ -16,7 +16,7 @@ namespace AIDA {
  * User level interface to 3D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram3DROOT.h,v 1.8 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IHistogram3DROOT.h,v 1.9 2007-01-22 16:36:22 tkraemer Exp $
  */
 
 class IHistogram3DROOT : public IHistogram3D {
@@ -415,6 +415,12 @@ public:
      *
      */
   virtual bool scale(double scaleFactor) ;
+
+  /** Print out the contents of a histogram to the screen.
+   * This method is made for debugging purposes. It is not part of the
+   * AIDA Interface!
+   */
+  virtual void printContents() const ;
 
 protected:
 

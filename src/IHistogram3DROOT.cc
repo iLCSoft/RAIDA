@@ -9,6 +9,7 @@
 #include <TH3D.h>
 #include <TDirectory.h>
 #include <string>
+#include <iomanip>
 
 using namespace AIDA ;
 using namespace std;
@@ -817,3 +818,115 @@ bool IHistogram3DROOT::divide(const IHistogram3D & hist)
   return true;
 }
 
+void IHistogram3DROOT::printContents() const 
+{
+  int colWidth = 10;
+
+  cout << "*******************************************************************************" << endl;
+  cout << endl 
+       << "Contents of 3D histogram:" << endl  
+       << "------------------------" << endl << endl; 
+  cout << "title:              " << title() << endl; 
+
+  cout << "x-range:            " 
+       << "min: " << xAxis().lowerEdge()
+       << ", max: " << xAxis().upperEdge() 
+       << ", nBins: " << xAxis().bins() ;
+  if (xAxis().isFixedBinning()) cout << " (fixed " ;
+  else cout << " (variable " ;
+  cout << "binning)" << endl; 
+  cout << "y-range:            " 
+       << "min: " << yAxis().lowerEdge()
+       << ", max: " << yAxis().upperEdge() 
+       << ", nBins: " << yAxis().bins() ;
+  if (yAxis().isFixedBinning()) cout << " (fixed " ;
+  else cout << " (variable " ;
+  cout << "binning)" << endl; 
+  cout << "z-range:            " 
+       << "min: " << zAxis().lowerEdge()
+       << ", max: " << zAxis().upperEdge() 
+       << ", nBins: " << zAxis().bins() ;
+  if (zAxis().isFixedBinning()) cout << " (fixed " ;
+  else cout << " (variable " ;
+  cout << "binning)" << endl; 
+
+  cout << "entries:            " 
+       << "in-range:  " << entries() << endl; 
+  cout << "                    " 
+       << "x-UNDERFLOW: " << binEntriesX(-2) 
+       << " x-OVERFLOW: " << binEntriesX(-1) << endl;
+  cout << "                    " 
+       << "y-UNDERFLOW: " << binEntriesY(-2) 
+       << " y-OVERFLOW: " << binEntriesY(-1) << endl; 
+  cout << "                    " 
+       << "z-UNDERFLOW: " << binEntriesZ(-2) 
+       << " z-OVERFLOW: " << binEntriesZ(-1)
+       << " (total: " << extraEntries() << ")" << endl; 
+  cout << "                    " 
+       << "total:     " << allEntries() << endl; 
+  cout << "sum of bin heights: " 
+       << "in-range:  " << sumBinHeights() << endl; 
+  cout << "                    " 
+       << "x-UNDERFLOW: " << binHeightX(-2)
+       << " x-OVERFLOW: " << binHeightX(-1) << endl;
+  cout << "                    " 
+       << "y-UNDERFLOW: " << binHeightY(-2)
+       << " y-OVERFLOW: " << binHeightY(-1) << endl; 
+  cout << "                    " 
+       << "z-UNDERFLOW: " << binHeightZ(-2)
+       << " z-OVERFLOW: " << binHeightZ(-1)
+       << " (total: " << sumExtraBinHeights() << ")" << endl; 
+  cout << "                    " 
+       << "sum:       " << sumAllBinHeights()<< endl; 
+  cout << "bin height:         " << "minimum:   " << minBinHeight()
+       << " maximum: " << maxBinHeight() << endl;
+  cout << "statistics:         " 
+       << "x-mean: " << meanX() 
+       << " x-RMS: " << rmsX() 
+       << " y-mean: " << meanY() 
+       << " y-RMS: " << rmsY() 
+       << " z-mean: " << meanZ() 
+       << " z-RMS: " << rmsZ() << endl;
+  cout << endl; 
+
+  cout << "bin contents:" << endl 
+       << "------------" << endl << endl;
+  cout << "   x-binID | "
+       << "   y-binID | "
+       << "   z-binID | "
+       << "   x-low edge | "
+       << "   y-low edge | "
+       << "   z-low edge | "
+       << "   entries | "
+       << "x-bin mean | " 
+       << "y-bin mean | " 
+       << "z-bin mean | " 
+       << "     hight | " 
+       << "     error" << endl; 
+  cout << "------------------------------------------------------------------------------" << endl;
+
+  for (int i=IAxis::UNDERFLOW_BIN; i<xAxis().bins(); i++)
+    {
+      for (int j=IAxis::UNDERFLOW_BIN; j<yAxis().bins(); j++)
+	{
+	  for (int k=IAxis::UNDERFLOW_BIN; k<zAxis().bins(); k++)
+	    {
+	      cout << setw(colWidth) << i << " | " ;
+	      cout << setw(colWidth) << j << " | " ;
+	      cout << setw(colWidth) << k << " | " ;
+	      cout << setw(colWidth+3) << xAxis().binLowerEdge(i) << " | " ;
+	      cout << setw(colWidth+3) << yAxis().binLowerEdge(j) << " | " ;
+	      cout << setw(colWidth+3) << zAxis().binLowerEdge(k) << " | " ;
+	      cout << setw(colWidth) << binEntries(i,j,k) << " | " 
+		   << setw(colWidth) << binMeanX(i,j,k) << " | " 
+		   << setw(colWidth) << binMeanY(i,j,k) << " | " 
+		   << setw(colWidth) << binMeanZ(i,j,k) << " | " 
+		   << setw(colWidth) << binHeight(i,j,k) << " | " 
+		   << setw(colWidth) << binError(i,j,k) << endl;
+	    }
+	}
+    }
+  cout << "------------------------------------------------------------------------------" << endl;
+
+  cout << "*******************************************************************************" << endl;
+}
