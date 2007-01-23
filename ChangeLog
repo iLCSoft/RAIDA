@@ -1,3 +1,86 @@
+2007-01-23 16:09  tkraemer
+
+	* src/ITreeROOT.cc: removed the ROOT statements printing the
+	  current Directory and path to the screen.
+
+2007-01-23 16:08  tkraemer
+
+	* src/GNUmakefile: Uses now "example.cc" as file containing the
+	  main program ("main()").  In addition the script also recompiles
+	  RAIDA if the file "example.cc" has been updated/modified.
+
+2007-01-23 16:04  tkraemer
+
+	* example.cc: small example program using RAIDA to help the user
+	  getting started.
+
+2007-01-23 16:03  tkraemer
+
+	* mainroot.cc: removed the include statement for "utilROOT.h".
+
+2007-01-23 11:24  tkraemer
+
+	* src/: ICloud1DROOT.cc, ICloud2DROOT.cc, ICloud3DROOT.cc,
+	  ITreeROOT.cc, ITupleROOT.cc, LeafPoint.cc: Removed output
+	  statements used during the development.
+
+2007-01-23 10:31  tkraemer
+
+	* src/ITupleROOT.cc: removed "#include <RAIDA/utilROOT.h>" because
+	  the file is no longer in use.
+
+2007-01-23 10:25  tkraemer
+
+	* include/RAIDA/utilROOT.h, src/utilROOT.cc: The functionality
+	  implemented in this object is not longer needed in the project.
+
+2007-01-22 18:05  tkraemer
+
+	* src/: IHistogram1DROOT.cc, IHistogram2DROOT.cc, PathName.cc:
+	  Removed printouts from the development, which are of no use for
+	  the user.
+
+2007-01-22 17:38  tkraemer
+
+	* mainroot.cc: Changes to test the new function "printContents()"
+	  of "IHistogram2DROOT" and "IHistogram3DROOT".
+
+2007-01-22 17:36  tkraemer
+
+	* include/RAIDA/IHistogram3DROOT.h, src/IHistogram3DROOT.cc: New
+	  function "printContents()" to print the contents of a 3D
+	  Histogram to the screen. This function only exist in the ROOT
+	  implementation for test purposes.  Objects have to be casted to
+	  the ...ROOT objects in order to use this.
+
+2007-01-22 17:35  tkraemer
+
+	* include/RAIDA/IHistogram2DROOT.h, src/IHistogram2DROOT.cc: New
+	  function "printContents()" to print the contents of a 2D
+	  Histogram to the screen. This function only exist in the ROOT
+	  implementation for test purposes.  Objects have to be casted to
+	  the ...ROOT objects in order to use this.
+
+2007-01-19 15:36  tkraemer
+
+	* mainroot.cc: modifications to test new printing function for 1D
+	  histograms.
+
+2007-01-19 15:35  tkraemer
+
+	* src/IAxisROOT.cc: corrected handling of binning in some
+	  functions.
+
+2007-01-19 15:34  tkraemer
+
+	* include/RAIDA/IHistogram1DROOT.h, src/IHistogram1DROOT.cc: new
+	  function "printContents() " to print 1D Histogram information for
+	  debuging.
+
+2007-01-18 12:13  tkraemer
+
+	* ChangeLog: New ChangeLog generated from the CVS information.
+
 2007-01-18 12:07  tkraemer
 
 	* src/ITupleFactoryROOT.cc: Specifying the names and types of the
