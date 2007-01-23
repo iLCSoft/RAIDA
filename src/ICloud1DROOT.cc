@@ -76,7 +76,6 @@ bool ICloud1DROOT::fill(double x, double weight)
     {
       _AIDAHistogram->fill(x,weight);
     }
-  //  cout << _ROOTTree->GetEntriesFast() << " " << _nMax << endl;
   if (!_isConverted && _ROOTTree->GetEntriesFast()==_nMax)
     {
       convert(_nBinsDefault, (double)_ROOTTree->GetMinimum("xValue"), (double)_ROOTTree->GetMaximum("xValue"));
@@ -202,7 +201,6 @@ bool ICloud1DROOT::myConvert(int nBins,
   if ( !_path.onlyName() )
     {
       _usedTree->cd( _path.getPath() ); 
-      //      cout << "### pwd: " << _usedTree->pwd() << endl;
     }
 
   string options("");

@@ -109,13 +109,9 @@ ITupleROOT::ITupleROOT(const std::string & name,
 
   for (unsigned i = 0; i<_pointVec.size() ; i++)
     {
-      //      cout << "### Noch am LEBEN!!!" << endl;
       _theTree->Branch(_pointVec[i].getName().c_str(),
       		       _pointVec[i].getValue(),
       		       _pointVec[i].getROOTNameType().c_str());
-      //            cout << "spalten: " << 
-      //	      _pointVec[i].getROOTNameType() << " " << 
-      //	      _pointVec[i].getName() << endl;
     }
 }
 
@@ -193,7 +189,6 @@ bool ITupleROOT::fill(int column, long value)
   // right type?
   if (_pointVec[column].getType() != 'L') return false;
 
-  //  cout << "=== short wird gesetzt" << endl;
   return _pointVec[column].set(value); 
 }
 
@@ -458,7 +453,6 @@ float ITupleROOT::getFloat(int column) const
     {
       if (_pointVec[column].getType() == 'F')
 	{
-	  //  cout << "bis hier!" << endl; 
 	  return (float)_pointVec[column].getFloat();
 	}
       else if (_pointVec[column].getType() == 'I')

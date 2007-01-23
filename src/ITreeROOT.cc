@@ -46,7 +46,6 @@ ITreeROOT::ITreeROOT(const std::string & storeName,
 
 ITreeROOT::~ITreeROOT()
 {
-  cout << "Destruktor von tree" << endl;
   delete _ROOTFile;
 }
 

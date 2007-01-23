@@ -307,7 +307,6 @@ bool LeafPoint::set(const long v)
   else if (_leafType == 'L')
     {
       _l = v;
-      //      cout << "=== kommt wirklich an: " << _l << endl;
       return true;
     }
   else if (_leafType == 'O')

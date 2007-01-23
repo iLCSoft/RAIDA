@@ -313,7 +313,6 @@ bool ICloud2DROOT::myConvert(int nBinsX,
   if ( !_path.onlyName() )
     {
       _usedTree->cd( _path.getPath() );
-      //      cout << "### pwd: " << _usedTree->pwd() << endl;
     }
 
   string options("");
