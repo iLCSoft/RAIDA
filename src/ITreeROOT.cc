@@ -56,7 +56,8 @@ bool ITreeROOT::commit()
       //      _ROOTFile->mkdir("mydir","mydir");
       _ROOTFile->Write();
       //_ROOTFile->ls("-d");
-  gDirectory->ls("-d");
+      // print the ROOT Directory to std-out:
+      //  gDirectory->ls("-d");
       return true;
     }
   else 
@@ -69,9 +70,10 @@ bool ITreeROOT::close()
 {
   if (_ROOTFile) 
     {
-      gDirectory->pwd();
+      // print out the current ROOT working directory.
+      //      gDirectory->pwd();
       _ROOTFile->Close();
-      gDirectory->pwd();
+      //      gDirectory->pwd();
       return true;
     }
   else 
