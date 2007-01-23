@@ -5,7 +5,7 @@ export RAIDA_DEBUG_VERBOSE_FACTORY=1
 # Example GNUmakefile to build an Application with Marlin
 #
 # @author Frank Gaede
-# @version $Id: GNUmakefile,v 1.5 2007-01-17 16:58:36 tkraemer Exp $
+# @version $Id: GNUmakefile,v 1.6 2007-01-23 15:08:07 tkraemer Exp $
 #
 ###########################################################
 
@@ -93,9 +93,9 @@ endif
 
 bin:  lib $(BINDIR)/$(PROGNAME)
 
-$(BINDIR)/$(PROGNAME): $(INSTALL)/lib$(PROGNAME).a
+$(BINDIR)/$(PROGNAME): $(INSTALL)/lib$(PROGNAME).a $(BASEDIR)/example.cc
 	mkdir -p $(BINDIR)
-	$(CXX) -o $(BINDIR)/$(PROGNAME) $(CPPFLAGS) $(BASEDIR)/mainroot.cc $(LIBS) 
+	$(CXX) -o $(BINDIR)/$(PROGNAME) $(CPPFLAGS) $(BASEDIR)/example.cc $(LIBS) 
 
 objects = $(patsubst %.cc,%.o, $(wildcard *.cc)  )
 
