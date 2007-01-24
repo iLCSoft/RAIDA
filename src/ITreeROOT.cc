@@ -196,7 +196,7 @@ bool ITreeROOT::ls(const std::string & path,
   ITreeROOT *tempobj = const_cast<ITreeROOT*>(this);
   string thePWD = pwd();
   bool pathexists = tempobj->cd(path);
-  cout << "pfad: " << path << " " << pathexists << endl;
+  //  cout << "pfad: " << path << " " << pathexists << endl;
   if (!pathexists) return false;
   gDirectory->ls("-d");
   tempobj->cd( thePWD ) ;
