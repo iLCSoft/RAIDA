@@ -23,7 +23,7 @@ namespace AIDA {
  * This may be implemented on a per-thread basis.
  *
  * @author T. Kraemer, DESY
- * @version $Id: ITreeROOT.h,v 1.3 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: ITreeROOT.h,v 1.4 2007-01-24 10:57:01 tkraemer Exp $
  */
 
 class ITreeROOT : public ITree {
@@ -103,7 +103,9 @@ public:
    * @return false If the path does not exist.
    *
    */
-  /// virtual bool ls(const std::string & path = ".", bool recursive = false, std::ostream & os = std::cout) const;
+  virtual bool ls(const std::string & path = ".", 
+		  bool recursive = false, 
+		  std::ostream & os = std::cout) const;
 
   /**
    * Get the list of names of the IManagedObjects under a given path, including directories

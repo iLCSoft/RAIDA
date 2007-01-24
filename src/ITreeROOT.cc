@@ -96,6 +96,10 @@ bool ITreeROOT::cd(const std::string & path)
       localPath += ":";
       localPath += path;
     }
+  else if (path == ".") 
+    {
+      return true;
+    }
   else if (path != "" && path[0] != '/')
     {
       localPath = path;
@@ -182,5 +186,19 @@ bool ITreeROOT::mkdir(const std::string & path)
   gDirectory->mkdir(subDirectory.c_str(),subDirectory.c_str());
 
   cd(currentDir);
+  return true;
+}
+
+bool ITreeROOT::ls(const std::string & path,
+		   bool recursive,
+		   std::ostream & os) const
+{
+  ITreeROOT *tempobj = const_cast<ITreeROOT*>(this);
+  string thePWD = pwd();
+  bool pathexists = tempobj->cd(path);
+  cout << "pfad: " << path << " " << pathexists << endl;
+  if (!pathexists) return false;
+  gDirectory->ls("-d");
+  tempobj->cd( thePWD ) ;
   return true;
 }

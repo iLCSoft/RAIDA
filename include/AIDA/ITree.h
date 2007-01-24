@@ -90,7 +90,7 @@ public:
    * @return false If the path does not exist.
    *
    */
-  /// virtual bool ls(const std::string & path = ".", bool recursive = false, std::ostream & os = std::cout) const = 0;
+  virtual bool ls(const std::string & path = ".", bool recursive = false, std::ostream & os = std::cout) const = 0;
 
   /**
    * Get the list of names of the IManagedObjects under a given path, including directories
