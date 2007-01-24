@@ -110,9 +110,10 @@ int main()
   IHistogram3D * H3D_1 = HF->createHistogram3D("cube","a nice die",10,0.,100.,10,0.,100.,10,0.,100.);
 
 
-
 /// Save the Objects to the file ----------------------------------------------
   TREE->commit();
+  TREE->cd("/Histograms");
+  TREE->ls("..");
 
 /// Close the file ------------------------------------------------------------
   TREE->close();
