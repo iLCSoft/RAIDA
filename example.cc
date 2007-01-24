@@ -34,7 +34,7 @@ int main()
 
   ITreeFactory * TRF = AF->createTreeFactory();
 
-// Create a "ITree" object which is bound to a file.
+/// Create a "ITree" object which is bound to a file. -------------------------
 // You must always create a "ITree" object to create any other factory.
 
   string storeName("RAIDATest.root");
@@ -45,15 +45,15 @@ int main()
 
   ITree * TREE = TRF->create(storeName,storeType,readOnly,createNew,options);
 
-// Create a "IHistogramFactory" which is bound to the tree "*TREE". 
+/// Create a "IHistogramFactory" which is bound to the tree "*TREE". 
 
   IHistogramFactory * HF = AF->createHistogramFactory(*TREE);
 
-// Create a "ITupleFactory" which is bound to the tree "*TREE". 
+/// Create a "ITupleFactory" which is bound to the tree "*TREE". 
 
   ITupleFactory * TUF = AF->createTupleFactory(*TREE);
 
-// Create some sub-directories to store the histograms, n-tuples etc.
+/// Create some sub-directories to store the histograms, n-tuples etc.
 // in a structured way in the file.
 
   TREE->mkdir("Histograms");
@@ -72,13 +72,28 @@ int main()
 
   TREE->mkdir("N-Tuples");
 
-// Create a bunch of different histograms.
+// Create a bunch of different histograms. ------------------------------------
 
   // Specify the absolut path of the objects
   // (The current directory is "/").
-  IHistogram1D * H1D_1 = HF->createHistogram1D("histo","My first Histogram with RAIDA",10,0,100);
-  IHistogram1D * H1D_2 = HF->createHistogram1D("Histograms/1D/eqd","equal distribution",20,0,100);
-  IHistogram1D * H1D_3 = HF->createHistogram1D("Histograms/1D/steps",10,0,100);
+  
+  string name = "histo";
+  string title = "My first Histogram with RAIDA";
+  int nBins = 10;
+  double lowerEdge = 0;
+  double upperEdge = 100;
+  
+  IHistogram1D * H1D_1 = HF->createHistogram1D(name,title,
+					       nBins,lowerEdge,upperEdge);
+  
+  string path = "Histograms/1D/eqd"; 
+  
+  IHistogram1D * H1D_2 = HF->createHistogram1D(path,"equal distribution",
+					       20,0,100);
+  
+  string pathandtitle = "Histograms/1D/steps";
+  
+  IHistogram1D * H1D_3 = HF->createHistogram1D(pathandtitle,10,0,100);
 
   // Create a 1D Histogram with variable binning.
 
@@ -101,13 +116,84 @@ int main()
   TREE->cd("Histograms/2D");
 
   // Create a histogram by specifying a relative path. 
-  IHistogram2D * H2D_1 = HF->createHistogram2D("flat","flat distribution",10,0.,100.,10,0.,100.);
+
+  name = "flat";
+  title = "flat distribution";
+  int nBinsX = 10;
+  double lowerEdgeX = 0;
+  double upperEdgeX = 100;
+  int nBinsY = 10;
+  double lowerEdgeY = 0;
+  double upperEdgeY = 100;
+
+  IHistogram2D * H2D_1 = HF->createHistogram2D(name,title,
+					       nBinsX,lowerEdgeX,upperEdgeX,
+					       nBinsY,lowerEdgeY,upperEdgeY);
 
   // Change the directory:
   TREE->cd("../3D");
 
   // Create a 3D histogram with relative path
-  IHistogram3D * H3D_1 = HF->createHistogram3D("cube","a nice die",10,0.,100.,10,0.,100.,10,0.,100.);
+
+  name = "cube";
+  title = "a nice die";
+  nBinsX = 10;
+  lowerEdgeX = 0;
+  upperEdgeX = 100;
+  nBinsY = 10;
+  lowerEdgeY = 0;
+  upperEdgeY = 100;
+  int nBinsZ = 10;
+  double lowerEdgeZ = 0;
+  double upperEdgeZ = 100;
+
+  IHistogram3D * H3D_1 = HF->createHistogram3D(name,title,
+					       nBinsX,lowerEdgeX,upperEdgeX,
+					       nBinsY,lowerEdgeY,upperEdgeY,
+					       nBinsZ,lowerEdgeZ,upperEdgeZ);
+
+
+/// Fill the histograms with random numbers -----------------------------------
+
+// initialise random number generator
+
+  srand(time(NULL));
+
+  // 1D Histograms:
+  for (int i = 0; i<100000; i++)
+    {
+      H1D_1->fill( (double)(rand() % 100) );
+      H1D_2->fill( (double)(rand() % 120) -10 );
+
+      H1D_3->fill( (double)(rand() % 100) );
+      H1D_3->fill( (double)(rand() % 90) +9 );
+      H1D_3->fill( (double)(rand() % 80) +19 );
+      H1D_3->fill( (double)(rand() % 70) +29 );
+      H1D_3->fill( (double)(rand() % 60) +39 );
+      H1D_3->fill( (double)(rand() % 50) +49 );
+      H1D_3->fill( (double)(rand() % 40) +59 );
+      H1D_3->fill( (double)(rand() % 30) +69 );
+      H1D_3->fill( (double)(rand() % 20) +79 );
+      H1D_3->fill( (double)(rand() % 10) +89 );
+
+      H1D_4->fill( (double)(rand() % 60) -5  );
+    }
+
+  // 2D and 3D Histograms:
+  for (int i=0; i<100000; i++)
+    {
+      // all weights are 2
+      H2D_1->fill( (double)(rand() % 110) -5,(double)(rand() % 110) -5,2.);
+      // random weights
+      H3D_1->fill((double)(rand() % 110) -5,
+		  (double)(rand() % 110) -5,
+		  (double)(rand() % 110) -5,
+		  (double)(rand() % 10000)/5000. );
+    }
+
+/// Create some profile histograms --------------------------------------------
+
+
 
 
 /// Save the Objects to the file ----------------------------------------------
