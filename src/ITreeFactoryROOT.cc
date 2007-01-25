@@ -43,5 +43,6 @@ ITree * ITreeFactoryROOT::create(const std::string & storeName,
   cout << "          " 
        << "will call: ITreeROOT::ITreeROOT(const std::string & storeName,const std::string & storeType,bool readOnly,bool createNew,const std::string &options)" << endl;
 #endif
+  if (storeName=="") return new ITreeROOT;
   return new ITreeROOT(storeName,storeType,readOnly,createNew,options);
 }
