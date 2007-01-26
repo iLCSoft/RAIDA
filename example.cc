@@ -517,6 +517,21 @@ int main()
   // 1D cloudes 
   TREE->cd("/Cloudes/1D");
 
+  /**
+   * Create a ICloud1D, an unbinned 1-dimensional histogram.
+   * @param path    The path of the created ICloud. 
+   * @param title   The title of the ICloud1D.
+   * @param nMax    The maximum number of entries after which the ICloud1D
+   *                will convert to an IHistogram1D. The default nMax = -1 
+   *                means no autoconversion.
+   * @param options The options for the ICloud1D. 
+   * @return        The newly created ICloud1D.
+   */
+  // virtual ICloud1D * IHistogramFactory::createCloud1D(const std::string & path,
+  //						         const std::string & title,
+  //						         int nMax = -1,
+  //						         const std::string & options = "");
+
   ICloud1D * C1D_1 = HF->createCloud1D("Cloud",
 				       "my first cloud",
 				       -1);
@@ -524,6 +539,7 @@ int main()
   ICloud1D * C1D_2 = HF->createCloud1D("numbers",          // name
 				       "set of numbers",   // title
 				       1000);              // The maximum number of entries after which the ICloud1D will convert to an IHistogram1D. The default nMax = -1 means no autoconversion.
+
   ICloud1D * C1D_3 = HF->createCloud1D("flat",              // name
 				       "flat distribution", // title
 				       -1);                 // The maximum number of entries after which the ICloud1D will convert to an IHistogram1D. The default nMax = -1 means no autoconversion.
@@ -531,19 +547,43 @@ int main()
   // 2D and 3D cloudes 
   TREE->cd("/Cloudes/2D");
 
-  ICloud2D * C2D_1 = HF->createCloud2D("another",                // name
-				       "this is an other cloud", // title
-				       -1);                      // The maximum number of entries after which the ICloud1D will convert to an IHistogram1D. The default nMax = -1 means no autoconversion.
+  /**
+   * Create a ICloud2D, an unbinned 2-dimensional histogram.
+   * @param path    The path of the created ICloud. 
+   * @param title   The title of the ICloud2D.
+   * @param nMax    The maximum number of entries after which the ICloud2D
+   *                will convert to an IHistogram2D. The default nMax = -1 
+   *                means no autoconversion.
+   * @param options The options for the ICloud2D. 
+   * @return        The newly created ICloud2D.
+   */
+  // virtual ICloud2D * IHistogramFactory::createCloud2D(const std::string & path,
+  //						         const std::string & title,
+  //						         int nMax = -1,
+  //						         const std::string & options = "");
 
-  ICloud3D * C3D_1 = HF->createCloud3D("more",       // name
-				       "more cloud", // title
-				       -1);          // The maximum number of entries after which the ICloud1D will convert to an IHistogram1D. The default nMax = -1 means no autoconversion.
+  ICloud2D * C2D_1 = HF->createCloud2D("another",
+				       "this is an other cloud",
+				       -1);
+
+  ICloud3D * C3D_1 = HF->createCloud3D("more",
+				       "more cloud", 
+				       -1);
 
 /// Fill the cloudes with random numbers --------------------------------------
 
   for (int i=0; i<100000; i++)
     {
       // 1D cloudes
+
+      /**
+       * Fill the ICloud1D with a value and a corresponding weight.
+       * @param x      The value.
+       * @param weight The corresponding weight. By default it is 1.
+       * @return false If the weight's value is <0. 
+       */
+      // bool ICloud1D::fill(double x, double weight = 1.);
+
       C1D_1->fill( (double)(rand() % 1000),  // x-value 
 		   1.);                      // weight
       C1D_2->fill( (double)(rand() % 1000),  // x-value 
@@ -552,11 +592,35 @@ int main()
 		   (double)(rand() % 10000)/5000.  ); // weight
 
       // 2D cloudes
+
+      /**
+       * Fill the ICloud2D with a couple of values and a corresponding weight.
+       * @param x      The x value.
+       * @param y      The y value.
+       * @param weight The corresponding weight. By default it is 1.
+       * @return false If the weight's value is <0.
+       */
+      // virtual bool ICloud2D::fill(double x, double y, double weight = 1.) ;
+
       C2D_1->fill( (double)(rand() % 1000),           // x-value 
 		   (double)(rand() % 1000),           // y-value
 		   (double)(rand() % 10000)/5000.  ); // weight
 
       // 3D cloudes
+
+      /**
+       * Fill the ICloud3D with a triplet of values and a corresponding weight.
+       * @param x      The x value.
+       * @param y      The y value.
+       * @param z      The z value.
+       * @param weight The corresponding weight. By default it is 1.
+       * @return false If the ICloud3D is full, if the weight's value is
+       *                                  is not between 0 and 1.
+       *
+       */
+      // virtual bool ICloud3D::fill(double x, double y, double z, 
+      //                             double weight = 1.);
+
       C3D_1->fill( (double)(rand() % 1000),           // x-value 
 		   (double)(rand() % 1000),           // y-value
 		   (double)(rand() % 1000),           // z-value
@@ -567,8 +631,23 @@ int main()
 
   TREE->cd("N-Tuples");
 
-  ITuple * ntu_1 = TUF->create("nt1","my first n-tuple",
+  /**
+   * Creates an NTuple
+   * @param path    The path of the created ITuple. 
+   * @param title   The title of the n-tuple
+   * @param columns The names and types of the columns e.g. "float px, py, pz,
+   *                float energy, int charge"
+   * @param options NTuple options (currently undefined)
+   */
+  // virtual ITuple * ITupleFactory::create(const std::string & path,
+  //                                        const std::string & title,
+  //                                        const std::string & columns,
+  //                                        const std::string & options = "") = 0;
+
+  ITuple * ntu_1 = TUF->create("nt1",
+			       "my first n-tuple",
 			       "int id, bool student, int age, float size, double weight");
+
   for (int i=0; i<40000; i++)
     {
       int age = (rand() % 100) +4;
