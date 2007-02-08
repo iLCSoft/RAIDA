@@ -194,7 +194,8 @@ int IProfile1DROOT::binEntries(int index) const
 double IProfile1DROOT::binHeight(int index) const 
 {
   int indexROOT = RAIDAUtil::binIndexAIDA2ROOT(index,axis().bins());
-  return (double)_profile->GetBinEntries( (Int_t)indexROOT );
+  //  return (double)_profile->GetBinEntries( (Int_t)indexROOT );
+  return (double)_profile->GetBinContent( (Int_t)indexROOT );
 }
 
 double IProfile1DROOT::binError(int index) const
@@ -250,7 +251,7 @@ double IProfile1DROOT::sumBinHeights() const
 
   for (int i = 1; i<=(int)_profile->GetNbinsX();i++)
     {
-      integral += (double)_profile->GetBinEntries( (Int_t)i );
+      integral += (double)_profile->GetBinContent( (Int_t)i );
     }
   return integral;
 }
@@ -259,8 +260,8 @@ double IProfile1DROOT::sumAllBinHeights() const
 {
   double integralall;
   integralall = sumBinHeights()
-    + (double)_profile->GetBinEntries(0)
-    + (double)_profile->GetBinEntries( _profile->GetNbinsX() + 1);
+    + (double)_profile->GetBinContent(0)
+    + (double)_profile->GetBinContent( _profile->GetNbinsX() + 1);
   return integralall;
 }
 
@@ -269,8 +270,8 @@ double IProfile1DROOT::sumExtraBinHeights() const
   double integralextra;
 
   integralextra =
-    + (double)_profile->GetBinEntries(0)
-    + (double)_profile->GetBinEntries( _profile->GetNbinsX() + 1);
+    + (double)_profile->GetBinContent(0)
+    + (double)_profile->GetBinContent( _profile->GetNbinsX() + 1);
 
   return integralextra;
 }
@@ -279,13 +280,13 @@ double IProfile1DROOT::minBinHeight() const
 {
   double minHeight;
 
-  minHeight = (double)_profile->GetBinEntries( (Int_t)1 );
+  minHeight = (double)_profile->GetBinContent( (Int_t)1 );
 
   for (int i = 1; i<=(int)_profile->GetNbinsX();i++)
     {
-      if ((double)_profile->GetBinEntries( (Int_t)i ) < minHeight)
+      if ((double)_profile->GetBinContent( (Int_t)i ) < minHeight)
         {
-          minHeight = (double)_profile->GetBinEntries( (Int_t)i );
+          minHeight = (double)_profile->GetBinContent( (Int_t)i );
         }
     }
 
@@ -296,13 +297,13 @@ double IProfile1DROOT::maxBinHeight() const
 {
   double maxHeight;
 
-  maxHeight = (double)_profile->GetBinEntries( (Int_t)1 );
+  maxHeight = (double)_profile->GetBinContent( (Int_t)1 );
 
   for (int i = 1; i<=(int)_profile->GetNbinsX();i++)
     {
-      if ((double)_profile->GetBinEntries( (Int_t)i ) > maxHeight)
+      if ((double)_profile->GetBinContent( (Int_t)i ) > maxHeight)
         {
-          maxHeight = (double)_profile->GetBinEntries( (Int_t)i );
+          maxHeight = (double)_profile->GetBinContent( (Int_t)i );
         }
     }
 

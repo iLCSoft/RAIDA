@@ -313,7 +313,7 @@ double IProfile2DROOT::binHeight(int indexX, int indexY) const
   int indexXROOT = RAIDAUtil::binIndexAIDA2ROOT(indexX,xAxis().bins());
   int indexYROOT = RAIDAUtil::binIndexAIDA2ROOT(indexY,yAxis().bins());
 
-  return (double)_profile->GetBinEntries(_profile->GetBin( (Int_t)indexXROOT,
+  return (double)_profile->GetBinContent(_profile->GetBin( (Int_t)indexXROOT,
 							   (Int_t)indexYROOT ));
 }
 
