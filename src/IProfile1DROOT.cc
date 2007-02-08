@@ -173,7 +173,7 @@ bool IProfile1DROOT::fill(double x, double y, double weight)
   newBinMean = (oldBinMean * iBinHeight + x*weight)/(weight+iBinHeight);
 
   _histogramAIDABinMeanX->SetBinContent( (Int_t)iBin, (Stat_t)newBinMean );
-  _profile->Fill((Axis_t)x,(Stat_t)weight);
+  _profile->Fill((Axis_t)x,(Axis_t)y,(Stat_t)weight);
   _histogram->Fill((Axis_t)x,(Stat_t)weight);
   _histogramAIDA->Fill((Axis_t)x,(Stat_t)1.);
   return true;

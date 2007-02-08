@@ -251,7 +251,7 @@ bool IProfile2DROOT::fill(double x, double y, double z, double weight)
 
   _histogramAIDABinMeanX->SetBinContent( (Int_t)iBin, (Stat_t)newBinMeanX );
   _histogramAIDABinMeanY->SetBinContent( (Int_t)iBin, (Stat_t)newBinMeanY );
-  _profile->Fill( (Axis_t)x,(Axis_t)y,(Stat_t)weight );
+  _profile->Fill( (Axis_t)x,(Axis_t)y,(Axis_t)z,(Stat_t)weight );
   _histogram->Fill( (Axis_t)x,(Axis_t)y,(Stat_t)weight );
   _histogramAIDA->Fill( (Axis_t)x,(Axis_t)y,(Stat_t)1. );
   return true;
