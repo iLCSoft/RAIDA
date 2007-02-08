@@ -1,3 +1,60 @@
+2007-02-08 17:37  tkraemer
+
+	* mainroot.cc, src/mainroot.cc, src/mainroot.cc.axis,
+	  src/mainroot.cc.exception, src/mainroot.cc.old2,
+	  src/mainroot.cc.tree1, src/mainroot.cc.tuple1,
+	  src/mainroot.cc.tuple2, src/mainroot.cc.tuple3,
+	  src/mainroot.cc.xx: Removed files which are now longer used
+	  building the library.
+
+2007-02-08 17:10  tkraemer
+
+	* src/: IProfile1DROOT.cc, IProfile2DROOT.cc: Correction of bug: in
+	  Function IProfile1D::binHeight() and IProfile2D::binHeight() the
+	  sum of the weights was calculated incorrect, returning the number
+	  of entries. This problem was removed in all IProfile classes.
+	  Also other functions using equivalent functionality were checked.
+
+2007-01-26 15:01  tkraemer
+
+	* example.cc: Included more comments into the example program to
+	  help the reader to understand how to use RAIDA.
+
+2007-01-25 17:55  tkraemer
+
+	* example.cc: some more example code + documentation.
+
+2007-01-25 15:33  tkraemer
+
+	* src/ITreeFactoryROOT.cc: Create ITree in memory if storeName
+	  =="".
+
+2007-01-24 19:08  tkraemer
+
+	* example.cc: Some more functionality in the example program.
+
+2007-01-24 17:16  tkraemer
+
+	* src/ITreeROOT.cc: removed 1 "cout" used for debuging.
+
+2007-01-24 11:57  tkraemer
+
+	* include/AIDA/ITree.h, include/RAIDA/ITreeROOT.h,
+	  src/ITreeROOT.cc: new implementation of the "ITree::ls()" method.
+	  This method will return the ROOT directory at the moment and not
+	  the directory listing according to the AIDA conventions. In
+	  addition there is no chance to get a recursive listing of the
+	  directories. Also the redirection of the output stream is not
+	  possible yet.
+
+2007-01-24 11:54  tkraemer
+
+	* example.cc: code to test the ITree::ls() method.
+
+2007-01-23 16:10  tkraemer
+
+	* ChangeLog: updated version of the ChangeLog.
+
 2007-01-23 16:09  tkraemer
 
 	* src/ITreeROOT.cc: removed the ROOT statements printing the
