@@ -1,8 +1,11 @@
 #include <RAIDA/LeafPoint.h>
+
 #include <string>
 #include <iostream>
 #include <limits.h>
 #include <float.h>
+#include <cmath>
+
 #include <TROOT.h>
 
 using namespace AIDA ;
