@@ -3,11 +3,13 @@
 #define AIDA_IHISTOGRAM2DROOT_H 1
 
 
-#include "AIDA/IHistogram2D.h"
-#include <TH1D.h>
-#include <TH2D.h>
+#include <AIDA/IHistogram2D.h>
 #include <AIDA/IAxis.h>
 #include <RAIDA/IHistogram3DROOT.h>
+
+#include <TH1D.h>
+#include <TH2D.h>
+#include <vector>
 
 namespace AIDA {
 
@@ -17,7 +19,7 @@ namespace AIDA {
  * User level interface to 2D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram2DROOT.h,v 1.9 2007-01-22 16:35:27 tkraemer Exp $
+ * @version $Id: IHistogram2DROOT.h,v 1.10 2007-03-23 14:41:36 tkraemer Exp $
  */
  
 class IHistogram2DROOT : public IHistogram2D {

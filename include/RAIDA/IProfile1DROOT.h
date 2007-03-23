@@ -2,8 +2,10 @@
 #ifndef AIDA_IPROFILE1DROOT_H
 #define AIDA_IPROFILE1DROOT_H 1
 
-#include "AIDA/IProfile1D.h"
+#include <AIDA/IProfile1D.h>
 #include <AIDA/IAxis.h>
+
+#include <vector>
 #include <TH1D.h>
 #include <TProfile.h>
 
@@ -15,7 +17,7 @@ namespace AIDA {
  * User level interface to a 1-dimensional profile histogram
  *
  * @author T. Kraemer, DESY
- * @version $Id: IProfile1DROOT.h,v 1.6 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IProfile1DROOT.h,v 1.7 2007-03-23 14:41:36 tkraemer Exp $
  */
  
 class IProfile1DROOT : public IProfile1D {

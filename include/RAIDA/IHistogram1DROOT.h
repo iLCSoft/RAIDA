@@ -6,7 +6,7 @@
 #include <RAIDA/IHistogram2DROOT.h>
 #include <RAIDA/IHistogram3DROOT.h>
 
-
+#include <vector>
 #include <TH1D.h>
 #include <AIDA/IAxis.h>
 
@@ -18,7 +18,7 @@ namespace AIDA {
  * User level interface to 1D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram1DROOT.h,v 1.11 2007-01-19 14:34:20 tkraemer Exp $
+ * @version $Id: IHistogram1DROOT.h,v 1.12 2007-03-23 14:41:36 tkraemer Exp $
  */
  
 class IHistogram1DROOT : public IHistogram1D {

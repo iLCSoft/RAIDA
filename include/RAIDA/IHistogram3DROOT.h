@@ -2,11 +2,13 @@
 #ifndef AIDA_IHISTOGRAM3DROOT_H
 #define AIDA_IHISTOGRAM3DROOT_H 1
 
-#include "AIDA/IHistogram3D.h"
+#include <AIDA/IHistogram3D.h>
+#include <AIDA/IAxis.h>
+
 #include <TH1D.h>
 #include <TH2D.h>
 #include <TH3D.h>
-#include <AIDA/IAxis.h>
+#include <vector>
 
 namespace AIDA {
 
@@ -16,7 +18,7 @@ namespace AIDA {
  * User level interface to 3D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram3DROOT.h,v 1.9 2007-01-22 16:36:22 tkraemer Exp $
+ * @version $Id: IHistogram3DROOT.h,v 1.10 2007-03-23 14:41:36 tkraemer Exp $
  */
 
 class IHistogram3DROOT : public IHistogram3D {

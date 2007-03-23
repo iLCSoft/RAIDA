@@ -3,9 +3,10 @@
 #define AIDA_IPROFILE2DROOT_H 1
 
 
-#include "AIDA/IProfile2D.h"
+#include <AIDA/IProfile2D.h>
 #include <AIDA/IAxis.h>
 
+#include <vector>
 #include <TH2D.h>
 #include <TProfile2D.h>
 
@@ -17,7 +18,7 @@ namespace AIDA {
  * User level interface to a 2-dimensional profile histogram
  *
  * @author T. Kraemer, DESY
- * @version $Id: IProfile2DROOT.h,v 1.6 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IProfile2DROOT.h,v 1.7 2007-03-23 14:41:36 tkraemer Exp $
  */
 
 class IProfile2DROOT : public IProfile2D {
