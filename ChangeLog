@@ -1,3 +1,31 @@
+2007-03-23 15:41  tkraemer
+
+	* include/RAIDA/: IHistogram1DROOT.h, IHistogram2DROOT.h,
+	  IHistogram3DROOT.h, IProfile1DROOT.h, IProfile2DROOT.h: Add all
+	  #include statements to ensure the save compilation also on other
+	  LINUX installations outside of DESY. In addition removed all
+	  #includes which are not required by the class definition.
+
+2007-03-23 15:38  tkraemer
+
+	* src/: ICloud1DROOT.cc, ICloud2DROOT.cc, ICloud3DROOT.cc,
+	  ITupleROOT.cc, LeafPoint.cc: Added some #include statements to
+	  ensure save compilation on other LINUX installations outside of
+	  DESY.
+
+2007-03-23 15:35  tkraemer
+
+	* src/GNUmakefile: Debug information turned off.
+
+2007-02-08 18:29  tkraemer
+
+	* src/: IProfile1DROOT.cc, IProfile2DROOT.cc: removed bug in
+	  IProfilexD::fill() method. The 2nd, 3rd coordinate was not used.
+
+2007-02-08 17:41  tkraemer
+
+	* ChangeLog: Updated version of the ChangeLog.
+
 2007-02-08 17:37  tkraemer
 
 	* mainroot.cc, src/mainroot.cc, src/mainroot.cc.axis,
