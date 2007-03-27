@@ -7,15 +7,13 @@ using namespace AIDA ;
 const std::vector<double>  & IRangeSetROOT::lowerBounds() 
 {
   throw(NotYetImplementedException("lowerBounds()","IRangeSet"));
-  std::vector<double> x;
-  return x;
+  return *(new std::vector<double>);
 }
 
 const std::vector<double>  & IRangeSetROOT::upperBounds() 
 {
   throw(NotYetImplementedException("upperBounds()","IRangeSet"));
-  std::vector<double> x;
-  return x;
+  return *(new std::vector<double>);
 }
 
 void IRangeSetROOT::include(double xMin, double xMax) 

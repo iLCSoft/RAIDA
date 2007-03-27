@@ -39,8 +39,7 @@ bool IFunctionROOT::isEqual(const IFunction & f) const
 const std::vector<double>  & IFunctionROOT::gradient(const std::vector<double>  & x) const 
 {
   throw(NotYetImplementedException("gradient()","IFunction"));
-  std::vector<double> y;
-  return y;
+  return *(new std::vector<double>);
 }
 
 bool IFunctionROOT::providesGradient() const 
@@ -71,8 +70,7 @@ bool IFunctionROOT::setParameters(const std::vector<double>  & params)
 const std::vector<double>  & IFunctionROOT::parameters() const 
 {
   throw(NotYetImplementedException("parameters()","IFunction"));
-  std::vector<double> x;
-  return x;
+  return *(new std::vector<double>);
 }
 
 int IFunctionROOT::numberOfParameters() const 

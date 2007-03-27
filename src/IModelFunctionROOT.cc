@@ -28,8 +28,7 @@ bool IModelFunctionROOT::isNormalized() const
 const std::vector<double> & IModelFunctionROOT::parameterGradient(const std::vector<double>  & x) const 
 {
   throw(NotYetImplementedException("parameterGradient()","IModelFunction"));
-  std::vector<double> y;
-  return y;
+  return *(new std::vector<double>);
 }
 
 bool IModelFunctionROOT::providesParameterGradient() const 
@@ -41,8 +40,7 @@ bool IModelFunctionROOT::providesParameterGradient() const
 IRangeSet & IModelFunctionROOT::normalizationRange(int iAxis) 
 {
   throw(NotYetImplementedException("normalizationRange()","IModelFunction"));
-  IRangeSet *x = new IRangeSetROOT;
-  return *x;
+  return *(new IRangeSetROOT);
 }
 
 void IModelFunctionROOT::includeNormalizationAll() 

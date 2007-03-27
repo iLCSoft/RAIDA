@@ -119,7 +119,7 @@ ITuple * ITupleFactoryROOT::create(const string & path,
   vector<string> columnType;
   vector<string> alltypeandnames = RAIDAUtil::splitIntoWords(columns,',');
 
-  for (int i=0; i<alltypeandnames.size(); i++)
+  for (int i=0; i<(int)alltypeandnames.size(); i++)
     {
       vector<string> typeandname = RAIDAUtil::splitIntoWords(alltypeandnames[i],' ');
 
