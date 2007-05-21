@@ -22,7 +22,8 @@ INSTALL( DIRECTORY "${${PROJECT_NAME}_SOURCE_DIR}/include"
 ####################################################################################################
 
 # require proper c++
-ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
+# FIXME under sl4 -pedantic flag throws C++ ISO error
+ADD_DEFINITIONS( "-Wall -ansi" )
 
 # need long long for int64 for now
 #FIXME: should establish wether we are on a 32bit or 64 bit machine ...
