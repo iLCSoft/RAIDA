@@ -629,7 +629,7 @@ int main()
 
 /// Create and fill n-tuples --------------------------------------------------
 
-  TREE->cd("N-Tuples");
+  TREE->cd("/N-Tuples");
 
   /**
    * Creates an NTuple
