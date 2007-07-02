@@ -41,10 +41,10 @@ ENDIF()
 ##########################################################################################
 
 # library *nix style versioning
-SET( ${PROJECT_NAME}_VERSION
-    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
 SET( ${PROJECT_NAME}_SOVERSION
     "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
+SET( ${PROJECT_NAME}_VERSION
+    "${${PROJECT_NAME}_SOVERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
 
 # add library install path to the rpath list
 SET( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
@@ -120,6 +120,10 @@ SET( BUILD_RAIDA_EXAMPLE "${BUILD_RAIDA_EXAMPLE}" CACHE BOOL
     "Set to ON to build RAIDA exmaple" FORCE )
 SET( RAIDA_DEBUG_VERBOSE_FACTORY "${RAIDA_DEBUG_VERBOSE_FACTORY}" CACHE BOOL
     "Set to ON to build RAIDA exmaple" FORCE )
+
+# export build settings
+INCLUDE( CMakeExportBuildSettings )
+CMAKE_EXPORT_BUILD_SETTINGS( "${PROJECT_NAME}BuildSettings.cmake" )
 
 # export library dependencies (keep this as the last line in the file)
 EXPORT_LIBRARY_DEPENDENCIES( "${PROJECT_NAME}LibDeps.cmake" )
