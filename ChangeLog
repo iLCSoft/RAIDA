@@ -1,3 +1,64 @@
+2007-07-13 16:13  engels
+
+	* README: updated
+
+2007-07-12 15:03  engels
+
+	* README: updated
+
+2007-07-06 15:25  engels
+
+	* README: added cmake build instructions
+
+2007-07-04 16:07  engels
+
+	* CMakeLists.txt: added rpath for apple
+
+2007-07-02 14:56  engels
+
+	* BuildSetup.cmake, CMakeLists.txt: added BuildSetup.cmake
+
+2007-06-22 14:26  engels
+
+	* CMakeLists.txt, src/CMakeLists.txt: retabed files
+
+2007-05-29 17:47  engels
+
+	* CMakeLists.txt: updated version
+
+2007-05-22 18:11  gaede
+
+	* example.cc: bug fix: proper path for ntuple: "/N-Tuples"
+
+2007-05-21 12:30  engels
+
+	* src/CMakeLists.txt: bug fix: -pedantic flag crashed in sl4
+
+2007-05-16 16:32  engels
+
+	* CMakeLists.txt, src/CMakeLists.txt: moved dependencies code to a
+	  macro
+
+2007-05-11 10:19  engels
+
+	* CMakeLists.txt, src/CMakeLists.txt: bug fix: build_with and
+	  link_with were calling load_package with required arg
+
+2007-04-25 15:03  engels
+
+	* CMakeLists.txt, RAIDAConfig.cmake.in, cmake_uninstall.cmake.in,
+	  src/CMakeLists.txt: added CMake files
+
+2007-03-27 16:15  tkraemer
+
+	* src/: IDataPointSetROOT.cc, IFunctionROOT.cc,
+	  IModelFunctionROOT.cc, IRangeSetROOT.cc, ITupleFactoryROOT.cc:
+	  Removed critical statements to get rid of all warnings.
+
+2007-03-23 15:43  tkraemer
+
+	* ChangeLog: New ChangeLog.
+
 2007-03-23 15:41  tkraemer
 
 	* include/RAIDA/: IHistogram1DROOT.h, IHistogram2DROOT.h,

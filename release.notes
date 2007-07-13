@@ -1,0 +1,23 @@
+
+##################################################
+#
+#   RAIDA
+#   AIDA implementation based on root (http://root.cern.ch)  
+#
+#   original author T.Kraemer, DESY
+##################################################
+
+  -------
+ | v01-03 |
+  -------
+    - cmake now default build tool - see README
+    - bug fix: proper path for ntuple: "/N-Tuples"
+       
+  -------
+ | v01-02 |  
+  -------
+     - added cmake support
+
+
+
+
