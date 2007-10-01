@@ -62,7 +62,8 @@ fi
 if [ "${print_root}" ]
 then
     # does the shell know this command?
-    type root-config >& /dev/null
+    #type root-config >& /dev/null
+    type root-config 1> /dev/null 2> /dev/null
     # test the exit status of "type"
     if [ $? -ne 0 ]
     then
