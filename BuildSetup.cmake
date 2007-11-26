@@ -20,11 +20,11 @@ SET( ILC_HOME "/afs/desy.de/group/it/ilcsoft"
     CACHE PATH "Path to ILC Software" FORCE )
 
 # Path to ROOT
-SET( ROOT_HOME "${ILC_HOME}/root/5.08.00"
+SET( ROOT_HOME "${ILC_HOME}/root/5.16.00"
     CACHE PATH "Path to ROOT" FORCE )
 
 # CMake Modules Path
-SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-04-01"
+SET( CMAKE_MODULE_PATH "${ILC_HOME}/CMakeModules/v01-05"
     CACHE PATH "Path to CMake Modules" FORCE )
 
 ###############################################
