@@ -47,7 +47,7 @@ public:
      * @return false If the histogram cannot be destroyed.
      *
      */
-  ///virtual bool destroy(IBaseHistogram * hist) = 0;
+  virtual bool destroy(IBaseHistogram * hist) = 0;
 
     /**
      * Create a ICloud1D, an unbinned 1-dimensional histogram.

@@ -27,6 +27,42 @@ IHistogramFactoryROOT::IHistogramFactoryROOT(ITree & tree)
   _usedTree = &tree;
 }
 
+// default consturctor needed to initialise _usedTree pointer correctly
+IHistogramFactoryROOT::IHistogramFactoryROOT()
+    : _usedTree(0)
+{
+}
+
+IHistogramFactoryROOT::~IHistogramFactoryROOT()
+{
+    // write all histograms associated with a file
+    _usedTree->commit();
+
+    // itterate on all histos in the set and delete them
+    for (std::set<IBaseHistogram *>::iterator setIter = _histosInThisFactory.begin();
+	     setIter != _histosInThisFactory.end(); setIter++  ) 
+    {
+	delete *setIter;
+    }
+}
+
+bool IHistogramFactoryROOT::destroy(IBaseHistogram * hist)
+{
+
+    // check if the pointer is valid
+    // if it is not in the set deleting it would cause a segfault
+    if (_histosInThisFactory.find(hist) == _histosInThisFactory.end() )
+    {
+	return false;
+    }
+
+    // if the histo is there, delete it and remove the pointer from the set
+    delete hist;
+    _histosInThisFactory.erase(hist);
+    
+    return true;
+}
+
 IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
                const std::string & path, 
                const std::string & title, 
@@ -99,6 +135,8 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(
 					       options) ;
 
   _usedTree->cd( thePWD ) ;
+
+  _histosInThisFactory.insert(histo);
 
   return histo;
 }
@@ -226,6 +264,8 @@ IHistogram1D * IHistogramFactoryROOT::createHistogram1D(const std::string & path
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
+
   return histo;
 }
 
@@ -295,6 +335,8 @@ IHistogram1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 						     *phist) ;
 
   _usedTree->cd( thePWD ) ;
+
+  _histosInThisFactory.insert(histogram);
 
   return histogram;
 } 
@@ -381,6 +423,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -537,6 +580,7 @@ IHistogram2D * IHistogramFactoryROOT::createHistogram2D(const std::string & path
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -611,6 +655,7 @@ IHistogram2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -704,6 +749,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -893,6 +939,7 @@ IHistogram3D * IHistogramFactoryROOT::createHistogram3D(const std::string & path
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -971,6 +1018,7 @@ IHistogram3D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -1047,6 +1095,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1129,6 +1178,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1279,6 +1329,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1383,6 +1434,7 @@ IProfile1D * IHistogramFactoryROOT::createProfile1D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1453,6 +1505,7 @@ IProfile1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(profhist);
   return profhist;
 }
 
@@ -1538,6 +1591,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1628,6 +1682,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1816,6 +1871,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -1948,6 +2004,7 @@ IProfile2D * IHistogramFactoryROOT::createProfile2D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -2022,6 +2079,7 @@ IProfile2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(profhist);
   return profhist;
 }
 
@@ -2094,6 +2152,7 @@ ICloud1D * IHistogramFactoryROOT::createCloud1D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -2183,6 +2242,7 @@ ICloud1D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(newCloud);
   return newCloud;
 }
 
@@ -2253,6 +2313,7 @@ ICloud2D * IHistogramFactoryROOT::createCloud2D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -2343,6 +2404,7 @@ ICloud2D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(newCloud);
   return newCloud;
 }
 
@@ -2413,6 +2475,7 @@ ICloud3D * IHistogramFactoryROOT::createCloud3D(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histo);
   return histo;
 }
 
@@ -2503,6 +2566,7 @@ ICloud3D * IHistogramFactoryROOT::createCopy(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(newCloud);
   return newCloud;
 }
 
@@ -2550,6 +2614,7 @@ IHistogram1D * IHistogramFactoryROOT::add(const std::string & path,
 
   IHistogram1D *hist = createCopy(path,hist1);
   hist->add(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2598,6 +2663,7 @@ IHistogram1D * IHistogramFactoryROOT::subtract(const std::string & path,
   IHistogram1DROOT *hist = 
     dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
   hist->subtract(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2646,6 +2712,7 @@ IHistogram1D * IHistogramFactoryROOT::multiply(const std::string & path,
   IHistogram1DROOT *hist = 
     dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
   hist->multiply(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2694,6 +2761,7 @@ IHistogram1D * IHistogramFactoryROOT::divide(const std::string & path,
   IHistogram1DROOT *hist = 
     dynamic_cast<IHistogram1DROOT*>( createCopy(path,hist1) );
   hist->divide(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2755,6 +2823,7 @@ IHistogram2D * IHistogramFactoryROOT::add(const std::string & path,
 
   IHistogram2D *hist = createCopy(path,hist1);
   hist->add(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2817,6 +2886,7 @@ IHistogram2D * IHistogramFactoryROOT::subtract(const std::string & path,
   IHistogram2DROOT *hist = 
     dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
   hist->subtract(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2879,6 +2949,7 @@ IHistogram2D * IHistogramFactoryROOT::multiply(const std::string & path,
   IHistogram2DROOT *hist = 
     dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
   hist->multiply(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -2941,6 +3012,7 @@ IHistogram2D * IHistogramFactoryROOT::divide(const std::string & path,
   IHistogram2DROOT *hist = 
     dynamic_cast<IHistogram2DROOT*>( createCopy(path,hist1) );
   hist->divide(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -3018,6 +3090,7 @@ IHistogram3D * IHistogramFactoryROOT::add(const std::string & path,
   hist->add(hist2) ;
   //  cout << "###---###" << dynamic_cast<IHistogram3DROOT*>(hist)->_histogram->GetNbinsX() << endl; 
   //  cout << "###---###" << dynamic_cast<IHistogram3DROOT*>(hist)->histoROOT()->GetNbinsX() << endl; 
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -3094,6 +3167,7 @@ IHistogram3D * IHistogramFactoryROOT::subtract(const std::string & path,
   IHistogram3DROOT *hist = 
     dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
   hist->subtract(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -3170,6 +3244,7 @@ IHistogram3D * IHistogramFactoryROOT::multiply(const std::string & path,
   IHistogram3DROOT *hist = 
     dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
   hist->multiply(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -3246,6 +3321,7 @@ IHistogram3D * IHistogramFactoryROOT::divide(const std::string & path,
   IHistogram3DROOT *hist = 
     dynamic_cast<IHistogram3DROOT*>( createCopy(path,hist1) );
   hist->divide(hist2) ;
+  // no need to add hist to  _histosInThisFactory, createCopy already did it 
   return hist;
 }
 
@@ -3370,6 +3446,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceX(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -3441,6 +3518,7 @@ IHistogram1D * IHistogramFactoryROOT::sliceY(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -3550,6 +3628,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXY(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -3619,6 +3698,7 @@ IHistogram2D * IHistogramFactoryROOT::sliceXZ(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }
 
@@ -3689,5 +3769,6 @@ IHistogram2D * IHistogramFactoryROOT::sliceYZ(const std::string & path,
 
   _usedTree->cd( thePWD ) ;
 
+  _histosInThisFactory.insert(histogram);
   return histogram;
 }

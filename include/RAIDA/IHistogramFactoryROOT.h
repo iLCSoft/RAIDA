@@ -8,6 +8,7 @@
 #include <AIDA/IHistogram2D.h>
 #include <string>
 #include <vector>
+#include <set>
 
 namespace AIDA {
 
@@ -26,17 +27,17 @@ namespace AIDA {
  * The created objects are assumed to be managed by the tree which is associated to the factory.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogramFactoryROOT.h,v 1.9 2006-12-04 17:24:06 tkraemer Exp $
+ * @version $Id: IHistogramFactoryROOT.h,v 1.10 2008-01-30 17:42:20 killenberg Exp $
  */
  
 class IHistogramFactoryROOT : public IHistogramFactory {
 
 public: 
     /// Destructor.
-  virtual ~IHistogramFactoryROOT() { /* nop */; }
+    virtual ~IHistogramFactoryROOT();
 
   IHistogramFactoryROOT(ITree & tree);
-  IHistogramFactoryROOT() {}
+    IHistogramFactoryROOT();
 
     /**
      * Destroy an IBaseHistogram ogject.
@@ -44,7 +45,7 @@ public:
      * @return false If the histogram cannot be destroyed.
      *
      */
-  /// virtual bool destroy(IBaseHistogram * hist) ;
+  virtual bool destroy(IBaseHistogram * hist) ;
 
     /**
      * Create a ICloud1D, an unbinned 1-dimensional histogram.
@@ -1127,6 +1128,13 @@ private:
 
   ITree* _usedTree; 
   static const int _nMaxDefault;
+
+    // a set (sorted associative stl container) which contains 
+    // pointers to all the histograms which have been created with this
+    // factory. All these histograms belong the factory, so we have to do
+    // some bookkeeping.
+    std::set<IBaseHistogram *> _histosInThisFactory;
+
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IHISTOGRAMFACTORYROOT_H */

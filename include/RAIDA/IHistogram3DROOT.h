@@ -18,7 +18,7 @@ namespace AIDA {
  * User level interface to 3D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram3DROOT.h,v 1.10 2007-03-23 14:41:36 tkraemer Exp $
+ * @version $Id: IHistogram3DROOT.h,v 1.11 2008-01-30 17:42:20 killenberg Exp $
  */
 
 class IHistogram3DROOT : public IHistogram3D {
@@ -27,10 +27,10 @@ class IHistogram3DROOT : public IHistogram3D {
 
 public: 
     /// Destructor.
-    virtual ~IHistogram3DROOT() { /* nop */; }
+    virtual ~IHistogram3DROOT();
 
   /// Constructor.
-  IHistogram3DROOT() { /* nop */; }
+    IHistogram3DROOT();
 
   IHistogram3DROOT(const std::string & name,
                    const std::string & title,

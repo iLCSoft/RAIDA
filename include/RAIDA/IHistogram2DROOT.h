@@ -19,7 +19,7 @@ namespace AIDA {
  * User level interface to 2D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram2DROOT.h,v 1.10 2007-03-23 14:41:36 tkraemer Exp $
+ * @version $Id: IHistogram2DROOT.h,v 1.11 2008-01-30 17:42:20 killenberg Exp $
  */
  
 class IHistogram2DROOT : public IHistogram2D {
@@ -27,10 +27,10 @@ friend class IHistogramFactoryROOT ;
 friend class IHistogram1DROOT ;
 public: 
     /// Destructor.
-    virtual ~IHistogram2DROOT() { /* nop */; }
+  virtual ~IHistogram2DROOT();
 
   /// Constructor.
-  IHistogram2DROOT() { /* nop */; }
+  IHistogram2DROOT();
 
   IHistogram2DROOT(const std::string & name,
                    const std::string & title,

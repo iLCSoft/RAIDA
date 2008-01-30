@@ -14,6 +14,38 @@
 using namespace AIDA ;
 using namespace std;
 
+IHistogram3DROOT::~IHistogram3DROOT()
+{
+    // The histograms (at least _histogram) are associated to a file.
+    // Set the directory to 0 to remove this binding so we can delete them.
+    _histogram->SetDirectory(0);
+    delete _histogram;
+
+    _histogramAIDA->SetDirectory(0);
+    delete _histogramAIDA;
+
+    _histogramAIDABinMeanX->SetDirectory(0);
+    delete _histogramAIDABinMeanX;
+
+    _histogramAIDABinMeanY->SetDirectory(0);
+    delete _histogramAIDABinMeanY;
+
+    _histogramAIDABinMeanZ->SetDirectory(0);
+    delete _histogramAIDABinMeanZ;
+
+    delete _xAxis;
+    delete _yAxis;
+    delete _zAxis;
+}
+
+IHistogram3DROOT::IHistogram3DROOT()
+  : _histogram(0),  _histogramAIDA(0), _histogramAIDABinMeanX(0),
+    _histogramAIDABinMeanY(0), _histogramAIDABinMeanZ(0),
+    _xAxis(0),  _yAxis(0), _zAxis(0)
+{
+    // nothing to do, just created implementation to initialize pointers correctly
+}
+
 IHistogram3DROOT::IHistogram3DROOT(const std::string & name,
                                    const std::string & title,
                                    int nBinsX,

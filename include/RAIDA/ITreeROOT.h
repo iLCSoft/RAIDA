@@ -23,7 +23,7 @@ namespace AIDA {
  * This may be implemented on a per-thread basis.
  *
  * @author T. Kraemer, DESY
- * @version $Id: ITreeROOT.h,v 1.4 2007-01-24 10:57:01 tkraemer Exp $
+ * @version $Id: ITreeROOT.h,v 1.5 2008-01-30 17:42:20 killenberg Exp $
  */
 
 class ITreeROOT : public ITree {
@@ -50,7 +50,7 @@ public:
 	    bool createNew = false,
 	    const std::string &options = "");
 
-  ITreeROOT() {}
+    ITreeROOT();
 
   /**
    * Get the name of the store.

@@ -18,16 +18,16 @@ namespace AIDA {
  * User level interface to 1D Histogram.
  *
  * @author T. Kraemer, DESY
- * @version $Id: IHistogram1DROOT.h,v 1.12 2007-03-23 14:41:36 tkraemer Exp $
+ * @version $Id: IHistogram1DROOT.h,v 1.13 2008-01-30 17:42:20 killenberg Exp $
  */
  
 class IHistogram1DROOT : public IHistogram1D {
 friend class IHistogramFactoryROOT ;
 public: 
     /// Destructor.
-    virtual ~IHistogram1DROOT() { _histogram->Write(); }
+    virtual ~IHistogram1DROOT();
 
-  IHistogram1DROOT() { /* nop */; }
+    IHistogram1DROOT();
 
   IHistogram1DROOT(const std::string & name, 
                    const std::string & title, 

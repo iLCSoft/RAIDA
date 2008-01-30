@@ -14,11 +14,14 @@
 using namespace AIDA ;
 using namespace std;
 
+ITreeROOT::ITreeROOT() : _ROOTFile(0) {}
+
 ITreeROOT::ITreeROOT(const std::string & storeName,
 		     const std::string & storeType,
 		     bool readOnly,
 		     bool createNew,
 		     const std::string &options)
+ : _ROOTFile(0)
 {
   string RWMode;
   if (createNew && readOnly)

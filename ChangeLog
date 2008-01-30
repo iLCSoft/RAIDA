@@ -1,3 +1,11 @@
+2008-01-30 killenberg
+ - Added Doxyfile
+ - Introduced memory management of histograms in IHistorgamFactoryROOT
+ - Removed memory leaks in IHistgram1D, 2D and 3D
+ - Improved AIDA compatibility:
+   IHistorgamFactoryROOT::destroy(IBaseHistogram * hist) is now implemented
+	
+
 2007-07-13 16:13  engels
 
 	* README: updated
