@@ -7,6 +7,20 @@
 #   original author T.Kraemer, DESY
 ##################################################
 
+ -----------
+| v01-04-01 |  
+ -----------
+           J.Engels, DESY 
+           added aida-config and aida-setup.sh INSTALL rule in CMakeLists.txt
+  -------
+ | v01-04 |  
+  -------
+          M.Killenberg, Bonn
+         - Added Doxyfile 
+         - Introduced memory management of histograms in IHistorgamFactoryROOT
+         - Removed memory leaks in IHistgram1D, 2D and 3D
+         - IHistorgamFactoryROOT::destroy(IBaseHistogram * hist) implemented
+
   -------
  | v01-03 |
   -------
