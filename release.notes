@@ -8,6 +8,11 @@
 ##################################################
 
  -----------
+| v01-04-02 |
+ -----------
+    - added compatibility issue for being able to switch between RAIDA/JAIDA
+        in LCFIVertex
+ -----------
 | v01-04-01 |  
  -----------
            J.Engels, DESY 
