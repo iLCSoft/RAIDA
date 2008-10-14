@@ -8,10 +8,10 @@
 ####################################################################################################
 
 # include directories
-INCLUDE_DIRECTORIES( "${${PROJECT_NAME}_SOURCE_DIR}/include" )
+INCLUDE_DIRECTORIES( "${RAIDA_SOURCE_DIR}/include" )
 
 # install include files
-INSTALL( DIRECTORY "${${PROJECT_NAME}_SOURCE_DIR}/include"
+INSTALL( DIRECTORY "${RAIDA_SOURCE_DIR}/include"
         DESTINATION .
         PATTERN "*~" EXCLUDE
         PATTERN "*CVS*" EXCLUDE )
@@ -35,9 +35,6 @@ IF( RAIDA_DEBUG_VERBOSE_FACTORY )
     ADD_DEFINITIONS( "-DUSE_RAIDA_DEBUG_VERBOSE_FACTORY" )
 ENDIF()
 
-# binary sources: list of all sources from which you want to create a binary
-#SET( bin_srcs example.cc )
-
 # get list of all source files in this directory
 AUX_SOURCE_DIRECTORY( . lib_srcs )
 
@@ -47,23 +44,23 @@ AUX_SOURCE_DIRECTORY( . lib_srcs )
 ####################################################################################################
 
 # create library
-ADD_LIBRARY( lib_${PROJECT_NAME} ${lib_srcs} )
+ADD_LIBRARY( lib_RAIDA ${lib_srcs} )
 
 # create symbolic lib target for calling target lib_XXX
-ADD_CUSTOM_TARGET( lib DEPENDS lib_${PROJECT_NAME} )
+ADD_CUSTOM_TARGET( lib DEPENDS lib_RAIDA )
 
 # change lib_target properties
-SET_TARGET_PROPERTIES( lib_${PROJECT_NAME} PROPERTIES
+SET_TARGET_PROPERTIES( lib_RAIDA PROPERTIES
     # create *nix style library versions + symbolic links
-    VERSION ${${PROJECT_NAME}_VERSION}
-    SOVERSION ${${PROJECT_NAME}_SOVERSION}
+    VERSION ${RAIDA_VERSION}
+    SOVERSION ${RAIDA_SOVERSION}
     # allow creating static and shared libs without conflicts
     CLEAN_DIRECT_OUTPUT 1
     # avoid conflicts between library and binary target names
-    OUTPUT_NAME ${PROJECT_NAME} )
+    OUTPUT_NAME RAIDA )
 
 # install library
-INSTALL( TARGETS lib_${PROJECT_NAME} DESTINATION lib PERMISSIONS
+INSTALL( TARGETS lib_RAIDA DESTINATION lib PERMISSIONS
         OWNER_READ OWNER_WRITE OWNER_EXECUTE
         GROUP_READ GROUP_EXECUTE
         WORLD_READ WORLD_EXECUTE )
@@ -76,8 +73,8 @@ INSTALL( TARGETS lib_${PROJECT_NAME} DESTINATION lib PERMISSIONS
 IF( BUILD_RAIDA_EXAMPLE )
 
     ADD_EXECUTABLE( bin ../example.cc )
-    SET_TARGET_PROPERTIES( bin PROPERTIES OUTPUT_NAME ${PROJECT_NAME} )
-    TARGET_LINK_LIBRARIES( bin lib_${PROJECT_NAME} )
+    SET_TARGET_PROPERTIES( bin PROPERTIES OUTPUT_NAME RAIDA )
+    TARGET_LINK_LIBRARIES( bin lib_RAIDA )
     # install binary commando
     INSTALL( TARGETS bin DESTINATION bin )
 

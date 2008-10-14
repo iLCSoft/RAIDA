@@ -17,16 +17,17 @@ PROJECT( RAIDA )
 
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
+OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" ON )
 OPTION( RAIDA_DEBUG_VERBOSE_FACTORY "Set to ON to additional verbosity" OFF )
 OPTION( BUILD_RAIDA_EXAMPLE "Set to ON to build RAIDA example" OFF )
 
-# project dependencies e.g. SET( ${PROJECT_NAME}_DEPENDS "ROOT;LCIO;Marlin" )
-SET( ${PROJECT_NAME}_DEPENDS "ROOT" )
+# project dependencies
+SET( RAIDA_DEPENDS "ROOT" )
 
 # project version
-SET( ${PROJECT_NAME}_MAJOR_VERSION 1 )
-SET( ${PROJECT_NAME}_MINOR_VERSION 4 )
-SET( ${PROJECT_NAME}_PATCH_LEVEL 1 )
+SET( RAIDA_MAJOR_VERSION 1 )
+SET( RAIDA_MINOR_VERSION 4 )
+SET( RAIDA_PATCH_LEVEL 1 )
 
 # set default cmake build type to RelWithDebInfo
 IF( NOT CMAKE_BUILD_TYPE )
@@ -38,13 +39,34 @@ IF( CMAKE_INSTALL_PREFIX STREQUAL "/usr/local" )
     SET( CMAKE_INSTALL_PREFIX "${PROJECT_SOURCE_DIR}" )
 ENDIF()
 
+#---------------- 32/64 bit issues ---------------------------------------
+IF( CMAKE_SIZEOF_VOID_P EQUAL 4 )
+    MESSAGE( STATUS "32 bit architecture detected" )
+ENDIF()
+
+IF( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+    MESSAGE( STATUS "64 bit architecture detected" )
+
+    IF( BUILD_32BIT_COMPATIBLE )
+        IF( COMMAND SET_PROPERTY )
+            SET_PROPERTY(GLOBAL PROPERTY FIND_LIBRARY_USE_LIB64_PATHS 0)
+            SET( CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -m32" )
+        ELSE()
+            MESSAGE( FATAL_ERROR "to build in 32 bit compatibility mode you need cmake >= 2.6" )
+        ENDIF()
+        MESSAGE( STATUS "Build in 32 bit compatibility mode" )
+    ELSE()
+        MESSAGE( STATUS "Build in native 64 bit mode" )
+    ENDIF()
+ENDIF()
+#-------------------------------------------------------------------------
+
+
 ##########################################################################################
 
 # library *nix style versioning
-SET( ${PROJECT_NAME}_SOVERSION
-    "${${PROJECT_NAME}_MAJOR_VERSION}.${${PROJECT_NAME}_MINOR_VERSION}" )
-SET( ${PROJECT_NAME}_VERSION
-    "${${PROJECT_NAME}_SOVERSION}.${${PROJECT_NAME}_PATCH_LEVEL}" )
+SET( RAIDA_SOVERSION "${RAIDA_MAJOR_VERSION}.${RAIDA_MINOR_VERSION}" )
+SET( RAIDA_VERSION "${RAIDA_SOVERSION}.${RAIDA_PATCH_LEVEL}" )
 
 # add install path to the rpath list
 SET( CMAKE_INSTALL_RPATH "${CMAKE_INSTALL_PREFIX}/lib" )
@@ -67,9 +89,10 @@ SET( LIBRARY_OUTPUT_PATH "${PROJECT_BINARY_DIR}/lib" CACHE PATH
     "LIBRARY_OUTPUT_PATH" FORCE )
 MARK_AS_ADVANCED( EXECUTABLE_OUTPUT_PATH LIBRARY_OUTPUT_PATH )
 
+
 # DEPENDENCIES: this code has to be placed before adding any library or
 # executable so that these are linked properly against the dependencies
-IF( DEFINED ${PROJECT_NAME}_DEPENDS OR DEFINED BUILD_WITH OR DEFINED LINK_WITH )
+IF( DEFINED RAIDA_DEPENDS OR DEFINED BUILD_WITH OR DEFINED LINK_WITH )
     IF( NOT DEFINED CMAKE_MODULE_PATH )
         MESSAGE( FATAL_ERROR "CMAKE_MODULE_PATH not set! Set it with: "
             "-DCMAKE_MODULE_PATH=\"/path_to_ilcsoft/CMakeModules\"" )
@@ -91,11 +114,11 @@ CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/cmake_uninstall.cmake.in"
 ADD_CUSTOM_TARGET( uninstall "${CMAKE_COMMAND}" -P "${PROJECT_BINARY_DIR}/cmake_uninstall.cmake" )
 
 # create configuration file from .in file
-CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/${PROJECT_NAME}Config.cmake.in"
-                "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" @ONLY )
+CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/RAIDAConfig.cmake.in"
+                "${PROJECT_BINARY_DIR}/RAIDAConfig.cmake" @ONLY )
 
 # install configuration file
-INSTALL( FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}Config.cmake" DESTINATION . )
+INSTALL( FILES "${PROJECT_BINARY_DIR}/RAIDAConfig.cmake" DESTINATION . )
 
 INSTALL( FILES "${PROJECT_SOURCE_DIR}/bin/aida-config" "${PROJECT_SOURCE_DIR}/bin/aida-setup.sh"
     DESTINATION bin PERMISSIONS
@@ -111,6 +134,9 @@ MESSAGE( STATUS "BUILD_SHARED_LIBS = ${BUILD_SHARED_LIBS}" )
 MESSAGE( STATUS "CMAKE_INSTALL_PREFIX = ${CMAKE_INSTALL_PREFIX}" )
 MESSAGE( STATUS "CMAKE_BUILD_TYPE = ${CMAKE_BUILD_TYPE}" )
 MESSAGE( STATUS "CMAKE_MODULE_PATH = ${CMAKE_MODULE_PATH}" )
+IF( CMAKE_SIZEOF_VOID_P EQUAL 8 )
+    MESSAGE( STATUS "BUILD_32BIT_COMPATIBLE = ${BUILD_32BIT_COMPATIBLE}" )
+ENDIF()
 MESSAGE( STATUS "BUILD_RAIDA_EXAMPLE = ${BUILD_RAIDA_EXAMPLE}" )
 MESSAGE( STATUS "RAIDA_DEBUG_VERBOSE_FACTORY = ${RAIDA_DEBUG_VERBOSE_FACTORY}" )
 MESSAGE( STATUS "Change a value with: cmake -D<Variable>=<Value>" )
@@ -122,7 +148,7 @@ MESSAGE( STATUS )
 SET( BUILD_SHARED_LIBS "${BUILD_SHARED_LIBS}" CACHE BOOL
     "Set to OFF to build static libraries" FORCE )
 SET( CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}" CACHE PATH
-    "Where to install ${PROJECT_NAME}" FORCE )
+    "Where to install RAIDA" FORCE )
 SET( CMAKE_BUILD_TYPE "${CMAKE_BUILD_TYPE}" CACHE STRING
     "Choose the type of build, options are: None Debug Release RelWithDebInfo MinSizeRel." FORCE )
 SET( CMAKE_MODULE_PATH "${CMAKE_MODULE_PATH}" CACHE PATH
@@ -134,7 +160,10 @@ SET( RAIDA_DEBUG_VERBOSE_FACTORY "${RAIDA_DEBUG_VERBOSE_FACTORY}" CACHE BOOL
 
 # export build settings
 INCLUDE( CMakeExportBuildSettings )
-CMAKE_EXPORT_BUILD_SETTINGS( "${PROJECT_NAME}BuildSettings.cmake" )
+CMAKE_EXPORT_BUILD_SETTINGS( "RAIDABuildSettings.cmake" )
+INSTALL( FILES "${PROJECT_BINARY_DIR}/RAIDABuildSettings.cmake" DESTINATION lib/cmake )
 
 # export library dependencies (keep this as the last line in the file)
-EXPORT_LIBRARY_DEPENDENCIES( "${PROJECT_NAME}LibDeps.cmake" )
+EXPORT_LIBRARY_DEPENDENCIES( "RAIDALibDeps.cmake" )
+INSTALL( FILES "${PROJECT_BINARY_DIR}/RAIDALibDeps.cmake" DESTINATION lib/cmake )
+
