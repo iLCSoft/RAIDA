@@ -8,6 +8,12 @@
 ##################################################
 
  -----------
+| v01-04-03 |
+ -----------
+    - made cmake 2.6 compatible
+    - added 32 bit compatibility build option
+    - added RAIDA_LIBRARY_DIRS
+ -----------
 | v01-04-02 |
  -----------
     - added compatibility issue for being able to switch between RAIDA/JAIDA
