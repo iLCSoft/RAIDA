@@ -15,6 +15,10 @@ SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
 # project name
 PROJECT( RAIDA )
 
+# needed for using ctest
+ENABLE_TESTING()
+INCLUDE(CTest)
+
 # project options
 OPTION( BUILD_SHARED_LIBS "Set to OFF to build static libraries" ON )
 OPTION( BUILD_32BIT_COMPATIBLE "Set to ON to build in 32 bit compatibility mode" ON )
