@@ -14,7 +14,9 @@ INCLUDE_DIRECTORIES( "${RAIDA_SOURCE_DIR}/include" )
 INSTALL( DIRECTORY "${RAIDA_SOURCE_DIR}/include"
         DESTINATION .
         PATTERN "*~" EXCLUDE
-        PATTERN "*CVS*" EXCLUDE )
+        PATTERN "*CVS*" EXCLUDE
+        PATTERN "*/.svn*" EXCLUDE
+        )
 
 
 ####################################################################################################
