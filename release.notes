@@ -6,6 +6,11 @@
 #
 #   original author T.Kraemer, DESY
 ##################################################
+  -------
+ | v01-05 |  
+  -------
+      - fixed issue with duplicate histograms (M.Killenberg)
+      - removed old GNUmakefiles
 
  -----------
 | v01-04-03 |

@@ -81,25 +81,6 @@ Installation (with cmake):
  http://www.cmake.org
 
 
-Installation (old makefiles): -> Deprecated, please use cmake!
---------------------------------------------------------------
-
-Set the environment variables that describe your root installation, e.g.:
-
-   export ROOTSYS=/opt/products/root/5.08.00
-
-   export LD_LIBRARY_PATH=$ROOTSYS/lib:$LD_LIBRARY_PATH
-   export PATH=$ROOTSYS/bin:$PATH
-
-and then build the library:
-   
-  cd ./src
-  gmake
-  cd ..
-
-this will create ./lib/libRAIDA.a
-
-
 Linking against RAIDA:
 ---------------------
 

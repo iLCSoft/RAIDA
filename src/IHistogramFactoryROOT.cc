@@ -35,7 +35,8 @@ IHistogramFactoryROOT::IHistogramFactoryROOT()
 
 IHistogramFactoryROOT::~IHistogramFactoryROOT()
 {
-    // do not write to file, i.e. do not call _usedTree->commit()
+    // do not write to file, i.e. do not call 
+    // _usedTree->commit()
     // this only should happen if explicitly called by user
   
     // itterate on all histos in the set and delete them
