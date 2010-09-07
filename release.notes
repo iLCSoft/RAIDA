@@ -8,24 +8,40 @@
 ##################################################
 
  -----------
+| v01-04-04 |
+ -----------
+
+    - Removed redundant tree->commit() from destructor of histogram factory. The
+      user/programmer has to call tree->commit() explicitly to write to
+      file. Now each histogram is only written once using the Marlin
+      AIDAProcessor, like it should be. (M. Killenberg)
+ 
+ -----------
 | v01-04-03 |
  -----------
+
     - made cmake 2.6 compatible
     - added 32 bit compatibility build option
     - added RAIDA_LIBRARY_DIRS
+
  -----------
 | v01-04-02 |
  -----------
+
     - added compatibility issue for being able to switch between RAIDA/JAIDA
         in LCFIVertex
+
  -----------
 | v01-04-01 |  
  -----------
-           J.Engels, DESY 
-           added aida-config and aida-setup.sh INSTALL rule in CMakeLists.txt
+
+       J.Engels, DESY 
+       added aida-config and aida-setup.sh INSTALL rule in CMakeLists.txt
+
   -------
  | v01-04 |  
   -------
+
           M.Killenberg, Bonn
          - Added Doxyfile 
          - Introduced memory management of histograms in IHistorgamFactoryROOT
@@ -35,12 +51,14 @@
   -------
  | v01-03 |
   -------
+
     - cmake now default build tool - see README
     - bug fix: proper path for ntuple: "/N-Tuples"
        
   -------
  | v01-02 |  
   -------
+
      - added cmake support
 
 

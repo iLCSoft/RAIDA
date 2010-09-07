@@ -27,7 +27,7 @@ SET( RAIDA_DEPENDS "ROOT" )
 # project version
 SET( RAIDA_MAJOR_VERSION 1 )
 SET( RAIDA_MINOR_VERSION 4 )
-SET( RAIDA_PATCH_LEVEL 3 )
+SET( RAIDA_PATCH_LEVEL 4 )
 
 # set default cmake build type to RelWithDebInfo
 IF( NOT CMAKE_BUILD_TYPE )
