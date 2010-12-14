@@ -126,6 +126,7 @@ INSTALL( FILES "./bin/aida-config" "./bin/aida-setup.sh"
 # display some variables and write them to cache
 DISPLAY_STD_VARIABLES()
 
+MESSAGE( STATUS "BUILD_RAIDA_EXAMPLE = ${BUILD_RAIDA_EXAMPLE}" )
 MESSAGE( STATUS "RAIDA_DEBUG_VERBOSE_FACTORY = ${RAIDA_DEBUG_VERBOSE_FACTORY}" )
 MESSAGE( STATUS )
 
