@@ -1,0 +1,85 @@
+##############################################################################
+# cmake configuration file for RAIDA
+#
+# requires:
+#   MacroCheckPackageLibs.cmake for checking package libraries
+#
+# returns following variables:
+#
+#   RAIDA_FOUND      : set to TRUE if RAIDA found
+#       if FIND_PACKAGE called with REQUIRED and COMPONENTS arguments
+#       RAIDA_FOUND is only set to TRUE if ALL components are also found
+#       if REQUIRED is NOT set components may or may not be available
+#
+#   RAIDA_ROOT       : path to this RAIDA installation
+#   RAIDA_LIBRARIES  : list of RAIDA libraries (NOT including COMPONENTS)
+#   RAIDA_INCLUDE_DIRS  : list of paths to be used with INCLUDE_DIRECTORIES
+#   RAIDA_LIBRARY_DIRS  : list of paths to be used with LINK_DIRECTORIES
+#   RAIDA_COMPONENT_LIBRARIES      : list of RAIDA component libraries
+#   RAIDA_${COMPONENT}_FOUND       : set to TRUE or FALSE for each library
+#   RAIDA_${COMPONENT}_LIBRARY     : path to individual libraries
+#   RAIDA_${COMPONENT}_LIB_DEPENDS : individual library dependencies
+#
+# @author Jan Engels, Desy
+##############################################################################
+
+SET( RAIDA_ROOT "@CMAKE_INSTALL_PREFIX@" )
+
+
+# ---------- include dirs -----------------------------------------------------
+# do not store find results in cache
+SET( RAIDA_INCLUDE_DIRS RAIDA_INCLUDE_DIRS-NOTFOUND )
+MARK_AS_ADVANCED( RAIDA_INCLUDE_DIRS )
+
+FIND_PATH( RAIDA_INCLUDE_DIRS
+	NAMES AIDA/AIDA.h
+	PATHS ${RAIDA_ROOT}/include
+	NO_DEFAULT_PATH
+)
+
+
+# ---------- libraries --------------------------------------------------------
+INCLUDE( ${RAIDA_ROOT}/cmake/MacroCheckPackageLibs.cmake ) # FIXME full path ?!
+
+# only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
+# additional components are set by cmake in variable PKG_FIND_COMPONENTS
+# first argument should be the package name
+CHECK_PACKAGE_LIBS( RAIDA RAIDA )
+
+
+
+
+# ---------- libraries dependencies -------------------------------------------
+# this sets RAIDA_${COMPONENT}_LIB_DEPENDS variables
+INCLUDE( "${RAIDA_ROOT}/lib/cmake/RAIDALibDeps.cmake" )
+ 
+
+
+
+# ---------- final checking ---------------------------------------------------
+INCLUDE( FindPackageHandleStandardArgs )
+# set RAIDA_FOUND to TRUE if all listed variables are TRUE and not empty
+# RAIDA_COMPONENT_VARIABLES will be set if FIND_PACKAGE is called with REQUIRED argument
+FIND_PACKAGE_HANDLE_STANDARD_ARGS( RAIDA DEFAULT_MSG RAIDA_ROOT RAIDA_INCLUDE_DIRS RAIDA_LIBRARIES ${RAIDA_COMPONENT_VARIABLES} )
+
+
+
+# ---------- definitions ------------------------------------------------------
+# RAIDA_DEFINITIONS should only include definitions absolutely necessary to compile
+# against RAIDA (e.g. -Wno-long-long )
+IF( RAIDA_FOUND )
+    SET( RAIDA_DEFINITIONS "-DUSE_AIDA -DMARLIN_USE_AIDA -DUSE_RAIDA" ) # FIXME : this should not be defined HERE !!!
+    MARK_AS_ADVANCED( RAIDA_DEFINITIONS )
+ENDIF( RAIDA_FOUND )
+
+
+
+# ---------- bug fix for cmake versions < 2.8 ---------------------------------
+# RAIDA_FIND_REQUIRED is not reset between FIND_PACKAGE calls, i.e. the following
+# code fails when geartgeo component not available: (fixed in cmake 2.8)
+# FIND_PACKAGE( RAIDA REQUIRED )
+# FIND_PACKAGE( RAIDA COMPONENTS geartgeo QUIET )
+IF( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8 )
+    SET( RAIDA_FIND_REQUIRED )
+ENDIF()
+
