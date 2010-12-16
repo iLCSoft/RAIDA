@@ -23,10 +23,21 @@
 #       1.5 != 1.5.0.1
 #
 #
-#   a version is compatible if and only if:
+#   if PKG_VERSION_CHECK_MINIMUM_REQUIRED is set to TRUE than any version
+#   greater or equal to the requested version is compatible, i.e. the same
+#   behavior as with the cmake variable CMAKE_MINIMUM_REQUIRED, e.g.:
+#       searching: 1.2     --> installed: 1.5.2.2 --> compatible
+#       searching: 1.5     --> installed: 1.5.2.2 --> compatible
+#       searching: 1.5.2.1 --> installed: 1.5.2.2 --> compatible
+#       searching: 1.5.2.2 --> installed: 1.5.2.2 --> compatible
+#       searching: 1.5.2.3 --> installed: 1.5.2.2 --> unsuitable
+#       searching: 1.7     --> installed: 1.5.2.2 --> unsuitable
+#
+#
+#   otherwise a version is compatible if and only if:
 #       1. MAJOR AND MINOR versions are EQUAL
 #       2. remaining version parts (PATCH.TWEAK) of installed package
-#           are greater or equal than the searched version i.e.:
+#             are greater or equal than the searched version i.e.:
 #          searching: 1.5     --> installed: 1.5.2.2 --> compatible
 #          searching: 1.5.0   --> installed: 1.5.2.2 --> compatible
 #          searching: 1.5.1   --> installed: 1.5.2.2 --> compatible
@@ -50,9 +61,13 @@
 
 SET( CMAKE_ALLOW_LOOSE_LOOP_CONSTRUCTS TRUE )
 
-MACRO( CHECK_PACKAGE_VERSION )
+MACRO( CHECK_PACKAGE_VERSION _pkgname )
 
-    SET( _pkgname "${PACKAGE_FIND_NAME}" )
+    # PACKAGE_FIND_NAME is not defined on FindPKG.cmake modules, therefore
+    # we need to make it an argument to the macro
+    IF( NOT _pkgname AND DEFINED PACKAGE_FIND_NAME )
+        SET( _pkgname "${PACKAGE_FIND_NAME}" )
+    ENDIF()
 
     SET( _installed_major ${${_pkgname}_VERSION_MAJOR} )
     SET( _installed_minor ${${_pkgname}_VERSION_MINOR} )
@@ -83,6 +98,7 @@ MACRO( CHECK_PACKAGE_VERSION )
             
             SET( PACKAGE_VERSION_EXACT TRUE )
             SET( PACKAGE_VERSION_UNSUITABLE FALSE )
+            #SET( PACKAGE_VERSION_COMPATIBLE TRUE ) # FIXME also set COMPATIBLE if version matches EXACTLY ?!
 
         ELSE() # if version does not match EXACTLY, check if it is at least compatible/suitable
 
@@ -98,34 +114,42 @@ MACRO( CHECK_PACKAGE_VERSION )
             ELSE() # user did not require an EXACT match, let's check if version is compatible...
 
 
-                # --- METHOD 1: MAJOR.MINOR MUST BE EQUAL ---------------------------------------------
-                # check for compatible version, i.e.
-                # MAJOR and MINOR versions must be EQUAL
-                IF( _installed_major VERSION_EQUAL _searching_major AND
-                    _installed_minor VERSION_EQUAL _searching_minor )
+                IF( ${_pkgname}_VERSION_CHECK_MINIMUM_REQUIRED )
 
-                    # if given, PATCH.TWEAK must be EQUAL or GREATER, i.e.
-                    # if user asks for 1.2.6 then 1.2.7 is compatible, but 1.2.5 is unsuitable
-                    IF( ${_pkgname}_FIND_VERSION_COUNT LESS 3 )
+                    IF( NOT ${_pkgname}_FIND_QUIETLY )
+                        MESSAGE( STATUS "Check for ${_pkgname}_VERSION_CHECK_MINIMUM_REQUIRED" )
+                    ENDIF()
+
+                    # --- METHOD 1: MINIMUM_REQUIRED ------------------------------------------------------
+                    # this method is not as strict as method 2. it only requires that installed version is
+                    # greater or equal than version searched by the user, i.e. like CMAKE_MINIMUM_REQUIRED
+                    # if user asks for version 1.2.5 then any version >= 1.2.5 is suitable/compatible
+                    IF( _searching_version VERSION_LESS _installed_version )
                         SET( PACKAGE_VERSION_COMPATIBLE TRUE )
-                    ELSE()
-                        IF( _searching_version VERSION_LESS _installed_version )
+                    ENDIF()
+                    # -------------------------------------------------------------------------------------
+
+                ELSE()
+
+                    # --- METHOD 2: MAJOR.MINOR MUST BE EQUAL ---------------------------------------------
+                    # check for compatible version, i.e.
+                    # MAJOR and MINOR versions must be EQUAL
+                    IF( _installed_major VERSION_EQUAL _searching_major AND
+                        _installed_minor VERSION_EQUAL _searching_minor )
+
+                        # if given, PATCH.TWEAK must be EQUAL or GREATER, i.e.
+                        # if user asks for 1.2.6 then 1.2.7 is compatible, but 1.2.5 is unsuitable
+                        IF( ${_pkgname}_FIND_VERSION_COUNT LESS 3 )
                             SET( PACKAGE_VERSION_COMPATIBLE TRUE )
+                        ELSE()
+                            IF( _searching_version VERSION_LESS _installed_version )
+                                SET( PACKAGE_VERSION_COMPATIBLE TRUE )
+                            ENDIF()
                         ENDIF()
                     ENDIF()
+                    # -------------------------------------------------------------------------------------
+
                 ENDIF()
-                # -------------------------------------------------------------------------------------
-
-
-                # --- METHOD 2: MINIMUM_REQUIRED ------------------------------------------------------
-                # this method is not as strict as method 1. it only requires that installed version is
-                # greater or equal than version searched by the user, i.e. like CMAKE_MINIMUM_REQUIRED
-                # if user asks for version 1.2.5 then any version >= 1.2.5 is suitable/compatible
-                #IF( _searching_version VERSION_LESS _installed_version )
-                #    SET( PACKAGE_VERSION_COMPATIBLE TRUE )
-                #ENDIF()
-                # -------------------------------------------------------------------------------------
-
 
             ENDIF()
 
