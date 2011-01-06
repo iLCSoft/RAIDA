@@ -18,20 +18,11 @@ SET( ${PROJECT_NAME}_VERSION_TWEAK 0 )
 
 ### SETTINGS ################################################################
 
-# additionally search for cmake macros/moules defined by this project
-LIST( APPEND CMAKE_MODULE_PATH ${PROJECT_SOURCE_DIR}/cmake )
+# ilcsoft_default_settings.cmake needs to be in CMAKE_MODULE_PATH
 INCLUDE( ilcsoft_default_settings )
-#INCLUDE( build_32bit_compatible )
-INCLUDE( MacroAddSharedLibrary )
-
 
 
 ### DEPENDENCIES ############################################################
-
-# fix for backwards compatibility
-IF( NOT ROOT_DIR AND DEFINED ROOT_HOME )
-    SET( ROOT_DIR "${ROOT_HOME}" )
-ENDIF()
 
 # at least version 5.0 of ROOT is required
 SET( ROOT_VERSION_CHECK_MINIMUM_REQUIRED TRUE )
@@ -81,7 +72,7 @@ FIND_PACKAGE( ROOT 5.0 REQUIRED )
 
 INCLUDE_DIRECTORIES( ./include )
 INCLUDE_DIRECTORIES( ${ROOT_INCLUDE_DIRS} )
-INSTALL( DIRECTORY ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
+INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
 
 
@@ -101,6 +92,7 @@ ENDIF()
 # RAIDA library
 AUX_SOURCE_DIRECTORY( ./src library_sources )
 ADD_SHARED_LIBRARY( RAIDA ${library_sources} )
+INSTALL_SHARED_LIBRARY( RAIDA DESTINATION lib )
 TARGET_LINK_LIBRARIES( RAIDA ${ROOT_LIBRARIES} )
 
 
