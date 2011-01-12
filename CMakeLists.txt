@@ -16,16 +16,16 @@ SET( ${PROJECT_NAME}_VERSION_TWEAK 0 )
 
 
 
-### SETTINGS ################################################################
+### DEPENDENCIES ############################################################
 
-# ilcsoft_default_settings.cmake needs to be in CMAKE_MODULE_PATH
+# FindILCSOFT_CMAKE_MODULES.cmake needs to be in CMAKE_MODULE_PATH
+FIND_PACKAGE( ILCSOFT_CMAKE_MODULES 0.11 REQUIRED )
+
+# load default settings from ILCSOFT_CMAKE_MODULES
 INCLUDE( ilcsoft_default_settings )
 
 
-### DEPENDENCIES ############################################################
-
 # at least version 5.0 of ROOT is required
-SET( ROOT_VERSION_CHECK_MINIMUM_REQUIRED TRUE )
 FIND_PACKAGE( ROOT 5.0 REQUIRED )
 
 
@@ -124,7 +124,6 @@ MESSAGE( STATUS "RAIDA_DEBUG_VERBOSE_FACTORY = ${RAIDA_DEBUG_VERBOSE_FACTORY}" )
 MESSAGE( STATUS )
 
 
-# export library dependencies (keep this as the last line in the file)
-EXPORT_LIBRARY_DEPENDENCIES( "${PROJECT_NAME}LibDeps.cmake" )
-INSTALL( FILES "${PROJECT_BINARY_DIR}/${PROJECT_NAME}LibDeps.cmake" DESTINATION lib/cmake )
+# generate and install following configuration files
+GENERATE_PACKAGE_CONFIGURATION_FILES( RAIDAConfig.cmake RAIDAConfigVersion.cmake RAIDALibDeps.cmake )
 
