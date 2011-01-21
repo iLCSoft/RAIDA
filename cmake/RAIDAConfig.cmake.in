@@ -39,7 +39,7 @@ FIND_PATH( RAIDA_INCLUDE_DIRS
 
 
 # ---------- libraries --------------------------------------------------------
-INCLUDE( ${RAIDA_ROOT}/cmake/MacroCheckPackageLibs.cmake ) # FIXME full path ?!
+INCLUDE( "@ILCSOFT_CMAKE_MODULES_ROOT@/MacroCheckPackageLibs.cmake" )
 
 # only standard libraries should be passed as arguments to CHECK_PACKAGE_LIBS
 # additional components are set by cmake in variable PKG_FIND_COMPONENTS
@@ -71,15 +71,4 @@ IF( RAIDA_FOUND )
     SET( RAIDA_DEFINITIONS "-DUSE_AIDA -DMARLIN_USE_AIDA -DUSE_RAIDA" ) # FIXME : this should not be defined HERE !!!
     MARK_AS_ADVANCED( RAIDA_DEFINITIONS )
 ENDIF( RAIDA_FOUND )
-
-
-
-# ---------- bug fix for cmake versions < 2.8 ---------------------------------
-# RAIDA_FIND_REQUIRED is not reset between FIND_PACKAGE calls, i.e. the following
-# code fails when geartgeo component not available: (fixed in cmake 2.8)
-# FIND_PACKAGE( RAIDA REQUIRED )
-# FIND_PACKAGE( RAIDA COMPONENTS geartgeo QUIET )
-IF( "${CMAKE_MAJOR_VERSION}.${CMAKE_MINOR_VERSION}" LESS 2.8 )
-    SET( RAIDA_FIND_REQUIRED )
-ENDIF()
 
