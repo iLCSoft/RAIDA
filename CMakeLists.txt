@@ -50,15 +50,6 @@ ENDIF()
 #############################################################################
 
 
-# -------- generate RAIDAConfig.h ----------------------------------------------
-#CONFIGURE_FILE( "${PROJECT_SOURCE_DIR}/cmake/RAIDAConfig.h.cmake.in"
-#    "${PROJECT_BINARY_DIR}/RAIDA/RAIDAConfig.h" @ONLY )
-#
-#INSTALL( FILES "${PROJECT_BINARY_DIR}/RAIDA/RAIDAConfig.h" DESTINATION "include/RAIDA/" )
-# -----------------------------------------------------------------------------
-
-
-
 INCLUDE_DIRECTORIES( ./include )
 INCLUDE_DIRECTORIES( ${ROOT_INCLUDE_DIRS} )
 INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )

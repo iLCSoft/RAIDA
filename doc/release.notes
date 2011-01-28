@@ -6,6 +6,15 @@
 #
 #   original author T.Kraemer, DESY
 ##################################################
+
+  -------
+ | v01-06 |  
+  -------
+
+    - fixed building documentation
+    - added RAIDAConfigVersion.cmake to check RAIDA version
+
+
   -------
  | v01-05 |  
   -------
