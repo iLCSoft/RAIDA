@@ -64,15 +64,10 @@ export RAIDA_DEBUG_VERBOSE=1
 Installation (with cmake):
 -------------------------
 
- 1st: edit the file BuildSetup.cmake according to your
-      system setup.
- 
- 2nd: type the following commands:
-                                                                                                                                                            
-    $ mkdir build
-    $ cd build
-    $ cmake -C ../BuildSetup.cmake ..
-    $ make install
+    mkdir build
+    cd build
+    cmake -DROOT_DIR=/path/to/ROOT ..
+    make install
  
  For more information on CMake for the ILCSoftware check:
  http://ilcsoft.desy.de/portal/general_documentation/index_eng.html

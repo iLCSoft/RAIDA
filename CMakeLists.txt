@@ -30,30 +30,21 @@ FIND_PACKAGE( ROOT 5.0 REQUIRED )
 
 ### DOCUMENTATION ###########################################################
 
-#OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" ON )
-#
-#IF( INSTALL_DOC )
-#
-#    FIND_PACKAGE( Doxygen )
-#    FIND_PACKAGE( LATEX )
-#
-#    IF( DOXYGEN_FOUND AND LATEX_COMPILER AND MAKEINDEX_COMPILER )
-#        ADD_SUBDIRECTORY( ./doc )
-#    ELSE()
-#        IF( NOT DOXYGEN_FOUND )
-#            MESSAGE( STATUS "Doxygen not found in your system!!" )
-#        ENDIF()
-#        IF( NOT LATEX_COMPILER OR NOT MAKEINDEX_COMPILER )
-#            MESSAGE( STATUS "Latex not found in your system!!" )
-#        ENDIF()
-#        IF( INSTALL_DOC )
-#            MESSAGE( STATUS "INSTALL_DOC set to OFF" )
-#            SET( INSTALL_DOC OFF )
-#        ENDIF()
-#    ENDIF()
-#ENDIF()
-#MESSAGE( STATUS "INSTALL_DOC = ${INSTALL_DOC}" )
+OPTION( INSTALL_DOC "Set to OFF to skip build/install Documentation" OFF )
 
+IF( INSTALL_DOC )
+
+    FIND_PACKAGE( Doxygen )
+
+    IF( DOXYGEN_EXECUTABLE )
+        ADD_SUBDIRECTORY( ./doc )
+    ELSE()
+        MESSAGE( SEND_ERROR "Could not find doxygen required to build documentation" )
+        MESSAGE( "Please install doxygen or set INSTALL_DOC to OFF" )
+        MESSAGE( "" )
+    ENDIF()
+
+ENDIF()
 
 
 #############################################################################
@@ -83,6 +74,8 @@ ADD_DEFINITIONS( "-Wno-long-long" )
 OPTION( RAIDA_DEBUG_VERBOSE_FACTORY "Set to ON to additional verbosity" OFF )
 IF( RAIDA_DEBUG_VERBOSE_FACTORY )
     ADD_DEFINITIONS( "-DUSE_RAIDA_DEBUG_VERBOSE_FACTORY" )
+ELSE()
+    MESSAGE( STATUS "RAIDA_DEBUG_VERBOSE_FACTORY: ${RAIDA_DEBUG_VERBOSE_FACTORY}" )
 ENDIF()
 
 
@@ -95,11 +88,10 @@ TARGET_LINK_LIBRARIES( RAIDA ${ROOT_LIBRARIES} )
 
 
 # RAIDA example
-OPTION( BUILD_RAIDA_EXAMPLE "Set to ON to build RAIDA example" OFF )
-IF( BUILD_RAIDA_EXAMPLE )
+IF( BUILD_TESTING )
     ADD_EXECUTABLE( RAIDA_EXAMPLE ./example/example.cc )
     TARGET_LINK_LIBRARIES( RAIDA_EXAMPLE RAIDA )
-    INSTALL( TARGETS RAIDA_EXAMPLE DESTINATION bin )
+    #INSTALL( TARGETS RAIDA_EXAMPLE DESTINATION bin )
 ENDIF()
 
 
@@ -109,11 +101,6 @@ INSTALL( PROGRAMS "./bin/aida-config" "./bin/aida-setup.sh" DESTINATION bin )
 
 # display some variables and write them to cache
 DISPLAY_STD_VARIABLES()
-
-MESSAGE( STATUS "BUILD_RAIDA_EXAMPLE = ${BUILD_RAIDA_EXAMPLE}" )
-MESSAGE( STATUS "RAIDA_DEBUG_VERBOSE_FACTORY = ${RAIDA_DEBUG_VERBOSE_FACTORY}" )
-MESSAGE( STATUS )
-
 
 # generate and install following configuration files
 GENERATE_PACKAGE_CONFIGURATION_FILES( RAIDAConfig.cmake RAIDAConfigVersion.cmake RAIDALibDeps.cmake )
