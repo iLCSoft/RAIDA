@@ -64,16 +64,33 @@ export RAIDA_DEBUG_VERBOSE=1
 Installation (with cmake):
 -------------------------
 
+    In order to build RAIDA you need ILCUTIL, ROOT and CMake
+
+    if you have access to /afs/desy.de/ then you will find all this packages under:
+
+        /afs/desy.de/project/ilcsoft/sw/i386_gcc34_sl4/   # SL4 32bit
+        /afs/desy.de/project/ilcsoft/sw/i386_gcc41_sl5/   # SL5 32bit
+        /afs/desy.de/project/ilcsoft/sw/x86_64_gcc41_sl5/ # SL5 64bit
+
+
+    if you do NOT have acces to /afs/desy.de/ or you do not have an SL4/SL5 machine the easiest
+        way is to use ilcinstall (http://ilcsoft.desy.de/portal/software_packages/ilcinstall/).
+        Please use an ilcinstall version >= v01-11. More information under:
+        http://ilcsoft.desy.de/portal/software_packages/ilcinstall_documentation/
+
+
+    Once the dependencies are resolved, issue the following commands:
+
     mkdir build
     cd build
-    cmake -DROOT_DIR=/path/to/ROOT ..
+    cmake -C $ILCSOFT/ILCSoft.cmake ..
     make install
- 
- For more information on CMake for the ILCSoftware check:
- http://ilcsoft.desy.de/portal/general_documentation/index_eng.html
- 
- CMake's official website:
- http://www.cmake.org
+
+    For more information on CMake for the ILCSoftware check:
+    http://ilcsoft.desy.de/portal/general_documentation/index_eng.html
+
+    CMake's official website:
+    http://www.cmake.org
 
 
 Linking against RAIDA:

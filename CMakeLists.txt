@@ -56,7 +56,7 @@ INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
 
 
-ADD_DEFINITIONS( "-Wall -ansi" ) # FIXME -pedantic
+ADD_DEFINITIONS( "-Wall -ansi -pedantic" )
 ADD_DEFINITIONS( "-Wno-long-long" )
 
 
