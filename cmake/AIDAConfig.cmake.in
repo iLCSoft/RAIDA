@@ -1,0 +1,18 @@
+##############################################################################
+# cmake configuration file for AIDA using RAIDA implementation
+# @author Jan Engels, Desy
+##############################################################################
+
+include( RAIDAConfig.cmake )
+
+SET( AIDA_FOUND ${RAIDA_FOUND} )
+
+if( AIDA_FOUND )
+    SET( AIDA_ROOT "${RAIDA_ROOT}" )
+    SET( AIDA_VERSION "${RAIDA_VERSION}" )
+    SET( AIDA_INCLUDE_DIRS ${RAIDA_INCLUDE_DIRS} )
+    SET( AIDA_LIBRARY_DIRS ${RAIDA_LIBRARY_DIRS} )
+    SET( AIDA_LIBRARIES ${RAIDA_LIBRARIES} )
+    SET( AIDA_DEFINITIONS ${RAIDA_DEFINITIONS} )
+endif()
+
