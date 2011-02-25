@@ -7,6 +7,13 @@
 #   original author T.Kraemer, DESY
 ##################################################
 
+  -----------
+ | v01-06-01 |
+  -----------
+
+    - added AIDAConfig.cmake configuration files to be able to
+        call FIND_PACKAGE( AIDA ) without and additional FindAIDA.cmake module
+
   -------
  | v01-06 |  
   -------
