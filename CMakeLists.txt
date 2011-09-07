@@ -50,7 +50,7 @@ ENDIF()
 #############################################################################
 
 
-INCLUDE_DIRECTORIES( ./include )
+INCLUDE_DIRECTORIES( BEFORE ./include )
 INCLUDE_DIRECTORIES( ${ROOT_INCLUDE_DIRS} )
 INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
