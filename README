@@ -76,7 +76,7 @@ Installation (with cmake):
     if you do NOT have acces to /afs/desy.de/ or you do not have an SL4/SL5 machine the easiest
         way is to use ilcinstall (http://ilcsoft.desy.de/portal/software_packages/ilcinstall/).
         Please use an ilcinstall version >= v01-11. More information under:
-        http://ilcsoft.desy.de/portal/software_packages/ilcinstall_documentation/
+        http://ilcsoft.desy.de/portal/general_documentation/ilcinstall_documentation/
 
 
     Once the dependencies are resolved, issue the following commands:
@@ -91,6 +91,32 @@ Installation (with cmake):
 
     CMake's official website:
     http://www.cmake.org
+
+
+Installation (with cmake) standalone (no ilcinstall, no afs):
+-------------------------
+
+    In order to build RAIDA you need ILCUTIL, ROOT and CMake
+
+    # 1. install ROOT >= 5.0
+    # please visit http://root.cern.ch for ROOT install instructions.
+
+    # 2. install ILCUTIL
+    svn co https://svnsrv.desy.de/public/ilctools/ilcutil/tags/v01-00 ilcutil-v01-00
+
+    mkdir ilcutil-v01-00/build
+    cd ilcutil-v01-00/build
+    cmake ..
+    make install
+    cd ../../
+
+    # install RAIDA
+    svn co https://svnsrv.desy.de/public/ilctools/RAIDA/tags/v01-06-02 raida-v01-06-02
+
+    mkdir raida-v01-06-02/build
+    cd raida-v01-06-02/build
+    cmake -DILCUTIL_DIR=/tmp/ilcutil-v01-00 -DROOT_DIR=/path/to/ROOT ..
+    make install
 
 
 Linking against RAIDA:
