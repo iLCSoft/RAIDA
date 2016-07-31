@@ -7,6 +7,15 @@
 #   original author T.Kraemer, DESY
 ##################################################
 
+
+  -------
+ | v01-07 |  
+  -------
+
+F. Gaede
+   - made compatible with c++11
+   - removed -ansi -pedantic -Wno-long-long
+
   -----------
  | v01-06-02 |
   -----------
