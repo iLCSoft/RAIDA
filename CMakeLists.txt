@@ -51,14 +51,14 @@ ENDIF()
 
 
 INCLUDE_DIRECTORIES( BEFORE ./include )
-INCLUDE_DIRECTORIES( ${ROOT_INCLUDE_DIRS} )
+INCLUDE_DIRECTORIES( SYSTEM ${ROOT_INCLUDE_DIRS} )
 INSTALL_DIRECTORY( ./include DESTINATION . FILES_MATCHING PATTERN "*.h" )
 
 
 
-#ADD_DEFINITIONS( "-Wall -ansi" ) # -pedantic" )
-#ADD_DEFINITIONS( "-Wno-long-long" )
-
+#FIXME: silence the eccessive warnings for now
+#       should be addressed later - if needed
+ADD_DEFINITIONS( "-Wno-effc++ -Wno-unused-parameter -Wno-vla" )
 
 
 # verbose debug mode
