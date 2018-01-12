@@ -23,7 +23,7 @@ class IAnnotation;
  * @version $Id: IFunctionROOT.h,v 1.2 2007-01-02 16:20:45 tkraemer Exp $
  */
  
-class IFunctionROOT : public IFunction {
+class IFunctionROOT : virtual public IFunction {
 
 public: 
   /// Destructor.
