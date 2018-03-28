@@ -1,3 +1,9 @@
+# v01-09
+
+* 2018-01-12 Frank Gaede ([PR#3](https://github.com/iLCSoft/RAIDA/pull/3))
+  - silence warnings: effc++, unused, vla 
+  - fix virtual inheritance in IFunctionROOT
+
 # v01-08
 
 # v01-07
