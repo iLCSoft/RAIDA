@@ -1,6 +1,8 @@
 # RAIDA
-[![Build Status](https://travis-ci.org/iLCSoft/RAIDA.svg?branch=master)](https://travis-ci.org/iLCSoft/RAIDA)
-[![Coverity Scan Build Status](https://scan.coverity.com/projects/12491/badge.svg)](https://scan.coverity.com/projects/ilcsoft-raida)
+[![linux](https://github.com/iLCSoft/RAIDA/actions/workflows/linux.yml/badge.svg)](https://github.com/iLCSoft/RAIDA/actions/workflows/linux.yml)
+[![key4hep](https://github.com/iLCSoft/RAIDA/actions/workflows/key4hep.yml/badge.svg)](https://github.com/iLCSoft/RAIDA/actions/workflows/key4hep.yml)
+<!-- coverity not setup at the moment via github actions -->
+<!-- [![Coverity Scan Build Status](https://scan.coverity.com/projects/12491/badge.svg)](https://scan.coverity.com/projects/ilcsoft-raida) -->
 
 RAIDA [Root](http://root.cern.ch) implementation of [AIDA](http://aida.freehep.org)(Abstract Interfaces for Data Analysis). The motivation for the development of RAIDA was to offer the possibility to create and fill n-tuple or histograms using standard ROOT objects with AIDA. All ROOT objects created with AIDA are stored in a ROOT file. Since our main application of RAIDA is to create ROOT output to be analysed using the ROOT program, the current version can not read in the root files created. Furthermore only objects, which exist within ROOT can be created. 
 
