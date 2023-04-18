@@ -1,3 +1,11 @@
+# v01-10
+
+* 2023-04-18 tmadlener ([PR#5](https://github.com/iLCSoft/RAIDA/pull/5))
+  - Migrate CI to github actions and remove travis-CI based configuration.
+
+* 2023-04-18 jmcarcell ([PR#4](https://github.com/iLCSoft/RAIDA/pull/4))
+  - Link only against the ROOT libraries that are necessary to avoid downstream linker problems.
+
 # v01-09
 
 * 2018-01-12 Frank Gaede ([PR#3](https://github.com/iLCSoft/RAIDA/pull/3))
