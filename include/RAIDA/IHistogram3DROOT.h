@@ -9,6 +9,7 @@
 #include <TH2D.h>
 #include <TH3D.h>
 #include <vector>
+#include <stdexcept>
 
 namespace AIDA {
 
@@ -340,7 +341,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const ;
+  virtual void * cast(const std::string & className) const { throw std::runtime_error("Not implemented"); }
 
 // ---------------------------------------------------------------------------
 // Functions from IHistogram.h
@@ -368,7 +369,7 @@ public:
      * @return The number of equivalent entries.
      *
      */
-  /// virtual double equivalentBinEntries() const ;
+  virtual double equivalentBinEntries() const { throw std::runtime_error("Not implemented"); }
 
     /**
      * Sum of in-range bin heights in the IHistogram,

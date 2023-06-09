@@ -127,7 +127,7 @@ public:
      * @return false If the ICloud1D has already been converted.
      *
      */
-  /// virtual bool convert(const std::vector<double>  & binEdges) = 0;
+    virtual bool convert(const std::vector<double>  & binEdges) = 0;
 
     /**
      * Get the internal IHistogram1D in which the ICloud1D converted to.

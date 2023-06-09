@@ -5,6 +5,7 @@
 #include <AIDA/ITupleFactory.h>
 #include <string>
 #include <vector>
+#include <stdexcept>
 
 namespace AIDA {
 
@@ -76,7 +77,7 @@ public:
      * @param set   The array of ITuples to chain
      *
      */
-  ///virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<ITuple *>  & set) ;
+  virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<ITuple *>  & set) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Creates a logical chain of ITuples. All ITuples in the set must
@@ -90,7 +91,7 @@ public:
      * @param set   The array of the names of the ITuples to chain
      *
      */
-  ///virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<std::string>  & set) ;
+  virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<std::string>  & set) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Creates a new reduced tuple (less rows) from an existing one
@@ -103,7 +104,7 @@ public:
      * @param filter IFilter to be used
      *
      */
-  ///virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter) ;
+  virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Creates a new reduced tuple (less rows) from an existing one
@@ -118,14 +119,14 @@ public:
      * @param columns Names of columns to for a new n-tuple
      *
      */
-  ///virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter, const std::vector<std::string>  & columns) ;
+  virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter, const std::vector<std::string>  & columns) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Creates IFilter object given a string defining of the "cut" expression.
      * @param expression String defining of the "cut" expression.
      *
      */
-  ///virtual IFilter * createFilter(const std::string & expression) ;
+  virtual IFilter * createFilter(const std::string & expression) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Creates a filter object given a string defining the "cut" expression.
@@ -135,14 +136,14 @@ public:
      * @param startingRow Row number where to start
      *
      */
-  /// virtual IFilter * createFilter(const std::string & expression, int rowsToProcess, int startingRow = 0) ;
+  virtual IFilter * createFilter(const std::string & expression, int rowsToProcess, int startingRow = 0) { throw std::runtime_error("Not implemented"); }
 
     /**
      * Create IEvaluator object given its expression.
      * @param expression String defining of the evaluator expression.
      *
      */
-  ///virtual IEvaluator * createEvaluator(const std::string & expression) ;
+  virtual IEvaluator * createEvaluator(const std::string & expression) { throw std::runtime_error("Not implemented"); }
 
 private:
 

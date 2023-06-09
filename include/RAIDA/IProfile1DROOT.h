@@ -6,6 +6,7 @@
 #include <AIDA/IAxis.h>
 
 #include <vector>
+#include <stdexcept>
 #include <TH1D.h>
 #include <TProfile.h>
 
@@ -126,7 +127,7 @@ public:
      * @param profile The IProfile1D to be added to this IProfile1D
      * @return false if profile binnings are incompatible
      */
-  /// virtual bool add(const IProfile1D & profile) ;
+  virtual bool add(const IProfile1D & profile) { throw std::runtime_error("Not implemented"); }
 
 // ----------------------------------------------------------------------------
 //  Functions from IHistogram.h
@@ -235,7 +236,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const ;
+  virtual void * cast(const std::string & className) const { throw std::runtime_error("Not implemented"); }
 
 protected:
 

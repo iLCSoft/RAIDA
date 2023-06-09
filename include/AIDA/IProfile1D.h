@@ -97,7 +97,7 @@ public:
      * @param profile The IProfile1D to be added to this IProfile1D
      * @return false if profile binnings are incompatible
      */
-  /// virtual bool add(const IProfile1D & profile) = 0;
+    virtual bool add(const IProfile1D & profile) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE1D_H */

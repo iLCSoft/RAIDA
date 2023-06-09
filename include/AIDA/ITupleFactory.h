@@ -58,10 +58,7 @@ public:
      * @param options NTuple options (currently undefined)
      *
      */
-  virtual ITuple * create(const std::string & path, 
-			  const std::string & title, 
-			  const std::string & columns, 
-			  const std::string & options = "") = 0;
+    virtual ITuple * create(const std::string & path, const std::string & title, const std::string & columns, const std::string & options = "") = 0;
 
     /**
      * Creates a logical chain of ITuples. All ITuples in the set must
@@ -75,7 +72,7 @@ public:
      * @param set   The array of ITuples to chain
      *
      */
-  ///virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<ITuple *>  & set) = 0;
+    virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<ITuple *>  & set) = 0;
 
     /**
      * Creates a logical chain of ITuples. All ITuples in the set must
@@ -89,7 +86,7 @@ public:
      * @param set   The array of the names of the ITuples to chain
      *
      */
-  ///virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<std::string>  & set) = 0;
+    virtual ITuple * createChained(const std::string & path, const std::string & title, const std::vector<std::string>  & set) = 0;
 
     /**
      * Creates a new reduced tuple (less rows) from an existing one
@@ -102,7 +99,7 @@ public:
      * @param filter IFilter to be used
      *
      */
-  ///virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter) = 0;
+    virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter) = 0;
 
     /**
      * Creates a new reduced tuple (less rows) from an existing one
@@ -117,14 +114,14 @@ public:
      * @param columns Names of columns to for a new n-tuple
      *
      */
-  ///virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter, const std::vector<std::string>  & columns) = 0;
+    virtual ITuple * createFiltered(const std::string & path, ITuple & tuple, IFilter & filter, const std::vector<std::string>  & columns) = 0;
 
     /**
      * Creates IFilter object given a string defining of the "cut" expression.
      * @param expression String defining of the "cut" expression.
      *
      */
-  ///virtual IFilter * createFilter(const std::string & expression) = 0;
+    virtual IFilter * createFilter(const std::string & expression) = 0;
 
     /**
      * Creates a filter object given a string defining the "cut" expression.
@@ -134,14 +131,14 @@ public:
      * @param startingRow Row number where to start
      *
      */
-  ///virtual IFilter * createFilter(const std::string & expression, int rowsToProcess, int startingRow = 0) = 0;
+    virtual IFilter * createFilter(const std::string & expression, int rowsToProcess, int startingRow = 0) = 0;
 
     /**
      * Create IEvaluator object given its expression.
      * @param expression String defining of the evaluator expression.
      *
      */
-  ///virtual IEvaluator * createEvaluator(const std::string & expression) = 0;
+    virtual IEvaluator * createEvaluator(const std::string & expression) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_ITUPLEFACTORY_H */

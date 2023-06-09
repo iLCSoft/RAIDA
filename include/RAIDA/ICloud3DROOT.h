@@ -216,7 +216,7 @@ public:
      * @return false If the ICloud3D has already been converted.
      *
      */
-  /// virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ) ;
+  virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ) {throw std::runtime_error("Not implemented");}
 
     /**     
      * Get the internal IHistogram3D in which the ICloud3D converted to.
@@ -329,7 +329,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const ;
+  virtual void * cast(const std::string & className) const {throw std::runtime_error("Not implemented");}
 
 private:
 

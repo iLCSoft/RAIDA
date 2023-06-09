@@ -168,7 +168,7 @@ public:
      * @return false if the profile binnings are incompatible
      *
      */
-  /// virtual bool add(const IProfile2D & h) = 0;
+    virtual bool add(const IProfile2D & h) = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IPROFILE2D_H */
