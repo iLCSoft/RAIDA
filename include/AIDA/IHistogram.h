@@ -51,7 +51,7 @@ public:
      * @return The number of equivalent entries.
      *
      */
-  /// virtual double equivalentBinEntries() const = 0;
+    virtual double equivalentBinEntries() const = 0;
 
     /**
      * Sum of in-range bin heights in the IHistogram,

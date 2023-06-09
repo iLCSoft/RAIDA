@@ -48,7 +48,7 @@ public:
      * @return      The newly created function.
      *
      */
-  /// virtual IFunction * createFunctionByName(const std::string & path, const std::string & model) = 0;
+    virtual IFunction * createFunctionByName(const std::string & path, const std::string & model) = 0;
 
     /**
      * Create function from script. Script conventions:
@@ -66,7 +66,7 @@ public:
      *                    provided expressions is illigal.
      *
      */
-  /// virtual IFunction * createFunctionFromScript(const std::string & name, int dim, const std::string & valexpr, const std::string & parameters, const std::string & description, const std::string & gradexpr = "") = 0;
+    virtual IFunction * createFunctionFromScript(const std::string & name, int dim, const std::string & valexpr, const std::string & parameters, const std::string & description, const std::string & gradexpr = "") = 0;
 
     /**
      * Create a clone of an existing function.
@@ -78,12 +78,12 @@ public:
      * @return     The clone of the provided IFunction.
      *
      */
-  /// virtual IFunction * cloneFunction(const std::string & path, IFunction & f) = 0;
+    virtual IFunction * cloneFunction(const std::string & path, IFunction & f) = 0;
 
     /**
      * get access to the function catalog
      */
-  /// virtual IFunctionCatalog * catalog() = 0;
+    virtual IFunctionCatalog * catalog() = 0;
 
     /** @link association 
      * @directed*/

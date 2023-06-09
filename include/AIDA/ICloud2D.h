@@ -179,7 +179,7 @@ public:
      * @return false If the ICloud2D has already been converted.
      *
      */
-  /// virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY) = 0;
+    virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY) = 0;
 
     /**     
      * Get the internal IHistogram2D in which the ICloud2D converted to.

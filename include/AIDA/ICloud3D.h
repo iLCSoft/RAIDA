@@ -231,7 +231,7 @@ public:
      * @return false If the ICloud3D has already been converted.
      *
      */
-  /// virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ) = 0;
+    virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY, const std::vector<double>  & binEdgesZ) = 0;
 
     /**     
      * Get the internal IHistogram3D in which the ICloud3D converted to.

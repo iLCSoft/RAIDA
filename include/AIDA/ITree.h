@@ -18,7 +18,7 @@
 
 namespace AIDA {
 
-  /// class IManagedObject;
+class IManagedObject;
 
 /**
  * User level interface to a Tree.
@@ -54,7 +54,7 @@ public:
    * @return     The corresponding IManagedObject.
    *
    */
-  /// virtual IManagedObject * find(const std::string & path) = 0;
+    virtual IManagedObject * find(const std::string & path) = 0;
 
   /**
    * Get a mounted ITree at a given path in the current ITree. The path can either be
@@ -63,7 +63,7 @@ public:
    * @return     The corresponding ITree.
    *
    */
-  /// virtual ITree * findTree(const std::string & path) = 0;
+    virtual ITree * findTree(const std::string & path) = 0;
 
   /**
    * Change to a given directory.
@@ -101,7 +101,7 @@ public:
    *                  in all the directories under path (the default is <code>false</code>.
    *
    */
-  /// virtual std::vector<std::string>  listObjectNames(const std::string & path = ".", bool recursive = false) const = 0;
+    virtual std::vector<std::string>  listObjectNames(const std::string & path = ".", bool recursive = false) const = 0;
 
   /**
    * Get the list of types of the IManagedObjects under a given path.
@@ -114,7 +114,7 @@ public:
    *                  in all the directories under path (the default is <code>false</code>.
    *
    */
-  /// virtual std::vector<std::string>  listObjectTypes(const std::string & path = ".", bool recursive = false) const = 0;
+    virtual std::vector<std::string>  listObjectTypes(const std::string & path = ".", bool recursive = false) const = 0;
 
   /**
    * Create a new directory. Given a path only the last directory
@@ -134,7 +134,7 @@ public:
    *             is not a directory, or if the directory already exists.
    *
    */
-  /// virtual bool mkdirs(const std::string & path) = 0;
+    virtual bool mkdirs(const std::string & path) = 0;
 
   /**
    * Remove a directory and all the contents underneeth.
@@ -143,7 +143,7 @@ public:
    *             a directory.
    *
    */
-  /// virtual bool rmdir(const std::string & path) = 0;
+    virtual bool rmdir(const std::string & path) = 0;
 
   /**
    * Remove an IManagedObject by specifying its path.
@@ -153,7 +153,7 @@ public:
    * @return false If path does not exist.
    *
    */
-  /// virtual bool rm(const std::string & path) = 0;
+    virtual bool rm(const std::string & path) = 0;
 
   /**
    * Get the full path of an IManagedObject.
@@ -162,7 +162,7 @@ public:
    *               In C++ if the object does not exist, an empty string is returned.
    *
    */
-  /// virtual std::string findPath(const IManagedObject & object) const = 0;
+    virtual std::string findPath(const IManagedObject & object) const = 0;
 
   /**
    * Move an IManagedObject or a directory from one directory to another.
@@ -171,7 +171,7 @@ public:
    * @return false If either path does not exist.
    *
    */
-  /// virtual bool mv(const std::string & oldPath, const std::string & newPath) = 0;
+    virtual bool mv(const std::string & oldPath, const std::string & newPath) = 0;
 
   /**
    * Commit any open transaction to the underlying store(s).
@@ -187,7 +187,7 @@ public:
    * @param overwrite <code>true</code> to enable overwriting.
    *
    */
-  /// virtual void setOverwrite(bool overwrite = true) = 0;
+    virtual void setOverwrite(bool overwrite = true) = 0;
 
   /**
    * Copy an object from a path to another.
@@ -197,7 +197,7 @@ public:
    * @return false If either path does not exist.
    *
    */
-  /// virtual bool cp(const std::string & oldPath, const std::string & newPath, bool recursive = false) = 0;
+    virtual bool cp(const std::string & oldPath, const std::string & newPath, bool recursive = false) = 0;
 
   /**
    * Create a symbolic link to an object in the ITree.
@@ -207,7 +207,7 @@ public:
    *              subidrectory within path does not exist.
    *
    */
-  /// virtual bool symlink(const std::string & path, const std::string & alias) = 0;
+    virtual bool symlink(const std::string & path, const std::string & alias) = 0;
 
   /**
    * Mounts a tree within another (target) tree. A tree can only be mounted once.
@@ -221,7 +221,7 @@ public:
    * @return false If something does not exist.
    *
    */
-  /// virtual bool mount(const std::string & path, ITree & tree, const std::string & treePath) = 0;
+    virtual bool mount(const std::string & path, ITree & tree, const std::string & treePath) = 0;
 
   /**
    * Unmount a subtree at a given path (mount point).
@@ -230,7 +230,7 @@ public:
    * @return false If path does not exist.
    *
    */
-  /// virtual bool unmount(const std::string & path) = 0;
+    virtual bool unmount(const std::string & path) = 0;
 
   /**
    * Closes the underlying store.
@@ -247,7 +247,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const = 0;
+    virtual void * cast(const std::string & className) const = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_ITREE_H */

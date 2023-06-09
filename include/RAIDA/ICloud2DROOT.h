@@ -167,7 +167,7 @@ public:
      * @return false If the ICloud2D has already been converted.
      *
      */
-  /// virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY) ;
+  virtual bool convert(const std::vector<double>  & binEdgesX, const std::vector<double>  & binEdgesY) {throw;}
 
     /**     
      * Get the internal IHistogram2D in which the ICloud2D converted to.
@@ -280,7 +280,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const ;
+  virtual void * cast(const std::string & className) const {throw;}
 
 private:
 

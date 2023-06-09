@@ -63,7 +63,7 @@ public:
      * @return The ITuple's IAnnotation.
      *
      */
-  /// virtual IAnnotation & annotation() = 0;
+    virtual IAnnotation & annotation() = 0;
 
   /// virtual const IAnnotation & annotation() const = 0;
 
@@ -137,7 +137,7 @@ public:
      * @return false If the column is of the wrong type.
      *
      */
-  /// virtual bool fill(int column, const std::string & value) = 0;
+    virtual bool fill(int column, const std::string & value) = 0;
 
     /**
      * Fill a given column with an object.
@@ -146,7 +146,7 @@ public:
      * @return false If the column is of the wrong type.
      *
      */
-  /// virtual bool fill(int column, const ITupleEntry & value) = 0;
+    virtual bool fill(int column, const ITupleEntry & value) = 0;
 
     /**
      * Fill all the columns at once with doubles.
@@ -296,7 +296,7 @@ public:
      * @return       The string.
      *
      */    
-  /// virtual std::string getString(int column) const = 0;
+    virtual std::string getString(int column) const = 0;
 
     /**
      * Get the object stored in a given column at the current cursor's position.
@@ -304,7 +304,7 @@ public:
      * @return       The object.
      *
      */    
-  /// virtual const ITupleEntry * getObject(int column) const = 0;
+    virtual const ITupleEntry * getObject(int column) const = 0;
 
     /**
      * Return method for tuple variables of type ITuple for a given column.
@@ -313,9 +313,9 @@ public:
      * @return       The ITuple representing the structure of this column.
      *
      */
-  /// virtual const ITuple * getTuple(int column) const = 0;
+    virtual const ITuple * getTuple(int column) const = 0;
 
-  /// virtual ITuple * getTuple(int column) = 0;
+    virtual ITuple * getTuple(int column) = 0;
 
    /** 
     * Get the number of columns in the ITuple
@@ -899,7 +899,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const = 0;
+    virtual void * cast(const std::string & className) const = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_ITUPLE_H */

@@ -7,6 +7,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <stdexcept>
 #include <TFile.h>
 namespace AIDA {
 
@@ -67,7 +68,7 @@ public:
    * @return     The corresponding IManagedObject.
    *
    */
-  /// virtual IManagedObject * find(const std::string & path);
+  virtual IManagedObject * find(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Get a mounted ITree at a given path in the current ITree. The path can either be
@@ -76,7 +77,7 @@ public:
    * @return     The corresponding ITree.
    *
    */
-  /// virtual ITree * findTree(const std::string & path);
+  virtual ITree * findTree(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Change to a given directory.
@@ -116,7 +117,7 @@ public:
    *                  in all the directories under path (the default is <code>false</code>.
    *
    */
-  /// virtual std::vector<std::string>  listObjectNames(const std::string & path = ".", bool recursive = false) const;
+  virtual std::vector<std::string>  listObjectNames(const std::string & path = ".", bool recursive = false) const { throw std::runtime_error("Not implemented"); }
 
   /**
    * Get the list of types of the IManagedObjects under a given path.
@@ -129,7 +130,7 @@ public:
    *                  in all the directories under path (the default is <code>false</code>.
    *
    */
-  /// virtual std::vector<std::string>  listObjectTypes(const std::string & path = ".", bool recursive = false) const;
+  virtual std::vector<std::string>  listObjectTypes(const std::string & path = ".", bool recursive = false) const { throw std::runtime_error("Not implemented"); }
 
   /**
    * Create a new directory. Given a path only the last directory
@@ -149,7 +150,7 @@ public:
    *             is not a directory, or if the directory already exists.
    *
    */
-  /// virtual bool mkdirs(const std::string & path);
+  virtual bool mkdirs(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Remove a directory and all the contents underneeth.
@@ -158,7 +159,7 @@ public:
    *             a directory.
    *
    */
-  /// virtual bool rmdir(const std::string & path);
+  virtual bool rmdir(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Remove an IManagedObject by specifying its path.
@@ -168,7 +169,7 @@ public:
    * @return false If path does not exist.
    *
    */
-  /// virtual bool rm(const std::string & path);
+  virtual bool rm(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Get the full path of an IManagedObject.
@@ -177,7 +178,7 @@ public:
    *               In C++ if the object does not exist, an empty string is returned.
    *
    */
-  /// virtual std::string findPath(const IManagedObject & object) const;
+  virtual std::string findPath(const IManagedObject & object) const { throw std::runtime_error("Not implemented"); }
 
   /**
    * Move an IManagedObject or a directory from one directory to another.
@@ -186,7 +187,7 @@ public:
    * @return false If either path does not exist.
    *
    */
-  /// virtual bool mv(const std::string & oldPath, const std::string & newPath);
+  virtual bool mv(const std::string & oldPath, const std::string & newPath) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Commit any open transaction to the underlying store(s).
@@ -202,7 +203,7 @@ public:
    * @param overwrite <code>true</code> to enable overwriting.
    *
    */
-  /// virtual void setOverwrite(bool overwrite = true);
+  virtual void setOverwrite(bool overwrite = true) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Copy an object from a path to another.
@@ -212,7 +213,7 @@ public:
    * @return false If either path does not exist.
    *
    */
-  /// virtual bool cp(const std::string & oldPath, const std::string & newPath, bool recursive = false);
+  virtual bool cp(const std::string & oldPath, const std::string & newPath, bool recursive = false) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Create a symbolic link to an object in the ITree.
@@ -222,7 +223,7 @@ public:
    *              subidrectory within path does not exist.
    *
    */
-  /// virtual bool symlink(const std::string & path, const std::string & alias);
+  virtual bool symlink(const std::string & path, const std::string & alias) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Mounts a tree within another (target) tree. A tree can only be mounted once.
@@ -236,7 +237,7 @@ public:
    * @return false If something does not exist.
    *
    */
-  /// virtual bool mount(const std::string & path, ITree & tree, const std::string & treePath) ;
+  virtual bool mount(const std::string & path, ITree & tree, const std::string & treePath)  { throw std::runtime_error("Not implemented"); }
 
   /**
    * Unmount a subtree at a given path (mount point).
@@ -245,7 +246,7 @@ public:
    * @return false If path does not exist.
    *
    */
-  /// virtual bool unmount(const std::string & path);
+  virtual bool unmount(const std::string & path) { throw std::runtime_error("Not implemented"); }
 
   /**
    * Closes the underlying store.
@@ -262,7 +263,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const;
+  virtual void * cast(const std::string & className) const { throw std::runtime_error("Not implemented"); }
 
 private:
 

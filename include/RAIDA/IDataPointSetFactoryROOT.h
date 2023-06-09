@@ -1,4 +1,5 @@
 // -*- C++ -*-
+#include <stdexcept>
 #ifndef AIDA_IDATAPOINTSETFACTORYROOT_H
 #define AIDA_IDATAPOINTSETFACTORYROOT_H 1
 #include <AIDA/IDataPointSetFactory.h>
@@ -47,7 +48,7 @@ public:
      * @return            The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const std::string & title, int dimOfPoints) ;
+  virtual IDataPointSet * create(const std::string & path, const std::string & title, int dimOfPoints) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an empty IDataPointSet.
@@ -60,7 +61,7 @@ public:
      * @return             The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & pathAndTitle, int dimOfPoints) ;
+  virtual IDataPointSet * create(const std::string & pathAndTitle, int dimOfPoints) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along y (the x value is 
@@ -75,7 +76,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createY(const std::string & path, const std::string & title, const std::vector<double>  & y, const std::vector<double>  & ey) ;
+  virtual IDataPointSet * createY(const std::string & path, const std::string & title, const std::vector<double>  & y, const std::vector<double>  & ey) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along y (the x value is 
@@ -91,7 +92,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createY(const std::string & path, const std::string & title, const std::vector<double>  & y, const std::vector<double>  & eyp, const std::vector<double>  & eym) ;
+  virtual IDataPointSet * createY(const std::string & path, const std::string & title, const std::vector<double>  & y, const std::vector<double>  & eyp, const std::vector<double>  & eym) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along y (the x value is 
@@ -106,7 +107,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createY(const std::string & pathAndTitle, const std::vector<double>  & y, const std::vector<double>  & ey) ;
+  virtual IDataPointSet * createY(const std::string & pathAndTitle, const std::vector<double>  & y, const std::vector<double>  & ey) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along y (the x value is 
@@ -122,7 +123,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createY(const std::string & pathAndTitle, const std::vector<double>  & y, const std::vector<double>  & eyp, const std::vector<double>  & eym) ;
+  virtual IDataPointSet * createY(const std::string & pathAndTitle, const std::vector<double>  & y, const std::vector<double>  & eyp, const std::vector<double>  & eym) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along x (the y value is 
@@ -137,7 +138,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createX(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & ex) ;
+  virtual IDataPointSet * createX(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & ex) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along x (the y value is 
@@ -153,7 +154,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createX(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & exp, const std::vector<double>  & exm) ;
+  virtual IDataPointSet * createX(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & exp, const std::vector<double>  & exm) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along x (the y value is 
@@ -168,7 +169,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createX(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & ex) ;
+  virtual IDataPointSet * createX(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & ex) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data along x (the y value is 
@@ -184,7 +185,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createX(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & exp, const std::vector<double>  & exm) ;
+  virtual IDataPointSet * createX(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & exp, const std::vector<double>  & exm) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -202,7 +203,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXY(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & exm, const std::vector<double>  & eym) ;
+  virtual IDataPointSet * createXY(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & exm, const std::vector<double>  & eym) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -218,7 +219,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXY(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & ex, const std::vector<double>  & ey) ;
+  virtual IDataPointSet * createXY(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & ex, const std::vector<double>  & ey) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -236,7 +237,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXY(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & exm, const std::vector<double>  & eym) ;
+  virtual IDataPointSet * createXY(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & exm, const std::vector<double>  & eym) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -252,7 +253,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXY(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & ex, const std::vector<double>  & ey) ;
+  virtual IDataPointSet * createXY(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & ex, const std::vector<double>  & ey) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a three dimensional IDataPointSet providing the data.
@@ -273,7 +274,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXYZ(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & ezp, const std::vector<double>  & exm, const std::vector<double>  & eym, const std::vector<double>  & ezm) ;
+  virtual IDataPointSet * createXYZ(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & ezp, const std::vector<double>  & exm, const std::vector<double>  & eym, const std::vector<double>  & ezm) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a three dimensional IDataPointSet providing the data.
@@ -291,7 +292,7 @@ public:
      * @return      The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXYZ(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & ex, const std::vector<double>  & ey, const std::vector<double>  & ez) ;
+  virtual IDataPointSet * createXYZ(const std::string & path, const std::string & title, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & ex, const std::vector<double>  & ey, const std::vector<double>  & ez) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -312,7 +313,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXYZ(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & ezp, const std::vector<double>  & exm, const std::vector<double>  & eym, const std::vector<double>  & ezm) ;
+  virtual IDataPointSet * createXYZ(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & exp, const std::vector<double>  & eyp, const std::vector<double>  & ezp, const std::vector<double>  & exm, const std::vector<double>  & eym, const std::vector<double>  & ezm) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create a two dimensional IDataPointSet providing the data.
@@ -330,7 +331,7 @@ public:
      * @return             The created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createXYZ(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & ex, const std::vector<double>  & ey, const std::vector<double>  & ez) ;
+  virtual IDataPointSet * createXYZ(const std::string & pathAndTitle, const std::vector<double>  & x, const std::vector<double>  & y, const std::vector<double>  & z, const std::vector<double>  & ex, const std::vector<double>  & ey, const std::vector<double>  & ez) {throw std::runtime_error("Not implemented");}
 
     /**
      * Make a copy of a given IDataPointSet.
@@ -342,7 +343,7 @@ public:
      * @return             The copy of the given IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * createCopy(const std::string & path, const IDataPointSet & dataPointSet) ;
+  virtual IDataPointSet * createCopy(const std::string & path, const IDataPointSet & dataPointSet) {throw std::runtime_error("Not implemented");}
 
     /**
      * Destroy a given IDataPointSet.
@@ -350,7 +351,7 @@ public:
      * @return false If dataPointSet cannot be destroyed.
      *
      */
-  ///virtual bool destroy(IDataPointSet * dataPointSet) ;
+  virtual bool destroy(IDataPointSet * dataPointSet) {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an IHistogram1D.
@@ -363,7 +364,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const IHistogram1D & hist, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const IHistogram1D & hist, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an IHistogram2D.
@@ -376,7 +377,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const IHistogram2D & hist, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const IHistogram2D & hist, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an IHistogram3D.
@@ -389,7 +390,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const IHistogram3D & hist, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const IHistogram3D & hist, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an ICloud1D.
@@ -402,7 +403,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const ICloud1D & cloud, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const ICloud1D & cloud, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an ICloud2D.
@@ -415,7 +416,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const ICloud2D & cloud, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const ICloud2D & cloud, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an ICloud3D.
@@ -428,7 +429,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const ICloud3D & cloud, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const ICloud3D & cloud, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an IProfile1D.
@@ -441,7 +442,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const IProfile1D & profile, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const IProfile1D & profile, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Create an IDataPointSet from an IProfile2D.
@@ -454,7 +455,7 @@ public:
      * @return        The newly created IDataPointSet.
      *
      */
-  ///virtual IDataPointSet * create(const std::string & path, const IProfile2D & profile, const std::string & options = "") ;
+  virtual IDataPointSet * create(const std::string & path, const IProfile2D & profile, const std::string & options = "") {throw std::runtime_error("Not implemented");}
 
     /**
      * Add two IDataSetPoint, point by point and measurement by measurement.
@@ -467,7 +468,7 @@ public:
      *                      if a directory in the path does not exist, or the path is illegal.
      *
      */
-  ///virtual IDataPointSet * add(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) ;
+  virtual IDataPointSet * add(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) {throw std::runtime_error("Not implemented");}
 
     /**
      * Subtract two IDataSetPoint, point by point and measurement by measurement.
@@ -482,7 +483,7 @@ public:
      *                      if a directory in the path does not exist, or the path is illegal.
      *
      */
-  ///virtual IDataPointSet * subtract(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) ;
+  virtual IDataPointSet * subtract(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) {throw std::runtime_error("Not implemented");}
 
     /**
      * Multiply two IDataSetPoint, point by point and measurement by measurement.
@@ -497,7 +498,7 @@ public:
      *                      if a directory in the path does not exist, or the path is illegal.
      *
      */
-  ///virtual IDataPointSet * multiply(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) ;
+  virtual IDataPointSet * multiply(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) {throw std::runtime_error("Not implemented");}
 
     /**
      * Divide two IDataSetPoint, point by point and measurement by measurement.
@@ -512,7 +513,7 @@ public:
      *                      if a directory in the path does not exist, or the path is illegal.
      *
      */
-  ///virtual IDataPointSet * divide(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) ;
+  virtual IDataPointSet * divide(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) {throw std::runtime_error("Not implemented");}
 
     /**
      * Calculate weighted means of two IDataSetPoint, point by point and measurement by measurement.
@@ -527,7 +528,7 @@ public:
      *                      if a directory in the path does not exist, or the path is illegal.
      *
      */
-  ///virtual IDataPointSet * weightedMean(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) ;
+  virtual IDataPointSet * weightedMean(const std::string & path, const IDataPointSet & dataPointSet1, const IDataPointSet & dataPointSet2) {throw std::runtime_error("Not implemented");}
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IDATAPOINTSETFACTORYROOT_H */

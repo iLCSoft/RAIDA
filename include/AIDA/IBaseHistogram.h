@@ -16,7 +16,7 @@
 
 namespace AIDA {
 
-  /// class IAnnotation;
+class IAnnotation;
 
 /**
  * User level interface to Histogram.
@@ -82,7 +82,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const = 0;
+    virtual void * cast(const std::string & className) const = 0;
 }; // class
 } // namespace AIDA
 #endif /* ifndef AIDA_IBASEHISTOGRAM_H */

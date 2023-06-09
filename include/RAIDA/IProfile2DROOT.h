@@ -7,6 +7,7 @@
 #include <AIDA/IAxis.h>
 
 #include <vector>
+#include <stdexcept>
 #include <TH2D.h>
 #include <TProfile2D.h>
 
@@ -206,7 +207,7 @@ public:
      * @return false if the profile binnings are incompatible
      *
      */
-  /// virtual bool add(const IProfile2D & h) ;
+  virtual bool add(const IProfile2D & h) { throw std::runtime_error("Not implemented"); }
 
 // ----------------------------------------------------------------------------
 //  Functions from IProfile.h
@@ -317,7 +318,7 @@ public:
    * @param className The name of the class to cast on.
    * @return The right pointer. Return 0 if failure.
    */ 
-  /// virtual void * cast(const std::string & className) const ;
+  virtual void * cast(const std::string & className) const { throw std::runtime_error("Not implemented"); }
 
 protected:
 

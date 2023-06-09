@@ -7,6 +7,7 @@
 #include <RAIDA/IHistogram3DROOT.h>
 
 #include <vector>
+#include <stdexcept>
 #include <TH1D.h>
 #include <AIDA/IAxis.h>
 
@@ -108,6 +109,13 @@ public:
    */
   virtual int entries() const ;
 
+  /**
+   *  See IManagedObject for a description.
+   * @param className The name of the class to cast on.
+   * @return The right pointer. Return 0 if failure.
+   */ 
+  virtual void * cast(const std::string & className) const {throw std::runtime_error("Not implemented");}
+
 // ---------------------------------------------------------------------------
 // Functions from IHistogram.h 
 // ---------------------------------------------------------------------------
@@ -177,6 +185,13 @@ public:
    *
    */
   virtual bool scale(double scaleFactor) ;
+  
+  /**
+   * Number of equivalent entries, i.e. <tt>SUM[ weight ] ^ 2 / SUM[ weight^2 ]</tt>
+   * @return The number of equivalent entries.
+   *
+   */
+  virtual double equivalentBinEntries() const {throw std::runtime_error("Not implemented");}
 
 // ---------------------------------------------------------------------------
 // Functions from IHistogram1D.h 
