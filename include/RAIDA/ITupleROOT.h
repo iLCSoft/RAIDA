@@ -68,7 +68,7 @@ public:
      */
   virtual IAnnotation & annotation() { throw std::runtime_error("Not implemented"); }
 
-  /// virtual const IAnnotation & annotation() const ;
+  virtual const IAnnotation & annotation() const { throw std::runtime_error("Not implemented"); }
 
     /**
      * Fill a given column with a double.
