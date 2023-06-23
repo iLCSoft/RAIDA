@@ -195,9 +195,9 @@ public:
    * @return The IAnnotation.
    *
    */
-  /// virtual IAnnotation & annotation() ;
+  virtual IAnnotation & annotation() { throw std::runtime_error("Not implemented"); }
 
-  /// virtual const IAnnotation & annotation() const ;
+  virtual const IAnnotation & annotation() const { throw std::runtime_error("Not implemented"); }
 
   /**
    * Get the Histogram's dimension.

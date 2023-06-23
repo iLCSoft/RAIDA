@@ -52,9 +52,9 @@ public:
    * @return The IAnnotation.
    *
    */
-  /// virtual IAnnotation & annotation() = 0;
+  virtual IAnnotation & annotation() = 0;
 
-  /// virtual const IAnnotation & annotation() const = 0;
+  virtual const IAnnotation & annotation() const = 0;
 
   /**
    * Get the Histogram's dimension.
