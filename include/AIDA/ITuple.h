@@ -63,9 +63,9 @@ public:
      * @return The ITuple's IAnnotation.
      *
      */
-    virtual IAnnotation & annotation() = 0;
+  virtual IAnnotation & annotation() = 0;
 
-  /// virtual const IAnnotation & annotation() const = 0;
+  virtual const IAnnotation & annotation() const = 0;
 
     /**
      * Fill a given column with a double.
