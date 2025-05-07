@@ -14,6 +14,12 @@
 
 #include <string>
 
+// This tells Gaudi that we declare IBaseHistogram::cast as a virtual method.
+// Gaudi overrides it in a derived class, and having this macro defined
+// causes it to use the override keyword to avoid warnings about
+// inconsistent use of override.
+#define AIDA_HAS_CAST
+
 namespace AIDA {
 
 class IAnnotation;
