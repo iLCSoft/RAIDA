@@ -53,7 +53,10 @@ CHECK_PACKAGE_LIBS( RAIDA RAIDA )
 
 # ---------- libraries dependencies -------------------------------------------
 # this sets RAIDA_${COMPONENT}_LIB_DEPENDS variables
-INCLUDE( "${RAIDA_ROOT}/lib/cmake/RAIDALibDeps.cmake" )
+INCLUDE( "${RAIDA_ROOT}/lib/cmake/RAIDA/RAIDALibDeps.cmake" OPTIONAL RESULT_VARIABLE RAIDA_LIBDEPS_INCLUDED )
+IF( RAIDA_LIBDEPS_INCLUDED STREQUAL "NOTFOUND" )
+    INCLUDE( "${RAIDA_ROOT}/lib/cmake/RAIDALibDeps.cmake" )
+ENDIF()
  
 
 

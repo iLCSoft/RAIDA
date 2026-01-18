@@ -3,7 +3,11 @@
 # @author Jan Engels, Desy
 ##############################################################################
 
-INCLUDE( "@CMAKE_INSTALL_PREFIX@/RAIDAConfig.cmake" )
+
+INCLUDE( "@CMAKE_INSTALL_PREFIX@/lib/cmake/RAIDA/RAIDAConfig.cmake" OPTIONAL RESULT_VARIABLE RAIDA_CONFIG_INCLUDED )
+IF( RAIDA_CONFIG_INCLUDED STREQUAL "NOTFOUND" )
+  INCLUDE( "@CMAKE_INSTALL_PREFIX@/RAIDAConfig.cmake" )
+ENDIF()
 
 SET( AIDA_FOUND ${RAIDA_FOUND} )
 
