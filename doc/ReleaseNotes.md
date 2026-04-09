@@ -1,3 +1,14 @@
+# v01-12
+
+* 2026-01-20 Juan Miguel Carceller ([PR#10](https://github.com/ilcsoft/raida/pull/10))
+  - Create a symbolic link to make `find_package(AIDA)` work
+
+* 2026-01-19 Thomas Madlener ([PR#9](https://github.com/ilcsoft/raida/pull/9))
+  - Update to the latest Key4hep CI workflow
+
+* 2026-01-19 Juan Miguel Carceller ([PR#8](https://github.com/ilcsoft/raida/pull/8))
+  - Check for the Config.cmake and LibDeps.cmake in lib/cmake first in case it is installed there instead of the usual root of the installation folder.
+
 # v01-11
 
 # v01-10
