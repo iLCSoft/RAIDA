@@ -97,7 +97,7 @@ GENERATE_PACKAGE_CONFIGURATION_FILES( RAIDAConfig.cmake RAIDAConfigVersion.cmake
 # Make a symbolic link in lib/cmake from RAIDA to AIDA to make sure that find_package(AIDA) works
 install(CODE "
 if(EXISTS \"${CMAKE_INSTALL_PREFIX}/lib/cmake/RAIDA\")
-  execute_process(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink \"${CMAKE_INSTALL_PREFIX}/lib/cmake/RAIDA\" \"${CMAKE_INSTALL_PREFIX}/lib/cmake/AIDA\")
+  execute_process(COMMAND \"${CMAKE_COMMAND}\" -E create_symlink \"RAIDA\" \"${CMAKE_INSTALL_PREFIX}/lib/cmake/AIDA\")
 endif()
 ")
 
