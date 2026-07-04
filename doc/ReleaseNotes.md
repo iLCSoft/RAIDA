@@ -1,3 +1,11 @@
+# v01-12-01
+
+* 2026-05-15 Juan Miguel Carceller ([PR#13](https://github.com/iLCSoft/RAIDA/pull/13))
+  - Add LANGUAGES CXX to the project() call to disable looking for a C compiler
+
+* 2026-05-15 Juan Miguel Carceller ([PR#12](https://github.com/iLCSoft/RAIDA/pull/12))
+  - Make the AIDA symbolic link be relative and point to RAIDA in the same directory, to make it work even when the installation is relocated and the symlink is not modified.
+
 # v01-12
 
 * 2026-01-20 Juan Miguel Carceller ([PR#10](https://github.com/ilcsoft/raida/pull/10))
