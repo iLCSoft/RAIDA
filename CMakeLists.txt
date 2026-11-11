@@ -1,7 +1,7 @@
 ########################################################
 # cmake file for building RAIDA
 # @author Jan Engels, Desy IT
-CMAKE_MINIMUM_REQUIRED(VERSION 2.6 FATAL_ERROR)
+CMAKE_MINIMUM_REQUIRED(VERSION 3.10 FATAL_ERROR)
 ########################################################
 
 
@@ -72,7 +72,8 @@ ENDIF()
 # RAIDA library
 AUX_SOURCE_DIRECTORY( ./src library_sources )
 ADD_SHARED_LIBRARY( RAIDA ${library_sources} )
-INSTALL_SHARED_LIBRARY( RAIDA DESTINATION lib )
+INSTALL_SHARED_LIBRARY( RAIDA EXPORT RAIDATargets DESTINATION lib )
+TARGET_INCLUDE_DIRECTORIES( RAIDA INTERFACE $<INSTALL_INTERFACE:include> )
 TARGET_LINK_LIBRARIES( RAIDA ROOT::Tree ROOT::Graf)
 
 
@@ -92,7 +93,8 @@ INSTALL( PROGRAMS "./bin/aida-config" "./bin/aida-setup.sh" DESTINATION bin )
 DISPLAY_STD_VARIABLES()
 
 # generate and install following configuration files
-GENERATE_PACKAGE_CONFIGURATION_FILES( RAIDAConfig.cmake RAIDAConfigVersion.cmake AIDAConfig.cmake AIDAConfigVersion.cmake RAIDALibDeps.cmake )
+GENERATE_PACKAGE_CONFIGURATION_FILES( RAIDAConfig.cmake RAIDAConfigVersion.cmake AIDAConfig.cmake AIDAConfigVersion.cmake )
+INSTALL( EXPORT RAIDATargets FILE RAIDATargets.cmake NAMESPACE RAIDA:: DESTINATION lib/cmake/RAIDA )
 
 # Make a symbolic link in lib/cmake from RAIDA to AIDA to make sure that find_package(AIDA) works
 install(CODE "
