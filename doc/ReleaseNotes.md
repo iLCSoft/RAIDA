@@ -1,3 +1,13 @@
+# v01-13
+
+* 2026-11-11 Juan Miguel Carceller ([PR#15](https://github.com/iLCSoft/RAIDA/pull/15))
+  - Raise the minimum CMake version to 3.10.
+  - Support CMake 4 by replacing the removed `export_library_dependencies` call with an installed `RAIDA::RAIDA` target. Load its ROOT dependencies in the package configuration while retaining the RAIDA/AIDA variables.
+
+* 2026-09-10 Thomas Madlener ([PR#14](https://github.com/iLCSoft/RAIDA/pull/14))
+  - Switch to the latest version of the key4hep-build workflow
+  - Fix `push.branches` to reference `master` (the repository's actual default branch) instead of `main`
+
 # v01-12-01
 
 * 2026-05-15 Juan Miguel Carceller ([PR#13](https://github.com/iLCSoft/RAIDA/pull/13))
